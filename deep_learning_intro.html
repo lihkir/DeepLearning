@@ -1,0 +1,749 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>1. Deep Learning &#8212; Deep Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=530fe47d" />
+    <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/custom-checkpoint.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'deep_learning_intro';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/custom.js?v=14184634"></script>
+    <script src="_static/.ipynb_checkpoints/custom-checkpoint.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="2. Multilayer Perceptron" href="ann_theory.html" />
+    <link rel="prev" title="Profesor: Dr. Lihki Rubio" href="intro.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fotolihki.jpg" class="logo__image only-light" alt="Deep Learning - Home"/>
+    <script>document.write(`<img src="_static/fotolihki.jpg" class="logo__image only-dark" alt="Deep Learning - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Profesor: Dr. Lihki Rubio
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ann_theory.html">2. Multilayer Perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time_series.html">3. Series de Tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">4. Apéndice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biblio.html">5. Bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/deep_learning_intro.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Deep Learning</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#de-los-modelos-clasicos-al-aprendizaje-profundo">1.1. De los modelos clásicos al aprendizaje profundo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones-que-veremos-a-lo-largo-del-curso">1.2. Aplicaciones que veremos a lo largo del curso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido-del-curso">1.3. Contenido del curso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-de-entornos-para-tensorflow">1.4. Configuración de entornos para TensorFlow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instalacion-de-tensorflow-2-10-en-windows-native">1.4.1. Instalación de <code class="docutils literal notranslate"><span class="pre">TensorFlow</span> <span class="pre">2.10</span></code> en <code class="docutils literal notranslate"><span class="pre">Windows</span> <span class="pre">Native</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instalacion-de-tensorflow-geq-2-11-en-wsl2">1.4.2. Instalación de <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> <span class="math notranslate nohighlight">\(\geq\)</span> <code class="docutils literal notranslate"><span class="pre">2.11</span></code> en <code class="docutils literal notranslate"><span class="pre">WSL2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instalacion-de-tensorflow-en-mac">1.4.3. Instalación de <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> en <code class="docutils literal notranslate"><span class="pre">Mac</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generacion-de-jupyter-books-para-los-entregables-de-deep-learning">1.4.4. Generación de <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Books</span></code> para los entregables de <strong>Deep Learning</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-a-docker-y-despliegue-de-modelos">1.4.5. Introducción a <code class="docutils literal notranslate"><span class="pre">Docker</span></code> y despliegue de modelos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#roles-en-el-ecosistema-de-inteligencia-artificial">1.5. Roles en el ecosistema de Inteligencia Artificial</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-vision-engineer">1.5.1. Computer Vision Engineer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nlp-conversational-ai-engineer">1.5.2. NLP / Conversational AI Engineer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-learning-research-scientist">1.5.3. Deep Learning Research Scientist</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mlops-deep-learning-engineer">1.5.4. MLOps / Deep Learning Engineer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-general">1.5.5. Comparación General</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linkedin-profile-para-especialistas-en-deep-learning">1.6. LinkedIn Profile para especialistas en Deep Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-es-especialmente-relevante-en-deep-learning">1.6.1. ¿Por qué es especialmente relevante en Deep Learning?</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="deep-learning">
+<h1><span class="section-number">1. </span>Deep Learning<a class="headerlink" href="#deep-learning" title="Link to this heading">#</a></h1>
+<div class="tip admonition">
+<p class="admonition-title">Introducción</p>
+<ul class="simple">
+<li><p>Durante décadas, construir un modelo de aprendizaje automático exitoso dependía en gran medida de un paso manual y costoso: el <em><strong>diseño de características (feature engineering)</strong></em>. Un experto debía traducir su conocimiento del dominio en variables numéricas que un algoritmo pudiera explotar. El <em><strong>aprendizaje profundo (Deep Learning)</strong></em> cambia radicalmente este paradigma: en lugar de diseñar características a mano, se construyen <em><strong>arquitecturas de múltiples capas</strong></em> capaces de <em><strong>aprender automáticamente representaciones jerárquicas</strong></em> directamente a partir de datos crudos (imágenes, texto, señales, series de tiempo).</p></li>
+<li><p>Cada capa de una red profunda transforma la representación de la capa anterior en una <em><strong>representación más abstracta y útil para la tarea final</strong></em>. Esta capacidad de aprender representaciones, combinada con la disponibilidad de grandes volúmenes de datos y de cómputo acelerado por GPU, es la razón por la cual el Deep Learning se ha convertido en el motor detrás de los avances más visibles de la inteligencia artificial en la última década.</p></li>
+</ul>
+</div>
+<section id="de-los-modelos-clasicos-al-aprendizaje-profundo">
+<h2><span class="section-number">1.1. </span>De los modelos clásicos al aprendizaje profundo<a class="headerlink" href="#de-los-modelos-clasicos-al-aprendizaje-profundo" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>En el curso de aprendizaje supervisado trabajamos con modelos que reciben un conjunto <em><strong>fijo</strong></em> de características diseñadas explícitamente (variables clínicas, indicadores financieros, estadísticos descriptivos, etc.). Estos modelos son interpretables y eficientes, pero su desempeño está limitado por la calidad de las características que el analista logre construir.</p></li>
+<li><p>Cuando los datos son de <em><strong>alta dimensionalidad y estructura compleja</strong></em> (píxeles de una imagen, secuencias de texto, señales fisiológicas, series financieras de alta frecuencia), diseñar características a mano se vuelve inviable. El aprendizaje profundo resuelve este problema reemplazando la ingeniería manual por <em><strong>capas entrenables que aprenden la representación óptima directamente de los datos</strong></em>, optimizando de forma conjunta representación y tarea de predicción.</p></li>
+</ul>
+<div class="important admonition">
+<p class="admonition-title">Observación</p>
+<ul class="simple">
+<li><p>El aprendizaje profundo <em><strong>no reemplaza</strong></em> los fundamentos estadísticos y de optimización vistos previamente; los <em><strong>extiende</strong></em>. Conceptos como sobreajuste, generalización, validación cruzada y selección de modelos siguen siendo centrales, pero ahora se aplican a arquitecturas con millones de parámetros, lo que exige un manejo más cuidadoso de la regularización, la inicialización de pesos y las estrategias de optimización.</p></li>
+</ul>
+</div>
+</section>
+<section id="aplicaciones-que-veremos-a-lo-largo-del-curso">
+<h2><span class="section-number">1.2. </span>Aplicaciones que veremos a lo largo del curso<a class="headerlink" href="#aplicaciones-que-veremos-a-lo-largo-del-curso" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>El poder del Deep Learning se aprecia mejor a través de sus aplicaciones. A lo largo del curso trabajaremos, entre otros, con los siguientes casos de uso:</p>
+<ul>
+<li><p><em><strong>Visión por computador</strong></em>: reconocimiento facial de emociones y segmentación de imágenes biomédicas mediante arquitecturas convolucionales (CNN, U-Net).</p></li>
+<li><p><em><strong>Procesamiento de Lenguaje Natural (NLP)</strong></em>: análisis de sentimiento y modelado de secuencias con redes recurrentes, LSTM y arquitecturas basadas en atención (Transformers).</p></li>
+<li><p><em><strong>Ciberseguridad</strong></em>: detección de malware a partir de secuencias de llamadas a la API del sistema operativo, entrenando a gran escala con <code class="docutils literal notranslate"><span class="pre">PySpark</span></code>.</p></li>
+<li><p><em><strong>Series de tiempo</strong></em>: pronóstico de series financieras y de otros dominios usando redes recurrentes y arquitecturas híbridas.</p></li>
+<li><p><em><strong>Aprendizaje no supervisado profundo</strong></em>: representaciones comprimidas y detección de anomalías mediante autoencoders.</p></li>
+</ul>
+</li>
+<li><p>Cada uno de estos bloques combina <em><strong>fundamento teórico riguroso</strong></em> (derivaciones, demostraciones y algoritmos) con <em><strong>implementación práctica</strong></em> en <code class="docutils literal notranslate"><span class="pre">Python</span></code>, usando <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code>/<code class="docutils literal notranslate"><span class="pre">Keras</span></code>, y en algunos casos <code class="docutils literal notranslate"><span class="pre">PySpark</span></code> para escenarios de gran volumen de datos.</p></li>
+</ul>
+</section>
+<section id="contenido-del-curso">
+<h2><span class="section-number">1.3. </span>Contenido del curso<a class="headerlink" href="#contenido-del-curso" title="Link to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Módulos</p>
+<ol class="arabic simple">
+<li><p><em><strong>Fundamentos de optimización</strong></em>: el método de gradiente descendente como base de todo entrenamiento de redes neuronales.</p></li>
+<li><p><em><strong>De la neurona biológica al perceptrón</strong></em>: el algoritmo perceptrón, su función de costo y su interpretación geométrica.</p></li>
+<li><p><em><strong>Redes totalmente conectadas (MLP)</strong></em>: arquitectura, funciones de activación y el algoritmo de <code class="docutils literal notranslate"><span class="pre">backpropagation</span></code>.</p></li>
+<li><p><em><strong>Entrenamiento y tuning de hiperparámetros</strong></em>: selección de arquitectura, tasa de aprendizaje, regularización y buenas prácticas de entrenamiento.</p></li>
+<li><p><em><strong>Redes Neuronales Convolucionales (CNN)</strong></em>: de la convolución básica a arquitecturas modernas (<code class="docutils literal notranslate"><span class="pre">LeNet-5</span></code>, <code class="docutils literal notranslate"><span class="pre">AlexNet</span></code>, <code class="docutils literal notranslate"><span class="pre">VGG-16</span></code>, <code class="docutils literal notranslate"><span class="pre">GoogleNet/Inception</span></code>, <code class="docutils literal notranslate"><span class="pre">ResNets</span></code>, <code class="docutils literal notranslate"><span class="pre">U-Net</span></code>).</p></li>
+<li><p><em><strong>Redes Neuronales Recurrentes (RNN) y LSTM</strong></em>: modelado de secuencias, <code class="docutils literal notranslate"><span class="pre">backpropagation</span> <span class="pre">through</span> <span class="pre">time</span></code> y el problema del desvanecimiento/explosión de gradientes.</p></li>
+<li><p><em><strong>Autoencoders</strong></em>: aprendizaje de representaciones comprimidas y aplicaciones no supervisadas.</p></li>
+<li><p><em><strong>Mecanismos de atención y Transformers</strong></em>: <code class="docutils literal notranslate"><span class="pre">self-attention</span></code>, <code class="docutils literal notranslate"><span class="pre">multi-head</span> <span class="pre">attention</span></code> y su aplicación en NLP.</p></li>
+<li><p><em><strong>Proyectos integradores aplicados</strong></em>: biomedicina (segmentación), NLP (clasificación de texto), series de tiempo y ciberseguridad.</p></li>
+<li><p><em><strong>Fundamentos de despliegue (MLOps)</strong></em>: <code class="docutils literal notranslate"><span class="pre">FastAPI</span></code>, <code class="docutils literal notranslate"><span class="pre">Docker</span></code>, <code class="docutils literal notranslate"><span class="pre">CI/CD</span></code> y monitoreo básico de modelos en producción.</p></li>
+</ol>
+</div>
+</section>
+<section id="configuracion-de-entornos-para-tensorflow">
+<h2><span class="section-number">1.4. </span>Configuración de entornos para TensorFlow<a class="headerlink" href="#configuracion-de-entornos-para-tensorflow" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Usaremos el mismo entorno de trabajo configurado para el curso de aprendizaje automático. Si ya lo tiene instalado y funcionando, puede pasar directamente a la siguiente sección.</p></li>
+</ul>
+<section id="instalacion-de-tensorflow-2-10-en-windows-native">
+<h3><span class="section-number">1.4.1. </span>Instalación de <code class="docutils literal notranslate"><span class="pre">TensorFlow</span> <span class="pre">2.10</span></code> en <code class="docutils literal notranslate"><span class="pre">Windows</span> <span class="pre">Native</span></code><a class="headerlink" href="#instalacion-de-tensorflow-2-10-en-windows-native" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Tutorial: <a class="reference external" href="https://www.youtube.com/watch?v=jzTWjXm8hsc&amp;amp;ab_channel=LihkiJoseRubioOrtega">Tutorial 1. Machine Learning. UN 202330</a> y <a class="reference external" href="https://github.com/lihkir/Data/blob/main/TutorialesMachineLearning.pdf">TutorialesMachineLearning.pdf</a></p></li>
+<li><p>Link: <a class="reference external" href="https://www.tensorflow.org/install/pip#windows-native">TensorFlow Windows Native</a></p></li>
+</ul>
+</section>
+<section id="instalacion-de-tensorflow-geq-2-11-en-wsl2">
+<h3><span class="section-number">1.4.2. </span>Instalación de <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> <span class="math notranslate nohighlight">\(\geq\)</span> <code class="docutils literal notranslate"><span class="pre">2.11</span></code> en <code class="docutils literal notranslate"><span class="pre">WSL2</span></code><a class="headerlink" href="#instalacion-de-tensorflow-geq-2-11-en-wsl2" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Tutorial: <a class="reference external" href="https://www.youtube.com/watch?v=VOJq98BLjb8&amp;amp;ab_channel=TechJotters">Install TensorFlow GPU on WSL2 (Windows Subsystem for Linux) - Step by Step Tutorial</a></p></li>
+<li><p>Link: <a class="reference external" href="https://www.tensorflow.org/install/pip#windows-wsl2">TensorFlow WSL2</a></p></li>
+</ul>
+</section>
+<section id="instalacion-de-tensorflow-en-mac">
+<h3><span class="section-number">1.4.3. </span>Instalación de <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> en <code class="docutils literal notranslate"><span class="pre">Mac</span></code><a class="headerlink" href="#instalacion-de-tensorflow-en-mac" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Tutorial: <a class="reference external" href="https://www.youtube.com/watch?v=5DgWvU0p2bk&amp;amp;ab_channel=JeffHeaton">How to Install TensorFlow GPU for Mac M1/M2 with Conda</a></p></li>
+<li><p>Link: <a class="reference external" href="https://www.tensorflow.org/install/pip#macos">TensorFlow MacOS</a></p></li>
+</ul>
+<ul class="simple">
+<li><p>Verifique que su entorno reconoce <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> y, si aplica, la <code class="docutils literal notranslate"><span class="pre">GPU</span></code> disponible antes de continuar con el resto del curso.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Verificamos la version de TensorFlow instalada en el entorno actual</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+
+<span class="c1"># Imprimimos la version de TensorFlow para confirmar que la instalacion fue exitosa</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TensorFlow version:&quot;</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+
+<span class="c1"># Listamos los dispositivos fisicos de tipo GPU detectados por TensorFlow</span>
+<span class="n">gpus</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s2">&quot;GPU&quot;</span><span class="p">)</span>
+
+<span class="c1"># Si la lista de GPUs no esta vacia, el entorno tiene aceleracion por GPU disponible</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">gpus</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GPU disponible:&quot;</span><span class="p">,</span> <span class="n">gpus</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;No se detecto GPU; TensorFlow correra sobre CPU.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="generacion-de-jupyter-books-para-los-entregables-de-deep-learning">
+<h3><span class="section-number">1.4.4. </span>Generación de <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Books</span></code> para los entregables de <strong>Deep Learning</strong><a class="headerlink" href="#generacion-de-jupyter-books-para-los-entregables-de-deep-learning" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Tutorial: <a class="reference external" href="https://www.youtube.com/watch?v=m_wCMg2EmdQ&amp;amp;ab_channel=LihkiJoseRubioOrtega">Tutorial 2. Machine Learning. UN 202330</a> y <a class="reference external" href="https://github.com/lihkir/Data/blob/main/TutorialesMachineLearning.pdf">TutorialesMachineLearning.pdf</a></p></li>
+<li><p>Link: <a class="reference external" href="https://jupyterbook.org/en/stable/start/your-first-book.html">Create your first book</a></p></li>
+</ul>
+</section>
+<section id="introduccion-a-docker-y-despliegue-de-modelos">
+<h3><span class="section-number">1.4.5. </span>Introducción a <code class="docutils literal notranslate"><span class="pre">Docker</span></code> y despliegue de modelos<a class="headerlink" href="#introduccion-a-docker-y-despliegue-de-modelos" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://lihkir.github.io/DataVizPython/postgresql.html#instalacion-y-uso-de-docker">Instalación y uso de Docker</a></p></li>
+<li><p>El despliegue de modelos de Deep Learning en contenedores (<code class="docutils literal notranslate"><span class="pre">Docker</span></code>) y su exposición a través de servicios web (<code class="docutils literal notranslate"><span class="pre">FastAPI</span></code>) se abordará en el módulo de MLOps hacia el final del curso.</p></li>
+</ul>
+</section>
+</section>
+<section id="roles-en-el-ecosistema-de-inteligencia-artificial">
+<h2><span class="section-number">1.5. </span>Roles en el ecosistema de Inteligencia Artificial<a class="headerlink" href="#roles-en-el-ecosistema-de-inteligencia-artificial" title="Link to this heading">#</a></h2>
+<p>El Deep Learning es un componente central dentro de distintos roles profesionales del ecosistema de datos e inteligencia artificial. A continuación se describen los perfiles más relevantes para quienes se especializan en esta área.</p>
+<section id="computer-vision-engineer">
+<h3><span class="section-number">1.5.1. </span>Computer Vision Engineer<a class="headerlink" href="#computer-vision-engineer" title="Link to this heading">#</a></h3>
+<p><strong>Responsabilidades principales:</strong></p>
+<ul class="simple">
+<li><p>Diseñar y entrenar modelos de visión por computador (clasificación, detección, segmentación).</p></li>
+<li><p>Optimizar arquitecturas convolucionales para producción (latencia, tamaño de modelo).</p></li>
+</ul>
+<p><strong>Herramientas comunes:</strong>
+TensorFlow, PyTorch, OpenCV, ONNX.</p>
+</section>
+<section id="nlp-conversational-ai-engineer">
+<h3><span class="section-number">1.5.2. </span>NLP / Conversational AI Engineer<a class="headerlink" href="#nlp-conversational-ai-engineer" title="Link to this heading">#</a></h3>
+<p><strong>Responsabilidades principales:</strong></p>
+<ul class="simple">
+<li><p>Construir modelos de procesamiento de lenguaje natural (clasificación de texto, generación, traducción).</p></li>
+<li><p>Ajustar modelos preentrenados basados en Transformers a dominios específicos.</p></li>
+</ul>
+<p><strong>Herramientas comunes:</strong>
+TensorFlow, PyTorch, Hugging Face Transformers, spaCy.</p>
+</section>
+<section id="deep-learning-research-scientist">
+<h3><span class="section-number">1.5.3. </span>Deep Learning Research Scientist<a class="headerlink" href="#deep-learning-research-scientist" title="Link to this heading">#</a></h3>
+<p><strong>Responsabilidades principales:</strong></p>
+<ul class="simple">
+<li><p>Investigar y proponer nuevas arquitecturas o mejoras algorítmicas.</p></li>
+<li><p>Publicar resultados y validar hipótesis mediante experimentación rigurosa.</p></li>
+</ul>
+<p><strong>Herramientas comunes:</strong>
+PyTorch, JAX, TensorFlow, bibliotecas de optimización matemática.</p>
+</section>
+<section id="mlops-deep-learning-engineer">
+<h3><span class="section-number">1.5.4. </span>MLOps / Deep Learning Engineer<a class="headerlink" href="#mlops-deep-learning-engineer" title="Link to this heading">#</a></h3>
+<p><strong>Responsabilidades principales:</strong></p>
+<ul class="simple">
+<li><p>Llevar modelos de Deep Learning de un notebook de experimentación a un servicio en producción.</p></li>
+<li><p>Automatizar entrenamiento, versionamiento y monitoreo de modelos.</p></li>
+</ul>
+<p><strong>Herramientas comunes:</strong>
+Docker, FastAPI, CI/CD, MLflow, Kubernetes.</p>
+</section>
+<section id="comparacion-general">
+<h3><span class="section-number">1.5.5. </span>Comparación General<a class="headerlink" href="#comparacion-general" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Rol</p></th>
+<th class="head text-center"><p>Modelado Profundo</p></th>
+<th class="head text-center"><p>Investigación</p></th>
+<th class="head text-center"><p>Optimización/Despliegue</p></th>
+<th class="head text-center"><p>Especialización de Dominio</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Computer Vision Engineer</p></td>
+<td class="text-center"><p>●●</p></td>
+<td class="text-center"><p>○</p></td>
+<td class="text-center"><p>●</p></td>
+<td class="text-center"><p>Visión</p></td>
+</tr>
+<tr class="row-odd"><td><p>NLP / Conversational AI Engineer</p></td>
+<td class="text-center"><p>●●</p></td>
+<td class="text-center"><p>○</p></td>
+<td class="text-center"><p>●</p></td>
+<td class="text-center"><p>Lenguaje</p></td>
+</tr>
+<tr class="row-even"><td><p>Deep Learning Research Scientist</p></td>
+<td class="text-center"><p>●●●</p></td>
+<td class="text-center"><p>●●</p></td>
+<td class="text-center"><p>–</p></td>
+<td class="text-center"><p>General</p></td>
+</tr>
+<tr class="row-odd"><td><p>MLOps / Deep Learning Engineer</p></td>
+<td class="text-center"><p>●</p></td>
+<td class="text-center"><p>–</p></td>
+<td class="text-center"><p>●●</p></td>
+<td class="text-center"><p>Infraestructura</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Leyenda:</strong><br />
+● = habilidad presente · ●● = habilidad principal · ●●● = habilidad altamente especializada · ○ = conocimiento parcial · – = no aplicable o no requerido</p>
+</section>
+</section>
+<section id="linkedin-profile-para-especialistas-en-deep-learning">
+<h2><span class="section-number">1.6. </span>LinkedIn Profile para especialistas en Deep Learning<a class="headerlink" href="#linkedin-profile-para-especialistas-en-deep-learning" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Construir una marca personal orientada a Deep Learning en LinkedIn <em><strong>acelera las oportunidades laborales y de colaboración en investigación</strong></em>. Publicar proyectos con código, resultados de modelos y aprendizajes técnicos posiciona su perfil frente a reclutadores y equipos de investigación que buscan talento especializado en inteligencia artificial.</p></li>
+</ul>
+<section id="por-que-es-especialmente-relevante-en-deep-learning">
+<h3><span class="section-number">1.6.1. </span>¿Por qué es especialmente relevante en Deep Learning?<a class="headerlink" href="#por-que-es-especialmente-relevante-en-deep-learning" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Portafolio técnico visible</strong>: proyectos con arquitecturas de CNN, RNN o Transformers, junto con resultados reproducibles, funcionan como evidencia directa de sus competencias.</p></li>
+<li><p><strong>Comunidad activa</strong>: gran parte de la discusión sobre nuevas arquitecturas y resultados de investigación circula primero en redes profesionales y repositorios abiertos.</p></li>
+<li><p><strong>Conexión con la industria</strong>: equipos de investigación aplicada y de producto en IA reclutan activamente a través de estas plataformas.</p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>Tutorial 1</strong>: <a class="reference external" href="https://www.youtube.com/watch?v=jpbU0uxRXhs&amp;amp;ab_channel=AnasRiad">Land Your Next DATA SCIENCE Job with LinkedIn (7 ESSENTIAL Steps)</a></p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>Tutorial 2</strong>: <a class="reference external" href="https://www.youtube.com/watch?v=PjenxeaMICc&amp;amp;ab_channel=EmmaDing">How to Make a Great LinkedIn Profile for Data Scientists</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "tf"
+        },
+        kernelOptions: {
+            name: "tf",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'tf'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="intro.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Profesor: Dr. Lihki Rubio</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="ann_theory.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Multilayer Perceptron</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#de-los-modelos-clasicos-al-aprendizaje-profundo">1.1. De los modelos clásicos al aprendizaje profundo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicaciones-que-veremos-a-lo-largo-del-curso">1.2. Aplicaciones que veremos a lo largo del curso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contenido-del-curso">1.3. Contenido del curso</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuracion-de-entornos-para-tensorflow">1.4. Configuración de entornos para TensorFlow</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instalacion-de-tensorflow-2-10-en-windows-native">1.4.1. Instalación de <code class="docutils literal notranslate"><span class="pre">TensorFlow</span> <span class="pre">2.10</span></code> en <code class="docutils literal notranslate"><span class="pre">Windows</span> <span class="pre">Native</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instalacion-de-tensorflow-geq-2-11-en-wsl2">1.4.2. Instalación de <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> <span class="math notranslate nohighlight">\(\geq\)</span> <code class="docutils literal notranslate"><span class="pre">2.11</span></code> en <code class="docutils literal notranslate"><span class="pre">WSL2</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#instalacion-de-tensorflow-en-mac">1.4.3. Instalación de <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> en <code class="docutils literal notranslate"><span class="pre">Mac</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generacion-de-jupyter-books-para-los-entregables-de-deep-learning">1.4.4. Generación de <code class="docutils literal notranslate"><span class="pre">Jupyter</span> <span class="pre">Books</span></code> para los entregables de <strong>Deep Learning</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#introduccion-a-docker-y-despliegue-de-modelos">1.4.5. Introducción a <code class="docutils literal notranslate"><span class="pre">Docker</span></code> y despliegue de modelos</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#roles-en-el-ecosistema-de-inteligencia-artificial">1.5. Roles en el ecosistema de Inteligencia Artificial</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-vision-engineer">1.5.1. Computer Vision Engineer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nlp-conversational-ai-engineer">1.5.2. NLP / Conversational AI Engineer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-learning-research-scientist">1.5.3. Deep Learning Research Scientist</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mlops-deep-learning-engineer">1.5.4. MLOps / Deep Learning Engineer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-general">1.5.5. Comparación General</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linkedin-profile-para-especialistas-en-deep-learning">1.6. LinkedIn Profile para especialistas en Deep Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-es-especialmente-relevante-en-deep-learning">1.6.1. ¿Por qué es especialmente relevante en Deep Learning?</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Lihki Rubio, Ph.D.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>Lihki Rubio, Ph.D. All rights reserved.</p>
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

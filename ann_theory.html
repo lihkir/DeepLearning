@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>1. Multilayer Perceptron &#8212; Deep Learning</title>
+    <title>2. Multilayer Perceptron &#8212; Deep Learning</title>
   
   
   
@@ -32,9 +32,9 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=530fe47d" />
     <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/custom-checkpoint.css" />
@@ -68,8 +68,8 @@
     <script src="_static/.ipynb_checkpoints/custom-checkpoint.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="2. Series de Tiempo" href="time_series.html" />
-    <link rel="prev" title="Profesor: Dr. Lihki Rubio" href="intro.html" />
+    <link rel="next" title="3. Series de Tiempo" href="time_series.html" />
+    <link rel="prev" title="1. Deep Learning" href="deep_learning_intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -188,10 +188,11 @@
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">1. Multilayer Perceptron</a></li>
-<li class="toctree-l1"><a class="reference internal" href="time_series.html">2. Series de Tiempo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix.html">3. Apéndice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="biblio.html">4. Bibliografía</a></li>
+<li class="toctree-l1"><a class="reference internal" href="deep_learning_intro.html">1. Deep Learning</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Multilayer Perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time_series.html">3. Series de Tiempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">4. Apéndice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biblio.html">5. Bibliografía</a></li>
 </ul>
 
     </div>
@@ -340,53 +341,53 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradiente-descendente">1.1. Gradiente descendente</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descenso-de-gradiente-estocastico-y-por-mini-batch">1.1.1. Descenso de gradiente estocástico y por mini-batch</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#condiciones-y-tasas-de-convergencia">1.1.2. Condiciones y tasas de convergencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradiente-descendente">2.1. Gradiente descendente</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descenso-de-gradiente-estocastico-y-por-mini-batch">2.1.1. Descenso de gradiente estocástico y por mini-batch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#condiciones-y-tasas-de-convergencia">2.1.2. Condiciones y tasas de convergencia</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-neuronales">1.2. Redes neuronales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-perceptron">1.3. El perceptrón</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-de-convergencia-del-perceptron">1.3.1. Teorema de convergencia del perceptrón</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-del-perceptron-el-problema-xor">1.3.2. Limitaciones del perceptrón: el problema XOR</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-neuronales">2.2. Redes neuronales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-perceptron">2.3. El perceptrón</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-de-convergencia-del-perceptron">2.3.1. Teorema de convergencia del perceptrón</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-del-perceptron-el-problema-xor">2.3.2. Limitaciones del perceptrón: el problema XOR</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-totalmente-conectadas">1.4. Redes Totalmente Conectadas</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-teorema-de-aproximacion-universal">1.4.1. El teorema de aproximación universal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-totalmente-conectadas">2.4. Redes Totalmente Conectadas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-teorema-de-aproximacion-universal">2.4.1. El teorema de aproximación universal</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-algoritmo-de-backpropagation">1.5. El Algoritmo De Backpropagation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-esquema-de-backpropagation-para-gradiente-descendente">1.6. El Esquema De Backpropagation Para Gradiente Descendente</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-de-mlp">1.7. Entrenamiento de MLP</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-gradientes">1.8. Cálculo de gradientes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-delta-nj-r">1.9. Cálculo de <span class="math notranslate nohighlight">\(\delta_{nj}^{r}\)</span></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forma-vectorizada-del-backpropagation">1.9.1. Forma vectorizada del backpropagation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-computacional-y-diferenciacion-automatica">1.9.2. Complejidad computacional y diferenciación automática</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-problema-del-desvanecimiento-y-la-explosion-del-gradiente">1.9.3. El problema del desvanecimiento y la explosión del gradiente</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inicializacion-de-pesos-glorot-xavier-y-he">1.9.4. Inicialización de pesos: Glorot/Xavier y He</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-algoritmo-de-backpropagation">2.5. El Algoritmo De Backpropagation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-esquema-de-backpropagation-para-gradiente-descendente">2.6. El Esquema De Backpropagation Para Gradiente Descendente</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-de-mlp">2.7. Entrenamiento de MLP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-gradientes">2.8. Cálculo de gradientes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-delta-nj-r">2.9. Cálculo de <span class="math notranslate nohighlight">\(\delta_{nj}^{r}\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forma-vectorizada-del-backpropagation">2.9.1. Forma vectorizada del backpropagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-computacional-y-diferenciacion-automatica">2.9.2. Complejidad computacional y diferenciación automática</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-problema-del-desvanecimiento-y-la-explosion-del-gradiente">2.9.3. El problema del desvanecimiento y la explosión del gradiente</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inicializacion-de-pesos-glorot-xavier-y-he">2.9.4. Inicialización de pesos: Glorot/Xavier y He</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-de-redes-neuronales">1.10. Tuning de Redes Neuronales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-malware-por-api-calls">1.11. Análisis de Malware por API calls</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-en-pyspark">1.11.1. Entrenamiento en <code class="docutils literal notranslate"><span class="pre">PySpark</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-usar-pyspark-para-modelos-de-machine-learning-con-grandes-volumenes-de-datos">1.11.2. ¿Por qué usar <code class="docutils literal notranslate"><span class="pre">PySpark</span></code> para modelos de Machine Learning con grandes volúmenes de datos?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-de-redes-neuronales">2.10. Tuning de Redes Neuronales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-malware-por-api-calls">2.11. Análisis de Malware por API calls</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-en-pyspark">2.11.1. Entrenamiento en <code class="docutils literal notranslate"><span class="pre">PySpark</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-usar-pyspark-para-modelos-de-machine-learning-con-grandes-volumenes-de-datos">2.11.2. ¿Por qué usar <code class="docutils literal notranslate"><span class="pre">PySpark</span></code> para modelos de Machine Learning con grandes volúmenes de datos?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proyecto-integrador-de-deep-learning">1.12. Proyecto Integrador de Deep Learning</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo">1.12.1. Objetivo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">1.12.2. Dataset</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#target">1.12.3. Target</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-de-datos-eda">1.12.4. Exploración de datos (EDA)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scikit-learn">1.12.5. scikit-learn</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyspark">1.12.6. PySpark</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelado-con-scikit-learn">1.12.7. Modelado con scikit-learn</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelado-con-pyspark">1.12.8. Modelado con PySpark</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretabilidad-con-lime">1.12.9. Interpretabilidad con LIME</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-resultados">1.12.10. Comparación de Resultados</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entregable">1.12.11. Entregable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proyecto-integrador-de-deep-learning">2.12. Proyecto Integrador de Deep Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo">2.12.1. Objetivo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">2.12.2. Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#target">2.12.3. Target</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-de-datos-eda">2.12.4. Exploración de datos (EDA)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scikit-learn">2.12.5. scikit-learn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyspark">2.12.6. PySpark</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelado-con-scikit-learn">2.12.7. Modelado con scikit-learn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelado-con-pyspark">2.12.8. Modelado con PySpark</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretabilidad-con-lime">2.12.9. Interpretabilidad con LIME</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-resultados">2.12.10. Comparación de Resultados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entregable">2.12.11. Entregable</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursos">1.13. Recursos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursos">2.13. Recursos</a></li>
 </ul>
             </nav>
         </div>
@@ -399,9 +400,9 @@ document.write(`
                 <article class="bd-article">
                   
   <section class="tex2jax_ignore mathjax_ignore" id="multilayer-perceptron">
-<h1><span class="section-number">1. </span>Multilayer Perceptron<a class="headerlink" href="#multilayer-perceptron" title="Link to this heading">#</a></h1>
+<h1><span class="section-number">2. </span>Multilayer Perceptron<a class="headerlink" href="#multilayer-perceptron" title="Link to this heading">#</a></h1>
 <section id="gradiente-descendente">
-<h2><span class="section-number">1.1. </span>Gradiente descendente<a class="headerlink" href="#gradiente-descendente" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.1. </span>Gradiente descendente<a class="headerlink" href="#gradiente-descendente" title="Link to this heading">#</a></h2>
 <ul>
 <li><p>El <em><strong>método de gradiente descendente</strong></em> es uno de los mas ampliamente usados para la <em><strong>minimización iterativa de una función de costo diferenciable</strong></em>, <span class="math notranslate nohighlight">\(J(\boldsymbol{\theta}),~\boldsymbol{\theta}\in\mathbb{R}^{l}\)</span>. Como cualquier otra técnica iterativa, el método <em><strong>parte de una estimación inicial</strong></em>, <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(0)}\)</span>, <em><strong>y genera una sucesión</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(i)},~i=1,2,\dots,\)</span> tal que:</p>
 <div class="math notranslate nohighlight">
@@ -415,7 +416,7 @@ document.write(`
 <a class="reference internal image-reference" href="_images/curva_nivel.png"><img alt="_images/curva_nivel.png" src="_images/curva_nivel.png" style="width: 504.8px; height: 386.40000000000003px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">Función de coste en el espacio de parámetros bidimensional.</span><a class="headerlink" href="#curva-nivel" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.1 </span><span class="caption-text">Función de coste en el espacio de parámetros bidimensional.</span><a class="headerlink" href="#curva-nivel" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -478,7 +479,7 @@ J(\boldsymbol{\theta}^{(i)})
 <a class="reference internal image-reference" href="_images/maximun_dec_cost_function.png"><img alt="_images/maximun_dec_cost_function.png" src="_images/maximun_dec_cost_function.png" style="width: 495.20000000000005px; height: 365.6px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.2 </span><span class="caption-text">El vector gradiente en un punto <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> es perpendicular al plano tangente (línea punteada) en la curva de nivel que cruza <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>. La dirección de descenso forma un ángulo obtuso, <span class="math notranslate nohighlight">\(\phi\)</span>, con el vector gradiente.</span><a class="headerlink" href="#maximun-dec-cost-function" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.2 </span><span class="caption-text">El vector gradiente en un punto <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> es perpendicular al plano tangente (línea punteada) en la curva de nivel que cruza <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span>. La dirección de descenso forma un ángulo obtuso, <span class="math notranslate nohighlight">\(\phi\)</span>, con el vector gradiente.</span><a class="headerlink" href="#maximun-dec-cost-function" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -488,7 +489,7 @@ J(\boldsymbol{\theta}^{(i)})
 <a class="reference internal image-reference" href="_images/curva_nivel_cost_function.png"><img alt="_images/curva_nivel_cost_function.png" src="_images/curva_nivel_cost_function.png" style="width: 484.2px; height: 359.1px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.3 </span><span class="caption-text">Las correspondientes curvas de nivel para la función de coste, en el plano bidimensional. Nótese que a medida que nos alejamos del valor óptimo, <span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{\star}\)</span>, los valores de <span class="math notranslate nohighlight">\(c\)</span> aumentan.</span><a class="headerlink" href="#curva-nivel-cost-function" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.3 </span><span class="caption-text">Las correspondientes curvas de nivel para la función de coste, en el plano bidimensional. Nótese que a medida que nos alejamos del valor óptimo, <span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{\star}\)</span>, los valores de <span class="math notranslate nohighlight">\(c\)</span> aumentan.</span><a class="headerlink" href="#curva-nivel-cost-function" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -679,7 +680,7 @@ z = -\frac{1}{\|\mathbf{a}\|} \mathbf{a} = -\frac{\mathbf{a}}{\|\mathbf{a}\|}.
 <a class="reference internal image-reference" href="_images/desc_gradient.png"><img alt="_images/desc_gradient.png" src="_images/desc_gradient.png" style="width: 480.6px; height: 352.8px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.4 </span><span class="caption-text">Representación del gradiente negativo el cual conduce a la máxima disminución de la función de coste.</span><a class="headerlink" href="#fig-desc-gradient" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.4 </span><span class="caption-text">Representación del gradiente negativo el cual conduce a la máxima disminución de la función de coste.</span><a class="headerlink" href="#fig-desc-gradient" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -692,14 +693,14 @@ z = -\frac{1}{\|\mathbf{a}\|} \mathbf{a} = -\frac{\mathbf{a}}{\|\mathbf{a}\|}.
 </ul>
 </div>
 <section id="descenso-de-gradiente-estocastico-y-por-mini-batch">
-<h3><span class="section-number">1.1.1. </span>Descenso de gradiente estocástico y por mini-batch<a class="headerlink" href="#descenso-de-gradiente-estocastico-y-por-mini-batch" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.1.1. </span>Descenso de gradiente estocástico y por mini-batch<a class="headerlink" href="#descenso-de-gradiente-estocastico-y-por-mini-batch" title="Link to this heading">#</a></h3>
 <ul>
 <li><p>En problemas de aprendizaje supervisado, la función de coste tiene típicamente una estructura de <em><strong>suma finita</strong></em> sobre las <span class="math notranslate nohighlight">\(N\)</span> muestras de entrenamiento,</p>
 <div class="math notranslate nohighlight" id="equation-eq-sum-structure">
-<span class="eqno">(1.1)<a class="headerlink" href="#equation-eq-sum-structure" title="Link to this equation">#</a></span>\[
+<span class="eqno">(2.1)<a class="headerlink" href="#equation-eq-sum-structure" title="Link to this equation">#</a></span>\[
     J(\boldsymbol{\theta})=\frac{1}{N}\sum_{n=1}^{N}J_{n}(\boldsymbol{\theta}),\qquad J_{n}(\boldsymbol{\theta}):=\mathcal{L}(y_{n}, f_{\boldsymbol{\theta}}(\boldsymbol{x}_{n})).
     \]</div>
-<p>El gradiente descendente estudiado hasta ahora, en su forma <em><strong>batch</strong></em> (o <em>full-batch</em>), utiliza el gradiente exacto de <a class="reference internal" href="#equation-eq-sum-structure">(1.1)</a>,</p>
+<p>El gradiente descendente estudiado hasta ahora, en su forma <em><strong>batch</strong></em> (o <em>full-batch</em>), utiliza el gradiente exacto de <a class="reference internal" href="#equation-eq-sum-structure">(2.1)</a>,</p>
 <div class="math notranslate nohighlight">
 \[
     \nabla J(\boldsymbol{\theta})=\frac{1}{N}\sum_{n=1}^{N}\nabla J_{n}(\boldsymbol{\theta}),
@@ -742,9 +743,9 @@ z = -\frac{1}{\|\mathbf{a}\|} \mathbf{a} = -\frac{\mathbf{a}}{\|\mathbf{a}\|}.
 </ul>
 </section>
 <section id="condiciones-y-tasas-de-convergencia">
-<h3><span class="section-number">1.1.2. </span>Condiciones y tasas de convergencia<a class="headerlink" href="#condiciones-y-tasas-de-convergencia" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.1.2. </span>Condiciones y tasas de convergencia<a class="headerlink" href="#condiciones-y-tasas-de-convergencia" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Para poder garantizar formalmente la convergencia del esquema iterativo <a class="reference internal" href="#equation-update-equations-gd">(1.4)</a>-tipo, es necesario imponer condiciones de regularidad sobre <span class="math notranslate nohighlight">\(J(\boldsymbol{\theta})\)</span>. Las dos condiciones centrales en la teoría de optimización convexa son las siguientes.</p></li>
+<li><p>Para poder garantizar formalmente la convergencia del esquema iterativo <a class="reference internal" href="#equation-update-equations-gd">(2.4)</a>-tipo, es necesario imponer condiciones de regularidad sobre <span class="math notranslate nohighlight">\(J(\boldsymbol{\theta})\)</span>. Las dos condiciones centrales en la teoría de optimización convexa son las siguientes.</p></li>
 </ul>
 <div class="important admonition">
 <p class="admonition-title">Definición: convexidad y <span class="math notranslate nohighlight">\(L\)</span>-suavidad</p>
@@ -764,7 +765,7 @@ z = -\frac{1}{\|\mathbf{a}\|} \mathbf{a} = -\frac{\mathbf{a}}{\|\mathbf{a}\|}.
 </ul>
 </div>
 <div class="proof theorem admonition" id="thm_descent_lemma">
-<p class="admonition-title"><span class="caption-number">Theorem 1.1 </span> (Lema del descenso (<em>descent lemma</em>))</p>
+<p class="admonition-title"><span class="caption-number">Theorem 2.1 </span> (Lema del descenso (<em>descent lemma</em>))</p>
 <section class="theorem-content" id="proof-content">
 <p>Si <span class="math notranslate nohighlight">\(J\)</span> es <span class="math notranslate nohighlight">\(L\)</span>-suave, entonces para todo <span class="math notranslate nohighlight">\(\boldsymbol{\theta},\boldsymbol{\eta}\in\mathbb{R}^{l}\)</span>,</p>
 <div class="math notranslate nohighlight">
@@ -787,9 +788,9 @@ J(\boldsymbol{\eta})-J(\boldsymbol{\theta})-\nabla^{T}J(\boldsymbol{\theta})(\bo
 \]</div>
 </div>
 <div class="proof theorem admonition" id="thm_gd_rate">
-<p class="admonition-title"><span class="caption-number">Theorem 1.2 </span> (Tasa de convergencia del gradiente descendente (<span class="math notranslate nohighlight">\(J\)</span> convexa y <span class="math notranslate nohighlight">\(L\)</span>-suave))</p>
+<p class="admonition-title"><span class="caption-number">Theorem 2.2 </span> (Tasa de convergencia del gradiente descendente (<span class="math notranslate nohighlight">\(J\)</span> convexa y <span class="math notranslate nohighlight">\(L\)</span>-suave))</p>
 <section class="theorem-content" id="proof-content">
-<p>Sea <span class="math notranslate nohighlight">\(J\)</span> convexa y <span class="math notranslate nohighlight">\(L\)</span>-suave, con minimizador <span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{\star}\)</span>. Si el tamaño de paso se fija como <span class="math notranslate nohighlight">\(\mu_{i}\equiv\mu=1/L\)</span>, entonces la sucesión <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(i)}\)</span> generada por <a class="reference internal" href="#equation-update-equations-gd">(1.4)</a> satisface</p>
+<p>Sea <span class="math notranslate nohighlight">\(J\)</span> convexa y <span class="math notranslate nohighlight">\(L\)</span>-suave, con minimizador <span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{\star}\)</span>. Si el tamaño de paso se fija como <span class="math notranslate nohighlight">\(\mu_{i}\equiv\mu=1/L\)</span>, entonces la sucesión <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(i)}\)</span> generada por <a class="reference internal" href="#equation-update-equations-gd">(2.4)</a> satisface</p>
 <div class="math notranslate nohighlight">
 \[
 J(\boldsymbol{\theta}^{(k)})-J(\boldsymbol{\theta}_{\star})\leq\frac{L\|\boldsymbol{\theta}^{(0)}-\boldsymbol{\theta}_{\star}\|^{2}}{2k},\qquad k=1,2,\dots
@@ -797,7 +798,7 @@ J(\boldsymbol{\theta}^{(k)})-J(\boldsymbol{\theta}_{\star})\leq\frac{L\|\boldsym
 <p>Es decir, el gradiente descendente alcanza una <em><strong>tasa de convergencia <span class="math notranslate nohighlight">\(\mathcal{O}(1/k)\)</span></strong></em> en el valor de la función de coste.</p>
 </section>
 </div><div class="proof admonition" id="proof">
-<p>Proof. Aplicando el <a class="reference internal" href="#thm_descent_lemma">Theorem 1.1</a> con <span class="math notranslate nohighlight">\(\boldsymbol{\eta}=\boldsymbol{\theta}^{(i)}=\boldsymbol{\theta}^{(i-1)}-\mu\nabla J(\boldsymbol{\theta}^{(i-1)})\)</span> y <span class="math notranslate nohighlight">\(\boldsymbol{\theta}=\boldsymbol{\theta}^{(i-1)}\)</span>, junto con <span class="math notranslate nohighlight">\(\mu=1/L\)</span>, se obtiene</p>
+<p>Proof. Aplicando el <a class="reference internal" href="#thm_descent_lemma">Theorem 2.1</a> con <span class="math notranslate nohighlight">\(\boldsymbol{\eta}=\boldsymbol{\theta}^{(i)}=\boldsymbol{\theta}^{(i-1)}-\mu\nabla J(\boldsymbol{\theta}^{(i-1)})\)</span> y <span class="math notranslate nohighlight">\(\boldsymbol{\theta}=\boldsymbol{\theta}^{(i-1)}\)</span>, junto con <span class="math notranslate nohighlight">\(\mu=1/L\)</span>, se obtiene</p>
 <div class="math notranslate nohighlight">
 \[
 J(\boldsymbol{\theta}^{(i)})\leq J(\boldsymbol{\theta}^{(i-1)})-\frac{1}{2L}\|\nabla J(\boldsymbol{\theta}^{(i-1)})\|^{2}.
@@ -898,12 +899,12 @@ J(\boldsymbol{\theta}^{(i)})-J(\boldsymbol{\theta}_{\star})\leq\frac{L}{2}\left(
 </div>
 </div>
 <ul class="simple">
-<li><p>Nótese en el panel izquierdo que la selección <span class="math notranslate nohighlight">\(\mu\approx2/L\)</span> produce oscilaciones (consistente con el análisis de estabilidad discutido al inicio de esta sección), mientras que <span class="math notranslate nohighlight">\(\mu=1/L\)</span> garantiza el descenso monótono predicho por el <a class="reference internal" href="#thm_descent_lemma">Theorem 1.1</a>. En el panel derecho se observa el efecto característico de la <em><strong>varianza del gradiente estocástico</strong></em>: la trayectoria de SGD desciende en promedio, pero con fluctuaciones alrededor de la trayectoria batch, ilustrando el compromiso sesgo-varianza discutido anteriormente.</p></li>
+<li><p>Nótese en el panel izquierdo que la selección <span class="math notranslate nohighlight">\(\mu\approx2/L\)</span> produce oscilaciones (consistente con el análisis de estabilidad discutido al inicio de esta sección), mientras que <span class="math notranslate nohighlight">\(\mu=1/L\)</span> garantiza el descenso monótono predicho por el <a class="reference internal" href="#thm_descent_lemma">Theorem 2.1</a>. En el panel derecho se observa el efecto característico de la <em><strong>varianza del gradiente estocástico</strong></em>: la trayectoria de SGD desciende en promedio, pero con fluctuaciones alrededor de la trayectoria batch, ilustrando el compromiso sesgo-varianza discutido anteriormente.</p></li>
 </ul>
 </section>
 </section>
 <section id="redes-neuronales">
-<h2><span class="section-number">1.2. </span>Redes neuronales<a class="headerlink" href="#redes-neuronales" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.2. </span>Redes neuronales<a class="headerlink" href="#redes-neuronales" title="Link to this heading">#</a></h2>
 <div class="admonition-introduccion admonition">
 <p class="admonition-title">Introducción</p>
 <ul class="simple">
@@ -913,7 +914,7 @@ J(\boldsymbol{\theta}^{(i)})-J(\boldsymbol{\theta}_{\star})\leq\frac{L}{2}\left(
 </div>
 </section>
 <section id="el-perceptron">
-<h2><span class="section-number">1.3. </span>El perceptrón<a class="headerlink" href="#el-perceptron" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.3. </span>El perceptrón<a class="headerlink" href="#el-perceptron" title="Link to this heading">#</a></h2>
 <ul>
 <li><p>Nuestro punto de partida será considerar el problema simple de una <em><strong>tarea de clasificación conformada por dos clases linealmente separables</strong></em>. En otras palabras, dado un conjunto de muestras de entrenamiento, <span class="math notranslate nohighlight">\((y_{n}, \boldsymbol{x}_{n})\)</span>, <span class="math notranslate nohighlight">\(n=1,2,\dots,N\)</span>, con <span class="math notranslate nohighlight">\(y_{n}\in\{-1,+1\},~\boldsymbol{x}_{n}\in\mathbb{R}^{l}\)</span>, suponemos que existe un hiperplano</p>
 <div class="math notranslate nohighlight">
@@ -986,7 +987,7 @@ J(\boldsymbol{\theta})=\left(-\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\bol
 <li><p>Otra versión del algoritmo considera una <em><strong>muestra por iteración en un esquema cíclico, hasta que el algoritmo converge</strong></em>. Denotemos por <span class="math notranslate nohighlight">\(y_{(i)}\)</span>, <span class="math notranslate nohighlight">\(\boldsymbol{x}_{i},~i\in\{1,2,\dots,N\}\)</span> los <em><strong>pares de entrenamiento presentados al algoritmo en la iteración</strong></em> <span class="math notranslate nohighlight">\(i\)</span><em><strong>-ésima</strong></em>. Entonces, la iteración de actualización se convierte en:</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-eq-perceptron-algo2">
-<span class="eqno">(1.2)<a class="headerlink" href="#equation-eq-perceptron-algo2" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(2.2)<a class="headerlink" href="#equation-eq-perceptron-algo2" title="Link to this equation">#</a></span>\[\begin{split}
 \boldsymbol{\theta}^{(i)}=
 \begin{cases}
 \boldsymbol{\theta}^{(i-1)}+\mu_{i}y_{(i)}\boldsymbol{x}_{(i)},&amp;\quad\text{si}\,\boldsymbol{x}_{(i)}\,\text{es mal clasificado por}\,\boldsymbol{\theta}^{(i-1)},\\
@@ -1001,17 +1002,17 @@ J(\boldsymbol{\theta})=\left(-\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\bol
 <p class="admonition-title">Observación</p>
 <ul class="simple">
 <li><p>Después de un número finito de épocas, se garantiza que el algoritmo es convergente (<em>convexidad de <span class="math notranslate nohighlight">\(J\)</span> y clases linealmente separables</em>). <em><strong>Nótese que para obtener dicha convergencia, la sucesión</strong></em> <span class="math notranslate nohighlight">\(\mu_{i}\)</span> <em><strong>debe ser seleccionada apropiadamente</strong></em>. Sin embargo, para el caso del <em><strong>algoritmo perceptrón, la convergencia es garantizada</strong></em>, aun cuando <span class="math notranslate nohighlight">\(\mu_{i}\)</span> es una constante positiva, <span class="math notranslate nohighlight">\(\mu_{i}=\mu&gt;0\)</span>, <em><strong>usualmente tomado igual a uno</strong></em>.</p></li>
-<li><p>La formulación en <a class="reference internal" href="#equation-eq-perceptron-algo2">(1.2)</a> es conocida también como la filosofía de aprendizaje <em><strong><code class="docutils literal notranslate"><span class="pre">reward-punishment</span></code></strong></em>. Si la actual estimación es exitosa en la predicción de la clase del respectivo patrón, ninguna acción es tomada (<em><strong>reward</strong></em>), en otro caso, el algoritmo es obligado a realizar una actualización (<em><strong>punishment</strong></em>).</p></li>
+<li><p>La formulación en <a class="reference internal" href="#equation-eq-perceptron-algo2">(2.2)</a> es conocida también como la filosofía de aprendizaje <em><strong><code class="docutils literal notranslate"><span class="pre">reward-punishment</span></code></strong></em>. Si la actual estimación es exitosa en la predicción de la clase del respectivo patrón, ninguna acción es tomada (<em><strong>reward</strong></em>), en otro caso, el algoritmo es obligado a realizar una actualización (<em><strong>punishment</strong></em>).</p></li>
 </ul>
 </div>
 <figure class="align-center" id="perceptron-rule">
 <img alt="_images/perceptron_rule.png" src="_images/perceptron_rule.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 1.5 </span><span class="caption-text">El punto <span class="math notranslate nohighlight">\(x\)</span> está mal clasificado por la línea roja. La regla perceptrón gira el hiperplano hacia el punto <span class="math notranslate nohighlight">\(x\)</span>, para intentar incluirlo en el lado correcto del nuevo hiperplano y clasificarlo correctamente.</span><a class="headerlink" href="#perceptron-rule" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.5 </span><span class="caption-text">El punto <span class="math notranslate nohighlight">\(x\)</span> está mal clasificado por la línea roja. La regla perceptrón gira el hiperplano hacia el punto <span class="math notranslate nohighlight">\(x\)</span>, para intentar incluirlo en el lado correcto del nuevo hiperplano y clasificarlo correctamente.</span><a class="headerlink" href="#perceptron-rule" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul>
-<li><p>La <a class="reference internal" href="#perceptron-rule"><span class="std std-numref">Fig. 1.5</span></a> ofrece una interpretación geométrica de la <em><strong>regla del perceptrón</strong></em>. Supongamos que la muestra <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> está mal clasificada por el hiperplano, <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(i-1)}\)</span>. Como sabemos, por geometría analítica, <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(i-1)}\)</span> <em><strong>corresponde a un vector que es perpendicular al hiperplano que está definido por este vector</strong></em>. Como <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> se encuentra en el lado <span class="math notranslate nohighlight">\((-)\)</span> del hiperplano y está mal clasificado, pertenece a la clase <span class="math notranslate nohighlight">\(\omega_{1}\)</span>; asumiendo <span class="math notranslate nohighlight">\(\mu = 1\)</span>, la corrección aplicada por el algoritmo es</p>
+<li><p>La <a class="reference internal" href="#perceptron-rule"><span class="std std-numref">Fig. 2.5</span></a> ofrece una interpretación geométrica de la <em><strong>regla del perceptrón</strong></em>. Supongamos que la muestra <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> está mal clasificada por el hiperplano, <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(i-1)}\)</span>. Como sabemos, por geometría analítica, <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(i-1)}\)</span> <em><strong>corresponde a un vector que es perpendicular al hiperplano que está definido por este vector</strong></em>. Como <span class="math notranslate nohighlight">\(\boldsymbol{x}\)</span> se encuentra en el lado <span class="math notranslate nohighlight">\((-)\)</span> del hiperplano y está mal clasificado, pertenece a la clase <span class="math notranslate nohighlight">\(\omega_{1}\)</span>; asumiendo <span class="math notranslate nohighlight">\(\mu = 1\)</span>, la corrección aplicada por el algoritmo es</p>
 <div class="math notranslate nohighlight">
 \[
     \boldsymbol{\theta}^{(i)}=\boldsymbol{\theta}^{(i-1)}+\boldsymbol{x},
@@ -1020,7 +1021,7 @@ J(\boldsymbol{\theta})=\left(-\sum_{n:\boldsymbol{x}_{n}\in\mathcal{Y}}y_{n}\bol
 </li>
 </ul>
 <div class="proof algorithm admonition" id="my_algorithm_pattern_by_pattern">
-<p class="admonition-title"><span class="caption-number">Algorithm 1.1 </span> (Algoritmo perceptrón <em>pattern-by-pattern</em>)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 2.1 </span> (Algoritmo perceptrón <em>pattern-by-pattern</em>)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>Inicialización</strong></p>
 <ol class="arabic simple">
@@ -1059,14 +1060,14 @@ f(z)=
 <a class="reference internal image-reference" href="_images/mcculloch_pitts.png"><img alt="_images/mcculloch_pitts.png" src="_images/mcculloch_pitts.png" style="width: 532.0px; height: 167.20000000000002px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.6 </span><span class="caption-text">Arquitectura básica de neuronas/perceptrones.</span><a class="headerlink" href="#mcculloch-pitts" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.6 </span><span class="caption-text">Arquitectura básica de neuronas/perceptrones.</span><a class="headerlink" href="#mcculloch-pitts" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
 <li><p>En la arquitectura básica de neuronas/perceptrones, las <em><strong>características de entrada se aplican a los nodos de entrada y se ponderan por los respectivos pesos que definen las sinapsis</strong></em>. A continuación <em><strong>se añade el término de sesgo en su combinación lineal y el resultado es empujado a través de la no linealidad</strong></em>. En la neurona <em><strong>McCulloch-Pitts</strong></em>, la salida es 1 para los patrones de la clase <span class="math notranslate nohighlight">\(\omega_{1}\)</span> o 0 para la clase <span class="math notranslate nohighlight">\(\omega_{2}\)</span>. La suma y la operación no lineal se unen para simplificar el gráfico.</p></li>
 </ul>
 <section id="teorema-de-convergencia-del-perceptron">
-<h3><span class="section-number">1.3.1. </span>Teorema de convergencia del perceptrón<a class="headerlink" href="#teorema-de-convergencia-del-perceptron" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.3.1. </span>Teorema de convergencia del perceptrón<a class="headerlink" href="#teorema-de-convergencia-del-perceptron" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>La observación hecha anteriormente, sobre la garantía de convergencia del algoritmo perceptrón en un <em><strong>número finito de épocas</strong></em>, puede formalizarse de manera precisa. El resultado clásico se debe a <span id="id4">[<a class="reference internal" href="biblio.html#id76" title="Albert B. J. Novikoff. On convergence proofs on perceptrons. Proceedings of the Symposium on the Mathematical Theory of Automata, 12:615–622, 1962.">Novikoff, 1962</a>]</span> y provee una <em><strong>cota explícita</strong></em> sobre el número de correcciones (actualizaciones) requeridas.</p></li>
 </ul>
@@ -1080,9 +1081,9 @@ f(z)=
 <p>y <span class="math notranslate nohighlight">\(R:=\max_{n=1,\dots,N}\|\boldsymbol{x}_{n}\|\)</span> el radio de la bola que contiene a las muestras.</p>
 </div>
 <div class="proof theorem admonition" id="thm_perceptron_convergence">
-<p class="admonition-title"><span class="caption-number">Theorem 1.3 </span> (Teorema de convergencia del perceptrón (Novikoff, 1962))</p>
+<p class="admonition-title"><span class="caption-number">Theorem 2.3 </span> (Teorema de convergencia del perceptrón (Novikoff, 1962))</p>
 <section class="theorem-content" id="proof-content">
-<p>Bajo la hipótesis de separabilidad lineal, con margen <span class="math notranslate nohighlight">\(\gamma\)</span> y radio <span class="math notranslate nohighlight">\(R\)</span> definidos como arriba, el algoritmo perceptrón (regla <a class="reference internal" href="#equation-eq-perceptron-algo2">(1.2)</a> con <span class="math notranslate nohighlight">\(\mu=1\)</span>, inicializado en <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(0)}=\boldsymbol{0}\)</span>) realiza a lo sumo</p>
+<p>Bajo la hipótesis de separabilidad lineal, con margen <span class="math notranslate nohighlight">\(\gamma\)</span> y radio <span class="math notranslate nohighlight">\(R\)</span> definidos como arriba, el algoritmo perceptrón (regla <a class="reference internal" href="#equation-eq-perceptron-algo2">(2.2)</a> con <span class="math notranslate nohighlight">\(\mu=1\)</span>, inicializado en <span class="math notranslate nohighlight">\(\boldsymbol{\theta}^{(0)}=\boldsymbol{0}\)</span>) realiza a lo sumo</p>
 <div class="math notranslate nohighlight">
 \[
 k\leq\left(\frac{R}{\gamma}\right)^{2}
@@ -1118,9 +1119,9 @@ k\leq\left(\frac{R}{\gamma}\right)^{2}
 </div>
 </section>
 <section id="limitaciones-del-perceptron-el-problema-xor">
-<h3><span class="section-number">1.3.2. </span>Limitaciones del perceptrón: el problema XOR<a class="headerlink" href="#limitaciones-del-perceptron-el-problema-xor" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.3.2. </span>Limitaciones del perceptrón: el problema XOR<a class="headerlink" href="#limitaciones-del-perceptron-el-problema-xor" title="Link to this heading">#</a></h3>
 <ul>
-<li><p>El <a class="reference internal" href="#thm_perceptron_convergence">Theorem 1.3</a> presupone que las clases son <em><strong>linealmente separables</strong></em>. Esta hipótesis, lejos de ser trivial, constituye la principal limitación del perceptrón simple, señalada de forma influyente por <span id="id5">[<a class="reference internal" href="biblio.html#id77" title="Marvin Minsky and Seymour A. Papert. Perceptrons: An Introduction to Computational Geometry. MIT Press, Cambridge, MA, 1969.">Minsky and Papert, 1969</a>]</span>. El ejemplo canónico es la función lógica <em><strong>XOR (o exclusivo)</strong></em>:</p>
+<li><p>El <a class="reference internal" href="#thm_perceptron_convergence">Theorem 2.3</a> presupone que las clases son <em><strong>linealmente separables</strong></em>. Esta hipótesis, lejos de ser trivial, constituye la principal limitación del perceptrón simple, señalada de forma influyente por <span id="id5">[<a class="reference internal" href="biblio.html#id77" title="Marvin Minsky and Seymour A. Papert. Perceptrons: An Introduction to Computational Geometry. MIT Press, Cambridge, MA, 1969.">Minsky and Papert, 1969</a>]</span>. El ejemplo canónico es la función lógica <em><strong>XOR (o exclusivo)</strong></em>:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(x_{1}\)</span></p></th>
@@ -1227,7 +1228,7 @@ Caso XOR: convergió = False (esperado: False), errores en la última época = 4
 <a class="reference internal image-reference" href="_images/hidden_layer_activationf_function.png"><img alt="_images/hidden_layer_activationf_function.png" src="_images/hidden_layer_activationf_function.png" style="width: 508.9px; height: 256.2px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.7 </span><span class="caption-text">Selección de función de activación para <em><strong>hidden layers</strong></em>. (Fuente <span id="id6">[<a class="reference internal" href="biblio.html#id55" title="J. Brownlee and Machine Learning Mastery. Deep Learning with Python: Develop Deep Learning Models on Theano and TensorFlow Using Keras. Machine Learning Mastery, 2017. URL: https://books.google.com.co/books?id=eJw2nQAACAAJ.">Brownlee and Mastery, 2017</a>]</span>).</span><a class="headerlink" href="#hidden-layer-activationf-function-fig" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.7 </span><span class="caption-text">Selección de función de activación para <em><strong>hidden layers</strong></em>. (Fuente <span id="id6">[<a class="reference internal" href="biblio.html#id55" title="J. Brownlee and Machine Learning Mastery. Deep Learning with Python: Develop Deep Learning Models on Theano and TensorFlow Using Keras. Machine Learning Mastery, 2017. URL: https://books.google.com.co/books?id=eJw2nQAACAAJ.">Brownlee and Mastery, 2017</a>]</span>).</span><a class="headerlink" href="#hidden-layer-activationf-function-fig" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -1238,7 +1239,7 @@ Caso XOR: convergió = False (esperado: False), errores en la última época = 4
 <a class="reference internal image-reference" href="_images/output_layer_activation_function.png"><img alt="_images/output_layer_activation_function.png" src="_images/output_layer_activation_function.png" style="width: 485.79999999999995px; height: 301.7px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.8 </span><span class="caption-text">Selección de función de activación para <em><strong>hidden layers</strong></em>. (Fuente <span id="id7">[<a class="reference internal" href="biblio.html#id55" title="J. Brownlee and Machine Learning Mastery. Deep Learning with Python: Develop Deep Learning Models on Theano and TensorFlow Using Keras. Machine Learning Mastery, 2017. URL: https://books.google.com.co/books?id=eJw2nQAACAAJ.">Brownlee and Mastery, 2017</a>]</span>).</span><a class="headerlink" href="#output-layer-activation-function" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.8 </span><span class="caption-text">Selección de función de activación para <em><strong>hidden layers</strong></em>. (Fuente <span id="id7">[<a class="reference internal" href="biblio.html#id55" title="J. Brownlee and Machine Learning Mastery. Deep Learning with Python: Develop Deep Learning Models on Theano and TensorFlow Using Keras. Machine Learning Mastery, 2017. URL: https://books.google.com.co/books?id=eJw2nQAACAAJ.">Brownlee and Mastery, 2017</a>]</span>).</span><a class="headerlink" href="#output-layer-activation-function" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -1247,7 +1248,7 @@ Caso XOR: convergió = False (esperado: False), errores en la última época = 4
 </section>
 </section>
 <section id="redes-totalmente-conectadas">
-<h2><span class="section-number">1.4. </span>Redes Totalmente Conectadas<a class="headerlink" href="#redes-totalmente-conectadas" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.4. </span>Redes Totalmente Conectadas<a class="headerlink" href="#redes-totalmente-conectadas" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Para resumir de manera más formal el tipo de <em><strong>operaciones que tienen lugar en una red totalmente conectada</strong></em>, centrémonos en, por ejemplo, la <em><strong>capa</strong></em> <span class="math notranslate nohighlight">\(r\)</span> <em><strong>de una red neuronal multicapa y supongamos que está formada por</strong></em> <span class="math notranslate nohighlight">\(k_{r}\)</span> <em><strong>neuronas</strong></em>. El vector de <em><strong>entrada a esta capa está formado por las salidas de los nodos de la capa anterior, que se denomina</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{y}^{r-1}\)</span>.</p></li>
 <li><p>Sea <span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{j}^{r}\)</span> el vector de los <em><strong>pesos sinápticos, incluido el término de sesgo, asociado a la neurona</strong></em> <span class="math notranslate nohighlight">\(j\)</span> <em><strong>de la capa</strong></em> <span class="math notranslate nohighlight">\(r\)</span>, donde <span class="math notranslate nohighlight">\(j = 1,2,\dots, k_{r}\)</span>. La <em><strong>dimensión respectiva</strong></em> de este vector es <span class="math notranslate nohighlight">\(k_{r-1} + 1\)</span>, donde <span class="math notranslate nohighlight">\(k_{r-1}\)</span> es el <em><strong>número de neuronas de la capa anterior</strong></em>, <span class="math notranslate nohighlight">\(r-1\)</span>, <em><strong>y el aumento en 1 representa el término de sesgo</strong></em>. Entonces las operaciones realizadas, antes de la no linealidad, son los productos internos</p></li>
@@ -1281,7 +1282,7 @@ f(\boldsymbol{z}^{r})
 <a class="reference internal image-reference" href="_images/fully_connected_net.png"><img alt="_images/fully_connected_net.png" src="_images/fully_connected_net.png" style="width: 600.0px; height: 317.20000000000005px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.9 </span><span class="caption-text"><span class="math notranslate nohighlight">\(j\)</span>-ésimo elemento de la capa <span class="math notranslate nohighlight">\(r\)</span> de la red totalmente conectada.</span><a class="headerlink" href="#id17" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.9 </span><span class="caption-text"><span class="math notranslate nohighlight">\(j\)</span>-ésimo elemento de la capa <span class="math notranslate nohighlight">\(r\)</span> de la red totalmente conectada.</span><a class="headerlink" href="#id17" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="important admonition">
@@ -1295,12 +1296,12 @@ f(\boldsymbol{z}^{r})
 <li><p>Las <strong>técnicas de reparto de pesos</strong> consisten en compartir un conjunto de parámetros entre varias conexiones mediante restricciones específicas. Las <strong>redes neuronales recurrentes</strong> y <strong>convolucionales</strong> aplican este principio; en estas últimas, las convoluciones reemplazan al producto interno, reduciendo significativamente el número de parámetros.</p></li>
 </ul>
 <section id="el-teorema-de-aproximacion-universal">
-<h3><span class="section-number">1.4.1. </span>El teorema de aproximación universal<a class="headerlink" href="#el-teorema-de-aproximacion-universal" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.4.1. </span>El teorema de aproximación universal<a class="headerlink" href="#el-teorema-de-aproximacion-universal" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>La limitación del perceptrón simple frente a problemas no linealmente separables, como XOR, queda superada al introducir capas ocultas. Un resultado fundamental de la teoría de redes neuronales, debido de forma independiente a <span id="id8">[<a class="reference internal" href="biblio.html#id78" title="George Cybenko. Approximation by superpositions of a sigmoidal function. Mathematics of Control, Signals and Systems, 2(4):303–314, 1989. doi:10.1007/BF02551274.">Cybenko, 1989</a>]</span> y <span id="id9">[<a class="reference internal" href="biblio.html#id79" title="Kurt Hornik, Maxwell Stinchcombe, and Halbert White. Multilayer feedforward networks are universal approximators. Neural Networks, 2(5):359–366, 1989. doi:10.1016/0893-6080(89)90020-8.">Hornik <em>et al.</em>, 1989</a>]</span>, establece que <em><strong>una red con una sola capa oculta es, en principio, suficientemente expresiva para aproximar cualquier función continua</strong></em> sobre un dominio compacto.</p></li>
 </ul>
 <div class="proof theorem admonition" id="thm_universal_approx">
-<p class="admonition-title"><span class="caption-number">Theorem 1.4 </span> (Teorema de aproximación universal (versión de Cybenko/Hornik))</p>
+<p class="admonition-title"><span class="caption-number">Theorem 2.4 </span> (Teorema de aproximación universal (versión de Cybenko/Hornik))</p>
 <section class="theorem-content" id="proof-content">
 <p>Sea <span class="math notranslate nohighlight">\(f\)</span> una función de activación no constante, acotada y continua (por ejemplo, sigmoidea). Entonces, para toda función continua <span class="math notranslate nohighlight">\(g:K\subset\mathbb{R}^{l}\to\mathbb{R}\)</span> definida sobre un conjunto compacto <span class="math notranslate nohighlight">\(K\)</span>, y para todo <span class="math notranslate nohighlight">\(\varepsilon&gt;0\)</span>, existe un entero <span class="math notranslate nohighlight">\(k\)</span> y parámetros <span class="math notranslate nohighlight">\(\{\boldsymbol{\theta}_{j}, \alpha_{j}, b_{j}\}_{j=1}^{k}\)</span> tales que la red de una sola capa oculta</p>
 <div class="math notranslate nohighlight">
@@ -1320,7 +1321,7 @@ f(\boldsymbol{z}^{r})
 </section>
 </section>
 <section id="el-algoritmo-de-backpropagation">
-<h2><span class="section-number">1.5. </span>El Algoritmo De Backpropagation<a class="headerlink" href="#el-algoritmo-de-backpropagation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.5. </span>El Algoritmo De Backpropagation<a class="headerlink" href="#el-algoritmo-de-backpropagation" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Una red neuronal considera una <em><strong>función paramétrica no lineal</strong></em>, <span class="math notranslate nohighlight">\(\hat{y} = f_{\boldsymbol{\theta}}(\boldsymbol{x})\)</span>, donde <span class="math notranslate nohighlight">\(\boldsymbol{\theta}\)</span> representa todos los pesos/sesgo presentes en la red. Por lo tanto, el entrenamiento de una red neuronal no parece ser diferente del entrenamiento de cualquier otro modelo de predicción paramétrica.</p></li>
 <li><p>Todo lo que se necesita es <em><strong>(a)</strong></em> un <em><strong>conjunto de muestras de entrenamiento</strong></em>, <em><strong>(b)</strong></em> una <em><strong>función de pérdida</strong></em> <span class="math notranslate nohighlight">\(\mathcal{L}(y, \hat{y})\)</span>, y <em><strong>(c)</strong></em> un <em><strong>esquema iterativo</strong></em>, por ejemplo, el <em><strong>gradiente descendente</strong></em>, para realizar la optimización de la función de coste asociada (<em><strong>pérdida empírica</strong></em>).</p></li>
@@ -1340,13 +1341,13 @@ J(\boldsymbol{\theta})=\sum_{n=1}^{N}\mathcal{L}(y_{n}, f_{\boldsymbol{\theta}}(
 f(z)=\sigma(z):=\frac{1}{1+\exp(-az)}.
 \]</div>
 <ul class="simple">
-<li><p>Nótese que <em><strong>cuanto mayor sea el valor del parámetro</strong></em> <span class="math notranslate nohighlight">\(a\)</span>, <em><strong>la gráfica correspondiente se acerca más a la de la función de Heaviside</strong></em> (ver <a class="reference internal" href="#sigmoid-act-function"><span class="std std-numref">Fig. 1.10</span></a>).</p></li>
+<li><p>Nótese que <em><strong>cuanto mayor sea el valor del parámetro</strong></em> <span class="math notranslate nohighlight">\(a\)</span>, <em><strong>la gráfica correspondiente se acerca más a la de la función de Heaviside</strong></em> (ver <a class="reference internal" href="#sigmoid-act-function"><span class="std std-numref">Fig. 2.10</span></a>).</p></li>
 </ul>
 <figure class="align-center" id="sigmoid-act-function">
 <a class="reference internal image-reference" href="_images/sigmoid_act_function.png"><img alt="_images/sigmoid_act_function.png" src="_images/sigmoid_act_function.png" style="width: 507.20000000000005px; height: 471.20000000000005px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.10 </span><span class="caption-text">Función <code class="docutils literal notranslate"><span class="pre">sigmoidea</span> <span class="pre">logística</span></code> para diferentes valores del parámetro <span class="math notranslate nohighlight">\(a\)</span>.</span><a class="headerlink" href="#sigmoid-act-function" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.10 </span><span class="caption-text">Función <code class="docutils literal notranslate"><span class="pre">sigmoidea</span> <span class="pre">logística</span></code> para diferentes valores del parámetro <span class="math notranslate nohighlight">\(a\)</span>.</span><a class="headerlink" href="#sigmoid-act-function" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul>
@@ -1355,14 +1356,14 @@ f(z)=\sigma(z):=\frac{1}{1+\exp(-az)}.
 \[
     f(z)=a\tanh\left(\frac{cz}{2}\right),
     \]</div>
-<p>donde <span class="math notranslate nohighlight">\(c\)</span> y <span class="math notranslate nohighlight">\(a\)</span> son parámetros de control. El gráfico de esta función se muestra en la <a class="reference internal" href="#tanh-act-function"><span class="std std-numref">Fig. 1.11</span></a>. Nótese que a diferencia de la sigmoidea logística, esta es una <em><strong>función no simétrica</strong></em>, es decir, <span class="math notranslate nohighlight">\(f(-z)=-f(z)\)</span>. Ambas son también conocidas como <em><strong>funciones de reducción, porque limitan la salida a un rango finito de valores</strong></em>.</p>
+<p>donde <span class="math notranslate nohighlight">\(c\)</span> y <span class="math notranslate nohighlight">\(a\)</span> son parámetros de control. El gráfico de esta función se muestra en la <a class="reference internal" href="#tanh-act-function"><span class="std std-numref">Fig. 2.11</span></a>. Nótese que a diferencia de la sigmoidea logística, esta es una <em><strong>función no simétrica</strong></em>, es decir, <span class="math notranslate nohighlight">\(f(-z)=-f(z)\)</span>. Ambas son también conocidas como <em><strong>funciones de reducción, porque limitan la salida a un rango finito de valores</strong></em>.</p>
 </li>
 </ul>
 <figure class="align-center" id="tanh-act-function">
 <a class="reference internal image-reference" href="_images/tanh_act_function.png"><img alt="_images/tanh_act_function.png" src="_images/tanh_act_function.png" style="width: 693.6px; height: 435.20000000000005px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.11 </span><span class="caption-text">Función de reducción de la tangente hiperbólica para <span class="math notranslate nohighlight">\(a = 1.7\)</span> y <span class="math notranslate nohighlight">\(c = 4/3\)</span>.</span><a class="headerlink" href="#tanh-act-function" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.11 </span><span class="caption-text">Función de reducción de la tangente hiperbólica para <span class="math notranslate nohighlight">\(a = 1.7\)</span> y <span class="math notranslate nohighlight">\(c = 4/3\)</span>.</span><a class="headerlink" href="#tanh-act-function" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul>
@@ -1373,13 +1374,13 @@ f(z)=\sigma(z):=\frac{1}{1+\exp(-az)}.
     \]</div>
 <p>y las iteraciones parten de un punto inicial arbitrario, <span class="math notranslate nohighlight">\(\theta^{(0)}\)</span>.</p>
 </li>
-<li><p>Si en la iteración actual el algoritmo está digamos, en el punto <span class="math notranslate nohighlight">\(\theta(old) = \theta_{1}\)</span>, entonces se moverá hacia el mínimo local, <span class="math notranslate nohighlight">\(\theta_{l}\)</span>. Esto se debe a que la <em><strong>derivada del coste en</strong></em> <span class="math notranslate nohighlight">\(\theta_{1}\)</span> <em><strong>es igual a la tangente</strong></em> <span class="math notranslate nohighlight">\(\phi_{1}\)</span> (ver <a class="reference internal" href="#convex-function-saddle-point"><span class="std std-numref">Fig. 1.12</span></a>), que es negativa (el ángulo es obtuso) y la actualización, <span class="math notranslate nohighlight">\(\theta(new)\)</span>, se moverá a la derecha, hacia el mínimo local, <span class="math notranslate nohighlight">\(\theta_{l}\)</span>.</p></li>
+<li><p>Si en la iteración actual el algoritmo está digamos, en el punto <span class="math notranslate nohighlight">\(\theta(old) = \theta_{1}\)</span>, entonces se moverá hacia el mínimo local, <span class="math notranslate nohighlight">\(\theta_{l}\)</span>. Esto se debe a que la <em><strong>derivada del coste en</strong></em> <span class="math notranslate nohighlight">\(\theta_{1}\)</span> <em><strong>es igual a la tangente</strong></em> <span class="math notranslate nohighlight">\(\phi_{1}\)</span> (ver <a class="reference internal" href="#convex-function-saddle-point"><span class="std std-numref">Fig. 2.12</span></a>), que es negativa (el ángulo es obtuso) y la actualización, <span class="math notranslate nohighlight">\(\theta(new)\)</span>, se moverá a la derecha, hacia el mínimo local, <span class="math notranslate nohighlight">\(\theta_{l}\)</span>.</p></li>
 </ul>
 <figure class="align-center" id="convex-function-saddle-point">
 <a class="reference internal image-reference" href="_images/convex_function_saddle_point.png"><img alt="_images/convex_function_saddle_point.png" src="_images/convex_function_saddle_point.png" style="width: 635.2px; height: 354.40000000000003px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.12 </span><span class="caption-text">Función no convexa global, con mínimos locales y puntos de silla.</span><a class="headerlink" href="#convex-function-saddle-point" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.12 </span><span class="caption-text">Función no convexa global, con mínimos locales y puntos de silla.</span><a class="headerlink" href="#convex-function-saddle-point" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="important admonition">
@@ -1388,7 +1389,7 @@ f(z)=\sigma(z):=\frac{1}{1+\exp(-az)}.
 </div>
 </section>
 <section id="el-esquema-de-backpropagation-para-gradiente-descendente">
-<h2><span class="section-number">1.6. </span>El Esquema De Backpropagation Para Gradiente Descendente<a class="headerlink" href="#el-esquema-de-backpropagation-para-gradiente-descendente" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.6. </span>El Esquema De Backpropagation Para Gradiente Descendente<a class="headerlink" href="#el-esquema-de-backpropagation-para-gradiente-descendente" title="Link to this heading">#</a></h2>
 <p>Habiendo adoptado una función de activación diferenciable, estamos listos para proceder a desarrollar el <em><strong><code class="docutils literal notranslate"><span class="pre">esquema</span> <span class="pre">iterativo</span> <span class="pre">de</span> <span class="pre">gradiente</span> <span class="pre">descendente</span> <span class="pre">para</span> <span class="pre">la</span> <span class="pre">minimización</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">función</span> <span class="pre">de</span> <span class="pre">coste</span></code></strong></em>. Formularemos la tarea en un marco general.</p>
 <ul class="simple">
 <li><p>Sea <span class="math notranslate nohighlight">\((\boldsymbol{y}_{n}, \boldsymbol{x}_{n}), n = 1, 2,\dots, N\)</span>, el conjunto de muestras de entrenamiento. <em><strong>Nótese que hemos asumido múltiples variables output</strong></em>, como vectores. Suponemos que la red consta de <span class="math notranslate nohighlight">\(L\)</span> capas, <span class="math notranslate nohighlight">\(L-1\)</span> capas ocultas y una capa de salida. Cada capa consta de <span class="math notranslate nohighlight">\(k_{r}, r = 1, 2,\dots, L\)</span>, neuronas. Así, los vectores de salida (objetivo/deseado) son</p></li>
@@ -1402,14 +1403,14 @@ f(z)=\sigma(z):=\frac{1}{1+\exp(-az)}.
 <li><p>Sea <span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{j}^{r}\)</span> el <em><strong>vector de los pesos sinápticos asociados a la</strong></em> <span class="math notranslate nohighlight">\(j\)</span><em><strong>-th neurona de la</strong></em> <span class="math notranslate nohighlight">\(r\)</span><em><strong>-th capa</strong></em>, con <span class="math notranslate nohighlight">\(j = 1, 2,\dots, k_{r}\)</span> y <span class="math notranslate nohighlight">\(r = 1, 2,\dots,L\)</span>, donde el término de sesgo se incluye en <span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{j}^{r}\)</span>, es decir,</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-parameters-vector-def">
-<span class="eqno">(1.3)<a class="headerlink" href="#equation-parameters-vector-def" title="Link to this equation">#</a></span>\[
+<span class="eqno">(2.3)<a class="headerlink" href="#equation-parameters-vector-def" title="Link to this equation">#</a></span>\[
 \boldsymbol{\theta}_{j}^{r}:=[\theta_{j0}^{r}, \theta_{j1}^{r},\dots, \theta_{jk_{r-1}}^{r}]^{T}.
 \]</div>
 <ul class="simple">
-<li><p>Los <em><strong>pesos sinápticos en la capa <span class="math notranslate nohighlight">\(r\)</span> enlazan la neurona respectiva con todas las neuronas de la capa <span class="math notranslate nohighlight">\(k_{r-1}\)</span></strong></em> (véase la <a class="reference internal" href="#synaptic-weights-link"><span class="std std-numref">Fig. 1.13</span></a>). El paso iterativo básico para el esquema de gradiente descendente se escribe como</p></li>
+<li><p>Los <em><strong>pesos sinápticos en la capa <span class="math notranslate nohighlight">\(r\)</span> enlazan la neurona respectiva con todas las neuronas de la capa <span class="math notranslate nohighlight">\(k_{r-1}\)</span></strong></em> (véase la <a class="reference internal" href="#synaptic-weights-link"><span class="std std-numref">Fig. 2.13</span></a>). El paso iterativo básico para el esquema de gradiente descendente se escribe como</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-update-equations-gd">
-<span class="eqno">(1.4)<a class="headerlink" href="#equation-update-equations-gd" title="Link to this equation">#</a></span>\[
+<span class="eqno">(2.4)<a class="headerlink" href="#equation-update-equations-gd" title="Link to this equation">#</a></span>\[
 \boldsymbol{\theta}_{j}^{r}(\text{new})=\boldsymbol{\theta}_{j}^{r}(old)+\Delta\boldsymbol{\theta}_{j}^{r},\quad
 \Delta\boldsymbol{\theta}_{j}^{r}:=-\mu\left.\frac{\partial J}{\partial\boldsymbol{\theta}_{j}^{r}}\right|_{\boldsymbol{\theta}_{j}^{r}(old)}.
 \]</div>
@@ -1420,13 +1421,13 @@ f(z)=\sigma(z):=\frac{1}{1+\exp(-az)}.
 <a class="reference internal image-reference" href="_images/synaptic_weights_link.png"><img alt="_images/synaptic_weights_link.png" src="_images/synaptic_weights_link.png" style="width: 529.6px; height: 355.20000000000005px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.13 </span><span class="caption-text">Enlaces y las variables asociadas de la <span class="math notranslate nohighlight">\(j\)</span> th neurona en la <span class="math notranslate nohighlight">\(r\)</span> th capa. <span class="math notranslate nohighlight">\(y_{k}^{r-1}\)</span> es la salida de la <span class="math notranslate nohighlight">\(k\)</span> th neurona de la <span class="math notranslate nohighlight">\((r - 1)\)</span> th capa y <span class="math notranslate nohighlight">\(\theta_{jk}^{r}\)</span> es el peso respectivo que conecta estas dos neuronas.</span><a class="headerlink" href="#synaptic-weights-link" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.13 </span><span class="caption-text">Enlaces y las variables asociadas de la <span class="math notranslate nohighlight">\(j\)</span> th neurona en la <span class="math notranslate nohighlight">\(r\)</span> th capa. <span class="math notranslate nohighlight">\(y_{k}^{r-1}\)</span> es la salida de la <span class="math notranslate nohighlight">\(k\)</span> th neurona de la <span class="math notranslate nohighlight">\((r - 1)\)</span> th capa y <span class="math notranslate nohighlight">\(\theta_{jk}^{r}\)</span> es el peso respectivo que conecta estas dos neuronas.</span><a class="headerlink" href="#synaptic-weights-link" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul>
-<li><p>Las ecuaciones de actualización <a class="reference internal" href="#equation-update-equations-gd">(1.4)</a> comprenden el par del esquema de gradiente descendente  para la optimización. Como se ha dicho anteriormente, la dificultad de las redes neuronales <em><strong>feed-forward</strong></em> surge de su estructura multicapa. Para calcular los gradientes en la Ecuación <a class="reference internal" href="#equation-update-equations-gd">(1.4)</a>, para todas las neuronas, en todas las capas, se deben seguir dos pasos en su cálculo</p>
+<li><p>Las ecuaciones de actualización <a class="reference internal" href="#equation-update-equations-gd">(2.4)</a> comprenden el par del esquema de gradiente descendente  para la optimización. Como se ha dicho anteriormente, la dificultad de las redes neuronales <em><strong>feed-forward</strong></em> surge de su estructura multicapa. Para calcular los gradientes en la Ecuación <a class="reference internal" href="#equation-update-equations-gd">(2.4)</a>, para todas las neuronas, en todas las capas, se deben seguir dos pasos en su cálculo</p>
 <ul>
-<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Forward</span> <span class="pre">computations</span></code></strong></em>: Para un vector de entrada dado <span class="math notranslate nohighlight">\(\boldsymbol{x}_{n}, n = 1, 2,\dots, N\)</span>, se utilizan las estimaciones actuales de los parámetros (pesos sinápticos) (<span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{j}^{r}(old)\)</span>) y <em><strong>calcula todas las salidas de todas las neuronas en todas las capas</strong></em>, denotadas como <span class="math notranslate nohighlight">\(y_{nj}^{r}\)</span>; en la <a class="reference internal" href="#synaptic-weights-link"><span class="std std-numref">Fig. 1.13</span></a>, se ha suprimido el índice <span class="math notranslate nohighlight">\(n\)</span> para no afectar la notación.</p></li>
+<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Forward</span> <span class="pre">computations</span></code></strong></em>: Para un vector de entrada dado <span class="math notranslate nohighlight">\(\boldsymbol{x}_{n}, n = 1, 2,\dots, N\)</span>, se utilizan las estimaciones actuales de los parámetros (pesos sinápticos) (<span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{j}^{r}(old)\)</span>) y <em><strong>calcula todas las salidas de todas las neuronas en todas las capas</strong></em>, denotadas como <span class="math notranslate nohighlight">\(y_{nj}^{r}\)</span>; en la <a class="reference internal" href="#synaptic-weights-link"><span class="std std-numref">Fig. 2.13</span></a>, se ha suprimido el índice <span class="math notranslate nohighlight">\(n\)</span> para no afectar la notación.</p></li>
 <li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Backward</span> <span class="pre">computations</span></code></strong></em>: Utilizando las salidas neuronales calculadas anteriormente junto con los valores objetivos conocidos, <span class="math notranslate nohighlight">\(y_{nk}\)</span>, de la capa de salida, <em><strong>se calculan los gradientes de la función de coste</strong></em>. Esto implica <span class="math notranslate nohighlight">\(L\)</span> pasos, es decir, tantos como el número de capas. La secuencia de los pasos algorítmicos se indica a continuación:</p>
 <ul>
 <li><p>Calcular el gradiente de la función de coste con respecto a los parámetros de las neuronas de la última capa, es decir, <span class="math notranslate nohighlight">\(\partial J/\partial\boldsymbol{\theta}_{j}^{L}, j = 1, 2,\dots, k_{L}\)</span>.</p></li>
@@ -1449,7 +1450,7 @@ f(z)=\sigma(z):=\frac{1}{1+\exp(-az)}.
 <a class="reference internal image-reference" href="_images/backpropagation_example.png"><img alt="_images/backpropagation_example.png" src="_images/backpropagation_example.png" style="width: 600.0px; height: 82.60000000000001px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.14 </span><span class="caption-text">Ejemplo de red neuronal para <code class="docutils literal notranslate"><span class="pre">backpropagation</span></code></span><a class="headerlink" href="#backpropagation-example-fig" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.14 </span><span class="caption-text">Ejemplo de red neuronal para <code class="docutils literal notranslate"><span class="pre">backpropagation</span></code></span><a class="headerlink" href="#backpropagation-example-fig" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -1498,7 +1499,7 @@ b &amp;= b-\textsf{lr}\cdot\frac{\partial\textsf{Loss}}{\partial b}=(0)-(0.01)(-
 </ul>
 </section>
 <section id="entrenamiento-de-mlp">
-<h2><span class="section-number">1.7. </span>Entrenamiento de MLP<a class="headerlink" href="#entrenamiento-de-mlp" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.7. </span>Entrenamiento de MLP<a class="headerlink" href="#entrenamiento-de-mlp" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
@@ -1510,25 +1511,25 @@ b &amp;= b-\textsf{lr}\cdot\frac{\partial\textsf{Loss}}{\partial b}=(0)-(0.01)(-
 <a class="reference internal image-reference" href="_images/twoinput_single_hidden_layer.png"><img alt="_images/twoinput_single_hidden_layer.png" src="_images/twoinput_single_hidden_layer.png" style="width: 300.0px; height: 207.60000000000002px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.15 </span><span class="caption-text">Red neuronal con una sola capa oculta y dos entradas.</span><a class="headerlink" href="#twoinput-single-hidden-layer" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.15 </span><span class="caption-text">Red neuronal con una sola capa oculta y dos entradas.</span><a class="headerlink" href="#twoinput-single-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>La <a class="reference internal" href="#forwardprop-single-hidden-layer"><span class="std std-numref">Fig. 1.16</span></a> ilustra este proceso mediante un <em><strong>grafo computacional</strong></em> para la entrada <span class="math notranslate nohighlight">\([-1, 2]\)</span>, generando salidas intermedias <span class="math notranslate nohighlight">\(p_i\)</span>. En particular, <span class="math notranslate nohighlight">\(p_7\)</span> y <span class="math notranslate nohighlight">\(p_8\)</span> corresponden a las salidas de las neuronas ocultas <span class="math notranslate nohighlight">\(g_1\)</span> y <span class="math notranslate nohighlight">\(g_2\)</span>. Durante este paso también se calcula la función de pérdida <span class="math notranslate nohighlight">\(L\)</span> usada en el entrenamiento.</p></li>
+<li><p>La <a class="reference internal" href="#forwardprop-single-hidden-layer"><span class="std std-numref">Fig. 2.16</span></a> ilustra este proceso mediante un <em><strong>grafo computacional</strong></em> para la entrada <span class="math notranslate nohighlight">\([-1, 2]\)</span>, generando salidas intermedias <span class="math notranslate nohighlight">\(p_i\)</span>. En particular, <span class="math notranslate nohighlight">\(p_7\)</span> y <span class="math notranslate nohighlight">\(p_8\)</span> corresponden a las salidas de las neuronas ocultas <span class="math notranslate nohighlight">\(g_1\)</span> y <span class="math notranslate nohighlight">\(g_2\)</span>. Durante este paso también se calcula la función de pérdida <span class="math notranslate nohighlight">\(L\)</span> usada en el entrenamiento.</p></li>
 </ul>
 <figure class="align-center" id="forwardprop-single-hidden-layer">
 <img alt="_images/forwardprop_single_hidden_layer.png" src="_images/forwardprop_single_hidden_layer.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 1.16 </span><span class="caption-text">Gráfico computacional de un perceptrón con una capa y dos neuronas ocultas.</span><a class="headerlink" href="#forwardprop-single-hidden-layer" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.16 </span><span class="caption-text">Gráfico computacional de un perceptrón con una capa y dos neuronas ocultas.</span><a class="headerlink" href="#forwardprop-single-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>En el <strong>backpropagation</strong>, el recorrido inverso del grafo (backward pass) calcula las derivadas parciales entre nodos conectados. Siguiendo la <strong>regla de la cadena</strong>, la derivada de la pérdida respecto a un peso es el producto de las derivadas a lo largo de cada camino que los une, y si hay varios caminos, se suman. Este enfoque gráfico sustenta las bibliotecas modernas de <strong>deep learning</strong> para implementar los pasos forward y backward (ver <a class="reference internal" href="#partialderivates-single-hidden-layer"><span class="std std-numref">Fig. 1.17</span></a>)</p></li>
+<li><p>En el <strong>backpropagation</strong>, el recorrido inverso del grafo (backward pass) calcula las derivadas parciales entre nodos conectados. Siguiendo la <strong>regla de la cadena</strong>, la derivada de la pérdida respecto a un peso es el producto de las derivadas a lo largo de cada camino que los une, y si hay varios caminos, se suman. Este enfoque gráfico sustenta las bibliotecas modernas de <strong>deep learning</strong> para implementar los pasos forward y backward (ver <a class="reference internal" href="#partialderivates-single-hidden-layer"><span class="std std-numref">Fig. 2.17</span></a>)</p></li>
 </ul>
 <figure class="align-center" id="partialderivates-single-hidden-layer">
 <img alt="_images/partialderivates_single_hidden_layer.png" src="_images/partialderivates_single_hidden_layer.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 1.17 </span><span class="caption-text">Cálculo de derivadas parciales en un grafo computacional.</span><a class="headerlink" href="#partialderivates-single-hidden-layer" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.17 </span><span class="caption-text">Cálculo de derivadas parciales en un grafo computacional.</span><a class="headerlink" href="#partialderivates-single-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -1552,7 +1553,7 @@ b &amp;= b-\textsf{lr}\cdot\frac{\partial\textsf{Loss}}{\partial b}=(0)-(0.01)(-
 <figure class="align-center" id="forward-backward-single-hidden-layer">
 <img alt="_images/forward_backward_single_hidden_layer.png" src="_images/forward_backward_single_hidden_layer.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 1.18 </span><span class="caption-text">Pasos hacia delante (en azul) y hacia atrás (en rojo) sobre un grafo computacional.</span><a class="headerlink" href="#forward-backward-single-hidden-layer" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.18 </span><span class="caption-text">Pasos hacia delante (en azul) y hacia atrás (en rojo) sobre un grafo computacional.</span><a class="headerlink" href="#forward-backward-single-hidden-layer" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -1628,7 +1629,7 @@ Bibliotecas como <strong>TensorFlow</strong>, <strong>Theano</strong> o <strong>
 <ul>
 <li><p>Para la derivación detallada del algoritmo backpropagation, <em><strong>se adopta como ejemplo la función de pérdida del error cuadrático</strong></em>, es decir</p>
 <div class="math notranslate nohighlight" id="equation-gradient-desc-scheme">
-<span class="eqno">(1.5)<a class="headerlink" href="#equation-gradient-desc-scheme" title="Link to this equation">#</a></span>\[
+<span class="eqno">(2.5)<a class="headerlink" href="#equation-gradient-desc-scheme" title="Link to this equation">#</a></span>\[
     J(\boldsymbol{\theta})=\sum_{n=1}^{N}J_{n}(\boldsymbol{\theta})\quad\text{y}\quad J_{n}(\boldsymbol{\theta})=\frac{1}{2}\sum_{k=1}^{k_{L}}(\hat{y}_{nk}-y_{nk})^{2},
     \]</div>
 <p>donde <span class="math notranslate nohighlight">\(\hat{y}_{nk},~k=1,2,\dots,k_{L}\)</span>, son las <em><strong>estimaciones proporcionadas en los correspondientes nodos de salida de la red</strong></em>. Las consideraremos como los elementos de un vector correspondiente, <span class="math notranslate nohighlight">\(\hat{\boldsymbol{y}}_{n}\)</span>.</p>
@@ -1636,11 +1637,11 @@ Bibliotecas como <strong>TensorFlow</strong>, <strong>Theano</strong> o <strong>
 </ul>
 </section>
 <section id="calculo-de-gradientes">
-<h2><span class="section-number">1.8. </span>Cálculo de gradientes<a class="headerlink" href="#calculo-de-gradientes" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.8. </span>Cálculo de gradientes<a class="headerlink" href="#calculo-de-gradientes" title="Link to this heading">#</a></h2>
 <ul>
-<li><p>Sea <span class="math notranslate nohighlight">\(z_{nj}^{r}\)</span> la <em><strong>salida del combinador lineal</strong></em> de la <span class="math notranslate nohighlight">\(j\)</span>-th neurona en la capa <span class="math notranslate nohighlight">\(r\)</span> en el <em><strong>instante de tiempo</strong></em> <span class="math notranslate nohighlight">\(n\)</span>, cuando se aplica el patrón <span class="math notranslate nohighlight">\(\boldsymbol{x}_{n}\)</span> en los nodos de entrada (véase la <a class="reference internal" href="#synaptic-weights-link"><span class="std std-numref">Fig. 1.13</span></a>). Entonces, para <span class="math notranslate nohighlight">\(n, j\)</span> fijos, podemos escribir</p>
+<li><p>Sea <span class="math notranslate nohighlight">\(z_{nj}^{r}\)</span> la <em><strong>salida del combinador lineal</strong></em> de la <span class="math notranslate nohighlight">\(j\)</span>-th neurona en la capa <span class="math notranslate nohighlight">\(r\)</span> en el <em><strong>instante de tiempo</strong></em> <span class="math notranslate nohighlight">\(n\)</span>, cuando se aplica el patrón <span class="math notranslate nohighlight">\(\boldsymbol{x}_{n}\)</span> en los nodos de entrada (véase la <a class="reference internal" href="#synaptic-weights-link"><span class="std std-numref">Fig. 2.13</span></a>). Entonces, para <span class="math notranslate nohighlight">\(n, j\)</span> fijos, podemos escribir</p>
 <div class="math notranslate nohighlight" id="equation-eq-znj">
-<span class="eqno">(1.6)<a class="headerlink" href="#equation-eq-znj" title="Link to this equation">#</a></span>\[
+<span class="eqno">(2.6)<a class="headerlink" href="#equation-eq-znj" title="Link to this equation">#</a></span>\[
     z_{nj}^{r}=\sum_{m=1}^{k_{r-1}}\theta_{jm}^{r}y_{nm}^{r-1}+\theta_{j0}^{r}=\sum_{m=0}^{k_{r-1}}\theta_{jm}^{r}y_{nm}^{r-1}=\boldsymbol{\theta}_{j}^{r^{T}}\boldsymbol{y}_{n}^{r-1},
     \]</div>
 <p>donde por definición</p>
@@ -1648,14 +1649,14 @@ Bibliotecas como <strong>TensorFlow</strong>, <strong>Theano</strong> o <strong>
 \[
     \boldsymbol{y}_{n}^{r-1}:=[1, y_{n1}^{r-1},\dots, y_{nk_{r-1}}^{r-1}]^{T},
     \]</div>
-<p>y <span class="math notranslate nohighlight">\(y_{n0}^{r}\equiv 1,~\forall~r, n\)</span> y <span class="math notranslate nohighlight">\(\theta_{j}^{r}\)</span> ha sido definido en la Ecuación <a class="reference internal" href="#equation-parameters-vector-def">(1.3)</a>.</p>
+<p>y <span class="math notranslate nohighlight">\(y_{n0}^{r}\equiv 1,~\forall~r, n\)</span> y <span class="math notranslate nohighlight">\(\theta_{j}^{r}\)</span> ha sido definido en la Ecuación <a class="reference internal" href="#equation-parameters-vector-def">(2.3)</a>.</p>
 </li>
 </ul>
 <ul class="simple">
 <li><p>Para las neuronas de la capa de salida <span class="math notranslate nohighlight">\(r=L,~y_{nm}^{L}=\hat{y}_{nm},~m=1,2,\dots, k_{L}\)</span>, y para <span class="math notranslate nohighlight">\(r=1\)</span>, tenemos <span class="math notranslate nohighlight">\(y_{nm}^{1}=x_{nm},~m=1,2,\dots, k_{1}\)</span>; esto es, <span class="math notranslate nohighlight">\(y_{nm}^{1}\)</span> se fija igual a los <em><strong>valores de las características de entrada</strong></em>.</p></li>
 </ul>
 <ul class="simple">
-<li><p>Por lo tanto, teniendo en cuenta que <span class="math notranslate nohighlight">\(z_{j}^{r}=\boldsymbol{\theta}_{j}^{rT}\boldsymbol{y}^{r-1},~j=1,2,\dots,k_{r}\)</span> y <span class="math notranslate nohighlight">\(\hat{y}_{j}:=y_{j}^{r}=f(\boldsymbol{\theta}_{j}^{r^{T}}\boldsymbol{y}^{r-1})=f(z_{j}^{r})\)</span>, con base en la Ecuación <a class="reference internal" href="#equation-gradient-desc-scheme">(1.5)</a> podemos escribir las derivadas parciales</p></li>
+<li><p>Por lo tanto, teniendo en cuenta que <span class="math notranslate nohighlight">\(z_{j}^{r}=\boldsymbol{\theta}_{j}^{rT}\boldsymbol{y}^{r-1},~j=1,2,\dots,k_{r}\)</span> y <span class="math notranslate nohighlight">\(\hat{y}_{j}:=y_{j}^{r}=f(\boldsymbol{\theta}_{j}^{r^{T}}\boldsymbol{y}^{r-1})=f(z_{j}^{r})\)</span>, con base en la Ecuación <a class="reference internal" href="#equation-gradient-desc-scheme">(2.5)</a> podemos escribir las derivadas parciales</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -1669,15 +1670,15 @@ Bibliotecas como <strong>TensorFlow</strong>, <strong>Theano</strong> o <strong>
 \delta_{nj}^{r}:=\frac{\partial J_{n}}{\partial z_{nj}^{r}}.
 \]</div>
 <ul class="simple">
-<li><p>Entonces la Ecuación <a class="reference internal" href="#equation-update-equations-gd">(1.4)</a> puede escribirse como</p></li>
+<li><p>Entonces la Ecuación <a class="reference internal" href="#equation-update-equations-gd">(2.4)</a> puede escribirse como</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-eq-delta-theta-jr">
-<span class="eqno">(1.7)<a class="headerlink" href="#equation-eq-delta-theta-jr" title="Link to this equation">#</a></span>\[
+<span class="eqno">(2.7)<a class="headerlink" href="#equation-eq-delta-theta-jr" title="Link to this equation">#</a></span>\[
 \Delta\boldsymbol{\theta}_{j}^{r}=\left.-\mu\frac{\partial J}{\partial\boldsymbol{\theta}_{j}^{r}}\right|_{\boldsymbol{\theta}_{j}^{r}(\text{old})}=-\mu\frac{\partial}{\partial\boldsymbol{\theta}_{j}^{r}}\left.\sum_{n=1}^{N}J_{n}\right|_{\boldsymbol{\theta}_{j}^{r}(\text{old})}=-\mu\sum_{n=1}^{N}\delta_{nj}^{r}\boldsymbol{y}_{n}^{r-1},\quad r=1,2,\dots,L.
 \]</div>
 </section>
 <section id="calculo-de-delta-nj-r">
-<h2><span class="section-number">1.9. </span>Cálculo de <span class="math notranslate nohighlight">\(\delta_{nj}^{r}\)</span><a class="headerlink" href="#calculo-de-delta-nj-r" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.9. </span>Cálculo de <span class="math notranslate nohighlight">\(\delta_{nj}^{r}\)</span><a class="headerlink" href="#calculo-de-delta-nj-r" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Este es el <em><strong>cálculo principal del algoritmo backpropagation</strong></em>. Para el cálculo de los gradientes, <span class="math notranslate nohighlight">\(\delta_{nj}^{r}\)</span>, se <em><strong>comienza en la última capa</strong></em>, <span class="math notranslate nohighlight">\(r = L\)</span>, y se <em><strong>procede hacia atrás</strong></em>, hacia <span class="math notranslate nohighlight">\(r = 1\)</span>; esta “filosofía” justifica el nombre dado al algoritmo.</p></li>
 </ul>
@@ -1694,7 +1695,7 @@ Bibliotecas como <strong>TensorFlow</strong>, <strong>Theano</strong> o <strong>
     \]</div>
 <p>Por lo tanto,</p>
 <div class="math notranslate nohighlight" id="equation-eq-delta-njl">
-<span class="eqno">(1.8)<a class="headerlink" href="#equation-eq-delta-njl" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(2.8)<a class="headerlink" href="#equation-eq-delta-njl" title="Link to this equation">#</a></span>\[\begin{split}
     \begin{align*}
     \delta_{nj}^{L}=\frac{\partial}{\partial z_{nj}^{L}}\left(\frac{1}{2}\sum_{k=1}^{k_{L}}\left(f(z_{nk}^{L})-y_{nk}\right)^{2}\right)&amp;=(f(z_{nj}^{L})-y_{nj})f'(z_{nj}^{L})\\
     &amp;=(\hat{y}_{nj}-y_{nj})f'(z_{nj}^{L})=e_{nj}f'(z_{nj}^{L}),
@@ -1706,15 +1707,15 @@ Bibliotecas como <strong>TensorFlow</strong>, <strong>Theano</strong> o <strong>
 <ol class="arabic" start="2">
 <li><p><span class="math notranslate nohighlight">\(r&lt;L\)</span>: Debido a la <em><strong>dependencia sucesiva entre las capas</strong></em>, el valor de <span class="math notranslate nohighlight">\(z_{nj}^{r-1}\)</span> <em><strong>influye en todos los valores</strong></em> <span class="math notranslate nohighlight">\(z_{nk}^{r},~k = 1, 2,\dots, k_{r}\)</span>, <em><strong>de la capa siguiente</strong></em>. Empleando la <em><strong>regla de la cadena</strong></em> para la diferenciación, obtenemos, para <span class="math notranslate nohighlight">\(r=L, L-1,\dots, 2\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-partial-der-znk1">
-<span class="eqno">(1.9)<a class="headerlink" href="#equation-partial-der-znk1" title="Link to this equation">#</a></span>\[
+<span class="eqno">(2.9)<a class="headerlink" href="#equation-partial-der-znk1" title="Link to this equation">#</a></span>\[
     \delta_{nj}^{r-1}=\frac{\partial J_{n}}{\partial z_{nj}^{r-1}}=\sum_{k=1}^{k_{r}}\frac{\partial J_{n}}{\partial z_{nk}^{r}}\frac{\partial z_{nk}^{r}}{\partial z_{nj}^{r-1}},
     \]</div>
 <p>o</p>
 <div class="math notranslate nohighlight" id="equation-partial-der-znk2">
-<span class="eqno">(1.10)<a class="headerlink" href="#equation-partial-der-znk2" title="Link to this equation">#</a></span>\[
+<span class="eqno">(2.10)<a class="headerlink" href="#equation-partial-der-znk2" title="Link to this equation">#</a></span>\[
     \delta_{nj}^{r-1}=\sum_{k=1}^{k_{r}}\delta_{nk}^{r}\frac{\partial z_{nk}^{r}}{\partial z_{nj}^{r-1}}.
     \]</div>
-<p>Además, usando la Ecuación <a class="reference internal" href="#equation-eq-znj">(1.6)</a> se tiene,</p>
+<p>Además, usando la Ecuación <a class="reference internal" href="#equation-eq-znj">(2.6)</a> se tiene,</p>
 <div class="math notranslate nohighlight">
 \[
     \frac{\partial z_{nk}^{r}}{\partial z_{nj}^{r-1}}=\frac{\partial}{\partial z_{nj}^{r-1}}\left(\sum_{m=0}^{k_{r-1}}\theta_{km}^{r}y_{nm}^{r-1}\right),
@@ -1724,7 +1725,7 @@ Bibliotecas como <strong>TensorFlow</strong>, <strong>Theano</strong> o <strong>
 \[
     \frac{\partial z_{nk}^{r}}{\partial z_{nj}^{r-1}}=\theta_{kj}^{r}f'(z_{nj}^{r-1}),
     \]</div>
-<p>y combinando las Ecuaciones <a class="reference internal" href="#equation-partial-der-znk1">(1.9)</a> y <a class="reference internal" href="#equation-partial-der-znk2">(1.10)</a>, obtenemos la regla recursiva</p>
+<p>y combinando las Ecuaciones <a class="reference internal" href="#equation-partial-der-znk1">(2.9)</a> y <a class="reference internal" href="#equation-partial-der-znk2">(2.10)</a>, obtenemos la regla recursiva</p>
 <div class="math notranslate nohighlight">
 \[
     \delta_{nj}^{r-1}=\left(\sum_{k=1}^{k_{r}}\delta_{nk}^{r}\theta_{kj}^{r}\right)f'(z_{nj}^{r-1}).
@@ -1732,14 +1733,14 @@ Bibliotecas como <strong>TensorFlow</strong>, <strong>Theano</strong> o <strong>
 </li>
 </ol>
 <ul>
-<li><p>Manteniendo la misma notación en la Ecuación <a class="reference internal" href="#equation-eq-delta-njl">(1.8)</a>, definimos</p>
+<li><p>Manteniendo la misma notación en la Ecuación <a class="reference internal" href="#equation-eq-delta-njl">(2.8)</a>, definimos</p>
 <div class="math notranslate nohighlight">
 \[
     e_{nj}^{r-1}:=\sum_{k=1}^{k_{r}}\delta_{nk}^{r}\theta_{kj}^{r},
     \]</div>
 <p>y finalmente obtenemos,</p>
 <div class="math notranslate nohighlight" id="equation-eq-delta-njr-1">
-<span class="eqno">(1.11)<a class="headerlink" href="#equation-eq-delta-njr-1" title="Link to this equation">#</a></span>\[
+<span class="eqno">(2.11)<a class="headerlink" href="#equation-eq-delta-njr-1" title="Link to this equation">#</a></span>\[
     \delta_{nj}^{r-1}=e_{nj}^{r-1}f'(z_{nj}^{r-1}).
     \]</div>
 </li>
@@ -1755,7 +1756,7 @@ f'(z)=af(z)(1-f(z)).
 <li><p>La derivación se ha completado y el esquema <em><strong>backpropagation neural network</strong></em> se resume en el siguiente algoritmo</p></li>
 </ul>
 <div class="proof algorithm admonition" id="my_algorithm_backpropagation">
-<p class="admonition-title"><span class="caption-number">Algorithm 1.2 </span> (Algoritmo Backpropagation Gradiente Descendente)</p>
+<p class="admonition-title"><span class="caption-number">Algorithm 2.2 </span> (Algoritmo Backpropagation Gradiente Descendente)</p>
 <section class="algorithm-content" id="proof-content">
 <p><strong>Inicialización</strong></p>
 <ol class="arabic simple">
@@ -1770,7 +1771,7 @@ f'(z)=af(z)(1-f(z)).
 <li><p><strong>For</strong> <span class="math notranslate nohighlight">\(r=1,2,\dots,L\)</span> <strong>Do</strong> Cálculo <em><strong>Forward</strong></em></p>
 <ol class="arabic">
 <li><p><strong>For</strong> <span class="math notranslate nohighlight">\(j=1,2,\dots,k_{r}\)</span> <strong>Do</strong></p>
-<p>Calcule <span class="math notranslate nohighlight">\(z_{nj}^{r}\)</span> a partir de la Ecuación <a class="reference internal" href="#equation-eq-znj">(1.6)</a>
+<p>Calcule <span class="math notranslate nohighlight">\(z_{nj}^{r}\)</span> a partir de la Ecuación <a class="reference internal" href="#equation-eq-znj">(2.6)</a>
 Calcule <span class="math notranslate nohighlight">\(y_{nj}^{r}=f(z_{nj}^{r})\)</span></p>
 </li>
 <li><p><strong>End For</strong></p></li>
@@ -1778,13 +1779,13 @@ Calcule <span class="math notranslate nohighlight">\(y_{nj}^{r}=f(z_{nj}^{r})\)<
 </li>
 <li><p><strong>End For</strong></p></li>
 <li><p><strong>For</strong> <span class="math notranslate nohighlight">\(j = 1, 2,\dots, k_{L}\)</span>, <strong>Do</strong>; Cálculo <em><strong>Backward</strong></em> (<em><strong>output layer</strong></em>)</p>
-<p>Calcule <span class="math notranslate nohighlight">\(\delta_{nj}^{L}\)</span> a partir de la Ecuación <a class="reference internal" href="#equation-eq-delta-njr-1">(1.11)</a></p>
+<p>Calcule <span class="math notranslate nohighlight">\(\delta_{nj}^{L}\)</span> a partir de la Ecuación <a class="reference internal" href="#equation-eq-delta-njr-1">(2.11)</a></p>
 </li>
 <li><p><strong>End For</strong></p></li>
 <li><p><strong>For</strong> <span class="math notranslate nohighlight">\(r=L, L-1,\dots, 2\)</span>, <strong>Do</strong>; Cálculo <em><strong>Backward</strong></em> (<em><strong>hidden layers</strong></em>)</p>
 <ol class="arabic">
 <li><p><strong>For</strong> <span class="math notranslate nohighlight">\(j=1,2,\dots, k_{r}\)</span>, <strong>Do</strong></p>
-<p>Calcule <span class="math notranslate nohighlight">\(\delta_{nj}^{r-1}\)</span> a partir de la Ecuación <a class="reference internal" href="#equation-eq-delta-njr-1">(1.11)</a></p>
+<p>Calcule <span class="math notranslate nohighlight">\(\delta_{nj}^{r-1}\)</span> a partir de la Ecuación <a class="reference internal" href="#equation-eq-delta-njr-1">(2.11)</a></p>
 </li>
 <li><p><strong>End For</strong></p></li>
 </ol>
@@ -1796,7 +1797,7 @@ Calcule <span class="math notranslate nohighlight">\(y_{nj}^{r}=f(z_{nj}^{r})\)<
 <li><p><strong>For</strong> <span class="math notranslate nohighlight">\(r=1,2,\dots,L\)</span>, <strong>Do</strong>: Actualice los pesos</p>
 <ol class="arabic">
 <li><p><strong>For</strong> <span class="math notranslate nohighlight">\(j=1,2,\dots,k_{r}\)</span>, <strong>Do</strong></p>
-<p>Calcule <span class="math notranslate nohighlight">\(\Delta\boldsymbol{\theta}_{j}^{r}\)</span> a partir de la Ecuación <a class="reference internal" href="#equation-eq-delta-theta-jr">(1.7)</a></p>
+<p>Calcule <span class="math notranslate nohighlight">\(\Delta\boldsymbol{\theta}_{j}^{r}\)</span> a partir de la Ecuación <a class="reference internal" href="#equation-eq-delta-theta-jr">(2.7)</a></p>
 <p><span class="math notranslate nohighlight">\(\boldsymbol{\theta}_{j}^{r}=\boldsymbol{\theta}_{j}^{r}+\Delta\boldsymbol{\theta}_{j}^{r}\)</span></p>
 </li>
 <li><p><strong>End For</strong></p></li>
@@ -1811,15 +1812,15 @@ Calcule <span class="math notranslate nohighlight">\(y_{nj}^{r}=f(z_{nj}^{r})\)<
 <li><p>Existen diferentes variaciones del algoritmo <em><strong>backpropagation</strong></em>, tales como: <em><strong>Gradiende descendente con término de momento, Algoritmo de momentos de Nesterov’s, Algoritmo AdaGrad, RMSProp con momento de Nesterov, Algortimo de estimación de momentos adaptativo</strong></em> los cuales pueden ser utlizados para resolver la tarea de optimización (ver <span id="id13">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>).</p></li>
 </ul>
 <section id="forma-vectorizada-del-backpropagation">
-<h3><span class="section-number">1.9.1. </span>Forma vectorizada del backpropagation<a class="headerlink" href="#forma-vectorizada-del-backpropagation" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.9.1. </span>Forma vectorizada del backpropagation<a class="headerlink" href="#forma-vectorizada-del-backpropagation" title="Link to this heading">#</a></h3>
 <ul>
 <li><p>La derivación anterior, componente a componente, es la más adecuada para establecer el resultado con rigor. Sin embargo, la <em><strong>implementación práctica</strong></em> (y la que efectivamente utilizan <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code> y <code class="docutils literal notranslate"><span class="pre">PyTorch</span></code>) opera con vectores y matrices completas, lo cual es además consistente con la representación matricial ya introducida, <span class="math notranslate nohighlight">\(\boldsymbol{z}^{r}=\Theta^{r}\boldsymbol{y}^{r-1}\)</span>.</p></li>
-<li><p>Agrupando las cantidades <span class="math notranslate nohighlight">\(\delta_{nj}^{r}\)</span> en un vector <span class="math notranslate nohighlight">\(\boldsymbol{\delta}_{n}^{r}:=[\delta_{n1}^{r},\dots,\delta_{nk_{r}}^{r}]^{T}\)</span>, la recursión <a class="reference internal" href="#equation-eq-delta-njr-1">(1.11)</a> se reescribe, en notación matricial, como</p>
+<li><p>Agrupando las cantidades <span class="math notranslate nohighlight">\(\delta_{nj}^{r}\)</span> en un vector <span class="math notranslate nohighlight">\(\boldsymbol{\delta}_{n}^{r}:=[\delta_{n1}^{r},\dots,\delta_{nk_{r}}^{r}]^{T}\)</span>, la recursión <a class="reference internal" href="#equation-eq-delta-njr-1">(2.11)</a> se reescribe, en notación matricial, como</p>
 <div class="math notranslate nohighlight" id="equation-eq-delta-vectorized">
-<span class="eqno">(1.12)<a class="headerlink" href="#equation-eq-delta-vectorized" title="Link to this equation">#</a></span>\[
+<span class="eqno">(2.12)<a class="headerlink" href="#equation-eq-delta-vectorized" title="Link to this equation">#</a></span>\[
     \boldsymbol{\delta}_{n}^{r-1}=\left(\Theta^{r\top}_{\setminus 0}\,\boldsymbol{\delta}_{n}^{r}\right)\odot f'(\boldsymbol{z}_{n}^{r-1}),
     \]</div>
-<p>donde <span class="math notranslate nohighlight">\(\Theta^{r}_{\setminus 0}\)</span> denota la matriz de pesos de la capa <span class="math notranslate nohighlight">\(r\)</span> <em><strong>sin la columna del sesgo</strong></em> (el sesgo no tiene una neurona “aguas arriba” hacia la cual retropropagar el error), y <span class="math notranslate nohighlight">\(\odot\)</span> denota el producto elemento a elemento (<em>Hadamard</em>). Para la capa de salida, <a class="reference internal" href="#equation-eq-delta-njl">(1.8)</a> se escribe como</p>
+<p>donde <span class="math notranslate nohighlight">\(\Theta^{r}_{\setminus 0}\)</span> denota la matriz de pesos de la capa <span class="math notranslate nohighlight">\(r\)</span> <em><strong>sin la columna del sesgo</strong></em> (el sesgo no tiene una neurona “aguas arriba” hacia la cual retropropagar el error), y <span class="math notranslate nohighlight">\(\odot\)</span> denota el producto elemento a elemento (<em>Hadamard</em>). Para la capa de salida, <a class="reference internal" href="#equation-eq-delta-njl">(2.8)</a> se escribe como</p>
 <div class="math notranslate nohighlight">
 \[
     \boldsymbol{\delta}_{n}^{L}=(\hat{\boldsymbol{y}}_{n}-\boldsymbol{y}_{n})\odot f'(\boldsymbol{z}_{n}^{L}).
@@ -1835,28 +1836,28 @@ Calcule <span class="math notranslate nohighlight">\(y_{nj}^{r}=f(z_{nj}^{r})\)<
 </ul>
 </section>
 <section id="complejidad-computacional-y-diferenciacion-automatica">
-<h3><span class="section-number">1.9.2. </span>Complejidad computacional y diferenciación automática<a class="headerlink" href="#complejidad-computacional-y-diferenciacion-automatica" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.9.2. </span>Complejidad computacional y diferenciación automática<a class="headerlink" href="#complejidad-computacional-y-diferenciacion-automatica" title="Link to this heading">#</a></h3>
 <ul class="simple">
-<li><p>Sea <span class="math notranslate nohighlight">\(W:=\sum_{r=1}^{L}k_{r}(k_{r-1}+1)\)</span> el número total de parámetros (pesos y sesgos) de la red. El paso <em><strong>forward</strong></em> requiere <span class="math notranslate nohighlight">\(\mathcal{O}(W)\)</span> multiplicaciones y sumas (una por cada peso, en la correspondiente combinación lineal <a class="reference internal" href="#equation-eq-znj">(1.6)</a>). Un resultado importante, y no evidente a priori, es que el paso <em><strong>backward</strong></em> (cálculo de todos los <span class="math notranslate nohighlight">\(\delta_{nj}^{r}\)</span> y de todos los gradientes <span class="math notranslate nohighlight">\(\partial J_{n}/\partial\boldsymbol{\theta}_{j}^{r}\)</span>) tiene <em><strong>el mismo orden de complejidad</strong></em>, <span class="math notranslate nohighlight">\(\mathcal{O}(W)\)</span>, y no, por ejemplo, <span class="math notranslate nohighlight">\(\mathcal{O}(W^{2})\)</span> o <span class="math notranslate nohighlight">\(\mathcal{O}(W\times L)\)</span>. Esto se debe a que cada peso participa en exactamente <em><strong>una</strong></em> multiplicación en la ecuación <a class="reference internal" href="#equation-eq-delta-vectorized">(1.12)</a> y en <em><strong>una</strong></em> multiplicación en el cálculo del gradiente correspondiente.</p></li>
-<li><p>Esta propiedad —costo del gradiente proporcional al costo de evaluar la función, independientemente del número de parámetros de entrada— es la característica distintiva del <em><strong>modo inverso de diferenciación automática (reverse-mode automatic differentiation)</strong></em>. En efecto, el algoritmo de <em>backpropagation</em> derivado en esta sección <em><strong>es un caso particular</strong></em> de diferenciación automática en modo inverso, aplicado al grafo computacional de una red <em>feed-forward</em> (ver <a class="reference internal" href="#forwardprop-single-hidden-layer"><span class="std std-numref">Fig. 1.16</span></a> y <a class="reference internal" href="#partialderivates-single-hidden-layer"><span class="std std-numref">Fig. 1.17</span></a>, presentadas anteriormente).</p></li>
+<li><p>Sea <span class="math notranslate nohighlight">\(W:=\sum_{r=1}^{L}k_{r}(k_{r-1}+1)\)</span> el número total de parámetros (pesos y sesgos) de la red. El paso <em><strong>forward</strong></em> requiere <span class="math notranslate nohighlight">\(\mathcal{O}(W)\)</span> multiplicaciones y sumas (una por cada peso, en la correspondiente combinación lineal <a class="reference internal" href="#equation-eq-znj">(2.6)</a>). Un resultado importante, y no evidente a priori, es que el paso <em><strong>backward</strong></em> (cálculo de todos los <span class="math notranslate nohighlight">\(\delta_{nj}^{r}\)</span> y de todos los gradientes <span class="math notranslate nohighlight">\(\partial J_{n}/\partial\boldsymbol{\theta}_{j}^{r}\)</span>) tiene <em><strong>el mismo orden de complejidad</strong></em>, <span class="math notranslate nohighlight">\(\mathcal{O}(W)\)</span>, y no, por ejemplo, <span class="math notranslate nohighlight">\(\mathcal{O}(W^{2})\)</span> o <span class="math notranslate nohighlight">\(\mathcal{O}(W\times L)\)</span>. Esto se debe a que cada peso participa en exactamente <em><strong>una</strong></em> multiplicación en la ecuación <a class="reference internal" href="#equation-eq-delta-vectorized">(2.12)</a> y en <em><strong>una</strong></em> multiplicación en el cálculo del gradiente correspondiente.</p></li>
+<li><p>Esta propiedad —costo del gradiente proporcional al costo de evaluar la función, independientemente del número de parámetros de entrada— es la característica distintiva del <em><strong>modo inverso de diferenciación automática (reverse-mode automatic differentiation)</strong></em>. En efecto, el algoritmo de <em>backpropagation</em> derivado en esta sección <em><strong>es un caso particular</strong></em> de diferenciación automática en modo inverso, aplicado al grafo computacional de una red <em>feed-forward</em> (ver <a class="reference internal" href="#forwardprop-single-hidden-layer"><span class="std std-numref">Fig. 2.16</span></a> y <a class="reference internal" href="#partialderivates-single-hidden-layer"><span class="std std-numref">Fig. 2.17</span></a>, presentadas anteriormente).</p></li>
 </ul>
 <div class="tip admonition">
 <p class="admonition-title">Observación: relación con <em>autograd</em> (TensorFlow/PyTorch)</p>
 <ul class="simple">
-<li><p>Cuando se ejecuta <code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code> en <code class="docutils literal notranslate"><span class="pre">PyTorch</span></code>, o se opera dentro de un contexto <code class="docutils literal notranslate"><span class="pre">tf.GradientTape</span></code> en <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code>, el motor de diferenciación automática subyacente realiza <em><strong>exactamente</strong></em> el procedimiento formalizado en las ecuaciones <a class="reference internal" href="#equation-eq-delta-njl">(1.8)</a>-<a class="reference internal" href="#equation-eq-delta-vectorized">(1.12)</a>, generalizado a <em><strong>cualquier</strong></em> grafo computacional acíclico dirigido (no solo arquitecturas <em>feed-forward</em> estrictamente secuenciales, sino también conexiones residuales, mecanismos de atención, etc.). El usuario nunca deriva manualmente <span class="math notranslate nohighlight">\(f'\)</span>; en su lugar, cada operación primitiva (suma, producto, <code class="docutils literal notranslate"><span class="pre">sigmoid</span></code>, <code class="docutils literal notranslate"><span class="pre">matmul</span></code>,…) registra su propia regla de derivación local, y el motor las encadena automáticamente mediante la regla de la cadena, en orden inverso al de ejecución del <em>forward pass</em>.</p></li>
+<li><p>Cuando se ejecuta <code class="docutils literal notranslate"><span class="pre">loss.backward()</span></code> en <code class="docutils literal notranslate"><span class="pre">PyTorch</span></code>, o se opera dentro de un contexto <code class="docutils literal notranslate"><span class="pre">tf.GradientTape</span></code> en <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code>, el motor de diferenciación automática subyacente realiza <em><strong>exactamente</strong></em> el procedimiento formalizado en las ecuaciones <a class="reference internal" href="#equation-eq-delta-njl">(2.8)</a>-<a class="reference internal" href="#equation-eq-delta-vectorized">(2.12)</a>, generalizado a <em><strong>cualquier</strong></em> grafo computacional acíclico dirigido (no solo arquitecturas <em>feed-forward</em> estrictamente secuenciales, sino también conexiones residuales, mecanismos de atención, etc.). El usuario nunca deriva manualmente <span class="math notranslate nohighlight">\(f'\)</span>; en su lugar, cada operación primitiva (suma, producto, <code class="docutils literal notranslate"><span class="pre">sigmoid</span></code>, <code class="docutils literal notranslate"><span class="pre">matmul</span></code>,…) registra su propia regla de derivación local, y el motor las encadena automáticamente mediante la regla de la cadena, en orden inverso al de ejecución del <em>forward pass</em>.</p></li>
 </ul>
 </div>
 </section>
 <section id="el-problema-del-desvanecimiento-y-la-explosion-del-gradiente">
-<h3><span class="section-number">1.9.3. </span>El problema del desvanecimiento y la explosión del gradiente<a class="headerlink" href="#el-problema-del-desvanecimiento-y-la-explosion-del-gradiente" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.9.3. </span>El problema del desvanecimiento y la explosión del gradiente<a class="headerlink" href="#el-problema-del-desvanecimiento-y-la-explosion-del-gradiente" title="Link to this heading">#</a></h3>
 <ul>
-<li><p>La ecuación <a class="reference internal" href="#equation-eq-delta-vectorized">(1.12)</a> revela una propiedad estructural crítica: el error retropropagado hasta la primera capa involucra un <em><strong>producto de <span class="math notranslate nohighlight">\(L-1\)</span> factores</strong></em>, cada uno de la forma <span class="math notranslate nohighlight">\(\Theta^{rT}_{\setminus 0}\,\text{diag}(f'(\boldsymbol{z}^{r-1}))\)</span>. Tomando normas,</p>
+<li><p>La ecuación <a class="reference internal" href="#equation-eq-delta-vectorized">(2.12)</a> revela una propiedad estructural crítica: el error retropropagado hasta la primera capa involucra un <em><strong>producto de <span class="math notranslate nohighlight">\(L-1\)</span> factores</strong></em>, cada uno de la forma <span class="math notranslate nohighlight">\(\Theta^{rT}_{\setminus 0}\,\text{diag}(f'(\boldsymbol{z}^{r-1}))\)</span>. Tomando normas,</p>
 <div class="math notranslate nohighlight" id="equation-eq-vanishing-bound">
-<span class="eqno">(1.13)<a class="headerlink" href="#equation-eq-vanishing-bound" title="Link to this equation">#</a></span>\[
+<span class="eqno">(2.13)<a class="headerlink" href="#equation-eq-vanishing-bound" title="Link to this equation">#</a></span>\[
     \|\boldsymbol{\delta}_{n}^{1}\|\leq\|\boldsymbol{\delta}_{n}^{L}\|\prod_{r=2}^{L}\|\Theta^{r}_{\setminus 0}\|\cdot\max_{z}|f'(z)|.
     \]</div>
 </li>
-<li><p>Para la sigmoidea logística, <span class="math notranslate nohighlight">\(f'(z)=af(z)(1-f(z))\leq a/4\)</span> (máximo en <span class="math notranslate nohighlight">\(z=0\)</span>); para <span class="math notranslate nohighlight">\(\tanh\)</span>, la cota análoga es también estrictamente menor que 1 en la práctica. En consecuencia, si <span class="math notranslate nohighlight">\(L\)</span> es grande (red profunda) y <span class="math notranslate nohighlight">\(\|\Theta^{r}\|\cdot\max|f'|&lt;1\)</span> de forma sistemática, el producto en <a class="reference internal" href="#equation-eq-vanishing-bound">(1.13)</a> <em><strong>decae exponencialmente</strong></em> con la profundidad: es el fenómeno conocido como <em><strong>desvanecimiento del gradiente (vanishing gradient)</strong></em>, ya mencionado en la discusión sobre la elección de funciones de activación para capas ocultas. Las capas más cercanas a la entrada reciben una señal de gradiente ínfima y, por tanto, <em><strong>prácticamente dejan de aprender</strong></em>.</p></li>
+<li><p>Para la sigmoidea logística, <span class="math notranslate nohighlight">\(f'(z)=af(z)(1-f(z))\leq a/4\)</span> (máximo en <span class="math notranslate nohighlight">\(z=0\)</span>); para <span class="math notranslate nohighlight">\(\tanh\)</span>, la cota análoga es también estrictamente menor que 1 en la práctica. En consecuencia, si <span class="math notranslate nohighlight">\(L\)</span> es grande (red profunda) y <span class="math notranslate nohighlight">\(\|\Theta^{r}\|\cdot\max|f'|&lt;1\)</span> de forma sistemática, el producto en <a class="reference internal" href="#equation-eq-vanishing-bound">(2.13)</a> <em><strong>decae exponencialmente</strong></em> con la profundidad: es el fenómeno conocido como <em><strong>desvanecimiento del gradiente (vanishing gradient)</strong></em>, ya mencionado en la discusión sobre la elección de funciones de activación para capas ocultas. Las capas más cercanas a la entrada reciben una señal de gradiente ínfima y, por tanto, <em><strong>prácticamente dejan de aprender</strong></em>.</p></li>
 <li><p>El fenómeno inverso, <em><strong>explosión del gradiente (exploding gradient)</strong></em>, ocurre cuando <span class="math notranslate nohighlight">\(\|\Theta^{r}\|\cdot\max|f'|&gt;1\)</span> de forma sistemática, produciendo actualizaciones de pesos numéricamente inestables. Este análisis motiva directamente:</p>
 <ol class="arabic simple">
 <li><p>La preferencia moderna por activaciones tipo <code class="docutils literal notranslate"><span class="pre">ReLU</span></code>, <span class="math notranslate nohighlight">\(f(z)=\max(0,z)\)</span>, cuya derivada es <span class="math notranslate nohighlight">\(0\)</span> o <span class="math notranslate nohighlight">\(1\)</span> (no satura para <span class="math notranslate nohighlight">\(z&gt;0\)</span>), evitando la contracción sistemática del gradiente.</p></li>
@@ -1868,7 +1869,7 @@ Calcule <span class="math notranslate nohighlight">\(y_{nj}^{r}=f(z_{nj}^{r})\)<
 </ul>
 </section>
 <section id="inicializacion-de-pesos-glorot-xavier-y-he">
-<h3><span class="section-number">1.9.4. </span>Inicialización de pesos: Glorot/Xavier y He<a class="headerlink" href="#inicializacion-de-pesos-glorot-xavier-y-he" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.9.4. </span>Inicialización de pesos: Glorot/Xavier y He<a class="headerlink" href="#inicializacion-de-pesos-glorot-xavier-y-he" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>El análisis anterior sugiere un principio de diseño: inicializar los pesos de forma que la <em><strong>varianza de las activaciones (y de los gradientes retropropagados) se preserve aproximadamente constante</strong></em> a través de las capas, en lugar de crecer o decaer exponencialmente antes incluso de comenzar el entrenamiento.</p></li>
 </ul>
@@ -1896,7 +1897,7 @@ Calcule <span class="math notranslate nohighlight">\(y_{nj}^{r}=f(z_{nj}^{r})\)<
 </ul>
 </div>
 <ul class="simple">
-<li><p>En ambos casos, nótese que la varianza de inicialización <em><strong>decrece con el número de neuronas de entrada/salida de la capa</strong></em>; una inicialización ingenua con varianza fija e independiente de <span class="math notranslate nohighlight">\(k_{r-1}, k_{r}\)</span> (p. ej. <span class="math notranslate nohighlight">\(\mathcal{N}(0,1)\)</span> para toda capa) es, en la práctica, una causa común de desvanecimiento o explosión del gradiente desde la primera iteración de entrenamiento, incluso antes de que el fenómeno descrito en <a class="reference internal" href="#equation-eq-vanishing-bound">(1.13)</a> se acumule por profundidad.</p></li>
+<li><p>En ambos casos, nótese que la varianza de inicialización <em><strong>decrece con el número de neuronas de entrada/salida de la capa</strong></em>; una inicialización ingenua con varianza fija e independiente de <span class="math notranslate nohighlight">\(k_{r-1}, k_{r}\)</span> (p. ej. <span class="math notranslate nohighlight">\(\mathcal{N}(0,1)\)</span> para toda capa) es, en la práctica, una causa común de desvanecimiento o explosión del gradiente desde la primera iteración de entrenamiento, incluso antes de que el fenómeno descrito en <a class="reference internal" href="#equation-eq-vanishing-bound">(2.13)</a> se acumule por profundidad.</p></li>
 </ul>
 <ul class="simple">
 <li><p>El siguiente experimento numérico verifica el algoritmo de <em>backpropagation</em> derivado en esta sección mediante <em><strong>chequeo de gradiente por diferencias finitas</strong></em>, una práctica estándar (y de gran valor pedagógico) para depurar implementaciones de <em>backpropagation</em> antes de confiar en ellas para el entrenamiento. Adicionalmente, se ilustra empíricamente el fenómeno de desvanecimiento del gradiente al comparar la norma de <span class="math notranslate nohighlight">\(\boldsymbol{\delta}^{r}\)</span> por capa, para una red profunda con activación sigmoidea frente a una con <code class="docutils literal notranslate"><span class="pre">ReLU</span></code>.</p></li>
@@ -2003,12 +2004,12 @@ Norma de delta^r por capa (r=1 es la más cercana a la entrada):
 </div>
 </div>
 <ul class="simple">
-<li><p>El chequeo de gradiente confirma, hasta precisión numérica, que la implementación vectorizada de <em>backpropagation</em> coincide con el gradiente calculado por diferencias finitas centradas —esta es, en la práctica profesional, la forma estándar de validar cualquier implementación manual de <em>backpropagation</em> antes de usarla en un pipeline de entrenamiento real. Adicionalmente, nótese en la salida numérica cómo <span class="math notranslate nohighlight">\(\|\boldsymbol{\delta}^{r}\|\)</span> tiende a <em><strong>decrecer</strong></em> a medida que <span class="math notranslate nohighlight">\(r\)</span> disminuye (capas más cercanas a la entrada), consistente con la cota <a class="reference internal" href="#equation-eq-vanishing-bound">(1.13)</a> y con la motivación teórica de las estrategias de inicialización y de las activaciones <code class="docutils literal notranslate"><span class="pre">ReLU</span></code> discutidas anteriormente.</p></li>
+<li><p>El chequeo de gradiente confirma, hasta precisión numérica, que la implementación vectorizada de <em>backpropagation</em> coincide con el gradiente calculado por diferencias finitas centradas —esta es, en la práctica profesional, la forma estándar de validar cualquier implementación manual de <em>backpropagation</em> antes de usarla en un pipeline de entrenamiento real. Adicionalmente, nótese en la salida numérica cómo <span class="math notranslate nohighlight">\(\|\boldsymbol{\delta}^{r}\|\)</span> tiende a <em><strong>decrecer</strong></em> a medida que <span class="math notranslate nohighlight">\(r\)</span> disminuye (capas más cercanas a la entrada), consistente con la cota <a class="reference internal" href="#equation-eq-vanishing-bound">(2.13)</a> y con la motivación teórica de las estrategias de inicialización y de las activaciones <code class="docutils literal notranslate"><span class="pre">ReLU</span></code> discutidas anteriormente.</p></li>
 </ul>
 </section>
 </section>
 <section id="tuning-de-redes-neuronales">
-<h2><span class="section-number">1.10. </span>Tuning de Redes Neuronales<a class="headerlink" href="#tuning-de-redes-neuronales" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.10. </span>Tuning de Redes Neuronales<a class="headerlink" href="#tuning-de-redes-neuronales" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Profundizaremos en la <em><strong>mecánica del Perceptrón Multicapa (MLP)</strong></em> empleando el <code class="docutils literal notranslate"><span class="pre">MLPClassifier()</span></code> <em><strong>en el conjunto de datos</strong></em> <code class="docutils literal notranslate"><span class="pre">two_moons</span></code> que se utilizó anteriormente en esta sección</p></li>
 </ul>
@@ -6994,7 +6995,7 @@ Accuracy on test set: 0.972
 </ul>
 </section>
 <section id="analisis-de-malware-por-api-calls">
-<h2><span class="section-number">1.11. </span>Análisis de Malware por API calls<a class="headerlink" href="#analisis-de-malware-por-api-calls" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.11. </span>Análisis de Malware por API calls<a class="headerlink" href="#analisis-de-malware-por-api-calls" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>El siguiente conjunto de datos forma parte de una investigación sobre la <em><strong>detección y clasificación de Malware mediante Deep Learning</strong></em> (ver <a class="reference external" href="https://www.techrxiv.org/articles/preprint/Behavioral_Malware_Detection_Using_Deep_Graph_Convolutional_Neural_Networks/10043099">Oliveira, Angelo; Sassi, Renato José (2019)</a>). Contiene <em><strong>42.797 secuencias de llamadas a la API de malware y 1.079 secuencias de llamadas a la API de goodware</strong></em>. Cada secuencia de llamadas a la API se compone de las <em><strong>100 primeras llamadas a la API consecutivas no repetidas asociadas al proceso principal</strong></em>, extraídas de los elementos <em><strong>“calls”</strong></em> de los informes de <a class="reference external" href="https://cuckoosandbox.org/">Cuckoo Sandbox</a>.</p></li>
 <li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Características</span></code></strong></em></p>
@@ -7024,7 +7025,7 @@ Accuracy on test set: 0.972
 <a class="reference internal image-reference" href="_images/trojan_horse_malware.png"><img alt="_images/trojan_horse_malware.png" src="_images/trojan_horse_malware.png" style="width: 495.0px; height: 483.59999999999997px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.19 </span><span class="caption-text">Gráfico de comportamiento del malware troyano con hash MD5 ac65ce897a1f0dc273e8dc54fe3768ec.</span><a class="headerlink" href="#trojan-horse-malware" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.19 </span><span class="caption-text">Gráfico de comportamiento del malware troyano con hash MD5 ac65ce897a1f0dc273e8dc54fe3768ec.</span><a class="headerlink" href="#trojan-horse-malware" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="cell docutils container">
@@ -7297,7 +7298,7 @@ Length: 102, dtype: object
 <a class="reference internal image-reference" href="_images/final_neural_network.png"><img alt="_images/final_neural_network.png" src="_images/final_neural_network.png" style="width: 317.79999999999995px; height: 376.59999999999997px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.20 </span><span class="caption-text">Red neuronal feed-forward de tres capas.</span><a class="headerlink" href="#final-neural-network" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 2.20 </span><span class="caption-text">Red neuronal feed-forward de tres capas.</span><a class="headerlink" href="#final-neural-network" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p><em><strong>La capa de entrada</strong></em></p>
@@ -7538,10 +7539,10 @@ weighted avg       0.99      0.99      0.99     10969
 <li><p>Nótese que con el umbral por defecto, la curva <em><strong>precision-recall</strong></em> muestra una clasificación con <em><strong>scores bastante buenos para cada una de estas métricas</strong></em>, incluso, si movemos el umbral un poco, para favorecer la clase 0 que es la menos frecuente, vamos a obtener de igual manera un rango de valores altos para <em><strong>precision</strong></em> y <em><strong>recall</strong></em>. Sólo valores de <em><strong>precision</strong></em> muy elevados, esto es, valores cuya distancia 1 tiende a cero, estaríamos sacrificando <em><strong>recall</strong></em>.</p></li>
 </ul>
 <section id="entrenamiento-en-pyspark">
-<h3><span class="section-number">1.11.1. </span>Entrenamiento en <code class="docutils literal notranslate"><span class="pre">PySpark</span></code><a class="headerlink" href="#entrenamiento-en-pyspark" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.11.1. </span>Entrenamiento en <code class="docutils literal notranslate"><span class="pre">PySpark</span></code><a class="headerlink" href="#entrenamiento-en-pyspark" title="Link to this heading">#</a></h3>
 </section>
 <section id="por-que-usar-pyspark-para-modelos-de-machine-learning-con-grandes-volumenes-de-datos">
-<h3><span class="section-number">1.11.2. </span>¿Por qué usar <code class="docutils literal notranslate"><span class="pre">PySpark</span></code> para modelos de Machine Learning con grandes volúmenes de datos?<a class="headerlink" href="#por-que-usar-pyspark-para-modelos-de-machine-learning-con-grandes-volumenes-de-datos" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.11.2. </span>¿Por qué usar <code class="docutils literal notranslate"><span class="pre">PySpark</span></code> para modelos de Machine Learning con grandes volúmenes de datos?<a class="headerlink" href="#por-que-usar-pyspark-para-modelos-de-machine-learning-con-grandes-volumenes-de-datos" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>A medida que trabajamos con datasets más grandes, las herramientas tradicionales como <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code> comienzan a mostrar ciertas limitaciones. Aunque son excelentes para prototipado rápido y problemas de tamaño moderado, <strong>no están diseñadas para escalar eficientemente</strong> cuando tratamos con millones de registros.</p></li>
 <li><p>Aquí es donde entra <strong>PySpark</strong>, la interfaz en Python de <code class="docutils literal notranslate"><span class="pre">Apache</span> <span class="pre">Spark</span></code>. <code class="docutils literal notranslate"><span class="pre">PySpark</span></code> permite:</p>
@@ -7902,13 +7903,13 @@ Name: count, dtype: int64
 </section>
 </section>
 <section id="proyecto-integrador-de-deep-learning">
-<h2><span class="section-number">1.12. </span>Proyecto Integrador de Deep Learning<a class="headerlink" href="#proyecto-integrador-de-deep-learning" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.12. </span>Proyecto Integrador de Deep Learning<a class="headerlink" href="#proyecto-integrador-de-deep-learning" title="Link to this heading">#</a></h2>
 <section id="objetivo">
-<h3><span class="section-number">1.12.1. </span>Objetivo<a class="headerlink" href="#objetivo" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.12.1. </span>Objetivo<a class="headerlink" href="#objetivo" title="Link to this heading">#</a></h3>
 <p>Construir un modelo de clasificación supervisada usando <strong>MLP (Multilayer Perceptron/Red Neuronal Multicapa)</strong> para predecir si un usuario hará clic en un anuncio móvil (<strong>click = 1</strong>) o no (<strong>click = 0</strong>). Se comparará el desempeño de los modelos construidos con <strong>scikit-learn</strong> y <strong>PySpark</strong>. Además, se aplicará <strong>LIME</strong> para interpretar predicciones individuales del modelo.</p>
 </section>
 <section id="dataset">
-<h3><span class="section-number">1.12.2. </span>Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.12.2. </span>Dataset<a class="headerlink" href="#dataset" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Nombre</strong>: Avazu Click-Through Rate Prediction</p></li>
 <li><p><strong>Fuente</strong>: <a class="reference external" href="https://www.kaggle.com/competitions/avazu-ctr-prediction">Kaggle – Avazu CTR Prediction</a></p></li>
@@ -7930,7 +7931,7 @@ Name: count, dtype: int64
 </ul>
 </section>
 <section id="target">
-<h3><span class="section-number">1.12.3. </span>Target<a class="headerlink" href="#target" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.12.3. </span>Target<a class="headerlink" href="#target" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Variable binaria:</strong> <code class="docutils literal notranslate"><span class="pre">click</span></code></p>
 <ul>
@@ -7945,7 +7946,7 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="exploracion-de-datos-eda">
-<h3><span class="section-number">1.12.4. </span>Exploración de datos (EDA)<a class="headerlink" href="#exploracion-de-datos-eda" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.12.4. </span>Exploración de datos (EDA)<a class="headerlink" href="#exploracion-de-datos-eda" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Cargar el dataset CSV</p></li>
 <li><p>Analizar la distribución de la variable <code class="docutils literal notranslate"><span class="pre">click</span></code></p></li>
@@ -7963,7 +7964,7 @@ Name: count, dtype: int64
 </ul>
 </section>
 <section id="scikit-learn">
-<h3><span class="section-number">1.12.5. </span>scikit-learn<a class="headerlink" href="#scikit-learn" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.12.5. </span>scikit-learn<a class="headerlink" href="#scikit-learn" title="Link to this heading">#</a></h3>
 <p>Debido al gran tamaño del dataset, el trabajo en scikit-learn deberá realizarse sobre una <strong>muestra representativa</strong> (por ejemplo, 1 millón de registros).</p>
 <ul class="simple">
 <li><p>Seleccionar un subconjunto de variables relevantes</p></li>
@@ -7977,7 +7978,7 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="pyspark">
-<h3><span class="section-number">1.12.6. </span>PySpark<a class="headerlink" href="#pyspark" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.12.6. </span>PySpark<a class="headerlink" href="#pyspark" title="Link to this heading">#</a></h3>
 <p>Esta sección debe trabajarse con el dataset completo.</p>
 <ul class="simple">
 <li><p>Leer el CSV utilizando <strong>SparkSession</strong></p></li>
@@ -7992,7 +7993,7 @@ Name: count, dtype: int64
 </div>
 </section>
 <section id="modelado-con-scikit-learn">
-<h3><span class="section-number">1.12.7. </span>Modelado con scikit-learn<a class="headerlink" href="#modelado-con-scikit-learn" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.12.7. </span>Modelado con scikit-learn<a class="headerlink" href="#modelado-con-scikit-learn" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Usar <strong>MLPClassifier</strong></p></li>
 <li><p>Realizar búsqueda de hiperparámetros (<strong>GridSearchCV</strong>) para:</p>
@@ -8016,7 +8017,7 @@ Name: count, dtype: int64
 </ul>
 </section>
 <section id="modelado-con-pyspark">
-<h3><span class="section-number">1.12.8. </span>Modelado con PySpark<a class="headerlink" href="#modelado-con-pyspark" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.12.8. </span>Modelado con PySpark<a class="headerlink" href="#modelado-con-pyspark" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Usar <strong>pyspark.ml.classification.MultilayerPerceptronClassifier</strong></p></li>
 <li><p>Probar combinaciones de hiperparámetros como:</p>
@@ -8045,7 +8046,7 @@ Name: count, dtype: int64
 </ul>
 </section>
 <section id="interpretabilidad-con-lime">
-<h3><span class="section-number">1.12.9. </span>Interpretabilidad con LIME<a class="headerlink" href="#interpretabilidad-con-lime" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.12.9. </span>Interpretabilidad con LIME<a class="headerlink" href="#interpretabilidad-con-lime" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Instalar LIME: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">lime</span></code></p></li>
 <li><p>Seleccionar una o dos instancias clasificadas erróneamente</p></li>
@@ -8055,7 +8056,7 @@ Name: count, dtype: int64
 </ul>
 </section>
 <section id="comparacion-de-resultados">
-<h3><span class="section-number">1.12.10. </span>Comparación de Resultados<a class="headerlink" href="#comparacion-de-resultados" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.12.10. </span>Comparación de Resultados<a class="headerlink" href="#comparacion-de-resultados" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Tabla comparativa</strong> con:</p>
 <ul>
@@ -8072,7 +8073,7 @@ Name: count, dtype: int64
 </ul>
 </section>
 <section id="entregable">
-<h3><span class="section-number">1.12.11. </span>Entregable<a class="headerlink" href="#entregable" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.12.11. </span>Entregable<a class="headerlink" href="#entregable" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Un <strong>Jupyter Book</strong> bien documentado que incluya:</p>
 <ul>
@@ -8095,7 +8096,7 @@ Name: count, dtype: int64
 </section>
 </section>
 <section id="recursos">
-<h2><span class="section-number">1.13. </span>Recursos<a class="headerlink" href="#recursos" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.13. </span>Recursos<a class="headerlink" href="#recursos" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.kaggle.com/competitions/avazu-ctr-prediction">Avazu CTR Prediction – Kaggle</a></p></li>
 <li><p><a class="reference external" href="https://lime-ml.readthedocs.io/en/latest/">LIME Documentation</a></p></li>
@@ -8136,12 +8137,12 @@ Name: count, dtype: int64
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="intro.html"
+       href="deep_learning_intro.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Profesor: Dr. Lihki Rubio</p>
+        <p class="prev-next-title"><span class="section-number">1. </span>Deep Learning</p>
       </div>
     </a>
     <a class="right-next"
@@ -8149,7 +8150,7 @@ Name: count, dtype: int64
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2. </span>Series de Tiempo</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Series de Tiempo</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -8169,53 +8170,53 @@ Name: count, dtype: int64
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradiente-descendente">1.1. Gradiente descendente</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descenso-de-gradiente-estocastico-y-por-mini-batch">1.1.1. Descenso de gradiente estocástico y por mini-batch</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#condiciones-y-tasas-de-convergencia">1.1.2. Condiciones y tasas de convergencia</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradiente-descendente">2.1. Gradiente descendente</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#descenso-de-gradiente-estocastico-y-por-mini-batch">2.1.1. Descenso de gradiente estocástico y por mini-batch</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#condiciones-y-tasas-de-convergencia">2.1.2. Condiciones y tasas de convergencia</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-neuronales">1.2. Redes neuronales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-perceptron">1.3. El perceptrón</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-de-convergencia-del-perceptron">1.3.1. Teorema de convergencia del perceptrón</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-del-perceptron-el-problema-xor">1.3.2. Limitaciones del perceptrón: el problema XOR</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-neuronales">2.2. Redes neuronales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-perceptron">2.3. El perceptrón</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teorema-de-convergencia-del-perceptron">2.3.1. Teorema de convergencia del perceptrón</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#limitaciones-del-perceptron-el-problema-xor">2.3.2. Limitaciones del perceptrón: el problema XOR</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-totalmente-conectadas">1.4. Redes Totalmente Conectadas</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-teorema-de-aproximacion-universal">1.4.1. El teorema de aproximación universal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-totalmente-conectadas">2.4. Redes Totalmente Conectadas</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-teorema-de-aproximacion-universal">2.4.1. El teorema de aproximación universal</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-algoritmo-de-backpropagation">1.5. El Algoritmo De Backpropagation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-esquema-de-backpropagation-para-gradiente-descendente">1.6. El Esquema De Backpropagation Para Gradiente Descendente</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-de-mlp">1.7. Entrenamiento de MLP</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-gradientes">1.8. Cálculo de gradientes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-delta-nj-r">1.9. Cálculo de <span class="math notranslate nohighlight">\(\delta_{nj}^{r}\)</span></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forma-vectorizada-del-backpropagation">1.9.1. Forma vectorizada del backpropagation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-computacional-y-diferenciacion-automatica">1.9.2. Complejidad computacional y diferenciación automática</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-problema-del-desvanecimiento-y-la-explosion-del-gradiente">1.9.3. El problema del desvanecimiento y la explosión del gradiente</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inicializacion-de-pesos-glorot-xavier-y-he">1.9.4. Inicialización de pesos: Glorot/Xavier y He</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-algoritmo-de-backpropagation">2.5. El Algoritmo De Backpropagation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-esquema-de-backpropagation-para-gradiente-descendente">2.6. El Esquema De Backpropagation Para Gradiente Descendente</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-de-mlp">2.7. Entrenamiento de MLP</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-gradientes">2.8. Cálculo de gradientes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#calculo-de-delta-nj-r">2.9. Cálculo de <span class="math notranslate nohighlight">\(\delta_{nj}^{r}\)</span></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forma-vectorizada-del-backpropagation">2.9.1. Forma vectorizada del backpropagation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#complejidad-computacional-y-diferenciacion-automatica">2.9.2. Complejidad computacional y diferenciación automática</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#el-problema-del-desvanecimiento-y-la-explosion-del-gradiente">2.9.3. El problema del desvanecimiento y la explosión del gradiente</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inicializacion-de-pesos-glorot-xavier-y-he">2.9.4. Inicialización de pesos: Glorot/Xavier y He</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-de-redes-neuronales">1.10. Tuning de Redes Neuronales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-malware-por-api-calls">1.11. Análisis de Malware por API calls</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-en-pyspark">1.11.1. Entrenamiento en <code class="docutils literal notranslate"><span class="pre">PySpark</span></code></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-usar-pyspark-para-modelos-de-machine-learning-con-grandes-volumenes-de-datos">1.11.2. ¿Por qué usar <code class="docutils literal notranslate"><span class="pre">PySpark</span></code> para modelos de Machine Learning con grandes volúmenes de datos?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-de-redes-neuronales">2.10. Tuning de Redes Neuronales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis-de-malware-por-api-calls">2.11. Análisis de Malware por API calls</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-en-pyspark">2.11.1. Entrenamiento en <code class="docutils literal notranslate"><span class="pre">PySpark</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#por-que-usar-pyspark-para-modelos-de-machine-learning-con-grandes-volumenes-de-datos">2.11.2. ¿Por qué usar <code class="docutils literal notranslate"><span class="pre">PySpark</span></code> para modelos de Machine Learning con grandes volúmenes de datos?</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proyecto-integrador-de-deep-learning">1.12. Proyecto Integrador de Deep Learning</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo">1.12.1. Objetivo</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">1.12.2. Dataset</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#target">1.12.3. Target</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-de-datos-eda">1.12.4. Exploración de datos (EDA)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scikit-learn">1.12.5. scikit-learn</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyspark">1.12.6. PySpark</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelado-con-scikit-learn">1.12.7. Modelado con scikit-learn</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelado-con-pyspark">1.12.8. Modelado con PySpark</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretabilidad-con-lime">1.12.9. Interpretabilidad con LIME</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-resultados">1.12.10. Comparación de Resultados</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entregable">1.12.11. Entregable</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proyecto-integrador-de-deep-learning">2.12. Proyecto Integrador de Deep Learning</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo">2.12.1. Objetivo</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">2.12.2. Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#target">2.12.3. Target</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exploracion-de-datos-eda">2.12.4. Exploración de datos (EDA)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scikit-learn">2.12.5. scikit-learn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pyspark">2.12.6. PySpark</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelado-con-scikit-learn">2.12.7. Modelado con scikit-learn</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#modelado-con-pyspark">2.12.8. Modelado con PySpark</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretabilidad-con-lime">2.12.9. Interpretabilidad con LIME</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#comparacion-de-resultados">2.12.10. Comparación de Resultados</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entregable">2.12.11. Entregable</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursos">1.13. Recursos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#recursos">2.13. Recursos</a></li>
 </ul>
   </nav></div>
 
