@@ -16,44 +16,47 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-
-  
-  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=b4b7a797" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="_static/custom.css?v=530fe47d" />
     <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/custom-checkpoint.css" />
   
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
-  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="_static/copybutton.js?v=f281be69"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script src="_static/design-tabs.js?v=f930bc37"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
@@ -69,9 +72,10 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="4. Apéndice" href="appendix.html" />
-    <link rel="prev" title="2. Multilayer Perceptron" href="ann_theory.html" />
+    <link rel="prev" title="2. Deep Learning" href="ann_theory.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
   
   
@@ -87,19 +91,8 @@
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
   
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-primary-sidebar-checkbox"/>
-  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
-  
-  <input type="checkbox"
-          class="sidebar-toggle"
-          id="pst-secondary-sidebar-checkbox"/>
-  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
-  
-  <div class="search-button__wrapper">
-    <div class="search-button__overlay"></div>
-    <div class="search-button__search-container">
+  <dialog id="pst-search-dialog">
+    
 <form class="bd-search d-flex align-items-center"
       action="search.html"
       method="get">
@@ -107,7 +100,6 @@
   <input type="search"
          class="form-control"
          name="q"
-         id="search-input"
          placeholder="Search this book..."
          aria-label="Search this book..."
          autocomplete="off"
@@ -115,8 +107,8 @@
          autocapitalize="off"
          spellcheck="false"/>
   <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
-</form></div>
-  </div>
+</form>
+  </dialog>
 
   <div class="pst-async-banner-revealer d-none">
   <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
@@ -132,7 +124,8 @@
       
       
       
-      <div class="bd-sidebar-primary bd-sidebar">
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
 
   
@@ -162,21 +155,17 @@
     
     
     <img src="_static/fotolihki.jpg" class="logo__image only-light" alt="Deep Learning - Home"/>
-    <script>document.write(`<img src="_static/fotolihki.jpg" class="logo__image only-dark" alt="Deep Learning - Home"/>`);</script>
+    <img src="_static/fotolihki.jpg" class="logo__image only-dark pst-js-only" alt="Deep Learning - Home"/>
   
   
 </a></div>
         <div class="sidebar-primary-item">
 
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
         <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
@@ -189,7 +178,8 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="deep_learning_intro.html">1. Deep Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ann_theory.html">2. Multilayer Perceptron</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ann_theory.html">2. Deep Learning</a></li>
+
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Series de Tiempo</a></li>
 <li class="toctree-l1"><a class="reference internal" href="appendix.html">4. Apéndice</a></li>
 <li class="toctree-l1"><a class="reference internal" href="biblio.html">5. Bibliografía</a></li>
@@ -201,9 +191,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -286,7 +281,7 @@
 
 
 <button onclick="toggleFullScreen()"
-  class="btn btn-sm btn-fullscreen-button"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
   title="Fullscreen mode"
   data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
@@ -300,25 +295,17 @@
 
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
-    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
-    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
-  </button>
-`);
-</script>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
 
 
-<script>
-document.write(`
-  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass fa-lg"></i>
-  </button>
-`);
-</script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
 </button>
 </div></div>
@@ -549,9 +536,9 @@ y_{t}=\mu+\sum_{i=0}^{\infty}\psi_{i}\varepsilon_{t-i}&amp;=\mu+\psi_{0}\varepsi
 <div class="admonition-observacion admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
-<li><p>La Ecuación <a class="reference internal" href="#equation-moving-average-backshift">(3.4)</a> se le conoce como el <em><strong>promedio móvil infinito</strong></em> y sirve como una clase general de <em><strong>modelos para cualquier serie temporal estacionaria</strong></em> <span id="id1">[<a class="reference internal" href="biblio.html#id92" title="Herman Wold. A study in the analysis of stationary time series. PhD thesis, Almqvist &amp; Wiksell, 1938.">Wold, 1938</a>]</span>.</p></li>
+<li><p>La Ecuación <a class="reference internal" href="#equation-moving-average-backshift">(3.4)</a> se le conoce como el <em><strong>promedio móvil infinito</strong></em> y sirve como una clase general de <em><strong>modelos para cualquier serie temporal estacionaria</strong></em> <span class="bibtex-citation" id="id1">[<a class="reference internal" href="biblio.html#id92" title="Herman Wold. A study in the analysis of stationary time series. PhD thesis, Almqvist &amp; Wiksell, 1938.">Wold, 1938</a>]</span>.</p></li>
 <li><p>Básicamente, establece que <em><strong>cualquier serie temporal</strong></em> <span class="math notranslate nohighlight">\(y_{t}\)</span> <em><strong>no determinística y estacionaria débil puede ser representada como en la Ecuación</strong></em> <a class="reference internal" href="#equation-linear-filter-white-noise">(3.3)</a>, donde <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span> satisfacen <span class="math notranslate nohighlight">\(\sum_{i=0}^{\infty}\psi_{i}^{2}&lt;\infty\)</span>.</p></li>
-<li><p>Una interpretación más intuitiva de este teorema es que <em><strong>una serie temporal estacionaria puede ser vista como la suma ponderada de las “perturbaciones” aleatorias presentes y pasadas</strong></em> <span id="id2">[<a class="reference internal" href="biblio.html#id94" title="Søren Bisgaard and Murat Kulahci. Time series analysis and forecasting by example. John Wiley &amp; Sons, 2011.">Bisgaard and Kulahci, 2011</a>, <a class="reference internal" href="biblio.html#id93" title="George Udny Yule. On a method of investigating periodicities in disturbed series with special reference to wolfer’s sunspot numbers. Statistical Papers of George Udny Yule, pages 389–420, 1971.">Yule, 1971</a>]</span>.</p></li>
+<li><p>Una interpretación más intuitiva de este teorema es que <em><strong>una serie temporal estacionaria puede ser vista como la suma ponderada de las “perturbaciones” aleatorias presentes y pasadas</strong></em> <span class="bibtex-citation" id="id2">[<a class="reference internal" href="biblio.html#id94" title="Søren Bisgaard and Murat Kulahci. Time series analysis and forecasting by example. John Wiley &amp; Sons, 2011.">Bisgaard and Kulahci, 2011</a>, <a class="reference internal" href="biblio.html#id93" title="George Udny Yule. On a method of investigating periodicities in disturbed series with special reference to wolfer’s sunspot numbers. Statistical Papers of George Udny Yule, pages 389–420, 1971.">Yule, 1971</a>]</span>.</p></li>
 </ul>
 </div>
 <ul class="simple">
@@ -760,7 +747,7 @@ F_{y_{t_1},\dots,y_{t_n}}(x_1,\dots,x_n) = F_{y_{t_1+k},\dots,y_{t_n+k}}(x_1,\do
 <ul>
 <li><p>Esta característica de la <code class="docutils literal notranslate"><span class="pre">ACF</span></code> es muy <em><strong>útil para identificar el modelo <code class="docutils literal notranslate"><span class="pre">MA</span></code> y su orden adecuado, ya que <em>“se corta”</em> después del rezago</strong></em> <span class="math notranslate nohighlight">\(q\)</span>. Sin embargo, en aplicaciones de la vida real, la <code class="docutils literal notranslate"><span class="pre">ACF</span></code> muestral, <span class="math notranslate nohighlight">\(r(k)\)</span>, no necesariamente será igual a cero después del rezago <span class="math notranslate nohighlight">\(q\)</span>. <em><strong>Se espera que se vuelva muy pequeña en valor absoluto después del rezago</strong></em> <span class="math notranslate nohighlight">\(q\)</span>.</p></li>
 <li><p>Para un conjunto de datos de <span class="math notranslate nohighlight">\(N\)</span> observaciones, esto a menudo se prueba contra límites de <span class="math notranslate nohighlight">\(\pm 2/\sqrt{N}\)</span>, donde <span class="math notranslate nohighlight">\(1/\sqrt{N}\)</span> es el <em><strong>valor aproximado para la desviación estándar de la</strong></em> <code class="docutils literal notranslate"><span class="pre">ACF</span></code> <em><strong>para cualquier rezago</strong></em> bajo la suposición de que <span class="math notranslate nohighlight">\(\rho(k)=0\)</span> para todos los <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
-<li><p><span id="id3">[<a class="reference internal" href="biblio.html#id85" title="Maurice S Bartlett. On the theoretical specification and sampling properties of autocorrelated time-series. Supplement to the Journal of the Royal Statistical Society, 8(1):27–41, 1946.">Bartlett, 1946</a>]</span> <span id="id4">[<a class="reference internal" href="biblio.html#id112" title="P.J. Brockwell and R.A. Davis. Time Series: Theory and Methods: Theory and Methods. Springer Series in Statistics. Springer New York, 1991. ISBN 9780387974293. URL: https://books.google.com.co/books?id=ZW_ThhYQiXIC.">Brockwell and Davis, 1991</a>]</span> Tenga en cuenta que una fórmula más precisa para el <em><strong>error estándar del coeficiente de autocorrelación muestral <span class="math notranslate nohighlight">\(k\)</span></strong></em> es proporcionada por (<em><strong><code class="docutils literal notranslate"><span class="pre">bonus</span></code></strong></em>)</p>
+<li><p><span class="bibtex-citation" id="id3">[<a class="reference internal" href="biblio.html#id85" title="Maurice S Bartlett. On the theoretical specification and sampling properties of autocorrelated time-series. Supplement to the Journal of the Royal Statistical Society, 8(1):27–41, 1946.">Bartlett, 1946</a>]</span> <span class="bibtex-citation" id="id4">[<a class="reference internal" href="biblio.html#id112" title="P.J. Brockwell and R.A. Davis. Time Series: Theory and Methods: Theory and Methods. Springer Series in Statistics. Springer New York, 1991. ISBN 9780387974293. URL: https://books.google.com.co/books?id=ZW_ThhYQiXIC.">Brockwell and Davis, 1991</a>]</span> Tenga en cuenta que una fórmula más precisa para el <em><strong>error estándar del coeficiente de autocorrelación muestral <span class="math notranslate nohighlight">\(k\)</span></strong></em> es proporcionada por (<em><strong><code class="docutils literal notranslate"><span class="pre">bonus</span></code></strong></em>)</p>
 <div class="math notranslate nohighlight">
 \[
     \text{s.e.}~(r(k))=N^{-1/2}\left(1+2\sum_{j=1}^{k-1}r(j)^{\star 2}\right)^{1/2}
@@ -837,10 +824,10 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}.
 </div>
 </div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plotds</span><span class="p">(</span><span class="n">xt</span><span class="p">,</span> <span class="n">nlag</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">fig_size</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">)):</span>
@@ -870,10 +857,10 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}.
 <li><p>El siguiente gráfico corresponden al proceso <span class="math notranslate nohighlight">\(MA(1)\)</span>: <span class="math notranslate nohighlight">\(y_{t}=40+\varepsilon_{t}+0.8\varepsilon_{t-1}\)</span>. En este ejemplo se ha utilizado la librería <a class="reference external" href="https://www.statsmodels.org/stable/generated/statsmodels.tsa.arima_process.arma_generate_sample.html#statsmodels.tsa.arima_process.arma_generate_sample">arma_generate_sample</a>. Debe instalarla previamente usando <code class="docutils literal notranslate"><span class="pre">pip</span></code></p></li>
 </ul>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
@@ -899,10 +886,10 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}.
 <li><p>Analogamente, el siguiente gráfico corresponden al proceso <span class="math notranslate nohighlight">\(MA(1)\)</span>: <span class="math notranslate nohighlight">\(y_{t}=40+\varepsilon_{t}-0.8\varepsilon_{t-1}\)</span>. Podemos observar que las observaciones <em><strong>tienden a oscilar sucesivamente</strong></em>. Esto sugiere una <em><strong>autocorrelación negativa</strong></em>, como lo confirma el gráfico de la <code class="docutils literal notranslate"><span class="pre">ACF</span></code> de la muestra.</p></li>
 </ul>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
@@ -966,10 +953,10 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\theta_{2}\varepsilon_{t-2
 <li><p>El siguiente gráfico muestra la serie temporal y la <em><strong>función de autocorrelación</strong></em> para la realización del modelo <span class="math notranslate nohighlight">\(MA(2)\)</span>: <span class="math notranslate nohighlight">\(y_{t}=40+\varepsilon_{t}+0.7\varepsilon_{t-1}-0.28\varepsilon_{t-2}\)</span></p></li>
 </ul>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
@@ -1175,10 +1162,10 @@ y_{t}=\mu+\varepsilon_{t}+\phi\varepsilon_{t-1}+\phi^{2}\varepsilon_{t-2}+\cdots
 </li>
 </ul>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
@@ -1204,10 +1191,10 @@ y_{t}=\mu+\varepsilon_{t}+\phi\varepsilon_{t-1}+\phi^{2}\varepsilon_{t-2}+\cdots
 <li><p>Al igual que en el modelo <span class="math notranslate nohighlight">\(MA(1)\)</span> con <span class="math notranslate nohighlight">\(\theta = −0.8\)</span>, podemos observar algunos <em><strong>cortos períodos durante los cuales las observaciones tienden a moverse en dirección ascendente o descendente</strong></em>. A diferencia del modelo <span class="math notranslate nohighlight">\(MA(1)\)</span>, <em><strong>sin embargo, la duración de estos períodos tiende a ser más larga y la tendencia tiende a persistir</strong></em>. Esto también puede observarse en el gráfico de la <em><strong>función de autocorrelación</strong></em> (<code class="docutils literal notranslate"><span class="pre">ACF</span></code>) de la muestra.</p></li>
 </ul>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
@@ -1404,7 +1391,7 @@ m_{1,2}=\frac{\phi_{1}\pm\sqrt{\phi_{1}^{2}+4\phi_{2}}}{2}
 <figure class="align-center" id="complex-roots-ar2-model-fig">
 <img alt="_images/complex_roots_ar2_model.png" src="_images/complex_roots_ar2_model.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">Funciones típicas de <em><strong>autocorrelación y autocorrelación parcial</strong></em> <span class="math notranslate nohighlight">\(\rho_{k}\)</span> y <span class="math notranslate nohighlight">\(\phi_{kk}\)</span> para varios modelos <span class="math notranslate nohighlight">\(AR(2)\)</span> estacionarios. (Fuente: <span id="id5">[<a class="reference internal" href="biblio.html#id95" title="Casimir Michael Stralkowski. Lower order autoregressive-moving average stochastic models and their use for the characterization of abrasive cutting tools. PhD thesis, University of Wisconsin, 1968.">Stralkowski, 1968</a>]</span>).</span><a class="headerlink" href="#complex-roots-ar2-model-fig" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">Funciones típicas de <em><strong>autocorrelación y autocorrelación parcial</strong></em> <span class="math notranslate nohighlight">\(\rho_{k}\)</span> y <span class="math notranslate nohighlight">\(\phi_{kk}\)</span> para varios modelos <span class="math notranslate nohighlight">\(AR(2)\)</span> estacionarios. (Fuente: <span class="bibtex-citation" id="id5">[<a class="reference internal" href="biblio.html#id95" title="Casimir Michael Stralkowski. Lower order autoregressive-moving average stochastic models and their use for the characterization of abrasive cutting tools. PhD thesis, University of Wisconsin, 1968.">Stralkowski, 1968</a>]</span>).</span><a class="headerlink" href="#complex-roots-ar2-model-fig" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -1536,10 +1523,10 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 <li><p>La siguiente figura muestra la realización del proceso <span class="math notranslate nohighlight">\(AR(2)\)</span>: <span class="math notranslate nohighlight">\(y_{t}=4+0.4y_{t-1}+0.5y_{t-2}+\varepsilon_{t}\)</span>.</p></li>
 </ul>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
@@ -1565,10 +1552,10 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 <li><p>Tenga en cuenta que las <em><strong>raíces</strong></em> del polinomio asociado a este modelo son <em><strong>reales</strong></em>. Por lo tanto, la <em><strong>ACF es una mezcla de dos términos de decaimiento exponencial</strong></em>. De manera similar, la siguiente figura muestra una realización del siguiente proceso <span class="math notranslate nohighlight">\(AR(2)\)</span>: <span class="math notranslate nohighlight">\(y_{t}=4+0.4y_{t-1}-0.5y_{t-2}+\varepsilon_{t}\)</span></p></li>
 </ul>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
@@ -1754,7 +1741,7 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 \end{align*}
 \end{split}\]</div>
 <ul>
-<li><p>Estas son las conocidas ecuaciones de <span id="id6">[<a class="reference internal" href="biblio.html#id115" title="G. Udny Yule. Vii. on a method of investigating periodicities disturbed series, with special reference to wolfer's sunspot numbers. Philosophical Transactions of the Royal Society A, 226(636–646):267–298, 1927. doi:10.1098/rsta.1927.0007.">Yule, 1927</a>]</span> <span id="id7">[<a class="reference internal" href="biblio.html#id114" title="Gilbert Thomas Walker. On periodicity in series of related terms. Proceedings of the Royal Society of London. Series A, Containing Papers of a Mathematical and Physical Character, 131(818):518–532, 1931.">Walker, 1931</a>]</span>. Obtenemos <em><strong>estimaciones de los parámetros de Yule-Walker reemplazando las autocorrelaciones teóricas</strong></em> <span class="math notranslate nohighlight">\(ρ_{k}\)</span> por las <em><strong>autocorrelaciones estimadas</strong></em> <span class="math notranslate nohighlight">\(r_{k}\)</span>. Nótese que, si escribimos</p>
+<li><p>Estas son las conocidas ecuaciones de <span class="bibtex-citation" id="id6">[<a class="reference internal" href="biblio.html#id115" title="G. Udny Yule. Vii. on a method of investigating periodicities disturbed series, with special reference to wolfer's sunspot numbers. Philosophical Transactions of the Royal Society A, 226(636–646):267–298, 1927. doi:10.1098/rsta.1927.0007.">Yule, 1927</a>]</span> <span class="bibtex-citation" id="id7">[<a class="reference internal" href="biblio.html#id114" title="Gilbert Thomas Walker. On periodicity in series of related terms. Proceedings of the Royal Society of London. Series A, Containing Papers of a Mathematical and Physical Character, 131(818):518–532, 1931.">Walker, 1931</a>]</span>. Obtenemos <em><strong>estimaciones de los parámetros de Yule-Walker reemplazando las autocorrelaciones teóricas</strong></em> <span class="math notranslate nohighlight">\(ρ_{k}\)</span> por las <em><strong>autocorrelaciones estimadas</strong></em> <span class="math notranslate nohighlight">\(r_{k}\)</span>. Nótese que, si escribimos</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
     \boldsymbol{\phi}=
@@ -1807,7 +1794,7 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 \text{E}(\hat{\phi}_{kk})\approx 0~\text{y}~\text{Var}(\hat{\phi}_{kk})\approx\frac{1}{N}
 \]</div>
 <ul class="simple">
-<li><p>Por lo tanto, los <em><strong>límites del 95% para juzgar si algún</strong></em> <span class="math notranslate nohighlight">\(\hat{\phi}_{kk}\)</span> es estadísticamente <em><strong>significativamente diferente de cero se dan por</strong></em> <span class="math notranslate nohighlight">\(\pm 2/\sqrt{N}\)</span> <span id="id8">[<a class="reference internal" href="biblio.html#id98" title="HE Daniels. The approximate distribution of serial correlation coefficients. Biometrika, 43(1/2):169–185, 1956.">Daniels, 1956</a>, <a class="reference internal" href="biblio.html#id97" title="GM Jenkins and others. Tests of hypotheses in the linear autoregressive model. 1956.">Jenkins and others, 1956</a>, <a class="reference internal" href="biblio.html#id96" title="Maurice H Quenouille. Approximate tests of correlation in time-series 3. In Mathematical Proceedings of the Cambridge Philosophical Society, volume 45, 483–484. Cambridge University Press, 1949.">Quenouille, 1949</a>]</span>.</p></li>
+<li><p>Por lo tanto, los <em><strong>límites del 95% para juzgar si algún</strong></em> <span class="math notranslate nohighlight">\(\hat{\phi}_{kk}\)</span> es estadísticamente <em><strong>significativamente diferente de cero se dan por</strong></em> <span class="math notranslate nohighlight">\(\pm 2/\sqrt{N}\)</span> <span class="bibtex-citation" id="id8">[<a class="reference internal" href="biblio.html#id98" title="HE Daniels. The approximate distribution of serial correlation coefficients. Biometrika, 43(1/2):169–185, 1956.">Daniels, 1956</a>, <a class="reference internal" href="biblio.html#id97" title="GM Jenkins and others. Tests of hypotheses in the linear autoregressive model. 1956.">Jenkins and others, 1956</a>, <a class="reference internal" href="biblio.html#id96" title="Maurice H Quenouille. Approximate tests of correlation in time-series 3. In Mathematical Proceedings of the Cambridge Philosophical Society, volume 45, 483–484. Cambridge University Press, 1949.">Quenouille, 1949</a>]</span>.</p></li>
 </ul>
 </div>
 <ul>
@@ -1820,10 +1807,10 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 </li>
 </ul>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
@@ -1942,10 +1929,10 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 </li>
 </ul>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
@@ -1975,10 +1962,10 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 y_{t}=16-0.7y_{t-1}+\varepsilon_{t}-0.6\varepsilon_{t-1}
 \]</div>
 <div class="cell tag_hide-input docutils container">
-<details class="hide above-input">
+<details class="admonition hide above-input">
 <summary aria-label="Toggle hidden content">
-<span class="collapsed">Show code cell source</span>
-<span class="expanded">Hide code cell source</span>
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
 </summary>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
@@ -2005,7 +1992,7 @@ y_{t}=16-0.7y_{t-1}+\varepsilon_{t}-0.6\varepsilon_{t-1}
 <h2><span class="section-number">3.16. </span>Funciones de autocorrelación (<span class="math notranslate nohighlight">\(ACF\)</span>) y autocorrelación parcial (<span class="math notranslate nohighlight">\(PACF\)</span>) del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span><a class="headerlink" href="#funciones-de-autocorrelacion-acf-y-autocorrelacion-parcial-pacf-del-proceso-arma-p-q" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Las <em><strong>funciones de autocorrelación (ACF) y autocorrelación parcial (PACF) de un proceso ARMA son determinadas por las componentes AR y MA</strong></em>, respectivamente. Por lo tanto, tanto la ACF como la PACF de un <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span> <em><strong>exhiben patrones de decaimiento exponencial y/o sinusoidales amortiguados</strong></em>, lo que <em>dificulta relativamente la identificación del orden del modelo</em> <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span>.</p></li>
-<li><p>Para ello, se pueden utilizar funciones de muestra adicionales como la <em><strong>ACF de muestra extendida (ESACF), la PACF de muestra generalizada (GPACF), la ACF inversa (IACF) y correlaciones canónicas</strong></em> <span id="id9">[<a class="reference internal" href="biblio.html#id99" title="George EP Box, Gwilym M Jenkins, Gregory C Reinsel, and Greta M Ljung. Time series analysis: forecasting and control. John Wiley &amp; Sons, 2015.">Box <em>et al.</em>, 2015</a>, <a class="reference internal" href="biblio.html#id103" title="Johannes Ledolter and Bovas Abraham. Some comments on the initialization of exponential smoothing. Journal of Forecasting, 3(1):79–84, 1984.">Ledolter and Abraham, 1984</a>, <a class="reference internal" href="biblio.html#id101" title="George C Tiao and George EP Box. Modeling multiple time series with applications. journal of the American Statistical Association, 76(376):802–816, 1981.">Tiao and Box, 1981</a>, <a class="reference internal" href="biblio.html#id102" title="Ruey S Tsay and George C Tiao. Consistent estimates of autoregressive parameters and extended sample autocorrelation function for stationary and nonstationary arma models. Journal of the American Statistical Association, 79(385):84–96, 1984.">Tsay and Tiao, 1984</a>, <a class="reference internal" href="biblio.html#id100" title="Wei William and S Wei. Time series analysis: univariate and multivariate methods. USA, Pearson Addison Wesley, Segunda edicion. Cap, 10:212–235, 2006.">William and Wei, 2006</a>]</span>.</p></li>
+<li><p>Para ello, se pueden utilizar funciones de muestra adicionales como la <em><strong>ACF de muestra extendida (ESACF), la PACF de muestra generalizada (GPACF), la ACF inversa (IACF) y correlaciones canónicas</strong></em> <span class="bibtex-citation" id="id9">[<a class="reference internal" href="biblio.html#id99" title="George EP Box, Gwilym M Jenkins, Gregory C Reinsel, and Greta M Ljung. Time series analysis: forecasting and control. John Wiley &amp; Sons, 2015.">Box <em>et al.</em>, 2015</a>, <a class="reference internal" href="biblio.html#id103" title="Johannes Ledolter and Bovas Abraham. Some comments on the initialization of exponential smoothing. Journal of Forecasting, 3(1):79–84, 1984.">Ledolter and Abraham, 1984</a>, <a class="reference internal" href="biblio.html#id101" title="George C Tiao and George EP Box. Modeling multiple time series with applications. journal of the American Statistical Association, 76(376):802–816, 1981.">Tiao and Box, 1981</a>, <a class="reference internal" href="biblio.html#id102" title="Ruey S Tsay and George C Tiao. Consistent estimates of autoregressive parameters and extended sample autocorrelation function for stationary and nonstationary arma models. Journal of the American Statistical Association, 79(385):84–96, 1984.">Tsay and Tiao, 1984</a>, <a class="reference internal" href="biblio.html#id100" title="Wei William and S Wei. Time series analysis: univariate and multivariate methods. USA, Pearson Addison Wesley, Segunda edicion. Cap, 10:212–235, 2006.">William and Wei, 2006</a>]</span>.</p></li>
 <li><p>Sin embargo, la <em><strong>disponibilidad de librerías en <code class="docutils literal notranslate"><span class="pre">Python</span></code></strong></em> permite al profesional considerar varios modelos con diferentes órdenes y compararlos según los <em><strong>criterios de selección de modelos como AIC, AICC y BIC</strong></em>. Los valores teóricos de la <em><strong>ACF y la PACF para series de tiempo estacionarias se resumen en la siguiente tabla</strong></em>.</p></li>
 </ul>
 <div class="pst-scrollable-table-container"><table class="table" id="table-acf-pacf-arima-process">
@@ -2081,7 +2068,7 @@ y_{t} &amp;= w_{t}+y_{t-1}\\
 <h2><span class="section-number">3.19. </span>Identificación de modelos<a class="headerlink" href="#identificacion-de-modelos" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><em><strong>Antes de comenzar con esfuerzos rigurosos de construcción de modelos estadísticos</strong></em>, se recomienda el uso de <em><strong>gráficos descriptivos, como los gráficos de series temporales simples y los gráficos de dispersión de los datos de series temporales</strong></em> <span class="math notranslate nohighlight">\(y_{t}\)</span> vs <span class="math notranslate nohighlight">\(y_{t−1}, y_{t−2},\dots,\)</span>.</p></li>
-<li><p>Si se <em><strong>sospecha de no estacionariedad</strong></em>, también se debe considerar el <em><strong>gráfico de la primera (o <em><strong><span class="math notranslate nohighlight">\(d\)</span></strong></em>-ésima) diferencia</strong></em>. La prueba de <em><strong>raíz unitaria</strong></em> <span id="id10">[<a class="reference internal" href="biblio.html#id104" title="David A Dickey and Wayne A Fuller. Distribution of the estimators for autoregressive time series with a unit root. Journal of the American statistical association, 74(366a):427–431, 1979.">Dickey and Fuller, 1979</a>]</span> también se puede realizar para asegurarse de que se necesite realmente la diferenciación.</p></li>
+<li><p>Si se <em><strong>sospecha de no estacionariedad</strong></em>, también se debe considerar el <em><strong>gráfico de la primera (o <em><strong><span class="math notranslate nohighlight">\(d\)</span></strong></em>-ésima) diferencia</strong></em>. La prueba de <em><strong>raíz unitaria</strong></em> <span class="bibtex-citation" id="id10">[<a class="reference internal" href="biblio.html#id104" title="David A Dickey and Wayne A Fuller. Distribution of the estimators for autoregressive time series with a unit root. Journal of the American statistical association, 74(366a):427–431, 1979.">Dickey and Fuller, 1979</a>]</span> también se puede realizar para asegurarse de que se necesite realmente la diferenciación.</p></li>
 <li><p><em><strong>Una vez que se puede asumir la estacionariedad</strong></em> de la serie temporal, se deben <em><strong>obtener la ACF y PACF muestral de la serie temporal original</strong></em> (o su <span class="math notranslate nohighlight">\(d\)</span>-ésima diferencia si es necesario). Dependiendo de la naturaleza de la autocorrelación, <em><strong>las primeras 20–25 autocorrelaciones y autocorrelaciones parciales muestrales deberían ser suficientes</strong></em>.</p></li>
 <li><p>La Tabla <a class="reference internal" href="#table-acf-pacf-arima-process"><span class="std std-ref">Comportamiento de las ACF, PACF teóricas para procesos estacionarios</span></a> junto con <em><strong>los límtes</strong></em> <span class="math notranslate nohighlight">\(\pm2/\sqrt{N}\)</span> pueden ser usados como una guía para <em><strong>identificar modelos</strong></em> <span class="math notranslate nohighlight">\(AR\)</span> y <span class="math notranslate nohighlight">\(MA\)</span>. La identificación va a requerir mayor cuidado dado que, <span class="math notranslate nohighlight">\(ACF\)</span> y <span class="math notranslate nohighlight">\(PACF\)</span> van a presentar <em><strong>decaimiento exponencial y comportamiento sinusoidal amortiguado</strong></em>.</p></li>
 </ul>
@@ -7061,7 +7048,7 @@ arch
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">2. </span>Multilayer Perceptron</p>
+        <p class="prev-next-title"><span class="section-number">2. </span>Deep Learning</p>
       </div>
     </a>
     <a class="right-next"
@@ -7080,14 +7067,16 @@ arch
             
             
               
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
 
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> Contents
   </div>
-  <nav class="bd-toc-nav page-toc">
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-i-fundamentos-teoricos">3.1. Parte I. Fundamentos Teóricos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis">3.2. Análisis</a></li>
@@ -7183,8 +7172,8 @@ By Lihki Rubio, Ph.D.
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
-<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>
