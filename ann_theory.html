@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2. Deep Learning &#8212; Deep Learning</title>
+    <title>2. Multilayer Perceptron &#8212; Deep Learning</title>
   
   
   
@@ -71,7 +71,7 @@
     <script src="_static/.ipynb_checkpoints/custom-checkpoint.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3. Series de Tiempo" href="time_series.html" />
+    <link rel="next" title="3. Convolutional Neural Networks" href="cnn_model.html" />
     <link rel="prev" title="1. Deep Learning" href="deep_learning_intro.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -178,11 +178,15 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="deep_learning_intro.html">1. Deep Learning</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Deep Learning</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Multilayer Perceptron</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="time_series.html">3. Series de Tiempo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix.html">4. Apéndice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="biblio.html">5. Bibliografía</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cnn_model.html">3. Convolutional Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnn_model.html">4. Recurrent Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time_series.html">5. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auto_encoders.html">6. Autoencoders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transformer_model.html">7. Transformer Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">8. Apéndice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biblio.html">9. Bibliografía</a></li>
 </ul>
 
     </div>
@@ -318,7 +322,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Deep Learning</h1>
+    <h1>Multilayer Perceptron</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -328,7 +332,7 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2. Deep Learning</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2. Multilayer Perceptron</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradiente-descendente">2.1. Gradiente descendente</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-neuronales">2.2. Redes neuronales</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-perceptron">2.3. El perceptrón</a></li>
@@ -377,8 +381,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="deep-learning">
-<h1><span class="section-number">2. </span>Deep Learning<a class="headerlink" href="#deep-learning" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="multilayer-perceptron">
+<h1><span class="section-number">2. </span>Multilayer Perceptron<a class="headerlink" href="#multilayer-perceptron" title="Link to this heading">#</a></h1>
 <section id="gradiente-descendente">
 <h2><span class="section-number">2.1. </span>Gradiente descendente<a class="headerlink" href="#gradiente-descendente" title="Link to this heading">#</a></h2>
 <ul>
@@ -9181,11 +9185,11 @@ arch
       </div>
     </a>
     <a class="right-next"
-       href="time_series.html"
+       href="cnn_model.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3. </span>Series de Tiempo</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>Convolutional Neural Networks</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -9207,7 +9211,7 @@ arch
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2. Deep Learning</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2. Multilayer Perceptron</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradiente-descendente">2.1. Gradiente descendente</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-neuronales">2.2. Redes neuronales</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-perceptron">2.3. El perceptrón</a></li>

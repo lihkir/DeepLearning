@@ -1,0 +1,954 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>6. Autoencoders &#8212; Deep Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=530fe47d" />
+    <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/custom-checkpoint.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'auto_encoders';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/custom.js?v=14184634"></script>
+    <script src="_static/.ipynb_checkpoints/custom-checkpoint.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="7. Transformer Model" href="transformer_model.html" />
+    <link rel="prev" title="5. Time Series" href="time_series.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fotolihki.jpg" class="logo__image only-light" alt="Deep Learning - Home"/>
+    <img src="_static/fotolihki.jpg" class="logo__image only-dark pst-js-only" alt="Deep Learning - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Profesor: Dr. Lihki Rubio
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="deep_learning_intro.html">1. Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ann_theory.html">2. Multilayer Perceptron</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="cnn_model.html">3. Convolutional Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnn_model.html">4. Recurrent Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time_series.html">5. Time Series</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">6. Autoencoders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transformer_model.html">7. Transformer Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">8. Apéndice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biblio.html">9. Bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/auto_encoders.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Autoencoders</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-autoencoders-para-mnist-data">6.1. Aplicación: Autoencoders para MNIST data</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="autoencoders">
+<h1><span class="section-number">6. </span>Autoencoders<a class="headerlink" href="#autoencoders" title="Link to this heading">#</a></h1>
+<figure class="align-center">
+<img alt="_images/autoencoder-architecture.png" src="_images/autoencoder-architecture.png" />
+</figure>
+<ul>
+<li><p>Los <em><strong>autoencoders</strong></em> han sido propuestos como <em><strong>métodos para la reducción de dimensionalidad</strong></em>. Un <em><strong>autoencoder</strong></em> consta de dos partes, el <em><strong>codificador</strong></em> y el <em><strong>decodificador</strong></em>. La <em><strong>salida del <code class="docutils literal notranslate"><span class="pre">codificador</span> <span class="pre">es</span> <span class="pre">la</span> <span class="pre">representación</span> <span class="pre">reducida</span> <span class="pre">del</span> <span class="pre">patrón</span> <span class="pre">de</span> <span class="pre">entrada</span></code></strong></em>, y se define en términos de una función vectorial</p>
+<div class="math notranslate nohighlight">
+\[
+    \boldsymbol{g}_{\phi}:~\boldsymbol{x}\in\mathbb{R}^{l}\longmapsto\boldsymbol{z}\in\mathbb{R}^{m},
+    \]</div>
+<p>donde</p>
+<div class="math notranslate nohighlight">
+\[
+    z_{i}:=g_{\phi, i}(\boldsymbol{x})=\phi_{e}(\boldsymbol{\theta}_{i}^{T}\boldsymbol{x}+b_{i}),\quad i=1,2,\dots,m,
+    \]</div>
+<p>con <span class="math notranslate nohighlight">\(\phi_{e}\)</span> función de <em><strong>activación</strong></em>; esta última suele tomarse como la función <em><strong>sigmoidea logística</strong></em> <span class="math notranslate nohighlight">\(\phi_{e}(\cdot)=\sigma(\cdot)\)</span>. En otras palabras, el <em><strong>codificador es una red neuronal feed-forward de una sola capa oculta</strong></em></p>
+</li>
+</ul>
+<ul>
+<li><p>El <em><strong><code class="docutils literal notranslate"><span class="pre">decodificador</span></code></strong></em> es otra función <span class="math notranslate nohighlight">\(\boldsymbol{f}_{\theta}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+    \boldsymbol{f}_{\theta}:~\boldsymbol{z}\in\mathbb{R}^{m}\longmapsto\boldsymbol{x}'\in\mathbb{R}^{l},
+    \]</div>
+<p>donde</p>
+<div class="math notranslate nohighlight">
+\[
+    \hat{x}_{j}=f_{\theta, j}(\boldsymbol{z})=\phi_{d}(\boldsymbol{\theta}'^{T}\boldsymbol{z}+b_{j}'),\quad j=1,\dots,l.
+    \]</div>
+<p>La función de <em><strong>activación</strong></em> <span class="math notranslate nohighlight">\(\phi_{d}\)</span> suele ser la identidad (<em><strong>reconstrucción lineal</strong></em>) o la <em><strong>sigmoidea logística</strong></em>.</p>
+</li>
+</ul>
+<ul class="simple">
+<li><p>La tarea de entrenamiento consiste en <em><strong>estimar los parámetros</strong></em></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\Theta:=[\boldsymbol{\theta}_{1},\dots,\boldsymbol{\theta}_{m}],~\boldsymbol{b},~\Theta':=[\boldsymbol{\theta}_{1}',\dots,\boldsymbol{\theta}_{l}'],~\boldsymbol{b}'.
+\]</div>
+<ul class="simple">
+<li><p>Es habitual suponer que <span class="math notranslate nohighlight">\(\Theta'=\Theta^{T}\)</span>. Los parámetros se estiman para que el <em><strong>error de reconstrucción</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{e}=\boldsymbol{x}-\boldsymbol{x}'\)</span>, sobre las muestras de entrada disponibles sea <em><strong>mínimo</strong></em>. Normalmente, se utiliza el <em><strong>coste por mínimos cuadrados</strong></em> pero también son posibles otras opciones.</p></li>
+<li><p>Las <em><strong>versiones regularizadas</strong></em>, que implican una norma de los parámetros, también es una posibilidad. Si se elige que la activación <span class="math notranslate nohighlight">\(\phi_{e}\)</span> sea la identidad (representación lineal) y <span class="math notranslate nohighlight">\(m &lt; l\)</span> (para evitar la trivialidad), el <em><strong>autoencoder es equivalente a la técnica PCA</strong></em>.</p></li>
+</ul>
+<section id="aplicacion-autoencoders-para-mnist-data">
+<h2><span class="section-number">6.1. </span>Aplicación: Autoencoders para MNIST data<a class="headerlink" href="#aplicacion-autoencoders-para-mnist-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.keras.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">mnist</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.keras.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Model</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.keras.layers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Input</span><span class="p">,</span> <span class="n">Dense</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="_images/incode_decode_784to32to784.png"><img alt="_images/incode_decode_784to32to784.png" src="_images/incode_decode_784to32to784.png" style="width: 530.4px; height: 190.8px;" />
+</a>
+</figure>
+<ul class="simple">
+<li><p>A continuación</p>
+<ul>
+<li><p><em><strong>Se cargan los datos del conjunto MNIST</strong></em>, que contiene imágenes de dígitos escritos a mano.</p></li>
+<li><p><em><strong>Cada muestra es una imagen en escala de grises de 28×28 píxeles</strong></em>.</p></li>
+<li><p><em><strong>Se ignoran las etiquetas de clase</strong></em> (<code class="docutils literal notranslate"><span class="pre">_</span></code>) porque el objetivo es reconstruir las imágenes (no clasificarlas), tal como se requiere en tareas de autoencoders.</p></li>
+</ul>
+</li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">_</span><span class="p">)</span> <span class="o">=</span> <span class="n">mnist</span><span class="o">.</span><span class="n">load_data</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Forma original de x_train:&quot;</span><span class="p">,</span> <span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Forma original de x_test:&quot;</span><span class="p">,</span> <span class="n">x_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Forma original de x_train: (60000, 28, 28)
+Forma original de x_test: (10000, 28, 28)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><em><strong>Se normalizan los valores de los píxeles de las imágenes</strong></em>, originalmente en el rango [0, 255], para que estén en el intervalo [0, 1]. <em><strong>La normalización facilita el entrenamiento del modelo</strong></em> al mejorar la estabilidad numérica y acelerar la convergencia del optimizador. <em><strong>Se convierte el tipo de dato a <code class="docutils literal notranslate"><span class="pre">float32</span></code></strong></em> para asegurar compatibilidad con las operaciones en <code class="docutils literal notranslate"><span class="pre">TensorFlow/Keras</span></code>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="mf">255.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><em><strong>Cada imagen del conjunto de datos MNIST tiene dimensiones 28×28</strong></em>, es decir, 784 píxeles. <em><strong>Estas imágenes se transforman en vectores unidimensionales de 784 elementos</strong></em> para que puedan ser procesadas por capas densas (<code class="docutils literal notranslate"><span class="pre">Dense</span></code>) del autoencoder. <em><strong>Esta transformación no altera la información de la imagen, solo su forma (reshape)</strong></em> para adaptarse a la entrada del modelo.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">x_train</span><span class="p">),</span> <span class="mi">784</span><span class="p">))</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">x_test</span><span class="p">),</span> <span class="mi">784</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Forma después del reshape de x_train:&quot;</span><span class="p">,</span> <span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Forma después del reshape de x_test:&quot;</span><span class="p">,</span> <span class="n">x_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Forma después del reshape de x_train: (60000, 784)
+Forma después del reshape de x_test: (10000, 784)
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">input_img</span> <span class="pre">=</span> <span class="pre">Input(shape=(784,))</span></code>:<br />
+<em><strong>Se define la capa de entrada del modelo, correspondiente a una imagen aplanada de 784 píxeles.</strong></em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">encoded</span> <span class="pre">=</span> <span class="pre">Dense(32,</span> <span class="pre">activation='relu')(input_img)</span></code>:<br />
+<em><strong>Esta capa es el codificador, que transforma la imagen de entrada en una representación latente de 32 dimensiones utilizando una función de activación ReLU.</strong></em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">decoded</span> <span class="pre">=</span> <span class="pre">Dense(784,</span> <span class="pre">activation='sigmoid')(encoded)</span></code>:<br />
+<em><strong>Esta capa actúa como decodificador, intentando reconstruir la imagen original a partir de la representación latente.</strong></em></p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">sigmoid</span></code></strong> se adapta bien cuando se usa la función de pérdida <code class="docutils literal notranslate"><span class="pre">binary_crossentropy</span></code>, ya que esa pérdida espera que la salida esté entre 0 y 1. Asegura que los <em><strong>valores de salida no sean negativos ni mayores a 1</strong></em>, lo que tendría poco sentido en términos de imágenes normalizadas.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">autoencoder</span> <span class="pre">=</span> <span class="pre">Model(input_img,</span> <span class="pre">decoded)</span></code>:<br />
+<em><strong>Se define el modelo completo del autoencoder, que aprende a mapear una imagen a su reconstrucción.</strong></em></p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">input_img</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">784</span><span class="p">,))</span>
+<span class="n">encoded</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">input_img</span><span class="p">)</span>
+<span class="n">decoded</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">784</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)(</span><span class="n">encoded</span><span class="p">)</span>
+<span class="n">autoencoder</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">input_img</span><span class="p">,</span> <span class="n">decoded</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">autoencoder.compile(...)</span></code>:<br />
+<em><strong>Se compila el modelo autoencoder</strong></em>, especificando el optimizador y la función de pérdida.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">optimizer='adam'</span></code>:<br />
+<em><strong>Se utiliza el optimizador Adam</strong></em>, ampliamente usado en redes neuronales por su eficiencia y capacidad de adaptación del aprendizaje.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">loss='binary_crossentropy'</span></code>:<br />
+<em><strong>Se emplea la entropía cruzada binaria como función de pérdida</strong></em>, apropiada en tareas de reconstrucción donde los valores de salida están en el rango [0, 1].</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">autoencoder</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">autoencoder.fit(...)</span></code>:<br />
+<em><strong>Entrena el modelo autoencoder utilizando como entrada y objetivo los mismos datos</strong></em>, dado que la tarea es de reconstrucción.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x_train,</span> <span class="pre">x_train</span></code>:<br />
+Se entrena el modelo para que aprenda a <em><strong>reproducir su entrada como salida</strong></em>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">epochs=50</span></code>:<br />
+<em><strong>El entrenamiento se realiza durante 50 épocas</strong></em> completas sobre el conjunto de datos.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">batch_size=256</span></code>:<br />
+El tamaño del <em><strong>mini-batch</strong></em> para cada actualización de parámetros es de <em><strong>256 muestras.</strong></em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">shuffle=True</span></code>:<br />
+Se <em><strong>mezclan aleatoriamente las muestras</strong></em> en cada época para <em><strong>mejorar la generalización.</strong></em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">validation_data=(x_test,</span> <span class="pre">x_test)</span></code>:<br />
+Se utiliza el conjunto de prueba para evaluar la pérdida de validación y así monitorear el sobreajuste.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">autoencoder</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">x_train</span><span class="p">,</span>
+                <span class="n">epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+                <span class="n">batch_size</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span>
+                <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">x_test</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/50
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1762262123.911098    3197 service.cc:146] XLA service 0x5c15adeb5240 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+I0000 00:00:1762262123.911161    3197 service.cc:154]   StreamExecutor device (0): NVIDIA GeForce RTX 4070, Compute Capability 8.9
+2025-11-04 08:15:23.983188: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:268] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">138/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━</span><span class=" -Color -Color-White">━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.4416
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>I0000 00:00:1762262125.412862    3197 device_compiler.h:188] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">3s</span> 7ms/step - loss: 0.3807 - val_loss: 0.1879
+Epoch 2/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.1794 - val_loss: 0.1553
+Epoch 3/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.1507 - val_loss: 0.1347
+Epoch 4/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.1323 - val_loss: 0.1221
+Epoch 5/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.1210 - val_loss: 0.1133
+Epoch 6/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.1131 - val_loss: 0.1070
+Epoch 7/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.1069 - val_loss: 0.1024
+Epoch 8/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.1027 - val_loss: 0.0991
+Epoch 9/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0998 - val_loss: 0.0969
+Epoch 10/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 2ms/step - loss: 0.0977 - val_loss: 0.0954
+Epoch 11/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 2ms/step - loss: 0.0962 - val_loss: 0.0944
+Epoch 12/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0956 - val_loss: 0.0937
+Epoch 13/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0948 - val_loss: 0.0934
+Epoch 14/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 2ms/step - loss: 0.0944 - val_loss: 0.0931
+Epoch 15/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 2ms/step - loss: 0.0943 - val_loss: 0.0927
+Epoch 16/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0941 - val_loss: 0.0926
+Epoch 17/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0934 - val_loss: 0.0925
+Epoch 18/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0937 - val_loss: 0.0923
+Epoch 19/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0935 - val_loss: 0.0922
+Epoch 20/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 2ms/step - loss: 0.0933 - val_loss: 0.0922
+Epoch 21/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 2ms/step - loss: 0.0932 - val_loss: 0.0920
+Epoch 22/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0934 - val_loss: 0.0921
+Epoch 23/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0932 - val_loss: 0.0919
+Epoch 24/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0929 - val_loss: 0.0919
+Epoch 25/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0930 - val_loss: 0.0919
+Epoch 26/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0929 - val_loss: 0.0918
+Epoch 27/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0928 - val_loss: 0.0918
+Epoch 28/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0930 - val_loss: 0.0918
+Epoch 29/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0928 - val_loss: 0.0917
+Epoch 30/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0930 - val_loss: 0.0918
+Epoch 31/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0929 - val_loss: 0.0916
+Epoch 32/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0929 - val_loss: 0.0916
+Epoch 33/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0927 - val_loss: 0.0916
+Epoch 34/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0929 - val_loss: 0.0916
+Epoch 35/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0924 - val_loss: 0.0916
+Epoch 36/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0926 - val_loss: 0.0917
+Epoch 37/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0927 - val_loss: 0.0916
+Epoch 38/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0929 - val_loss: 0.0917
+Epoch 39/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0928 - val_loss: 0.0915
+Epoch 40/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0928 - val_loss: 0.0915
+Epoch 41/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0927 - val_loss: 0.0916
+Epoch 42/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0926 - val_loss: 0.0915
+Epoch 43/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0925 - val_loss: 0.0915
+Epoch 44/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0926 - val_loss: 0.0915
+Epoch 45/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 2ms/step - loss: 0.0925 - val_loss: 0.0915
+Epoch 46/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0926 - val_loss: 0.0915
+Epoch 47/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0927 - val_loss: 0.0914
+Epoch 48/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0927 - val_loss: 0.0915
+Epoch 49/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0927 - val_loss: 0.0915
+Epoch 50/50
+<span class=" -Color -Color-Bold">235/235</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 1ms/step - loss: 0.0927 - val_loss: 0.0915
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.src.callbacks.history.History at 0x7061501df2b0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><em><strong>Define el modelo encoder</strong></em> que transforma una imagen de entrada (784 dimensiones) en su representación latente de 32 dimensiones. Este modelo <em><strong>extrae la parte de codificación del autoencoder original</strong></em>.</p></li>
+<li><p><em><strong>Crea un nuevo modelo decoder</strong></em> tomando como entrada una representación latente de 32 dimensiones y aplicando la última capa del autoencoder (la capa de decodificación). Esto permite <em><strong>reconstruir imágenes directamente desde sus representaciones codificadas</strong></em>, de forma independiente.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">autoencoder.layers[-1]</span></code></strong> <em><strong>accede a la última capa del modelo autoencoder</strong></em> (el <code class="docutils literal notranslate"><span class="pre">Dense(784,</span> <span class="pre">activation='sigmoid')</span></code>)</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">encoder</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">input_img</span><span class="p">,</span> <span class="n">encoded</span><span class="p">)</span>
+
+<span class="n">encoded_input</span> <span class="o">=</span> <span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">32</span><span class="p">,))</span>
+<span class="n">decoder_layer</span> <span class="o">=</span> <span class="n">autoencoder</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">decoder</span> <span class="o">=</span> <span class="n">Model</span><span class="p">(</span><span class="n">encoded_input</span><span class="p">,</span> <span class="n">decoder_layer</span><span class="p">(</span><span class="n">encoded_input</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><em><strong>Codifica las imágenes de prueba</strong></em> transformándolas desde el espacio original (784 dimensiones) al espacio latente (64 dimensiones) mediante el modelo <code class="docutils literal notranslate"><span class="pre">encoder</span></code>.</p></li>
+<li><p><em><strong>Reconstruye las imágenes</strong></em> a partir de sus representaciones latentes usando el modelo <code class="docutils literal notranslate"><span class="pre">decoder</span></code>.</p></li>
+<li><p>Este paso permite evaluar qué tan bien el autoencoder logra aproximar las imágenes originales.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">encoded_imgs</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+<span class="n">decoded_imgs</span> <span class="o">=</span> <span class="n">decoder</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">encoded_imgs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">313/313</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 821us/step
+<span class=" -Color -Color-Bold">313/313</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">0s</span> 711us/step
+</pre></div>
+</div>
+</div>
+</div>
+<ul class="simple">
+<li><p><em><strong>Selecciona 10 imágenes</strong></em> del conjunto de prueba y configura el tamaño de la figura para mostrar una comparación clara entre las imágenes originales y sus reconstrucciones.</p></li>
+<li><p><em><strong>Primera fila: imágenes originales</strong></em>. Se toma la <span class="math notranslate nohighlight">\(i\)</span>-ésima imagen original, se remodela a su forma 2D (28×28) y se muestra en escala de grises sin ejes para mayor claridad.</p></li>
+<li><p><em><strong>Segunda fila: imágenes reconstruidas</strong></em>. Se visualiza la imagen generada por el autoencoder a partir de la codificación latente.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">x_test</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">n</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">decoded_imgs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span> <span class="mi">28</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/74606aab4a9ab5208165ec750715faf5dc70bec64391e44e9ca8439dfe92ad9e.png" src="_images/74606aab4a9ab5208165ec750715faf5dc70bec64391e44e9ca8439dfe92ad9e.png" />
+</div>
+</div>
+<ol class="arabic">
+<li><p><strong>Reconstrucción de imágenes</strong><br />
+Se utiliza el modelo entrenado para generar reconstrucciones del conjunto de prueba, es decir, aproximaciones de las imágenes originales.</p></li>
+<li><p><strong>Cálculo del Error Cuadrático Medio (MSE)</strong><br />
+Se calcula el error cuadrático medio entre las imágenes originales y sus reconstrucciones. Este valor indica qué tan lejos están, en promedio, las imágenes reconstruidas de las originales.</p></li>
+<li><p><strong>Estimación de la varianza total</strong><br />
+Se computa la varianza de los datos originales del conjunto de prueba. Representa la cantidad total de información (variabilidad) presente en los datos sin comprimir.</p></li>
+<li><p><strong>Cálculo de la variabilidad explicada</strong><br />
+Se emplea la fórmula:</p>
+<div class="math notranslate nohighlight">
+\[
+   \text{Variabilidad explicada} = 1 - \frac{\text{MSE}}{\text{Varianza total}}
+   \]</div>
+<p>Esta expresión indica qué fracción de la variación total en los datos originales ha sido retenida por el modelo de autoencoder. Es una métrica análoga al coeficiente de determinación (<span class="math notranslate nohighlight">\(R^2\)</span>) utilizado en modelos de regresión.</p>
+</li>
+<li><p><strong>Interpretación del resultado</strong><br />
+Un valor cercano a 1 sugiere que el autoencoder captura gran parte de la estructura de los datos. Un valor bajo indica que el modelo no ha logrado representar eficazmente la información original.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="n">decoded_imgs</span> <span class="o">=</span> <span class="n">autoencoder</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+<span class="n">mse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">x_test</span> <span class="o">-</span> <span class="n">decoded_imgs</span><span class="p">))</span>
+<span class="n">var_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+<span class="n">var_explicada</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">mse</span> <span class="o">/</span> <span class="n">var_total</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variabilidad explicada por el autoencoder:&quot;</span><span class="p">,</span> <span class="n">var_explicada</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">313/313</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 935us/step
+Variabilidad explicada por el autoencoder: 0.9004852250218391
+</pre></div>
+</div>
+</div>
+</div>
+<ul>
+<li><p>En un autoencoder, <strong>el número de neuronas en la capa latente (bottleneck layer)</strong> representa la <strong>dimensión comprimida</strong> o el número de “componentes” aprendidos. Aunque no son componentes lineales como en PCA, son equivalentes en el sentido de que capturan una representación reducida de los datos. Por ejemplo, en el modelo:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">encoded</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">)(</span><span class="n">input_img</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Aquí el autoencoder utiliza <strong>32 dimensiones latentes</strong>, lo que se puede comparar directamente con <strong>las 32 primeras componentes principales</strong> en PCA.</p>
+</li>
+</ul>
+<p><strong>¿Cómo hacer una comparación justa con PCA?</strong></p>
+<ol class="arabic">
+<li><p><strong>Entrena un PCA con el mismo número de componentes</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">X_pca</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+<span class="n">X_reconstructed</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">X_pca</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Calcula el MSE y la variabilidad explicada del PCA</strong>, de la misma forma que hiciste con el autoencoder:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mse_pca</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">x_test</span> <span class="o">-</span> <span class="n">X_reconstructed</span><span class="p">))</span>
+<span class="n">var_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+<span class="n">var_explicada_pca</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">mse_pca</span> <span class="o">/</span> <span class="n">var_total</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Compara valores</strong>:</p>
+<ul class="simple">
+<li><p>Variabilidad explicada por el Autoencoder</p></li>
+<li><p>Variabilidad explicada por el PCA</p></li>
+</ul>
+</li>
+</ol>
+<p>Esto te dirá cuál técnica <strong>preserva mejor la estructura</strong> de los datos bajo la misma cantidad de compresión (32 dimensiones, por ejemplo).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+<span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+<span class="n">X_pca</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+<span class="n">X_reconstructed</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">X_pca</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mse_pca</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">x_test</span> <span class="o">-</span> <span class="n">X_reconstructed</span><span class="p">))</span>
+<span class="n">var_total</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">x_test</span><span class="p">)</span>
+<span class="n">var_explicada_pca</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">mse_pca</span> <span class="o">/</span> <span class="n">var_total</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Variabilidad explicada por el PCA:&quot;</span><span class="p">,</span> <span class="n">var_explicada_pca</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Variabilidad explicada por el PCA: 0.8270165622234344
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "tf"
+        },
+        kernelOptions: {
+            name: "tf",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'tf'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="time_series.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">5. </span>Time Series</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="transformer_model.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">7. </span>Transformer Model</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-autoencoders-para-mnist-data">6.1. Aplicación: Autoencoders para MNIST data</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Lihki Rubio, Ph.D.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>Lihki Rubio, Ph.D. All rights reserved.</p>
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

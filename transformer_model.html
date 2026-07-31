@@ -1,0 +1,2642 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>7. Transformer Model &#8212; Deep Learning</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css?v=8cd3d715" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/proof.css?v=8c6b312c" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=530fe47d" />
+    <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/custom-checkpoint.css" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'transformer_model';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/custom.js?v=14184634"></script>
+    <script src="_static/.ipynb_checkpoints/custom-checkpoint.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="8. Apéndice" href="appendix.html" />
+    <link rel="prev" title="6. Autoencoders" href="auto_encoders.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/fotolihki.jpg" class="logo__image only-light" alt="Deep Learning - Home"/>
+    <img src="_static/fotolihki.jpg" class="logo__image only-dark pst-js-only" alt="Deep Learning - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Profesor: Dr. Lihki Rubio
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="deep_learning_intro.html">1. Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ann_theory.html">2. Multilayer Perceptron</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="cnn_model.html">3. Convolutional Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnn_model.html">4. Recurrent Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="time_series.html">5. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auto_encoders.html">6. Autoencoders</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">7. Transformer Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">8. Apéndice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biblio.html">9. Bibliografía</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/transformer_model.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Transformer Model</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attention">7.1. Attention</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-attention">7.2. Self-Attention</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-head-attention">7.3. Multi-head Attention</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformer">7.4. Transformer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-analisis-de-sentimiento-con-transformer">7.5. Aplicación: Análisis de sentimiento con Transformer</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="transformer-model">
+<h1><span class="section-number">7. </span>Transformer Model<a class="headerlink" href="#transformer-model" title="Link to this heading">#</a></h1>
+<section id="attention">
+<h2><span class="section-number">7.1. </span>Attention<a class="headerlink" href="#attention" title="Link to this heading">#</a></h2>
+<div class="important admonition">
+<p class="admonition-title">Introducción</p>
+<ul class="simple">
+<li><p><strong>Base Neurocientífica y Psicológica</strong></p>
+<ul>
+<li><p>En lectura humana, no procesamos cada palabra linealmente; <strong>nuestro cerebro focaliza atención en elementos relevantes según contexto y significado</strong>.</p></li>
+<li><p>En NLP, esto se traduce en <strong>pesos de atención (<span class="math notranslate nohighlight">\(\alpha\)</span>)</strong> aplicados a los estados del encoder para generar un <strong>vector de contexto (<span class="math notranslate nohighlight">\(c_t\)</span>)</strong> que condicione la predicción del decoder.</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<ul>
+<li><p><strong>Problema de los Encoder-Decoder clásicos</strong>. El modelo secuencial clásico codifica toda la información en un vector fijo <span class="math notranslate nohighlight">\(v\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    P(y_1, ..., y_T \mid x_1, ..., x_S) = \prod_{t=1}^T P(y_t \mid v, y_1, ..., y_{t-1})
+    \]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(v\)</span> es un vector de contexto fijo → cuello de botella informativo. Es un <strong>vector de dimensión fija que intenta resumir toda la información relevante de la secuencia de entrada</strong>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(y_1, \ldots, y_T \mid x_1, \ldots, x_S)\)</span>: Representa la <strong>probabilidad total</strong> de generar toda la <em>secuencia de salida (por ejemplo, en inglés) condicionada a la secuencia completa de entrada (por ejemplo, en español)</em>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\prod_{t=1}^T\)</span>: Indica que el modelo <strong>genera los tokens uno por uno, siguiendo un proceso autoregresivo</strong>. Cada paso (<span class="math notranslate nohighlight">\(t\)</span>) depende de los tokens previos (<span class="math notranslate nohighlight">\(y_1, \ldots, y_{t-1}\)</span>).</p></li>
+<li><p><span class="math notranslate nohighlight">\(P(y_t \mid v, y_1, \ldots, y_{t-1})\)</span>: Es la <strong>probabilidad de generar el token actual</strong> (<span class="math notranslate nohighlight">\(y_t\)</span>), dado:</p>
+<ol class="arabic simple">
+<li><p>El <strong>vector de contexto fijo</strong> (<span class="math notranslate nohighlight">\(v\)</span>), que proviene del encoder.</p></li>
+<li><p>La <strong>historia previa</strong> de tokens ya generados por el decoder.</p></li>
+</ol>
+</li>
+</ul>
+</li>
+<li><p><strong>Contexto: Modelo Encoder-Decoder</strong>: ¿Qué hace cada parte?</p>
+<p><strong>1. Encoder:</strong></p>
+<ul class="simple">
+<li><p>Recibe la <strong>secuencia de entrada</strong>, por ejemplo una frase en español:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    X = [x_1, x_2, x_3, x_4] = [\text{&quot;El&quot;, &quot;gato&quot;, &quot;negro&quot;, &quot;duerme&quot;}]
+    \]</div>
+<ul class="simple">
+<li><p>La procesa paso a paso y genera <strong>hidden states</strong> (representaciones vectoriales de cada palabra):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    h_1, h_2, h_3, h_4
+    \]</div>
+<ul class="simple">
+<li><p>Cada <span class="math notranslate nohighlight">\(h_i\)</span> <strong>captura información del token <span class="math notranslate nohighlight">\(x_i\)</span> y del contexto de la secuencia</strong> (dependiendo de si usamos RNN, LSTM, GRU, etc.).</p></li>
+</ul>
+<p><strong>2. Decoder:</strong></p>
+<ul class="simple">
+<li><p>Genera la <strong>secuencia de salida</strong> (por ejemplo en inglés):</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+    Y = [y_1, y_2, y_3] = [\text{&quot;The&quot;, &quot;black&quot;, &quot;cat&quot;}]
+    \]</div>
+<ul class="simple">
+<li><p>Lo hace <strong>token por token</strong>, usando:</p>
+<ol class="arabic simple">
+<li><p>El hidden state anterior del decoder.</p></li>
+<li><p>Un <strong>vector de contexto <span class="math notranslate nohighlight">\(v\)</span></strong> que representa la información de toda la entrada.</p></li>
+<li><p>El token “duerme” se procesó dentro del encoder → generó un hidden state <span class="math notranslate nohighlight">\(h_4\)</span>. Sin embargo, en <strong>el modelo Encoder-Decoder tradicional, el decoder no tiene acceso directo a <span class="math notranslate nohighlight">\(h_4\)</span> (ni a <span class="math notranslate nohighlight">\(h_1, h_2, h_3\)</span>). Solo recibe el vector <span class="math notranslate nohighlight">\(v\)</span>, que resume todo en una representación fija</strong>.</p></li>
+<li><p>Por tanto, el “significado” de duerme queda mezclado con el resto de la información en ese vector. <strong>Si el vector <span class="math notranslate nohighlight">\(v\)</span> no logra codificar bien la acción, el modelo olvida traducir “duerme” → “sleeps”</strong>.</p></li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>Vector de contexto <span class="math notranslate nohighlight">\(v\)</span> en modelos Encoder–Decoder: ¿Qué es realmente <span class="math notranslate nohighlight">\(v\)</span>?</strong>. El vector <span class="math notranslate nohighlight">\(v\)</span> se define como una <strong>representación vectorial de dimensión fija</strong> que resume la información contenida en toda la secuencia de entrada.</p></li>
+<li><p>Sea una secuencia de entrada</p>
+<div class="math notranslate nohighlight">
+\[
+    X = (x_1, x_2, \dots, x_T)
+    \]</div>
+<p>y supóngase que el encoder genera una sucesión de estados ocultos:</p>
+<div class="math notranslate nohighlight">
+\[
+    h_1, h_2, \dots, h_T
+    \]</div>
+</li>
+<li><p>Entonces, el vector de contexto puede expresarse de forma general como:</p>
+<div class="math notranslate nohighlight">
+\[
+    v = \phi(h_1, h_2, \dots, h_T)
+    \]</div>
+<p>donde <span class="math notranslate nohighlight">\(\phi(\cdot)\)</span> es una función de agregación o selección  y <span class="math notranslate nohighlight">\(v \in \mathbb{R}^d\)</span> es un vector de dimensión fija</p>
+</li>
+<li><p>En el modelo encoder–decoder clásico (sin atención), esta función adopta una forma particularmente simple.</p></li>
+</ul>
+<ul>
+<li><p><strong>¿Cómo se calcula <span class="math notranslate nohighlight">\(v\)</span>?</strong>: En arquitecturas secuenciales como RNN, LSTM o GRU, el cálculo de <span class="math notranslate nohighlight">\(v\)</span> se basa en la dinámica recursiva del modelo.</p></li>
+<li><p>Caso estándar (sin mecanismo de atención):</p>
+<div class="math notranslate nohighlight">
+\[
+    v = h_T
+    \]</div>
+<p>Es decir, el vector de contexto corresponde al <strong>último estado oculto del encoder</strong>.</p>
+</li>
+<li><p>El estado oculto en una red recurrente se define mediante la relación:</p>
+<div class="math notranslate nohighlight">
+\[
+    h_t = f(x_t, h_{t-1})
+    \]</div>
+<p>donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_t\)</span>: embedding del token en la posición <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(h_{t-1}\)</span>: estado oculto previo</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(\cdot)\)</span>: función no lineal (por ejemplo, una celda LSTM o GRU)</p></li>
+</ul>
+</li>
+<li><p>Desarrollo recursivo:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+h_t = f(x_t, f(x_{t-1}, f(x_{t-2}, \dots f(x_1, h_0)\dots )))
+\]</div>
+<ul class="simple">
+<li><p>Por lo tanto, existe una función compuesta <span class="math notranslate nohighlight">\(g(\cdot)\)</span> tal que:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+h_t = g(x_1, x_2, \dots, x_t)
+\]</div>
+<ul class="simple">
+<li><p>Esto implica:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{aligned}
+h_1 &amp;= g(x_1) \\
+h_2 &amp;= g(x_1, x_2) \\
+&amp;\vdots \\
+h_T &amp;= g(x_1, x_2, \dots, x_T)
+\end{aligned}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>El estado oculto final satisface:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+h_T = g(x_1, x_2, \dots, x_T)
+\]</div>
+<ul class="simple">
+<li><p>Por lo tanto, depende funcionalmente de <strong>toda la secuencia de entrada</strong>, lo que justifica su uso como representación global:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+v = h_T \approx \text{representación de toda la secuencia}
+\]</div>
+<ul class="simple">
+<li><p>Precisión conceptual:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(h_T\)</span> es un vector de dimensión fija</p></li>
+<li><p>la secuencia puede ser arbitrariamente larga</p></li>
+</ul>
+</li>
+<li><p>Por lo tanto, el modelo realiza una <strong>compresión de información</strong>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+(x_1, x_2, \dots, x_T) \longrightarrow v.
+\]</div>
+<ul class="simple">
+<li><p><strong>Limitaciones</strong></p>
+<ul>
+<li><p>Si la frase de entrada es larga, <span class="math notranslate nohighlight">\(v\)</span> no puede contener toda la información.</p></li>
+<li><p>Esto se llama <strong>cuello de botella</strong>, porque el decoder “ve” toda la entrada a través de un solo vector.</p></li>
+<li><p>Como resultado, la traducción o la predicción pierde información, especialmente en frases largas.</p></li>
+</ul>
+</li>
+<li><p><strong>Analogía sencilla</strong></p>
+<ul>
+<li><p>Imagina que tienes que <strong>resumir un libro de 200 páginas en una sola oración</strong> y luego alguien tiene que escribir un resumen basado solo en esa oración.</p></li>
+<li><p>Obviamente, perderías mucho detalle importante.</p></li>
+<li><p>En el modelo clásico Encoder-Decoder sin atención, eso es exactamente lo que pasa: <strong>toda la secuencia de entrada se comprime en un solo vector <span class="math notranslate nohighlight">\(v\)</span></strong>.</p></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">Bahdanau</span> <span class="pre">Attention</span> <span class="pre">(Additive)</span></code></strong>. La atención de Bahdanau et al. (2015) solucionó el problema de <em>cuello de botella</em> permitiendo que, <strong>en cada paso del decoder, el modelo “mire” directamente a los estados del encoder relevantes</strong>. Así nace el concepto de <strong>pesos de atención y contexto dinámico (<span class="math notranslate nohighlight">\(c_t\)</span>)</strong>: el decoder ya no memoriza todo, sino que selecciona lo importante en cada momento.</p></li>
+<li><p><strong>Score de atención (alineamiento)</strong></p>
+<div class="math notranslate nohighlight">
+\[
+    e_{tj} = v_a^\top \tanh(W_a s_{t-1} + U_a h_j)
+    \]</div>
+<p>Donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(s_{t-1}\)</span>: estado anterior del <strong>decoder</strong> “hidden state” (<em>usualmente una LSTM o GRU</em>). Aquí, el índice <span class="math notranslate nohighlight">\(t\)</span> recorre la secuencia de salida (decoder).</p></li>
+<li><p><span class="math notranslate nohighlight">\(h_j\)</span>: <span class="math notranslate nohighlight">\(j\)</span>-ésimo estado del <strong>encoder</strong> (<em>generalmente una Bi-LSTM o Bi-GRU</em>).</p></li>
+<li><p><span class="math notranslate nohighlight">\(W_a, U_a\)</span>: matrices de pesos entrenables</p></li>
+<li><p><span class="math notranslate nohighlight">\(v_a\)</span>: vector de pesos entrenable</p></li>
+</ul>
+<p><strong>Pesos de atención normalizados</strong></p>
+<div class="math notranslate nohighlight">
+\[
+    \alpha_{tj} = \frac{\exp(e_{tj})}{\sum_{k=1}^S \exp(e_{tk})}
+    \]</div>
+<p><strong>Vector de contexto dinámico</strong></p>
+<div class="math notranslate nohighlight">
+\[
+    c_t = \sum_{j=1}^S \alpha_{tj} h_j
+    \]</div>
+</li>
+<li><p>En otras palabras:</p>
+<ul class="simple">
+<li><p>Cada <span class="math notranslate nohighlight">\(h_j\)</span> es una <strong>codificación contextual</strong> de la palabra <span class="math notranslate nohighlight">\(x_j\)</span>.
+No es la palabra en sí, sino su representación en el <em>espacio latente del encoder</em>.</p></li>
+<li><p>Cada <span class="math notranslate nohighlight">\(s_{t-1}\)</span> es una <strong>codificación del estado de generación</strong> del decoder en el tiempo <span class="math notranslate nohighlight">\(t-1\)</span>.
+Resume lo que el modelo “sabe” del texto ya producido y lo que espera producir ahora.</p></li>
+<li><p>El vector de contexto <span class="math notranslate nohighlight">\(c_t\)</span></p>
+<ul>
+<li><p>Resume <strong>la información relevante de la entrada</strong> en el paso actual del decoder.</p></li>
+<li><p>Se recalcula <strong>en cada paso de generación</strong>.</p></li>
+<li><p><strong>Permite que el modelo “mire” directamente partes específicas de la secuencia de entrada</strong>, en lugar de depender de una sola representación comprimida.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Por <strong>diseño clásico</strong> (Bahdanau et al., 2015, <em>Neural Machine Translation by Jointly Learning to Align and Translate</em>):</p>
+<ul>
+<li><p><strong>Encoder:</strong> Una <strong>RNN bidireccional</strong> (generalmente una <em>Bi-LSTM</em> o <em>Bi-GRU</em>). Produce una secuencia de <em>hidden states</em>:</p>
+<div class="math notranslate nohighlight">
+\[
+      h_1, h_2, \dots, h_S \in \mathbb{R}^{d_h}
+      \]</div>
+<p>Cada <span class="math notranslate nohighlight">\(h_j\)</span> es la concatenación de los estados forward y backward.</p>
+</li>
+<li><p><strong>Decoder:</strong> Una <strong>RNN unidireccional</strong> (usualmente una <em>LSTM</em> o <em>GRU</em>). En cada paso <span class="math notranslate nohighlight">\(t\)</span>, produce un nuevo estado:</p>
+<div class="math notranslate nohighlight">
+\[
+      s_t = \text{RNNCell}(s_{t-1}, [y_{t-1}, c_t])
+      \]</div>
+<p>donde <span class="math notranslate nohighlight">\(y_{t-1}\)</span> es el embedding del token previo, y <span class="math notranslate nohighlight">\(c_t\)</span> es el vector de contexto dinámico que viene de la atención.</p>
+</li>
+<li><p><strong>Generación del token de salida</strong>. A partir del estado oculto del <em>decoder</em> <span class="math notranslate nohighlight">\(s_t\)</span>, y el <em>contexto de atención</em> <span class="math notranslate nohighlight">\(c_{t}\)</span>, calculamos qué tan probable es cada palabra del vocabulario (siguiente token <span class="math notranslate nohighlight">\(y_t\)</span>)</p>
+<div class="math notranslate nohighlight">
+\[
+        p(y_t \mid y_{&lt;t}, X) = \text{softmax}(W_o [s_t, c_t])
+        \]</div>
+<p>donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(W_o \in \mathbb{R}^{|V| \times (d_s + d_c)}\)</span> es una <strong>matriz de pesos entrenable</strong>,</p></li>
+<li><p><span class="math notranslate nohighlight">\([s_t, c_t]\)</span> es la <strong>concatenación del estado oculto y el vector de contexto</strong>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(|V|\)</span> es el <strong>tamaño del vocabulario</strong>.</p></li>
+</ul>
+<p>El token de salida se obtiene como:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+y_t =
+\begin{cases}
+\arg\max p(y_t \mid y_{&lt;t}, X), &amp; \text{(inferencia)} \\
+\text{sample}\big(p(y_t \mid y_{&lt;t}, X)\big), &amp; \text{(teacher forcing)}
+\end{cases}
+        \end{split}\]</div>
+</li>
+</ul>
+<ul>
+<li><p>En este caso, <span class="math notranslate nohighlight">\(\arg\max\)</span> selecciona la palabra con mayor probabilidad y <em>sampling</em> selecciona una palabra aleatoriamente según las probabilidades aprendidas. En la práctica:</p>
+<ul class="simple">
+<li><p>Durante el entrenamiento normalmente se utiliza <em>teacher forcing</em>.</p></li>
+<li><p>Durante inferencia suele emplearse:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+        y_t = \arg\max p(y_t \mid y_{&lt;t}, X)
+        \]</div>
+</li>
+</ul>
+</li>
+<li><p>En <em>teacher forcing</em>, el decoder recibe las palabras reales para aprender. Por eso durante el entrenamiento sí conocemos los <span class="math notranslate nohighlight">\(y_t\)</span> verdaderos (supervisado).</p></li>
+<li><p>El <strong>espacio latente</strong> es el espacio vectorial en el que viven los estados ocultos (<span class="math notranslate nohighlight">\(h_j\)</span>, <span class="math notranslate nohighlight">\(s_t\)</span>) y el vector de contexto (<span class="math notranslate nohighlight">\(c_t\)</span>). Es decir, todos estos vectores están en la <strong>misma dimensión semántica</strong> (por ejemplo, <span class="math notranslate nohighlight">\(\mathbb{R}^{512}\)</span>).</p></li>
+</ul>
+<figure class="align-center" id="bahdanau-attention-fig">
+<img alt="_images/bahdanau_attention.png" src="_images/bahdanau_attention.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7.1 </span><span class="caption-text"><strong>Fuente:</strong> Bahdanau et al. (2015), <em>Neural Machine Translation by Jointly Learning to Align and Translate.</em></span><a class="headerlink" href="#bahdanau-attention-fig" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p><strong>Pseudocódigo Python:</strong></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="n">tanh</span><span class="p">(</span><span class="n">W_a</span> <span class="o">@</span> <span class="n">s_prev</span> <span class="o">+</span> <span class="n">U_a</span> <span class="o">@</span> <span class="n">encoder_outputs</span><span class="p">)</span>  <span class="c1"># shape (seq_len,)</span>
+<span class="n">attention_weights</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>  <span class="c1"># shape (seq_len,)</span>
+<span class="n">context_vector</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">attention_weights</span> <span class="o">*</span> <span class="n">encoder_outputs</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Interpretación:</strong></p>
+<ol class="arabic simple">
+<li><p>Linealizamos <span class="math notranslate nohighlight">\(h_j\)</span> y <span class="math notranslate nohighlight">\(s_{t-1}\)</span> con <span class="math notranslate nohighlight">\(W_a\)</span> y <span class="math notranslate nohighlight">\(U_a\)</span>.</p></li>
+<li><p>Aplicamos <span class="math notranslate nohighlight">\(\tanh\)</span> para no linealidades.</p></li>
+<li><p>Multiplicamos por <span class="math notranslate nohighlight">\(v_a^\top\)</span> para obtener un escalar de relevancia.</p></li>
+<li><p>Softmax transforma scores en distribución de atención.</p></li>
+</ol>
+</li>
+</ul>
+<div class="tip admonition">
+<p class="admonition-title">Observación</p>
+<ul class="simple">
+<li><p>La atención de Bahdanau soluciona el cuello de botella del encoder-decoder clásico porque <strong>ya no usa un único vector fijo</strong> para representar toda la entrada. En su lugar, el decoder <strong>calcula en cada paso un vector de contexto <span class="math notranslate nohighlight">\(c_t\)</span></strong> como una <strong>combinación ponderada de los estados del encoder (<span class="math notranslate nohighlight">\(h_j\)</span>)</strong>. Así, el modelo <strong>“enfoca su atención” dinámicamente en las partes más relevantes</strong> de la secuencia al generar cada palabra.</p></li>
+</ul>
+</div>
+<div class="information admonition">
+<p class="admonition-title">Ejemplo intuitivo: Bahdanau Attention</p>
+<ul>
+<li><p>Imagina que queremos traducir esta oración del español al inglés</p>
+<blockquote>
+<div><p><strong>Entrada (X):</strong> “El gato negro duerme”</p>
+<p><strong>Salida (Y):</strong> “The black cat sleeps”</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<ol class="arabic simple">
+<li><p><strong>Encoder: procesa toda la frase</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>El <strong>encoder</strong> (por ejemplo, una Bi-LSTM) recorre la frase palabra por palabra y genera una representación vectorial (<em>hidden state</em>) para cada token.</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Palabra</p></th>
+<th class="head"><p>Representación oculta (<span class="math notranslate nohighlight">\(h_j\)</span>)</p></th>
+<th class="head"><p>Intuición</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>El</p></td>
+<td><p><span class="math notranslate nohighlight">\(h_1\)</span></p></td>
+<td><p>Entiende que es un artículo</p></td>
+</tr>
+<tr class="row-odd"><td><p>gato</p></td>
+<td><p><span class="math notranslate nohighlight">\(h_2\)</span></p></td>
+<td><p>Entiende que es un sustantivo, sujeto</p></td>
+</tr>
+<tr class="row-even"><td><p>negro</p></td>
+<td><p><span class="math notranslate nohighlight">\(h_3\)</span></p></td>
+<td><p>Adjetivo que describe “gato”</p></td>
+</tr>
+<tr class="row-odd"><td><p>duerme</p></td>
+<td><p><span class="math notranslate nohighlight">\(h_4\)</span></p></td>
+<td><p>Verbo, acción principal</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>Al final, el encoder produce una secuencia de vectores</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+h_1, h_2, h_3, h_4
+\]</div>
+<ul class="simple">
+<li><p>Cada <span class="math notranslate nohighlight">\(h_j\)</span> <strong>contiene información contextual sobre su palabra y las palabras vecinas</strong> (dependiendo del tipo de RNN utilizada).</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p><strong>Decoder: genera la salida palabra por palabra</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>El <strong>decoder</strong> (una RNN unidireccional) produce la traducción una palabra a la vez.</p></li>
+<li><p><strong>En el paso <span class="math notranslate nohighlight">\(t = 1\)</span></strong>. Desea generar la primera palabra de la salida:</p></li>
+</ul>
+<blockquote>
+<div><p>“The”</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>Para hacerlo, el decoder usa su <strong>estado anterior</strong> <span class="math notranslate nohighlight">\(s_{t-1}\)</span> (inicialmente <span class="math notranslate nohighlight">\(s_0\)</span>) y <strong>“mira” los estados del encoder (<span class="math notranslate nohighlight">\(h_1, h_2, h_3, h_4\)</span>) para determinar qué partes de la entrada son más relevantes</strong>.</p></li>
+<li><p>La <strong>ecuación de alineamiento (score)</strong> es</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+e_{tj} = v_a^\top \tanh(W_a s_{t-1} + U_a h_j)
+\]</div>
+<ul class="simple">
+<li><p>Cada <span class="math notranslate nohighlight">\(e_{tj}\)</span> <strong>mide la relevancia del token de entrada</strong> <span class="math notranslate nohighlight">\(x_j\)</span> <strong>respecto al estado del decoder en el paso</strong> <span class="math notranslate nohighlight">\(t\)</span>. El término <span class="math notranslate nohighlight">\(v_a^{\top}\)</span> es clave para transformar un vector de compatibilidad en un valor escalar de atención.</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(v_a\)</span> es un vector entrenable que <strong>aprende cómo medir la relevancia entre el estado del decoder <span class="math notranslate nohighlight">\(s_{t-1}\)</span> y el estado del encoder <span class="math notranslate nohighlight">\(h_j\)</span></strong>.</p></li>
+<li><p>La operación <span class="math notranslate nohighlight">\(v_a^\top(\cdot)\)</span> proyecta el resultado del <em>tanh</em> (un vector) en un único número <span class="math notranslate nohighlight">\(e_{tj}\)</span>, que representa <strong>cuánto debe atender el modelo al token <span class="math notranslate nohighlight">\(j\)</span> al generar la palabra en el paso <span class="math notranslate nohighlight">\(t\)</span></strong>.</p></li>
+<li><p>En otras palabras, <span class="math notranslate nohighlight">\(v_a^{\top}\)</span> <strong>convierte una relación compleja entre vectores en una medida de atención interpretable</strong>.</p></li>
+</ul>
+</li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p><strong>Softmax: conversión en pesos de atención</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>Los valores <span class="math notranslate nohighlight">\(e_{tj}\)</span> se normalizan con una función <em>softmax</em> para producir una distribución de atención:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\alpha_{tj} = \frac{\exp(e_{tj})}{\sum_{k=1}^S \exp(e_{tk})}
+\]</div>
+<ul class="simple">
+<li><p>Los <span class="math notranslate nohighlight">\(\alpha_{tj}\)</span> representan <strong>cuánto “atiende” el modelo a cada palabra del encoder</strong>.</p></li>
+<li><p>Ejemplo numérico simplificado</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Palabra del encoder</p></th>
+<th class="head"><p>Score bruto <span class="math notranslate nohighlight">\(e_{tj}\)</span></p></th>
+<th class="head"><p>Peso de atención <span class="math notranslate nohighlight">\(\alpha_{tj}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>El</p></td>
+<td><p>1.8</p></td>
+<td><p>0.50</p></td>
+</tr>
+<tr class="row-odd"><td><p>gato</p></td>
+<td><p>1.4</p></td>
+<td><p>0.30</p></td>
+</tr>
+<tr class="row-even"><td><p>negro</p></td>
+<td><p>0.7</p></td>
+<td><p>0.15</p></td>
+</tr>
+<tr class="row-odd"><td><p>duerme</p></td>
+<td><p>0.2</p></td>
+<td><p>0.05</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>En este caso, el modelo se enfoca principalmente en “El” (50%) y “gato” (30%) para generar “The”.</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p><strong>Cálculo del vector de contexto dinámico</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>A partir de los pesos de atención, se obtiene el <strong>vector de contexto</strong> <span class="math notranslate nohighlight">\(c_t\)</span> como una combinación ponderada de los <em>hidden states</em> del encoder:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+c_t = \sum_{j=1}^S \alpha_{tj} h_j
+\]</div>
+<ul class="simple">
+<li><p>Por ejemplo</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+c_t = 0.50h_1 + 0.30h_2 + 0.15h_3 + 0.05h_4
+\]</div>
+<ul class="simple">
+<li><p>El vector <span class="math notranslate nohighlight">\(c_t\)</span> resume la información más relevante de la entrada en ese paso, en este caso “El gato”.</p></li>
+</ul>
+<ol class="arabic simple" start="5">
+<li><p><strong>Generación del token de salida</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>El decoder usa el contexto <span class="math notranslate nohighlight">\(c_t\)</span> junto con su estado actual <span class="math notranslate nohighlight">\(s_t\)</span> para predecir la siguiente palabra mediante una capa <em>softmax</em>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+p(y_t \mid y_{&lt;t}, X) = \text{softmax}(W_o [s_t, c_t])
+\]</div>
+<ul class="simple">
+<li><p>De donde se obtiene</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+y_1 = \text{“The”}
+\]</div>
+<ol class="arabic simple" start="6">
+<li><p><strong>Generación de la siguiente palabra (“black”)</strong></p></li>
+</ol>
+<ul class="simple">
+<li><p>En el siguiente paso (<span class="math notranslate nohighlight">\(t=2\)</span>), el decoder actualiza su estado <span class="math notranslate nohighlight">\(s_1\)</span> y repite el proceso de atención. Los nuevos pesos <span class="math notranslate nohighlight">\(\alpha_{2j}\)</span> podrían ser:</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Palabra</p></th>
+<th class="head"><p>Peso <span class="math notranslate nohighlight">\(\alpha_{2j}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>El</p></td>
+<td><p>0.10</p></td>
+</tr>
+<tr class="row-odd"><td><p>gato</p></td>
+<td><p>0.25</p></td>
+</tr>
+<tr class="row-even"><td><p>negro</p></td>
+<td><p>0.60</p></td>
+</tr>
+<tr class="row-odd"><td><p>duerme</p></td>
+<td><p>0.05</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>Ahora el modelo <strong>enfoca más atención en “negro”</strong> y genera la palabra “black”.</p></li>
+</ul>
+<ol class="arabic simple" start="7">
+<li><p><strong>Generación de “cat”</strong></p></li>
+</ol>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Palabra</p></th>
+<th class="head"><p>Peso <span class="math notranslate nohighlight">\(\alpha_{3j}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>El</p></td>
+<td><p>0.05</p></td>
+</tr>
+<tr class="row-odd"><td><p>gato</p></td>
+<td><p>0.70</p></td>
+</tr>
+<tr class="row-even"><td><p>negro</p></td>
+<td><p>0.20</p></td>
+</tr>
+<tr class="row-odd"><td><p>duerme</p></td>
+<td><p>0.05</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>El modelo <strong>se centra en “gato”</strong> y produce la palabra “cat”.</p></li>
+</ul>
+<ol class="arabic simple" start="8">
+<li><p><strong>Generación de “sleeps”</strong></p></li>
+</ol>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Palabra</p></th>
+<th class="head"><p>Peso <span class="math notranslate nohighlight">\(\alpha_{4j}\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>El</p></td>
+<td><p>0.05</p></td>
+</tr>
+<tr class="row-odd"><td><p>gato</p></td>
+<td><p>0.10</p></td>
+</tr>
+<tr class="row-even"><td><p>negro</p></td>
+<td><p>0.05</p></td>
+</tr>
+<tr class="row-odd"><td><p>duerme</p></td>
+<td><p>0.80</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p>El modelo <strong>atiende principalmente a “duerme”</strong> y genera “sleeps”.</p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>Conclusión intuitiva</strong></p>
+<ol class="arabic simple">
+<li><p>En lugar de resumir toda la oración en un solo vector fijo <span class="math notranslate nohighlight">\(v\)</span>, el modelo calcula un <strong>nuevo vector de contexto <span class="math notranslate nohighlight">\(c_t\)</span></strong> en cada paso <span class="math notranslate nohighlight">\(t\)</span>.</p></li>
+<li><p>Este vector <span class="math notranslate nohighlight">\(c_t\)</span> <strong>cambia dinámicamente</strong> según la palabra que el decoder está generando.</p></li>
+<li><p>De esta manera, la atención <strong>elimina el cuello de botella</strong> del modelo clásico, permitiendo al decoder acceder directamente a las partes más relevantes de la entrada.</p></li>
+</ol>
+</li>
+</ul>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">Atención</span> <span class="pre">Luong</span> <span class="pre">(Multiplicativa)</span></code></strong></p></li>
+<li><p>La atención multiplicativa fue propuesta por <strong>Luong et al. (2015)</strong> en <em>“Effective Approaches to Attention-based Neural Machine Translation”</em>. Surgió como una mejora computacional sobre la atención aditiva de Bahdanau, buscando <strong>simplificar el cálculo del alineamiento</strong> y <strong>aumentar la eficiencia</strong>.</p></li>
+<li><p>El objetivo es <strong>medir qué tan bien se alinean el estado actual del decoder (<span class="math notranslate nohighlight">\(s_t\)</span>) y los estados del encoder (<span class="math notranslate nohighlight">\(h_j\)</span>)</strong>.
+Para ello, se define una <strong>función de score</strong> que cuantifica la similitud entre ambos.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\text{score}(s_t, h_j) =
+\begin{cases}
+s_t^\top h_j &amp; \text{(dot)} \\
+s_t^\top W_a h_j &amp; \text{(general)} \\
+v_a^\top \tanh(W_a [s_t; h_j]) &amp; \text{(concat)}
+\end{cases}
+\end{split}\]</div>
+<ul>
+<li><p><strong>Interpretación geométrica</strong></p>
+<ol class="arabic">
+<li><p><strong>Caso “dot” (producto punto simple):</strong>
+El score es proporcional al <strong>coseno del ángulo</strong> entre <span class="math notranslate nohighlight">\(s_t\)</span> y <span class="math notranslate nohighlight">\(h_j\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+       \text{score}(s_t, h_j) = \|s_t\|\|h_j\| \cos(\theta)
+       \]</div>
+<p>Si los vectores apuntan en la misma dirección (<span class="math notranslate nohighlight">\(\theta \approx 0\)</span>), la atención es alta.
+Esto equivale a una <strong>medida de similitud geométrica</strong> en el espacio latente.</p>
+</li>
+<li><p><strong>Caso “general”:</strong></p>
+<p>El producto punto se realiza tras aplicar una transformación lineal <span class="math notranslate nohighlight">\(W_a\)</span> a <span class="math notranslate nohighlight">\(h_j\)</span>.
+Esto permite que el modelo aprenda <strong>una métrica de similitud no isotrópica, es decir, que ciertas dimensiones tengan más relevancia que otras</strong></p>
+<div class="math notranslate nohighlight">
+\[
+       \text{score}(s_t, h_j) = s_t^\top W_a h_j
+       \]</div>
+</li>
+</ol>
+</li>
+<li><p><strong>Ejemplo:</strong> Supongamos que el estado del encoder está representado por el vector</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+       h_j =
+       \begin{bmatrix}
+       \text{semántica} \\
+       \text{género} \\
+       \text{tiempo verbal}
+       \end{bmatrix}
+       =
+       \begin{bmatrix}
+       5 \\
+       1 \\
+       0.2
+       \end{bmatrix}
+\end{split}\]</div>
+<ul class="simple">
+<li><p><strong>El modelo aprende que la información semántica es mucho más importante para el alineamiento</strong>. Entonces, la matriz de atención puede aprender pesos como</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    W_a =
+    \begin{bmatrix}
+    10 &amp; 0 &amp; 0 \\
+    0 &amp; 0.5 &amp; 0 \\
+    0 &amp; 0 &amp; 0.1
+    \end{bmatrix}
+\end{split}\]</div>
+<ul class="simple">
+<li><p>Aplicando la transformación lineal:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    W_a h_j
+    =
+    \begin{bmatrix}
+    10 &amp; 0 &amp; 0 \\
+    0 &amp; 0.5 &amp; 0 \\
+    0 &amp; 0 &amp; 0.1
+    \end{bmatrix}
+    \begin{bmatrix}
+    5 \\
+    1 \\
+    0.2
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+    50 \\
+    0.5 \\
+    0.02
+    \end{bmatrix}
+\end{split}\]</div>
+<ul>
+<li><p>La primera dimensión domina el cálculo del score, indicando que <strong>el modelo considera la componente semántica como la más relevante para el mecanismo de atención</strong>.</p>
+<ol class="arabic" start="5">
+<li><p><strong>Caso “concat”:</strong>
+Similar a Bahdanau, pero en lugar de sumar, se concatenan los vectores</p>
+<div class="math notranslate nohighlight">
+\[
+       \text{score}(s_t, h_j) = v_a^\top \tanh(W_a [s_t; h_j])
+       \]</div>
+<p>Este caso mezcla información multiplicativa y aditiva, pero es más costoso. <strong>En lugar de medir similitud geométrica directamente, el modelo aprende una función no lineal que decide cuánto se parecen <span class="math notranslate nohighlight">\(s_t\)</span> y <span class="math notranslate nohighlight">\(h_j\)</span>.</strong></p>
+</li>
+</ol>
+</li>
+<li><p><strong>Cálculo de pesos de atención y vector de contexto</strong>. El score se normaliza mediante softmax para obtener los <strong>pesos de atención</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \alpha_{tj} = \frac{\exp(\text{score}(s_t, h_j))}{\sum_{k=1}^S \exp(\text{score}(s_t, h_k))}
+    \]</div>
+<p>De esta forma</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\alpha_{tj} \in [0,1]\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\sum_j \alpha_{tj} = 1\)</span></p></li>
+</ul>
+<p>El <strong>vector de contexto</strong> se obtiene como la combinación ponderada de los estados del encoder</p>
+<div class="math notranslate nohighlight">
+\[
+    c_t = \sum_{j=1}^S \alpha_{tj} h_j
+    \]</div>
+</li>
+<li><p><strong>Derivación: relación con Bahdanau</strong></p></li>
+</ul>
+<ol class="arabic">
+<li><p>En Bahdanau</p>
+<div class="math notranslate nohighlight">
+\[
+   e_{tj} = v_a^\top \tanh(W_a s_{t-1} + U_a h_j)
+   \]</div>
+<ul class="simple">
+<li><p>Dos transformaciones lineales + activación no lineal.</p></li>
+<li><p>Requiere multiplicaciones adicionales y más parámetros.</p></li>
+</ul>
+</li>
+<li><p>En Luong</p>
+<div class="math notranslate nohighlight">
+\[
+   e_{tj} = s_t^\top W_a h_j
+   \]</div>
+<ul class="simple">
+<li><p>Solo una multiplicación de matrices.</p></li>
+<li><p>Sin activación <span class="math notranslate nohighlight">\(\tanh\)</span>, lo que reduce el costo de cómputo.</p></li>
+<li><p>Ideal para modelos con grandes secuencias o vocabularios.</p></li>
+</ul>
+</li>
+</ol>
+<ul>
+<li><p>Por tanto, Luong es una <strong>forma bilineal</strong> de Bahdanau</p>
+<div class="math notranslate nohighlight">
+\[
+    e_{tj}^{\text{Luong}} = s_t^\top W_a h_j
+    \quad \approx \quad
+    v_a^\top \tanh(W_a s_t + U_a h_j)
+    \]</div>
+<p>en el caso linealizado de <span class="math notranslate nohighlight">\(\tanh\)</span> (cercano a la identidad para pequeñas entradas).</p>
+</li>
+<li><p><strong>Pseudocódigo Python</strong></p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># s_t: hidden state del decoder (1 x d)</span>
+<span class="c1"># encoder_outputs: matriz de hidden states (S x d)</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">s_t</span> <span class="o">@</span> <span class="n">encoder_outputs</span><span class="o">.</span><span class="n">T</span>          <span class="c1"># Producto punto (dot)</span>
+<span class="n">attention_weights</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>       <span class="c1"># Normalización</span>
+<span class="n">context_vector</span> <span class="o">=</span> <span class="n">attention_weights</span> <span class="o">@</span> <span class="n">encoder_outputs</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Versión “general” (con matriz de pesos <span class="math notranslate nohighlight">\(W_a\)</span>):</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scores</span> <span class="o">=</span> <span class="p">(</span><span class="n">s_t</span> <span class="o">@</span> <span class="n">W_a</span><span class="p">)</span> <span class="o">@</span> <span class="n">encoder_outputs</span><span class="o">.</span><span class="n">T</span>
+<span class="n">attention_weights</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+<span class="n">context_vector</span> <span class="o">=</span> <span class="n">attention_weights</span> <span class="o">@</span> <span class="n">encoder_outputs</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>Interpretación geométrica</strong></p>
+<ol class="arabic simple">
+<li><p>La atención de Luong puede interpretarse como una <strong>proyección bilineal</strong> entre los subespacios del encoder y el decoder.</p></li>
+<li><p>El término <span class="math notranslate nohighlight">\(s_t^\top W_a h_j\)</span> define una <strong>forma cuadrática</strong>, que mide la compatibilidad entre ambas representaciones.</p></li>
+<li><p>En el espacio latente <span class="math notranslate nohighlight">\(\mathbb{R}^{d}\)</span>, <span class="math notranslate nohighlight">\(W_a\)</span> actúa como una <strong>métrica aprendible</strong>:
+el modelo <strong>aprende qué direcciones (dimensiones) son relevantes para el alineamiento lingüístico</strong>.</p></li>
+</ol>
+</li>
+<li><p><strong>Comparación</strong></p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Característica</p></th>
+<th class="head"><p>Bahdanau (Additive)</p></th>
+<th class="head"><p>Luong (Multiplicative)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Tipo de operación</p></td>
+<td><p>Suma + <span class="math notranslate nohighlight">\(\tanh\)</span></p></td>
+<td><p>Producto punto (bilineal)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Complejidad</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(d^2)\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(O(d)\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Parámetros adicionales</p></td>
+<td><p><span class="math notranslate nohighlight">\(W_a, U_a, v_a\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(W_a\)</span> (a veces ninguno)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Interpretación</p></td>
+<td><p>Similaridad no lineal</p></td>
+<td><p>Similaridad geométrica</p></td>
+</tr>
+<tr class="row-even"><td><p>Rendimiento</p></td>
+<td><p>Preciso, pero más lento</p></td>
+<td><p>Más rápido, especialmente en GPU</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ideal para</p></td>
+<td><p>Traducciones cortas o ricas en sintaxis</p></td>
+<td><p>Secuencias largas, alta eficiencia</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p><strong>Conclusión</strong></p>
+<ul>
+<li><p>La <strong>atención de Luong</strong> representa una generalización más eficiente de Bahdanau.</p></li>
+<li><p>En lugar de aprender una función compleja de similitud, aprende una <strong>métrica bilineal</strong> que captura la compatibilidad entre los espacios del encoder y el decoder.</p></li>
+<li><p>Su base matemática en el <strong>producto punto y la forma cuadrática</strong> hace que sea más interpretable desde el punto de vista del <strong>análisis lineal</strong> y más fácil de optimizar en práctica.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="self-attention">
+<h2><span class="section-number">7.2. </span>Self-Attention<a class="headerlink" href="#self-attention" title="Link to this heading">#</a></h2>
+<ul>
+<li><p><strong>Self-Attention (atención escalada)</strong>: mecanismo que permite que cada token de una secuencia “atienda” a los demás para construir representaciones <strong>contextualizadas</strong>.</p></li>
+<li><p><strong>Variables principales</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(n\)</span>: longitud de la secuencia (número de tokens).</p></li>
+<li><p><span class="math notranslate nohighlight">\(d_{\text{model}}\)</span>: dimensión del embedding de entrada.</p></li>
+<li><p><span class="math notranslate nohighlight">\(d_k\)</span>: dimensión para <strong>queries</strong> y <strong>keys</strong>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(d_v\)</span>: dimensión para <strong>values</strong>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i \in \mathbb{R}^{d_{\text{model}}}\)</span>: embedding del token en la posición <span class="math notranslate nohighlight">\(i\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(W_Q, W_K, W_V\)</span>: matrices aprendibles para generar <span class="math notranslate nohighlight">\(Q\)</span>, <span class="math notranslate nohighlight">\(K\)</span> y <span class="math notranslate nohighlight">\(V\)</span>.</p></li>
+</ul>
+</li>
+<li><p><strong>Entrada a la capa</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  X = \begin{bmatrix}
+  x_1 \\ x_2 \\ \vdots \\ x_n
+  \end{bmatrix} \in \mathbb{R}^{n \times d_{\text{model}}}
+  \end{split}\]</div>
+</li>
+<li><p><strong>Proyecciones lineales aprendibles</strong></p>
+<div class="math notranslate nohighlight">
+\[
+  Q = X W_Q,\qquad K = X W_K,\qquad V = X W_V
+  \]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Q \in \mathbb{R}^{n \times d_k}\)</span>: <strong>query</strong> (lo que el token busca entre otros).</p></li>
+<li><p><span class="math notranslate nohighlight">\(K \in \mathbb{R}^{n \times d_k}\)</span>: <strong>key</strong> (información que ofrece a los demás).</p></li>
+<li><p><span class="math notranslate nohighlight">\(V \in \mathbb{R}^{n \times d_v}\)</span>: <strong>value</strong> (contenido propagado realmente).</p></li>
+</ul>
+<p>Para cada posición</p>
+<div class="math notranslate nohighlight">
+\[
+  q_i = W_Q^\top x_i,\qquad k_j = W_K^\top x_j,\qquad v_j = W_V^\top x_j
+  \]</div>
+</li>
+<li><p>Cálculo del <strong>self-attention escalado</strong></p>
+<div class="math notranslate nohighlight">
+\[
+  \mathrm{Attention}(Q,K,V) = \mathrm{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V
+  \]</div>
+</li>
+<li><p>Matriz de scores <strong>(similaridad query–key)</strong></p>
+<div class="math notranslate nohighlight">
+\[
+  S = \frac{QK^\top}{\sqrt{d_k}} \in \mathbb{R}^{n \times n}
+  \]</div>
+<p>Para cada palabra, el mecanismo de atención evalúa:</p>
+<blockquote>
+<div><p><em><strong>¿Qué tan relevantes son las demás palabras para comprender mi contexto?</strong></em></p>
+</div></blockquote>
+<p>Por ejemplo, en la oración</p>
+<blockquote>
+<div><p><em><strong>El gato negro duerme</strong></em></p>
+</div></blockquote>
+<p><strong>cuando el modelo procesa la palabra “duerme”, el vector query asociado tenderá a ser similar al vector key de “gato”, ya que esta palabra aporta información importante sobre quién realiza la acción</strong>. En consecuencia, el producto punto entre ambos vectores será alto, generando un peso de atención elevado.</p>
+</li>
+<li><p><strong>Pesos de atención</strong> (normalizados por filas). <em>Contiene: pesos, importancia, relevancia. Pero NO contiene contenido semántico</em>.</p>
+<div class="math notranslate nohighlight">
+\[
+  A = \mathrm{softmax}(S)
+  \]</div>
+</li>
+<li><p><strong>Salida contextuada</strong> para toda la secuencia. <em>El contenido real se encuentra en <span class="math notranslate nohighlight">\(V\)</span>. Los values contienen la información que será propagada</em>.</p>
+<div class="math notranslate nohighlight">
+\[
+  Y = A V \in \mathbb{R}^{n \times d_v}
+  \]</div>
+</li>
+<li><p><strong>Interpretación token a token</strong></p>
+<div class="math notranslate nohighlight">
+\[
+  y_i = \sum_{j=1}^n A_{ij}\, v_j
+  \]</div>
+<p><em>La fila <span class="math notranslate nohighlight">\(A_{i,:}\)</span> indica cuánto “atiende” el token <span class="math notranslate nohighlight">\(i\)</span> al token <span class="math notranslate nohighlight">\(j\)</span>.</em></p>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Ambos Luong y Sefl-Attention buscan medir <strong>qué tan relevante es un token respecto a otro</strong>, pero <strong><code class="docutils literal notranslate"><span class="pre">Self-Attention</span> <span class="pre">lo</span> <span class="pre">hace</span> <span class="pre">en</span> <span class="pre">paralelo</span> <span class="pre">y</span> <span class="pre">con</span> <span class="pre">proyecciones</span> <span class="pre">lineales</span> <span class="pre">entrenables</span></code></strong>.</p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>Motivo para proyectar a <span class="math notranslate nohighlight">\(Q,K,V\)</span></strong></p>
+<ul>
+<li><p>Permite <strong>aprender</strong> una métrica de similitud.</p></li>
+<li><p>Separa roles semánticos:</p>
+<ul>
+<li><p>Query → lo que el token <strong>busca</strong>.</p></li>
+<li><p>Key → lo que el token <strong>representa</strong>.</p></li>
+<li><p>Value → la información <strong>propagada</strong> posteriormente.</p></li>
+</ul>
+</li>
+<li><p>Reduce costo al no operar directamente sobre <span class="math notranslate nohighlight">\(d_{\text{model}}\)</span>.</p></li>
+</ul>
+</li>
+<li><p><strong>Escalado por <span class="math notranslate nohighlight">\(1/\sqrt{d_k}\)</span></strong></p>
+<ul>
+<li><p>Sin escalado, los valores de <span class="math notranslate nohighlight">\(QK^\top\)</span> crecen con <span class="math notranslate nohighlight">\(d_k\)</span>.</p></li>
+<li><p>La softmax se <strong>satura</strong> y los gradientes se debilitan.</p></li>
+<li><p>El escalado mantiene valores estables durante entrenamiento.</p></li>
+</ul>
+</li>
+<li><p><strong>Complejidad computacional</strong></p>
+<ul>
+<li><p>Cálculo de <span class="math notranslate nohighlight">\(Q,K,V\)</span>: <span class="math notranslate nohighlight">\(O(n d_{\text{model}} d_k)\)</span></p></li>
+<li><p>Producto <span class="math notranslate nohighlight">\(QK^\top\)</span>: <span class="math notranslate nohighlight">\(O(n^2 d_k)\)</span></p></li>
+<li><p>Multiplicación <span class="math notranslate nohighlight">\(AV\)</span>: <span class="math notranslate nohighlight">\(O(n^2 d_v)\)</span></p></li>
+<li><p><strong>Tiempo total</strong>: <span class="math notranslate nohighlight">\(O(n^2 d)\)</span></p></li>
+<li><p><strong>Memoria</strong>: <span class="math notranslate nohighlight">\(O(n^2)\)</span> por la matriz de atención</p></li>
+</ul>
+</li>
+<li><p><strong>Implicación práctica</strong></p>
+<ul>
+<li><p>Para secuencias largas, esta complejidad motiva atenciones <strong>eficientes</strong> como Linformer, Longformer, BigBird y Flash Attention.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p><strong>Relación con Bahdanau / Luong y ventajas conceptuales</strong></p></li>
+</ul>
+<ul class="simple">
+<li><p><em>Bahdanau</em> (aditivo) usa una función no lineal que compara <span class="math notranslate nohighlight">\(s\)</span> y <span class="math notranslate nohighlight">\(h_j\)</span> tras dos proyecciones y una <span class="math notranslate nohighlight">\(\tanh\)</span>. Es flexible, pero más pesado computacionalmente. <em>Luong</em> es bilineal (<span class="math notranslate nohighlight">\(s^\top W h\)</span>).</p></li>
+<li><p><em>Self-attention</em> se corresponde con aplicar una versión de Luong <strong>entre todas las posiciones de la misma secuencia</strong>: todas las posiciones actúan a la vez como queries y keys. Además, multi-head attention permite que diferentes <span class="math notranslate nohighlight">\(W_Q^i,W_K^i,W_V^i\)</span> aprendan diversas métricas simultáneamente.</p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>Complejidad computacional y memoria</strong></p>
+<ul>
+<li><p>Para una secuencia de longitud <span class="math notranslate nohighlight">\(n\)</span> y dimensión <span class="math notranslate nohighlight">\(d\)</span> (tomando <span class="math notranslate nohighlight">\(d_k\sim d\)</span>):</p>
+<ul>
+<li><p>Cálculo de <span class="math notranslate nohighlight">\(Q,K,V\)</span>: <span class="math notranslate nohighlight">\(O(n d d_k)\)</span> trivialmente <span class="math notranslate nohighlight">\(O(n d^2)\)</span> si <span class="math notranslate nohighlight">\(d_k\approx d\)</span>.</p></li>
+<li><p>Cálculo de <span class="math notranslate nohighlight">\(S = Q K^\top\)</span>: <span class="math notranslate nohighlight">\(O(n^2 d_k)\)</span>.</p></li>
+<li><p>Softmax y multiplicación <span class="math notranslate nohighlight">\(A V\)</span>: <span class="math notranslate nohighlight">\(O(n^2 + n^2 d_v) \sim O(n^2 d)\)</span>.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>Por tanto, <strong>self-attention es <span class="math notranslate nohighlight">\(O(n^2 d)\)</span> en tiempo y <span class="math notranslate nohighlight">\(O(n^2)\)</span> en memoria</strong> (para almacenar la matriz <span class="math notranslate nohighlight">\(S\)</span> o <span class="math notranslate nohighlight">\(A\)</span>). Esto explica las limitaciones para secuencias largas y motiva aproximaciones (sparse, local attention, linformer, etc.).</p></li>
+</ul>
+</section>
+<section id="multi-head-attention">
+<h2><span class="section-number">7.3. </span>Multi-head Attention<a class="headerlink" href="#multi-head-attention" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Formulación</strong>: Multi-head attention (MHA) <strong>extiende self-attention con varias cabezas paralelas</strong>, cada una enfocada en un subespacio distinto del espacio de representación</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\text{MultiHead}(Q,K,V) = \text{Concat}(\text{head}_1, ..., \text{head}_h) W^O
+\]</div>
+<ul class="simple">
+<li><p>Cada cabeza realiza su propia atención:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\text{head}_i = \text{Attention}(Q W_i^Q, K W_i^K, V W_i^V)
+\]</div>
+<ul>
+<li><p>De esta forma, el modelo capta múltiples tipos de relaciones de manera simultánea. En la práctica, <strong>cada cabeza de atención analiza la secuencia desde una perspectiva diferente</strong>: algunas captan <em>relaciones sintácticas</em>, otras <em>semánticas</em>, <em>dependencias a largo plazo</em> o <em>patrones locales</em>.</p></li>
+<li><p>Estos subespacios actúan como <em>canales de atención especializados, que aprenden de forma automática distintos aspectos de la estructura de la secuencia</em>. <strong>Cada cabeza (head) de atención puede especializarse en un tipo diferente de relación entre palabras</strong>.</p></li>
+<li><p>Por ejemplo, en la oración</p>
+<blockquote>
+<div><p><em><strong>El gato negro duerme</strong></em></p>
+</div></blockquote>
+<p>una cabeza puede aprender relaciones asociadas a <em><strong>quién realiza una acción</strong></em>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \textbf{duerme} \rightarrow \textbf{gato}
+    \]</div>
+<p>otra cabeza puede enfocarse en <em><strong>relaciones descriptivas</strong></em>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \textbf{negro} \rightarrow \textbf{gato}
+    \]</div>
+<p>mientras que otra puede aprender <em><strong>estructura gramatical</strong></em>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \textbf{El} \rightarrow \textbf{gato}
+    \]</div>
+</li>
+<li><p><strong>Todas las cabezas observan la misma secuencia, pero cada una aprende patrones distintos del lenguaje</strong>. Por ello, en Multi-Head Attention se utilizan múltiples cabezas en paralelo:</p>
+<div class="math notranslate nohighlight">
+\[
+    \text{MultiHead}(Q,K,V)
+    =
+    \text{Concat}(\text{head}_1,\dots,\text{head}_h)W^O
+    \]</div>
+<p><em><strong>Cada <span class="math notranslate nohighlight">\(\text{head}_i\)</span> aprende una perspectiva diferente del contexto</strong></em>.</p>
+</li>
+<li><p>Dimensionalidad típica</p></li>
+</ul>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(d_{model} = 512\)</span>, <span class="math notranslate nohighlight">\(h = 8\)</span> heads</p></li>
+<li><p><span class="math notranslate nohighlight">\(d_k = d_v = d_{model}/h = 64\)</span></p></li>
+</ul>
+<ul class="simple">
+<li><p>Complejidad computacional</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+O(n^2 \cdot d_{model}) \quad vs \quad O(n^2 \cdot d_{model}/h) \quad \text{por cabeza}
+\]</div>
+<ul class="simple">
+<li><p><strong>Interpretación geométrica</strong>: Cada cabeza proyecta la información en un subespacio diferente</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+Q_i = X W_i^Q \quad \text{proyecta a dimensión } d_k
+\]</div>
+<ul class="simple">
+<li><p><strong>Teorema (Yun et al., 2020)</strong>: Multi-head attention puede aproximar cualquier función continua de múltiples variables.</p></li>
+</ul>
+<p><strong>Pseudocódigo Python:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">heads</span> <span class="o">=</span> <span class="p">[</span><span class="n">self_attention</span><span class="p">(</span><span class="n">X</span> <span class="o">@</span> <span class="n">WQ</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">X</span> <span class="o">@</span> <span class="n">WK</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">X</span> <span class="o">@</span> <span class="n">WV</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">h</span><span class="p">)]</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(</span><span class="n">heads</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="o">@</span> <span class="n">WO</span>
+</pre></div>
+</div>
+<div class="tip admonition">
+<p class="admonition-title">Observación</p>
+<ul>
+<li><p>En <em>multi-head attention</em>, <strong>cada cabeza es un bloque independiente de self-attention</strong>, pero trabaja en un <strong>subespacio distinto</strong> del espacio de representaciones del modelo. Si tu vector de <em>embeddings</em> (una palabra o token) vive en un espacio de dimensión</p>
+<div class="math notranslate nohighlight">
+\[
+    d_{\text{model}} = 512
+    \]</div>
+<p>y tienes</p>
+<div class="math notranslate nohighlight">
+\[
+    h = 8
+    \]</div>
+<p>cabezas, entonces</p>
+<div class="math notranslate nohighlight">
+\[
+    d_k = d_v = \frac{d_{\text{model}}}{h} = 64
+    \]</div>
+</li>
+<li><p>Cada cabeza trabaja en un <strong>subespacio de 64 dimensiones</strong>, en lugar de usar todo el espacio de 512 dimensiones. Así, la <em>Multi-Head Attention (MHA)</em> <strong>no copia la misma atención 8 veces</strong>, sino que <strong>divide la información y la observa desde distintos ángulos</strong>.</p></li>
+</ul>
+</div>
+</section>
+<section id="transformer">
+<h2><span class="section-number">7.4. </span>Transformer<a class="headerlink" href="#transformer" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Encoder Layer Matemático</strong>. El <strong>encoder</strong> del Transformer se basa en dos bloques principales:</p>
+<ol class="arabic simple">
+<li><p><strong>Multi-Head Self-Attention (MHA)</strong></p></li>
+<li><p><strong>Feed-Forward Network (FFN)</strong>
+ambos con <strong>conexiones residuales</strong> y <strong>normalización de capa</strong>.</p></li>
+</ol>
+</li>
+</ul>
+<ul>
+<li><p><strong>Ecuaciones:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+    Z = \text{LayerNorm}(X + \text{MultiHeadAttention}(X,X,X))
+    \]</div>
+<div class="math notranslate nohighlight">
+\[
+    \text{Output} = \text{LayerNorm}(Z + \text{FFN}(Z))
+    \]</div>
+<p>Donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X\)</span> son las representaciones de entrada (tokens embebidos).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{MultiHeadAttention}(X,X,X)\)</span> aplica autoatención en paralelo sobre <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\text{LayerNorm}\)</span> estabiliza las distribuciones internas de activaciones.</p></li>
+<li><p>La conexión residual <span class="math notranslate nohighlight">\(X + F(X)\)</span> evita el desvanecimiento del gradiente. Es decir, suma la entrada original <span class="math notranslate nohighlight">\(X\)</span> a la salida transformada <span class="math notranslate nohighlight">\(F(X)\)</span></p></li>
+</ul>
+</li>
+<li><p>Transformer <strong>conserva la información original <span class="math notranslate nohighlight">\(X\)</span>, pero le agrega el contexto aprendido por la atención</strong>. De esta forma <em>se evita distorsionar información útil, degradar detalles, o dificultar el flujo del gradiente</em>.</p></li>
+</ul>
+<ul class="simple">
+<li><p><strong>Relación con Multi-Head Attention</strong></p></li>
+</ul>
+<ul class="simple">
+<li><p>El bloque de atención múltiple es el <strong>núcleo del encoder</strong>.
+Cada cabeza aprende a <strong>atender distintos patrones</strong> dentro de la misma secuencia:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\text{MultiHead}(Q,K,V) = \text{Concat}(\text{head}_1, ..., \text{head}_h) W^O
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\text{head}_i = \text{Attention}(Q W_i^Q, K W_i^K, V W_i^V)
+\]</div>
+<ul class="simple">
+<li><p><strong>Conexión directa:</strong></p>
+<ul>
+<li><p>En el <strong>encoder</strong>, <span class="math notranslate nohighlight">\(Q=K=V=X\)</span> → el modelo se “autoatiende”, capturando dependencias internas del input.</p></li>
+<li><p>Cada cabeza proyecta la información a un <strong>subespacio distinto</strong> (<span class="math notranslate nohighlight">\(W_i^Q, W_i^K, W_i^V\)</span>), y sus salidas se combinan linealmente.</p></li>
+<li><p>El resultado pasa a través de un bloque <strong>Feed-Forward (FFN)</strong> que actúa como <strong>proyector no lineal</strong>, expandiendo y comprimiendo la dimensionalidad.</p></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>Feed-Forward Network (FFN)</strong>. Cada token se procesa <strong>independientemente</strong> mediante dos transformaciones lineales y una no lineal:</p>
+<div class="math notranslate nohighlight">
+\[
+    \text{FFN}(x) = \max(0, x W_1 + b_1) W_2 + b_2
+    \]</div>
+<p>Típicamente:</p>
+<div class="math notranslate nohighlight">
+\[
+    d_{\text{model}} = 512, \quad d_{ff} = 2048
+    \]</div>
+<p>La FFN <strong>no mezcla información entre tokens</strong>; su función es refinar y transformar la representación enriquecida que proviene del MHA.</p>
+</li>
+<li><p><strong>Decoder: Masked Self-Attention</strong>. El <strong>decoder</strong> utiliza una versión <em>enmascarada</em> del self-attention para evitar que un token vea los futuros (causalidad). Supóngase que el modelo desea generar la secuencia</p>
+<blockquote>
+<div><p><em><strong>El gato duerme</strong></em></p>
+</div></blockquote>
+<p>Durante el proceso de generación, <strong>cuando el decoder intenta predecir la palabra</strong></p>
+<blockquote>
+<div><p><em><strong>gato</strong></em></p>
+</div></blockquote>
+<p><strong>solo debe tener acceso a la información previa</strong>:</p>
+<blockquote>
+<div><p><em><strong>El</strong></em></p>
+</div></blockquote>
+<p><em><strong>No debe poder ver la palabra</strong></em></p>
+<blockquote>
+<div><p><em><strong>duerme</strong></em></p>
+</div></blockquote>
+<p><em><strong>ya que esta todavía no ha sido generada</strong></em>. Por ello, el mecanismo de <em>Masked Self-Attention</em> bloquea el acceso a tokens futuros, garantizando una generación autorregresiva y causal.</p>
+<p><strong>Máscara causal:</strong></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    M_{ij} =
+    \begin{cases}
+    0 &amp; i \ge j \\
+    -\infty &amp; i &lt; j
+    \end{cases}
+    \end{split}\]</div>
+<p><strong>Aplicación en atención:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+    \text{MaskedAttention}(Q,K,V) = \text{softmax}!\left(\frac{QK^\top}{\sqrt{d_k}} + M\right)V
+    \]</div>
+<p>Esto asegura que el modelo genere tokens <strong>de manera autorregresiva</strong>, viendo solo los anteriores.</p>
+</li>
+<li><p><strong>Residual Connections</strong>. Permiten un flujo estable de gradientes:</p>
+<div class="math notranslate nohighlight">
+\[
+    y = x + F(x),\quad\frac{\partial L}{\partial x} = \frac{\partial L}{\partial y} \left(1 + \frac{\partial F}{\partial x}\right)
+    \]</div>
+<p>Gracias a esto, la red puede ser <strong>profunda sin degradar el entrenamiento</strong>, algo problemático en RNN o LSTM. Para verificar esto, dado que, las conexiones residuales utilizadas en Transformers tienen la forma</p>
+<div class="math notranslate nohighlight">
+\[
+    y = x + F(x)
+    \]</div>
+<p>donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x\)</span> representa la entrada original a la capa,</p></li>
+<li><p><span class="math notranslate nohighlight">\(F(x)\)</span> representa una transformación aprendida por la red neuronal
+(por ejemplo, un bloque de atención o una red feed-forward),</p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> es la salida final de la capa residual.</p></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>El objetivo es analizar cómo fluye el gradiente durante el proceso de entrenamiento mediante <em>backpropagation</em>. Supongamos que la función de pérdida del modelo es</p>
+<div class="math notranslate nohighlight">
+\[
+    L = L(y)
+    \]</div>
+<p>donde:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(L\)</span> es la <em>loss function</em>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> depende de <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ul>
+</li>
+<li><p>El gradiente respecto a la entrada <span class="math notranslate nohighlight">\(x\)</span> se obtiene aplicando la regla de la cadena:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial L}{\partial x}
+=
+\frac{\partial L}{\partial y}
+\frac{\partial y}{\partial x}
+\]</div>
+<ul>
+<li><p>Ahora derivamos la conexión residual <span class="math notranslate nohighlight">\(y = x + F(x)\)</span> respecto a <span class="math notranslate nohighlight">\(x\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+    \frac{\partial y}{\partial x}
+    =
+    \frac{\partial}{\partial x}(x + F(x))
+    \]</div>
+</li>
+<li><p>Aplicando linealidad de la derivada:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial y}{\partial x}
+=
+\frac{\partial x}{\partial x}
++
+\frac{\partial F(x)}{\partial x}=
+    1 +
+    \frac{\partial F(x)}{\partial x}
+\]</div>
+<ul class="simple">
+<li><p>Sustituyendo este resultado en la expresión inicial:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial L}{\partial x}
+=
+\frac{\partial L}{\partial y}
+\left(
+1 +
+\frac{\partial F(x)}{\partial x}
+\right)
+\]</div>
+<ul class="simple">
+<li><p>Entonces, la expresión anterior muestra que el gradiente contiene siempre un término constante igual a: <span class="math notranslate nohighlight">\(1\)</span>. Esto crea un camino directo para la propagación del gradiente, incluso si</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial F(x)}{\partial x}
+\approx 0
+\]</div>
+<ul>
+<li><p>En consecuencia:</p>
+<ul class="simple">
+<li><p>el gradiente no desaparece fácilmente,</p></li>
+<li><p>la información original puede preservarse,</p></li>
+<li><p>y la red puede entrenarse con muchas capas profundas.</p></li>
+</ul>
+<p>Por esta razón, las conexiones residuales son fundamentales en Transformers modernos y arquitecturas profundas como ResNet.</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>Layer Normalization</strong>. La normalización estabiliza las activaciones dentro de cada capa:</p>
+<div class="math notranslate nohighlight">
+\[
+    \text{LayerNorm}(x) = \gamma \frac{x - \mu}{\sigma} + \beta,
+    \]</div>
+<p>donde <span class="math notranslate nohighlight">\(\gamma,\,\beta\)</span> permiten ajustar esa normalización según lo que se necesita aprender y</p>
+<div class="math notranslate nohighlight">
+\[
+    \mu = \frac{1}{d}\sum_{i=1}^d x_i, \quad
+    \sigma = \sqrt{\frac{1}{d}\sum_{i=1}^d (x_i - \mu)^2}
+    \]</div>
+<p>Esto mantiene la escala de las representaciones controlada, favoreciendo la convergencia.</p>
+</li>
+<li><p><strong>Ventajas Matemáticas sobre LSTM</strong></p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspecto</p></th>
+<th class="head"><p><strong>Transformer</strong></p></th>
+<th class="head"><p><strong>LSTM</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Dependencia temporal</p></td>
+<td><p>Paralelizable</p></td>
+<td><p>Secuencial</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gradientes</p></td>
+<td><p>Sin desvanecimiento</p></td>
+<td><p>Se atenúan exponencialmente</p></td>
+</tr>
+<tr class="row-even"><td><p>Complejidad</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n^2 \cdot d)\)</span> (paralelizable)</p></td>
+<td><p><span class="math notranslate nohighlight">\(O(n \cdot d^2)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Dependencias largas</p></td>
+<td><p>Directas entre tokens</p></td>
+<td><p>Limitadas por memoria</p></td>
+</tr>
+<tr class="row-even"><td><p>Eficiencia en GPU/TPU</p></td>
+<td><p>Alta</p></td>
+<td><p>Baja</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p><strong>Gradiente:</strong></p>
+<ul>
+<li><p>En LSTM: <span class="math notranslate nohighlight">\(O(\lambda^L)\)</span> con <span class="math notranslate nohighlight">\(\lambda &lt; 1\)</span> → se desvanece al aumentar la longitud.</p></li>
+<li><p>En Transformer: la atención conecta tokens de manera directa, manteniendo <span class="math notranslate nohighlight">\(O(1)\)</span> en propagación.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p><strong>Intuición final</strong>. El <strong>encoder</strong> construye representaciones jerárquicas del input combinando:</p>
+<ul>
+<li><p><strong>Multi-Head Self-Attention</strong> → capta relaciones internas desde múltiples subespacios.</p></li>
+<li><p><strong>Feed-Forward Network</strong> → transforma las representaciones locales.</p></li>
+<li><p><strong>Residual + LayerNorm</strong> → estabilizan y preservan información útil.</p></li>
+</ul>
+</li>
+</ul>
+<ul class="simple">
+<li><p>El <strong>decoder</strong>, por su parte, usa <em>Masked Multi-Head Attention</em> para <strong>generar texto o secuencias paso a paso</strong>, mientras se conecta con el encoder a través de un bloque adicional de atención cruzada.</p></li>
+</ul>
+<p><strong>Pseudocódigo Python</strong></p>
+<ul class="simple">
+<li><p>Implementación Self-Attention</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">self_attention</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">WQ</span><span class="p">,</span> <span class="n">WK</span><span class="p">,</span> <span class="n">WV</span><span class="p">):</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="n">X</span> <span class="o">@</span> <span class="n">WQ</span>
+    <span class="n">K</span> <span class="o">=</span> <span class="n">X</span> <span class="o">@</span> <span class="n">WK</span>  
+    <span class="n">V</span> <span class="o">=</span> <span class="n">X</span> <span class="o">@</span> <span class="n">WV</span>
+    
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">@</span> <span class="n">K</span><span class="o">.</span><span class="n">T</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">K</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">scores</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">weights</span> <span class="o">@</span> <span class="n">V</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Comparación Teórica LSTM vs Transformer</p></li>
+</ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Métrica</p></th>
+<th class="head"><p>LSTM</p></th>
+<th class="head"><p>Transformer</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Paralelismo</p></td>
+<td><p>No</p></td>
+<td><p>Sí</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dependencias largas</p></td>
+<td><p>Exponencial decay</p></td>
+<td><p>Directo</p></td>
+</tr>
+<tr class="row-even"><td><p>Memoria</p></td>
+<td><p>O(n)</p></td>
+<td><p>O(n²)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Training</p></td>
+<td><p>Lento</p></td>
+<td><p>Rápido</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="aplicacion-analisis-de-sentimiento-con-transformer">
+<h2><span class="section-number">7.5. </span>Aplicación: Análisis de sentimiento con Transformer<a class="headerlink" href="#aplicacion-analisis-de-sentimiento-con-transformer" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Instalar inicialmente</p></li>
+</ul>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>tensorflow-text<span class="o">==</span><span class="m">2</span>.17.0
+pip<span class="w"> </span>install<span class="w"> </span>tensorflow-hub<span class="o">==</span><span class="m">0</span>.16.1
+pip<span class="w"> </span>install<span class="w"> </span>-q<span class="w"> </span>tf-models-official<span class="o">==</span><span class="m">2</span>.17.0
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow_text</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">text</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow_hub</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">hub</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TensorFlow version:&quot;</span><span class="p">,</span> <span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Num GPUs Available:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s1">&#39;GPU&#39;</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s1">&#39;GPU&#39;</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TensorFlow Text version:&quot;</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;TensorFlow Hub:&quot;</span><span class="p">,</span> <span class="n">hub</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/lihkir/.local/lib/python3.10/site-packages/tensorflow_hub/__init__.py:61: UserWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html. The pkg_resources package is slated for removal as early as 2025-11-30. Refrain from using this package or pin to Setuptools&lt;81.
+  from pkg_resources import parse_version
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TensorFlow version: 2.17.0
+Num GPUs Available: 1
+[PhysicalDevice(name=&#39;/physical_device:GPU:0&#39;, device_type=&#39;GPU&#39;)]
+TensorFlow Text version: 2.17.0
+TensorFlow Hub: 0.16.1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ==========================================================</span>
+<span class="c1"># Transformer para clasificación de texto (TensorFlow)</span>
+<span class="c1"># Métricas esenciales + Testing con textos personalizados</span>
+<span class="c1"># ==========================================================</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.keras</span><span class="w"> </span><span class="kn">import</span> <span class="n">layers</span><span class="p">,</span> <span class="n">models</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow_datasets</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tfds</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">roc_curve</span><span class="p">,</span> <span class="n">auc</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="c1"># Configurar estilo de plots</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;default&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Métricas Esenciales del Modelo Transformer&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="c1"># 1. Cargar dataset (IMDB)</span>
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cargando dataset IMDB...&quot;</span><span class="p">)</span>
+<span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span> <span class="o">=</span> <span class="n">tfds</span><span class="o">.</span><span class="n">load</span><span class="p">(</span>
+    <span class="s2">&quot;imdb_reviews&quot;</span><span class="p">,</span>
+    <span class="n">split</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;train&quot;</span><span class="p">,</span> <span class="s2">&quot;test&quot;</span><span class="p">],</span>
+    <span class="n">as_supervised</span><span class="o">=</span><span class="kc">True</span>
+<span class="p">)</span>
+
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="c1"># 2. Vectorización de texto</span>
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="n">VOCAB_SIZE</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">SEQUENCE_LENGTH</span> <span class="o">=</span> <span class="mi">200</span>
+
+<span class="n">vectorize_layer</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">TextVectorization</span><span class="p">(</span>
+    <span class="n">max_tokens</span><span class="o">=</span><span class="n">VOCAB_SIZE</span><span class="p">,</span>
+    <span class="n">output_mode</span><span class="o">=</span><span class="s2">&quot;int&quot;</span><span class="p">,</span>
+    <span class="n">output_sequence_length</span><span class="o">=</span><span class="n">SEQUENCE_LENGTH</span>
+<span class="p">)</span>
+
+<span class="c1"># Adaptar vocabulario</span>
+<span class="n">train_text</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">vectorize_layer</span><span class="o">.</span><span class="n">adapt</span><span class="p">(</span><span class="n">train_text</span><span class="p">)</span>
+
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="c1"># 3. Preparar datasets vectorizados</span>
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="n">AUTOTUNE</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">AUTOTUNE</span>
+<span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">64</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">vectorize_text</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">label</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">vectorize_layer</span><span class="p">(</span><span class="n">text</span><span class="p">),</span> <span class="n">label</span>
+
+<span class="n">train_vec</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">train_data</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">vectorize_text</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">BATCH_SIZE</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">prefetch</span><span class="p">(</span><span class="n">AUTOTUNE</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">test_vec</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="n">test_data</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">vectorize_text</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">cache</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">batch</span><span class="p">(</span><span class="n">BATCH_SIZE</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">prefetch</span><span class="p">(</span><span class="n">AUTOTUNE</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="c1"># 4. Definir modelo Transformer</span>
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="n">EMBED_DIM</span> <span class="o">=</span> <span class="mi">64</span>
+<span class="n">NUM_HEADS</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">FF_DIM</span> <span class="o">=</span> <span class="mi">128</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">TEORÍA TRANSFORMER - ENCODER LAYER MATEMÁTICO:</span>
+<span class="sd">El encoder del Transformer se basa en dos bloques principales:</span>
+<span class="sd">1. Multi-Head Self-Attention (MHA)</span>
+<span class="sd">2. Feed-Forward Network (FFN)</span>
+<span class="sd">ambos con conexiones residuales y normalización de capa.</span>
+
+<span class="sd">Ecuaciones teóricas:</span>
+<span class="sd">Z = LayerNorm(X + MultiHeadAttention(X,X,X))</span>
+<span class="sd">Output = LayerNorm(Z + FFN(Z))</span>
+
+<span class="sd">Donde:</span>
+<span class="sd">- X son las representaciones de entrada (tokens embebidos)</span>
+<span class="sd">- MultiHeadAttention(X,X,X) aplica autoatención en paralelo sobre X</span>
+<span class="sd">- LayerNorm estabiliza las distribuciones internas de activaciones</span>
+<span class="sd">- La conexión residual X + F(X) evita el desvanecimiento del gradiente</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">SEQUENCE_LENGTH</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">tf</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">TEORÍA TRANSFORMER - EMBEDDING:</span>
+<span class="sd">Cada token se representa como un vector denso en R^EMBED_DIM</span>
+<span class="sd">Esto corresponde a la primera transformación de tokens en vectores numéricos</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Embedding</span><span class="p">(</span><span class="n">VOCAB_SIZE</span><span class="p">,</span> <span class="n">EMBED_DIM</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">TEORÍA TRANSFORMER - MULTI-HEAD ATTENTION:</span>
+<span class="sd">Ecuaciones teóricas:</span>
+<span class="sd">MultiHead(Q,K,V) = Concat(head₁,...,headₕ)W^O</span>
+<span class="sd">head_i = Attention(Q W_i^Q, K W_i^K, V W_i^V)</span>
+
+<span class="sd">En nuestro caso: Q=K=V=X (self-attention del encoder)</span>
+<span class="sd">Cada cabeza aprende a atender distintos patrones dentro de la misma secuencia</span>
+<span class="sd">Cada cabeza proyecta la información a un subespacio distinto (W_i^Q, W_i^K, W_i^V)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">MultiHeadAttention</span><span class="p">(</span><span class="n">num_heads</span><span class="o">=</span><span class="n">NUM_HEADS</span><span class="p">,</span> <span class="n">key_dim</span><span class="o">=</span><span class="n">EMBED_DIM</span><span class="p">)(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">TEORÍA TRANSFORMER - POOLING PARA CLASIFICACIÓN:</span>
+<span class="sd">En clasificación, necesitamos convertir la secuencia de vectores </span>
+<span class="sd">(SEQUENCE_LENGTH × EMBED_DIM) en un solo vector para la clasificación</span>
+<span class="sd">Esto adapta la arquitectura encoder para tareas de clasificación</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">GlobalAveragePooling1D</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">TEORÍA TRANSFORMER - FEED-FORWARD NETWORK (FFN):</span>
+<span class="sd">Ecuación teórica: FFN(x) = max(0, xW₁ + b₁)W₂ + b₂</span>
+<span class="sd">La FFN no mezcla información entre tokens; su función es refinar y transformar </span>
+<span class="sd">la representación enriquecida que proviene del MHA.</span>
+
+<span class="sd">Típicamente: d_model = 512, d_ff = 2048 (en nuestro caso: EMBED_DIM=64, FF_DIM=128)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">FF_DIM</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Dropout para regularización (no parte de la teoría original pero útil en práctica)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.3</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="c1"># Capa final de clasificación binaria</span>
+<span class="n">outputs</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;sigmoid&quot;</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">)</span>
+
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="c1"># 5. Compilar y entrenar con AUC</span>
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span>
+    <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;binary_crossentropy&quot;</span><span class="p">,</span>
+    <span class="n">metrics</span><span class="o">=</span><span class="p">[</span>
+        <span class="s2">&quot;accuracy&quot;</span><span class="p">,</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">AUC</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;auc&#39;</span><span class="p">),</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">Precision</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;precision&#39;</span><span class="p">),</span>
+        <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">Recall</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;recall&#39;</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Entrenando modelo Transformer...&quot;</span><span class="p">)</span>
+<span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">train_vec</span><span class="p">,</span>
+    <span class="n">validation_data</span><span class="o">=</span><span class="n">test_vec</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="c1"># 6. Evaluar modelo y preparar datos para métricas</span>
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Evaluación final del modelo:&quot;</span><span class="p">)</span>
+<span class="n">loss</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">,</span> <span class="n">auc_score</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">recall</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">test_vec</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Obtener predicciones para métricas detalladas</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Generando predicciones para análisis...&quot;</span><span class="p">)</span>
+<span class="n">y_true</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">y_pred_proba</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">test_vec</span><span class="p">:</span>
+    <span class="n">texts</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">batch</span>
+    <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">y_true</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">labels</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+    <span class="n">y_pred_proba</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">predictions</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+
+<span class="n">y_true</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span>
+<span class="n">y_pred_proba</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y_pred_proba</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="p">(</span><span class="n">y_pred_proba</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="c1"># 7. MATRIZ DE CONFUSIÓN (SOLO PORCENTAJES)</span>
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">cm</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">cm_percentage</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float&#39;</span><span class="p">)</span> <span class="o">/</span> <span class="n">cm</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">cm_percentage</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.1f&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Blues&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+            <span class="n">xticklabels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Negativo&#39;</span><span class="p">,</span> <span class="s1">&#39;Positivo&#39;</span><span class="p">],</span>
+            <span class="n">yticklabels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Negativo&#39;</span><span class="p">,</span> <span class="s1">&#39;Positivo&#39;</span><span class="p">],</span>
+            <span class="n">cbar_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Porcentaje (%)&#39;</span><span class="p">})</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Predicción&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Valor Real&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Matriz de Confusión (% por Fila)&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="c1"># 8. CURVA ROC</span>
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">thresholds</span> <span class="o">=</span> <span class="n">roc_curve</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred_proba</span><span class="p">)</span>
+<span class="n">roc_auc</span> <span class="o">=</span> <span class="n">auc</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;ROC Curve (AUC = </span><span class="si">{</span><span class="n">roc_auc</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;navy&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Clasificador Aleatorio&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.05</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Tasa de Falsos Positivos (False Positive Rate)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Tasa de Verdaderos Positivos (True Positive Rate)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Curva ROC&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="c1"># Destacar punto de operación con threshold 0.5</span>
+<span class="n">threshold_05_idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">thresholds</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">[</span><span class="n">threshold_05_idx</span><span class="p">],</span> <span class="n">tpr</span><span class="p">[</span><span class="n">threshold_05_idx</span><span class="p">],</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> 
+        <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;Threshold 0.5</span><span class="se">\n</span><span class="s1">(FPR=</span><span class="si">{</span><span class="n">fpr</span><span class="p">[</span><span class="n">threshold_05_idx</span><span class="p">]</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">, TPR=</span><span class="si">{</span><span class="n">tpr</span><span class="p">[</span><span class="n">threshold_05_idx</span><span class="p">]</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;lower right&quot;</span><span class="p">)</span>
+
+<span class="c1"># Ajustar layout</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;metricas_esenciales_transformer.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="c1"># 9. REPORTE DE CLASIFICACIÓN DETALLADO</span>
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;REPORTE DE CLASIFICACIÓN DETALLADO&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+
+<span class="n">report</span> <span class="o">=</span> <span class="n">classification_report</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> 
+                              <span class="n">target_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Negativo&#39;</span><span class="p">,</span> <span class="s1">&#39;Positivo&#39;</span><span class="p">],</span>
+                              <span class="n">digits</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">output_dict</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Imprimir reporte formateado</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Precision&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Recall&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;F1-Score&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;Support&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">class_name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Negativo&#39;</span><span class="p">,</span> <span class="s1">&#39;Positivo&#39;</span><span class="p">]:</span>
+    <span class="n">metrics</span> <span class="o">=</span> <span class="n">report</span><span class="p">[</span><span class="n">class_name</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">class_name</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;precision&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;12.4f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;recall&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;12.4f</span><span class="si">}</span><span class="s2"> &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;f1-score&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;12.4f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">metrics</span><span class="p">[</span><span class="s1">&#39;support&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Accuracy&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;&#39;</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">report</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;12.4f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">y_true</span><span class="p">)</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Macro Avg&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">report</span><span class="p">[</span><span class="s1">&#39;macro avg&#39;</span><span class="p">][</span><span class="s1">&#39;precision&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;12.4f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">report</span><span class="p">[</span><span class="s1">&#39;macro avg&#39;</span><span class="p">][</span><span class="s1">&#39;recall&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;12.4f</span><span class="si">}</span><span class="s2"> &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">report</span><span class="p">[</span><span class="s1">&#39;macro avg&#39;</span><span class="p">][</span><span class="s1">&#39;f1-score&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;12.4f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">report</span><span class="p">[</span><span class="s1">&#39;macro avg&#39;</span><span class="p">][</span><span class="s1">&#39;support&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="s1">&#39;Weighted Avg&#39;</span><span class="si">:</span><span class="s2">&lt;15</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">report</span><span class="p">[</span><span class="s1">&#39;weighted avg&#39;</span><span class="p">][</span><span class="s1">&#39;precision&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;12.4f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">report</span><span class="p">[</span><span class="s1">&#39;weighted avg&#39;</span><span class="p">][</span><span class="s1">&#39;recall&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;12.4f</span><span class="si">}</span><span class="s2"> &quot;</span>
+      <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">report</span><span class="p">[</span><span class="s1">&#39;weighted avg&#39;</span><span class="p">][</span><span class="s1">&#39;f1-score&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;12.4f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">report</span><span class="p">[</span><span class="s1">&#39;weighted avg&#39;</span><span class="p">][</span><span class="s1">&#39;support&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="c1"># 10. RESUMEN DE MÉTRICAS DEL MODELO</span>
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RESUMEN DE MÉTRICAS DEL MODELO&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+
+<span class="c1"># Calcular métricas adicionales</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">f1_score</span>
+
+<span class="n">f1</span> <span class="o">=</span> <span class="n">f1_score</span><span class="p">(</span><span class="n">y_true</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="n">tn</span><span class="p">,</span> <span class="n">fp</span><span class="p">,</span> <span class="n">fn</span><span class="p">,</span> <span class="n">tp</span> <span class="o">=</span> <span class="n">cm</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+<span class="n">specificity</span> <span class="o">=</span> <span class="n">tn</span> <span class="o">/</span> <span class="p">(</span><span class="n">tn</span> <span class="o">+</span> <span class="n">fp</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">tn</span> <span class="o">+</span> <span class="n">fp</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+<span class="n">balanced_accuracy</span> <span class="o">=</span> <span class="p">(</span><span class="n">recall</span> <span class="o">+</span> <span class="n">specificity</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="c1"># Crear resumen de métricas</span>
+<span class="n">metrics_summary</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;AUC (Area Under ROC Curve)&#39;</span><span class="p">:</span> <span class="n">roc_auc</span><span class="p">,</span>
+    <span class="s1">&#39;Accuracy&#39;</span><span class="p">:</span> <span class="n">accuracy</span><span class="p">,</span>
+    <span class="s1">&#39;Precision&#39;</span><span class="p">:</span> <span class="n">precision</span><span class="p">,</span>
+    <span class="s1">&#39;Recall (Sensitivity)&#39;</span><span class="p">:</span> <span class="n">recall</span><span class="p">,</span>
+    <span class="s1">&#39;Specificity&#39;</span><span class="p">:</span> <span class="n">specificity</span><span class="p">,</span>
+    <span class="s1">&#39;F1-Score&#39;</span><span class="p">:</span> <span class="n">f1</span><span class="p">,</span>
+    <span class="s1">&#39;Balanced Accuracy&#39;</span><span class="p">:</span> <span class="n">balanced_accuracy</span>
+<span class="p">}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39;MÉTRICA&#39;</span><span class="si">:</span><span class="s2">&lt;30</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;VALOR&#39;</span><span class="si">:</span><span class="s2">&lt;10</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">&#39;INTERPRETACIÓN&#39;</span><span class="si">:</span><span class="s2">&lt;40</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">85</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">metrics_summary</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="c1"># Interpretaciones basadas en valores</span>
+    <span class="k">if</span> <span class="n">metric</span> <span class="o">==</span> <span class="s1">&#39;AUC (Area Under ROC Curve)&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mf">0.9</span><span class="p">:</span> <span class="n">interpretation</span> <span class="o">=</span> <span class="s2">&quot;Excelente discriminación&quot;</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mf">0.8</span><span class="p">:</span> <span class="n">interpretation</span> <span class="o">=</span> <span class="s2">&quot;Buena discriminación&quot;</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mf">0.7</span><span class="p">:</span> <span class="n">interpretation</span> <span class="o">=</span> <span class="s2">&quot;Discriminación aceptable&quot;</span>
+        <span class="k">else</span><span class="p">:</span> <span class="n">interpretation</span> <span class="o">=</span> <span class="s2">&quot;Discriminación pobre&quot;</span>
+    
+    <span class="k">elif</span> <span class="n">metric</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">,</span> <span class="s1">&#39;Balanced Accuracy&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mf">0.9</span><span class="p">:</span> <span class="n">interpretation</span> <span class="o">=</span> <span class="s2">&quot;Exactitud excelente&quot;</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mf">0.8</span><span class="p">:</span> <span class="n">interpretation</span> <span class="o">=</span> <span class="s2">&quot;Buena exactitud&quot;</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mf">0.7</span><span class="p">:</span> <span class="n">interpretation</span> <span class="o">=</span> <span class="s2">&quot;Exactitud aceptable&quot;</span>
+        <span class="k">else</span><span class="p">:</span> <span class="n">interpretation</span> <span class="o">=</span> <span class="s2">&quot;Exactitud pobre&quot;</span>
+    
+    <span class="k">elif</span> <span class="n">metric</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Precision&#39;</span><span class="p">,</span> <span class="s1">&#39;Recall (Sensitivity)&#39;</span><span class="p">,</span> <span class="s1">&#39;Specificity&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mf">0.9</span><span class="p">:</span> <span class="n">interpretation</span> <span class="o">=</span> <span class="s2">&quot;Rendimiento excelente&quot;</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mf">0.8</span><span class="p">:</span> <span class="n">interpretation</span> <span class="o">=</span> <span class="s2">&quot;Buen rendimiento&quot;</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mf">0.7</span><span class="p">:</span> <span class="n">interpretation</span> <span class="o">=</span> <span class="s2">&quot;Rendimiento aceptable&quot;</span>
+        <span class="k">else</span><span class="p">:</span> <span class="n">interpretation</span> <span class="o">=</span> <span class="s2">&quot;Rendimiento pobre&quot;</span>
+    
+    <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s1">&#39;F1-Score&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mf">0.9</span><span class="p">:</span> <span class="n">interpretation</span> <span class="o">=</span> <span class="s2">&quot;Balance excelente&quot;</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mf">0.8</span><span class="p">:</span> <span class="n">interpretation</span> <span class="o">=</span> <span class="s2">&quot;Buen balance&quot;</span>
+        <span class="k">elif</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mf">0.7</span><span class="p">:</span> <span class="n">interpretation</span> <span class="o">=</span> <span class="s2">&quot;Balance aceptable&quot;</span>
+        <span class="k">else</span><span class="p">:</span> <span class="n">interpretation</span> <span class="o">=</span> <span class="s2">&quot;Balance pobre&quot;</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">metric</span><span class="si">:</span><span class="s2">&lt;30</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">&lt;10.4f</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">interpretation</span><span class="si">:</span><span class="s2">&lt;40</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="c1"># 11. TESTEAR CON TEXTOS PERSONALIZADOS - DEMOSTRACIÓN PRÁCTICA</span>
+<span class="c1"># ----------------------------------------------------------</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">predict_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">vectorize_layer</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Predice si un texto es positivo o negativo</span>
+<span class="sd">    Demuestra el pipeline completo del Transformer:</span>
+<span class="sd">    1. Vectorización → 2. Embedding → 3. Attention → 4. Clasificación</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Vectorizar el texto (tokenización + padding)</span>
+    <span class="n">vectorized_text</span> <span class="o">=</span> <span class="n">vectorize_layer</span><span class="p">([</span><span class="n">text</span><span class="p">])</span>
+    
+    <span class="c1"># Predecir usando el modelo Transformer</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">vectorized_text</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">probability</span> <span class="o">=</span> <span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># Determinar sentimiento basado en threshold</span>
+    <span class="n">sentiment</span> <span class="o">=</span> <span class="s2">&quot;POSITIVO&quot;</span> <span class="k">if</span> <span class="n">probability</span> <span class="o">&gt;</span> <span class="n">threshold</span> <span class="k">else</span> <span class="s2">&quot;NEGATIVO&quot;</span>
+    
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
+        <span class="s1">&#39;probability&#39;</span><span class="p">:</span> <span class="n">probability</span><span class="p">,</span>
+        <span class="s1">&#39;sentiment&#39;</span><span class="p">:</span> <span class="n">sentiment</span><span class="p">,</span>
+        <span class="s1">&#39;confidence&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">probability</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">%&quot;</span>
+    <span class="p">}</span>
+
+<span class="c1"># Textos de ejemplo para probar el modelo</span>
+<span class="c1"># Estos textos demuestran cómo el Multi-Head Attention puede capturar</span>
+<span class="c1"># dependencias semánticas largas y patrones lingüísticos complejos</span>
+<span class="n">test_texts</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># Textos positivos - patrones que el modelo debe aprender</span>
+    <span class="s2">&quot;This movie was absolutely fantastic! The acting was superb and the story was captivating from start to finish.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;I loved this film! It&#39;s one of the best movies I&#39;ve seen this year. Highly recommended!&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Brilliant cinematography and outstanding performances. A true masterpiece of modern cinema.&quot;</span><span class="p">,</span>
+    
+    <span class="c1"># Textos negativos - patrones opuestos  </span>
+    <span class="s2">&quot;This was the worst movie I&#39;ve ever seen. Terrible acting and a boring plot. Complete waste of time.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;I hated every minute of this film. The characters were poorly developed and the dialogue was awful.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;Poor direction, bad screenplay, and mediocre acting. I regret watching this movie.&quot;</span><span class="p">,</span>
+    
+    <span class="c1"># Textos neutrales/mixtos - casos desafiantes</span>
+    <span class="s2">&quot;The movie had some good moments but overall it was just average. Not great, not terrible.&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;The special effects were impressive but the story was weak and predictable.&quot;</span><span class="p">,</span>
+    
+    <span class="c1"># Textos cortos - prueba de generalización</span>
+    <span class="s2">&quot;Awesome!&quot;</span><span class="p">,</span>           <span class="c1"># Palabra positiva aislada</span>
+    <span class="s2">&quot;Terrible.&quot;</span><span class="p">,</span>          <span class="c1"># Palabra negativa aislada  </span>
+    <span class="s2">&quot;I liked it&quot;</span><span class="p">,</span>         <span class="c1"># Expresión positiva simple</span>
+    <span class="s2">&quot;Boring movie&quot;</span><span class="p">,</span>       <span class="c1"># Expresión negativa simple</span>
+    
+    <span class="c1"># Textos en español - prueba de transferencia (el modelo fue entrenado en inglés)</span>
+    <span class="s2">&quot;Esta película es increíble, me encantó completamente!&quot;</span><span class="p">,</span>  <span class="c1"># Debería ser positivo</span>
+    <span class="s2">&quot;Que película tan mala, no la recomiendo para nada.&quot;</span>      <span class="c1"># Debería ser negativo</span>
+<span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;DEMOSTRACIÓN: TESTEO CON TEXTOS PERSONALIZADOS&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;El modelo usa Multi-Head Attention para analizar dependencias en el texto&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">text</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">test_texts</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">predict_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">vectorize_layer</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Texto </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Texto: &#39;</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Probabilidad: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;probability&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Confianza: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;confidence&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Sentimiento: </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Visualización de la confianza de predicción</span>
+    <span class="c1"># Muestra cómo el modelo distribuye su certeza entre positivo/negativo</span>
+    <span class="n">bar_length</span> <span class="o">=</span> <span class="mi">20</span>
+    <span class="n">pos_ratio</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;probability&#39;</span><span class="p">]</span>
+    <span class="n">neg_ratio</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">pos_ratio</span>
+    
+    <span class="n">pos_bar</span> <span class="o">=</span> <span class="s2">&quot;|&quot;</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">bar_length</span> <span class="o">*</span> <span class="n">pos_ratio</span><span class="p">)</span>
+    <span class="n">neg_bar</span> <span class="o">=</span> <span class="s2">&quot;.&quot;</span> <span class="o">*</span> <span class="nb">int</span><span class="p">(</span><span class="n">bar_length</span> <span class="o">*</span> <span class="n">neg_ratio</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Visual: [</span><span class="si">{</span><span class="n">pos_bar</span><span class="si">}{</span><span class="n">neg_bar</span><span class="si">}</span><span class="s2">]&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="c1"># 12. Análisis de rendimiento por categoría - EVALUACIÓN DETALLADA</span>
+<span class="c1"># ----------------------------------------------------------</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ANÁLISIS DETALLADO: RENDIMIENTO POR TIPO DE TEXTO&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Evalúa cómo el Transformer maneja diferentes patrones lingüísticos&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+
+<span class="c1"># Agrupación estratégica para análisis</span>
+<span class="n">positive_texts</span> <span class="o">=</span> <span class="n">test_texts</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">test_texts</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">test_texts</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">test_texts</span><span class="p">[</span><span class="mi">12</span><span class="p">]]</span>
+<span class="n">negative_texts</span> <span class="o">=</span> <span class="n">test_texts</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">test_texts</span><span class="p">[</span><span class="mi">9</span><span class="p">],</span> <span class="n">test_texts</span><span class="p">[</span><span class="mi">11</span><span class="p">],</span> <span class="n">test_texts</span><span class="p">[</span><span class="mi">13</span><span class="p">]]</span>
+<span class="n">neutral_texts</span> <span class="o">=</span> <span class="n">test_texts</span><span class="p">[</span><span class="mi">6</span><span class="p">:</span><span class="mi">8</span><span class="p">]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">analyze_category</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="n">category_name</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">vectorize_layer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Analiza el rendimiento del modelo en categorías específicas</span>
+<span class="sd">    Demuestra la capacidad del Transformer para generalizar patrones</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Análisis de textos </span><span class="si">{</span><span class="n">category_name</span><span class="si">}</span><span class="s2">:&quot;</span><span class="p">)</span>
+    <span class="n">correct_predictions</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">total_predictions</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">predict_sentiment</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">vectorize_layer</span><span class="p">)</span>
+        <span class="n">is_positive</span> <span class="o">=</span> <span class="s2">&quot;POSITIVO&quot;</span> <span class="ow">in</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span>
+        
+        <span class="c1"># Lógica de evaluación según categoría esperada</span>
+        <span class="k">if</span> <span class="n">category_name</span> <span class="o">==</span> <span class="s2">&quot;positivos&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">is_positive</span><span class="p">:</span>
+                <span class="n">correct_predictions</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">elif</span> <span class="n">category_name</span> <span class="o">==</span> <span class="s2">&quot;negativos&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">is_positive</span><span class="p">:</span>
+                <span class="n">correct_predictions</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># neutrales - solo mostramos sin evaluación binaria</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   &#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[:</span><span class="mi">50</span><span class="p">]</span><span class="si">}</span><span class="s2">...&#39; -&gt; </span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;sentiment&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;confidence&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">category_name</span> <span class="o">!=</span> <span class="s2">&quot;neutrales&quot;</span><span class="p">:</span>
+        <span class="n">accuracy</span> <span class="o">=</span> <span class="n">correct_predictions</span> <span class="o">/</span> <span class="n">total_predictions</span> <span class="o">*</span> <span class="mi">100</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Precisión: </span><span class="si">{</span><span class="n">correct_predictions</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">total_predictions</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">accuracy</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%)&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Interpretación: El modelo </span><span class="si">{</span><span class="s1">&#39;generaliza bien&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">accuracy</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">80</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;tiene dificultades&#39;</span><span class="si">}</span><span class="s2"> con textos </span><span class="si">{</span><span class="n">category_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Ejecutar análisis por categoría</span>
+<span class="n">analyze_category</span><span class="p">(</span><span class="n">positive_texts</span><span class="p">,</span> <span class="s2">&quot;positivos&quot;</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">vectorize_layer</span><span class="p">)</span>
+<span class="n">analyze_category</span><span class="p">(</span><span class="n">negative_texts</span><span class="p">,</span> <span class="s2">&quot;negativos&quot;</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">vectorize_layer</span><span class="p">)</span>
+<span class="n">analyze_category</span><span class="p">(</span><span class="n">neutral_texts</span><span class="p">,</span> <span class="s2">&quot;neutrales&quot;</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">vectorize_layer</span><span class="p">)</span>
+
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="c1"># 13. RESUMEN TÉCNICO: CONEXIÓN CON LA TEORÍA TRANSFORMER</span>
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RESUMEN TÉCNICO: CONEXIÓN IMPLEMENTACIÓN-TEORÍA&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">TEORÍA TRANSFORMER - VENTAJAS MATEMÁTICAS SOBRE LSTM:</span>
+
+<span class="sd">Aspecto               | Transformer                  | LSTM</span>
+<span class="sd">----------------------|------------------------------|---------------------------</span>
+<span class="sd">Dependencia temporal  | Paralelizable                | Secuencial</span>
+<span class="sd">Gradientes            | Sin desvanecimiento          | Se atenúan exponencialmente</span>
+<span class="sd">Complejidad           | O(n²·d) (paralelizable)      | O(n·d²)</span>
+<span class="sd">Dependencias largas   | Directas entre tokens        | Limitadas por memoria</span>
+<span class="sd">Eficiencia en GPU/TPU | Alta                         | Baja</span>
+
+<span class="sd">- Gradiente:</span>
+<span class="sd">  * En LSTM: O(λᴸ) con λ &lt; 1 → se desvanece al aumentar la longitud</span>
+<span class="sd">  * En Transformer: la atención conecta tokens de manera directa, manteniendo O(1)</span>
+
+<span class="sd">INTUICIÓN FINAL:</span>
+<span class="sd">El encoder construye representaciones jerárquicas del input combinando:</span>
+<span class="sd">• Multi-Head Self-Attention → capta relaciones internas desde múltiples subespacios</span>
+<span class="sd">• Feed-Forward Network → transforma las representaciones locales</span>
+<span class="sd">• Residual + LayerNorm → estabilizan y preservan información útil</span>
+
+<span class="sd">El decoder (no usado aquí) usa Masked Multi-Head Attention para generar texto </span>
+<span class="sd">paso a paso, mientras se conecta con el encoder mediante atención cruzada.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">NUESTRA IMPLEMENTACIÓN vs. TEORÍA TRANSFORMER:</span>
+
+<span class="s2">1. MULTI-HEAD ATTENTION: </span>
+<span class="s2">   • Teoría: Z = LayerNorm(X + MultiHeadAttention(X,X,X))</span>
+<span class="s2">   • Implementación: layers.MultiHeadAttention() maneja internamente</span>
+<span class="s2">     las proyecciones multi-head y combinación</span>
+
+<span class="s2">2. FEED-FORWARD NETWORK:</span>
+<span class="s2">   • Teoría: FFN(x) = max(0, xW₁ + b₁)W₂ + b₂  </span>
+<span class="s2">   • Implementación: layers.Dense(FF_DIM, activation=&#39;relu&#39;)</span>
+
+<span class="s2">3. EMBEDDING + POSICIONAL:</span>
+<span class="s2">   • Teoría: Input embedding + positional encoding</span>
+<span class="s2">   • Implementación: layers.Embedding() (sin positional encoding explícito)</span>
+
+<span class="s2">4. CLASIFICACIÓN:</span>
+<span class="s2">   • Adaptación de arquitectura encoder para clasificación</span>
+<span class="s2">   • GlobalAveragePooling convierte secuencia → vector</span>
+
+<span class="s2">VENTAJAS DEMOSTRADAS:</span>
+<span class="s2">• Paralelización completa del entrenamiento</span>
+<span class="s2">• Captura de dependencias largas mediante self-attention</span>
+<span class="s2">• Estabilidad numérica con capas de normalización implícitas</span>
+
+<span class="s2">LIMITACIONES DE ESTA IMPLEMENTACIÓN:</span>
+<span class="s2">• Arquitectura simplificada sin residual connections explícitas</span>
+<span class="s2">• Sin positional encoding para información del orden</span>
+<span class="s2">• Single-layer en lugar de multi-layer encoder</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="c1"># 14. GRÁFICA ADICIONAL: Resumen de Métricas</span>
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">metrics_for_plot</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">,</span> <span class="s1">&#39;Precision&#39;</span><span class="p">,</span> <span class="s1">&#39;Recall&#39;</span><span class="p">,</span> <span class="s1">&#39;F1-Score&#39;</span><span class="p">,</span> <span class="s1">&#39;AUC&#39;</span><span class="p">]</span>
+<span class="n">values_for_plot</span> <span class="o">=</span> <span class="p">[</span><span class="n">accuracy</span><span class="p">,</span> <span class="n">precision</span><span class="p">,</span> <span class="n">recall</span><span class="p">,</span> <span class="n">f1</span><span class="p">,</span> <span class="n">roc_auc</span><span class="p">]</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#2E86AB&#39;</span><span class="p">,</span> <span class="s1">&#39;#A23B72&#39;</span><span class="p">,</span> <span class="s1">&#39;#F18F01&#39;</span><span class="p">,</span> <span class="s1">&#39;#C73E1D&#39;</span><span class="p">,</span> <span class="s1">&#39;#3E8914&#39;</span><span class="p">]</span>
+
+<span class="n">bars</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">metrics_for_plot</span><span class="p">,</span> <span class="n">values_for_plot</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Resumen de Métricas del Modelo Transformer&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Valor de la Métrica&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="c1"># Añadir valores en las barras</span>
+<span class="k">for</span> <span class="n">bar</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">values_for_plot</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">bar</span><span class="o">.</span><span class="n">get_x</span><span class="p">()</span> <span class="o">+</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_width</span><span class="p">()</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">bar</span><span class="o">.</span><span class="n">get_height</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">,</span> 
+             <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s1">.4f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;resumen_metricas_transformer.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="c1"># 15. INTERPRETACIÓN FINAL</span>
+<span class="c1"># ----------------------------------------------------------</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;INTERPRETACIÓN FINAL DEL MODELO&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="o">*</span><span class="mi">80</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">El modelo Transformer ha demostrado los siguientes resultados:</span>
+
+<span class="s2">• CAPACIDAD DISCRIMINATIVA: </span><span class="si">{</span><span class="s1">&#39;EXCELENTE&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">roc_auc</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0.9</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;BUENA&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">roc_auc</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0.8</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;ACEPTABLE&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">roc_auc</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0.7</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;LIMITADA&#39;</span><span class="si">}</span>
+<span class="s2">  - AUC de </span><span class="si">{</span><span class="n">roc_auc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> indica que el modelo puede distinguir efectivamente entre reseñas positivas y negativas.</span>
+
+<span class="s2">• EXACTITUD GENERAL: </span><span class="si">{</span><span class="n">accuracy</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">% de las predicciones son correctas.</span>
+
+<span class="s2">• BALANCE PRECISIÓN-RECALL: </span>
+<span class="s2">  - Precisión: </span><span class="si">{</span><span class="n">precision</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">% de las predicciones positivas son correctas</span>
+<span class="s2">  - Recall: </span><span class="si">{</span><span class="n">recall</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">% de los casos positivos reales son detectados</span>
+<span class="s2">  - F1-Score: </span><span class="si">{</span><span class="n">f1</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> refleja un balance </span><span class="si">{</span><span class="s1">&#39;óptimo&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">f1</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0.9</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;bueno&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">f1</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0.8</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;aceptable&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">f1</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">0.7</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;mejorable&#39;</span><span class="si">}</span>
+
+<span class="s2">• ROBUSTEZ: Especificidad de </span><span class="si">{</span><span class="n">specificity</span><span class="o">*</span><span class="mi">100</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">% en identificar correctamente reseñas negativas.</span>
+<span class="s2">&quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cargando dataset IMDB...
+Entrenando modelo Transformer...
+Epoch 1/3
+<span class=" -Color -Color-Bold">391/391</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">18s</span> 33ms/step - accuracy: 0.6739 - auc: 0.7456 - loss: 0.5608 - precision: 0.6701 - recall: 0.6799 - val_accuracy: 0.8508 - val_auc: 0.9287 - val_loss: 0.3416 - val_precision: 0.8549 - val_recall: 0.8450
+Epoch 2/3
+<span class=" -Color -Color-Bold">391/391</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">2s</span> 5ms/step - accuracy: 0.8930 - auc: 0.9543 - loss: 0.2740 - precision: 0.8930 - recall: 0.8924 - val_accuracy: 0.8611 - val_auc: 0.9369 - val_loss: 0.3269 - val_precision: 0.8685 - val_recall: 0.8510
+Epoch 3/3
+<span class=" -Color -Color-Bold">391/391</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">2s</span> 5ms/step - accuracy: 0.9290 - auc: 0.9758 - loss: 0.1954 - precision: 0.9302 - recall: 0.9275 - val_accuracy: 0.8440 - val_auc: 0.9252 - val_loss: 0.3892 - val_precision: 0.8761 - val_recall: 0.8014
+
+Evaluación final del modelo:
+Generando predicciones para análisis...
+</pre></div>
+</div>
+<img alt="_images/5bb5a900a3511c9b6d3d15f7cd4650f99427ffa898c87a96e3d34b36be8292a9.png" src="_images/5bb5a900a3511c9b6d3d15f7cd4650f99427ffa898c87a96e3d34b36be8292a9.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+REPORTE DE CLASIFICACIÓN DETALLADO
+================================================================================
+
+                Precision    Recall       F1-Score     Support     
+------------------------------------------------------------
+Negativo        0.8170       0.8866       0.8504       12500.0     
+Positivo        0.8761       0.8014       0.8371       12500.0     
+------------------------------------------------------------
+Accuracy                                  0.8440       25000       
+Macro Avg       0.8465       0.8440       0.8437       25000.0     
+Weighted Avg    0.8465       0.8440       0.8437       25000.0     
+
+================================================================================
+RESUMEN DE MÉTRICAS DEL MODELO
+================================================================================
+
+MÉTRICA                        VALOR      INTERPRETACIÓN                          
+-------------------------------------------------------------------------------------
+AUC (Area Under ROC Curve)     0.9255     Excelente discriminación                
+Accuracy                       0.8440     Buena exactitud                         
+Precision                      0.8761     Buen rendimiento                        
+Recall (Sensitivity)           0.8014     Buen rendimiento                        
+Specificity                    0.8866     Buen rendimiento                        
+F1-Score                       0.8371     Buen balance                            
+Balanced Accuracy              0.8440     Buena exactitud                         
+
+================================================================================
+DEMOSTRACIÓN: TESTEO CON TEXTOS PERSONALIZADOS
+El modelo usa Multi-Head Attention para analizar dependencias en el texto
+================================================================================
+
+Texto 1:
+   Texto: &#39;This movie was absolutely fantastic! The acting was superb and the story was captivating from start to finish.&#39;
+   Probabilidad: 1.0000
+   Confianza: 100.00%
+   Sentimiento: POSITIVO
+   Visual: [||||||||||||||||||||]
+--------------------------------------------------
+
+Texto 2:
+   Texto: &#39;I loved this film! It&#39;s one of the best movies I&#39;ve seen this year. Highly recommended!&#39;
+   Probabilidad: 1.0000
+   Confianza: 100.00%
+   Sentimiento: POSITIVO
+   Visual: [||||||||||||||||||||]
+--------------------------------------------------
+
+Texto 3:
+   Texto: &#39;Brilliant cinematography and outstanding performances. A true masterpiece of modern cinema.&#39;
+   Probabilidad: 1.0000
+   Confianza: 100.00%
+   Sentimiento: POSITIVO
+   Visual: [||||||||||||||||||||]
+--------------------------------------------------
+
+Texto 4:
+   Texto: &#39;This was the worst movie I&#39;ve ever seen. Terrible acting and a boring plot. Complete waste of time.&#39;
+   Probabilidad: 0.0000
+   Confianza: 0.00%
+   Sentimiento: NEGATIVO
+   Visual: [...................]
+--------------------------------------------------
+
+Texto 5:
+   Texto: &#39;I hated every minute of this film. The characters were poorly developed and the dialogue was awful.&#39;
+   Probabilidad: 0.0000
+   Confianza: 0.00%
+   Sentimiento: NEGATIVO
+   Visual: [...................]
+--------------------------------------------------
+
+Texto 6:
+   Texto: &#39;Poor direction, bad screenplay, and mediocre acting. I regret watching this movie.&#39;
+   Probabilidad: 0.0000
+   Confianza: 0.00%
+   Sentimiento: NEGATIVO
+   Visual: [...................]
+--------------------------------------------------
+
+Texto 7:
+   Texto: &#39;The movie had some good moments but overall it was just average. Not great, not terrible.&#39;
+   Probabilidad: 0.0897
+   Confianza: 8.97%
+   Sentimiento: NEGATIVO
+   Visual: [|..................]
+--------------------------------------------------
+
+Texto 8:
+   Texto: &#39;The special effects were impressive but the story was weak and predictable.&#39;
+   Probabilidad: 0.0000
+   Confianza: 0.00%
+   Sentimiento: NEGATIVO
+   Visual: [...................]
+--------------------------------------------------
+
+Texto 9:
+   Texto: &#39;Awesome!&#39;
+   Probabilidad: 1.0000
+   Confianza: 100.00%
+   Sentimiento: POSITIVO
+   Visual: [||||||||||||||||||||]
+--------------------------------------------------
+
+Texto 10:
+   Texto: &#39;Terrible.&#39;
+   Probabilidad: 0.0000
+   Confianza: 0.00%
+   Sentimiento: NEGATIVO
+   Visual: [....................]
+--------------------------------------------------
+
+Texto 11:
+   Texto: &#39;I liked it&#39;
+   Probabilidad: 1.0000
+   Confianza: 100.00%
+   Sentimiento: POSITIVO
+   Visual: [||||||||||||||||||||]
+--------------------------------------------------
+
+Texto 12:
+   Texto: &#39;Boring movie&#39;
+   Probabilidad: 0.0000
+   Confianza: 0.00%
+   Sentimiento: NEGATIVO
+   Visual: [...................]
+--------------------------------------------------
+
+Texto 13:
+   Texto: &#39;Esta película es increíble, me encantó completamente!&#39;
+   Probabilidad: 0.5310
+   Confianza: 53.10%
+   Sentimiento: POSITIVO
+   Visual: [||||||||||.........]
+--------------------------------------------------
+
+Texto 14:
+   Texto: &#39;Que película tan mala, no la recomiendo para nada.&#39;
+   Probabilidad: 0.0003
+   Confianza: 0.03%
+   Sentimiento: NEGATIVO
+   Visual: [...................]
+--------------------------------------------------
+
+================================================================================
+ANÁLISIS DETALLADO: RENDIMIENTO POR TIPO DE TEXTO
+Evalúa cómo el Transformer maneja diferentes patrones lingüísticos
+================================================================================
+
+Análisis de textos positivos:
+   Precisión: 6/6 (100.0%)
+   Interpretación: El modelo generaliza bien con textos positivos
+
+Análisis de textos negativos:
+   Precisión: 6/6 (100.0%)
+   Interpretación: El modelo generaliza bien con textos negativos
+
+Análisis de textos neutrales:
+   &#39;The movie had some good moments but overall it was...&#39; -&gt; NEGATIVO (8.97%)
+   &#39;The special effects were impressive but the story ...&#39; -&gt; NEGATIVO (0.00%)
+
+================================================================================
+RESUMEN TÉCNICO: CONEXIÓN IMPLEMENTACIÓN-TEORÍA
+================================================================================
+
+NUESTRA IMPLEMENTACIÓN vs. TEORÍA TRANSFORMER:
+
+1. MULTI-HEAD ATTENTION: 
+   • Teoría: Z = LayerNorm(X + MultiHeadAttention(X,X,X))
+   • Implementación: layers.MultiHeadAttention() maneja internamente
+     las proyecciones multi-head y combinación
+
+2. FEED-FORWARD NETWORK:
+   • Teoría: FFN(x) = max(0, xW₁ + b₁)W₂ + b₂  
+   • Implementación: layers.Dense(FF_DIM, activation=&#39;relu&#39;)
+
+3. EMBEDDING + POSICIONAL:
+   • Teoría: Input embedding + positional encoding
+   • Implementación: layers.Embedding() (sin positional encoding explícito)
+
+4. CLASIFICACIÓN:
+   • Adaptación de arquitectura encoder para clasificación
+   • GlobalAveragePooling convierte secuencia → vector
+
+VENTAJAS DEMOSTRADAS:
+• Paralelización completa del entrenamiento
+• Captura de dependencias largas mediante self-attention
+• Estabilidad numérica con capas de normalización implícitas
+
+LIMITACIONES DE ESTA IMPLEMENTACIÓN:
+• Arquitectura simplificada sin residual connections explícitas
+• Sin positional encoding para información del orden
+• Single-layer en lugar de multi-layer encoder
+</pre></div>
+</div>
+<img alt="_images/4996adce708626340d3b086d55843a3c56f444d8046d764e6bef2186c7d90dee.png" src="_images/4996adce708626340d3b086d55843a3c56f444d8046d764e6bef2186c7d90dee.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>================================================================================
+INTERPRETACIÓN FINAL DEL MODELO
+================================================================================
+
+El modelo Transformer ha demostrado los siguientes resultados:
+
+• CAPACIDAD DISCRIMINATIVA: EXCELENTE
+  - AUC de 0.9255 indica que el modelo puede distinguir efectivamente entre reseñas positivas y negativas.
+
+• EXACTITUD GENERAL: 84.40% de las predicciones son correctas.
+
+• BALANCE PRECISIÓN-RECALL: 
+  - Precisión: 87.61% de las predicciones positivas son correctas
+  - Recall: 80.14% de los casos positivos reales son detectados
+  - F1-Score: 0.8371 refleja un balance bueno
+
+• ROBUSTEZ: Especificidad de 88.66% en identificar correctamente reseñas negativas.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "tf"
+        },
+        kernelOptions: {
+            name: "tf",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'tf'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="auto_encoders.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Autoencoders</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="appendix.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Apéndice</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#attention">7.1. Attention</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-attention">7.2. Self-Attention</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-head-attention">7.3. Multi-head Attention</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformer">7.4. Transformer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-analisis-de-sentimiento-con-transformer">7.5. Aplicación: Análisis de sentimiento con Transformer</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Lihki Rubio, Ph.D.
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>Lihki Rubio, Ph.D. All rights reserved.</p>
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

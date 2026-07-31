@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>3. Series de Tiempo &#8212; Deep Learning</title>
+    <title>5. Time Series &#8212; Deep Learning</title>
   
   
   
@@ -71,8 +71,8 @@
     <script src="_static/.ipynb_checkpoints/custom-checkpoint.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="4. Apéndice" href="appendix.html" />
-    <link rel="prev" title="2. Deep Learning" href="ann_theory.html" />
+    <link rel="next" title="6. Autoencoders" href="auto_encoders.html" />
+    <link rel="prev" title="4. Recurrent Neural Networks" href="rnn_model.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -178,11 +178,15 @@
         </ul>
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="deep_learning_intro.html">1. Deep Learning</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ann_theory.html">2. Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ann_theory.html">2. Multilayer Perceptron</a></li>
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Series de Tiempo</a></li>
-<li class="toctree-l1"><a class="reference internal" href="appendix.html">4. Apéndice</a></li>
-<li class="toctree-l1"><a class="reference internal" href="biblio.html">5. Bibliografía</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cnn_model.html">3. Convolutional Neural Networks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="rnn_model.html">4. Recurrent Neural Networks</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Time Series</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auto_encoders.html">6. Autoencoders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="transformer_model.html">7. Transformer Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="appendix.html">8. Apéndice</a></li>
+<li class="toctree-l1"><a class="reference internal" href="biblio.html">9. Bibliografía</a></li>
 </ul>
 
     </div>
@@ -318,7 +322,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Series de Tiempo</h1>
+    <h1>Time Series</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -328,49 +332,49 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-i-fundamentos-teoricos">3.1. Parte I. Fundamentos Teóricos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis">3.2. Análisis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-lineales-para-series-de-tiempo-estacionarias">3.3. Modelos lineales para series de tiempo estacionarias</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estacionariedad">3.4. Estacionariedad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-de-media-movil-finito-ma-q">3.5. Proceso de media móvil finito <span class="math notranslate nohighlight">\(MA(q)\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-proceso-de-media-movil-de-primer-orden-ma-1">3.6. El Proceso de Media Móvil de Primer Orden, <span class="math notranslate nohighlight">\(MA(1)\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-proceso-de-media-movil-de-segundo-orden-ma-2">3.7. El Proceso de Media Móvil de Segundo Orden, <span class="math notranslate nohighlight">\(MA(2)\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesos-autorregresivos-de-orden-finito">3.8. Procesos autorregresivos de orden finito</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-autorregresivo-de-primer-orden-ar-1">3.9. Proceso autorregresivo de primer orden, <span class="math notranslate nohighlight">\(AR(1)\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-autorregresivo-de-segundo-orden-ar-2">3.10. Proceso autorregresivo de segundo orden, <span class="math notranslate nohighlight">\(AR(2)\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-autorregresivo-general-ar-p">3.11. Proceso autorregresivo general, <span class="math notranslate nohighlight">\(AR(p)\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-de-autocorrelacion-parcial-pacf">3.12. Función de Autocorrelación Parcial, <span class="math notranslate nohighlight">\(PACF\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesos-mixtos-autorregresivos-media-movil">3.13. Procesos Mixtos Autorregresivos-Media Movil</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estacionariedad-del-proceso-arma-p-q">3.14. Estacionariedad del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invertibilidad-del-proceso-arma-p-q">3.15. Invertibilidad del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-de-autocorrelacion-acf-y-autocorrelacion-parcial-pacf-del-proceso-arma-p-q">3.16. Funciones de autocorrelación (<span class="math notranslate nohighlight">\(ACF\)</span>) y autocorrelación parcial (<span class="math notranslate nohighlight">\(PACF\)</span>) del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesos-no-estacionarios">3.17. Procesos No Estacionarios</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-de-modelos-de-series-temporales">3.18. Construcción de Modelos de Series Temporales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identificacion-de-modelos">3.19. Identificación de modelos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimacion-de-parametros">3.20. Estimación de Parámetros</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostico-checking">3.21. Diagnostico Checking</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pronostico-con-proceso-arima">3.22. Pronóstico con proceso ARIMA</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-ii-implementacion-computacional-modelos-clasicos">3.23. Parte II. Implementación Computacional: Modelos Clásicos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion">3.24. Implementación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-media-movil">3.25. Modelos de media móvil</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-de-conjuntos-de-datos-con-arima">3.26. Creación de conjuntos de datos con ARIMA</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arima">3.27. ARIMA</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalo-de-confianza">3.28. Intervalo de confianza</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#yahoo-finance">3.29. Yahoo Finance</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-forecast">3.29.1. Rolling forecast</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-i-fundamentos-teoricos">5.1. Parte I. Fundamentos Teóricos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis">5.2. Análisis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-lineales-para-series-de-tiempo-estacionarias">5.3. Modelos lineales para series de tiempo estacionarias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estacionariedad">5.4. Estacionariedad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-de-media-movil-finito-ma-q">5.5. Proceso de media móvil finito <span class="math notranslate nohighlight">\(MA(q)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-proceso-de-media-movil-de-primer-orden-ma-1">5.6. El Proceso de Media Móvil de Primer Orden, <span class="math notranslate nohighlight">\(MA(1)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-proceso-de-media-movil-de-segundo-orden-ma-2">5.7. El Proceso de Media Móvil de Segundo Orden, <span class="math notranslate nohighlight">\(MA(2)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesos-autorregresivos-de-orden-finito">5.8. Procesos autorregresivos de orden finito</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-autorregresivo-de-primer-orden-ar-1">5.9. Proceso autorregresivo de primer orden, <span class="math notranslate nohighlight">\(AR(1)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-autorregresivo-de-segundo-orden-ar-2">5.10. Proceso autorregresivo de segundo orden, <span class="math notranslate nohighlight">\(AR(2)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-autorregresivo-general-ar-p">5.11. Proceso autorregresivo general, <span class="math notranslate nohighlight">\(AR(p)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-de-autocorrelacion-parcial-pacf">5.12. Función de Autocorrelación Parcial, <span class="math notranslate nohighlight">\(PACF\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesos-mixtos-autorregresivos-media-movil">5.13. Procesos Mixtos Autorregresivos-Media Movil</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estacionariedad-del-proceso-arma-p-q">5.14. Estacionariedad del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invertibilidad-del-proceso-arma-p-q">5.15. Invertibilidad del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-de-autocorrelacion-acf-y-autocorrelacion-parcial-pacf-del-proceso-arma-p-q">5.16. Funciones de autocorrelación (<span class="math notranslate nohighlight">\(ACF\)</span>) y autocorrelación parcial (<span class="math notranslate nohighlight">\(PACF\)</span>) del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesos-no-estacionarios">5.17. Procesos No Estacionarios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-de-modelos-de-series-temporales">5.18. Construcción de Modelos de Series Temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identificacion-de-modelos">5.19. Identificación de modelos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimacion-de-parametros">5.20. Estimación de Parámetros</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostico-checking">5.21. Diagnostico Checking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pronostico-con-proceso-arima">5.22. Pronóstico con proceso ARIMA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-ii-implementacion-computacional-modelos-clasicos">5.23. Parte II. Implementación Computacional: Modelos Clásicos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion">5.24. Implementación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-media-movil">5.25. Modelos de media móvil</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-de-conjuntos-de-datos-con-arima">5.26. Creación de conjuntos de datos con ARIMA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arima">5.27. ARIMA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalo-de-confianza">5.28. Intervalo de confianza</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#yahoo-finance">5.29. Yahoo Finance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-forecast">5.29.1. Rolling forecast</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-iii-aprendizaje-profundo-para-series-de-tiempo">3.30. Parte III. Aprendizaje Profundo para Series de Tiempo</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-redes-recurrentes-lstm-gru">3.30.1. Extensión: Redes Recurrentes (<code class="docutils literal notranslate"><span class="pre">LSTM</span></code>/<code class="docutils literal notranslate"><span class="pre">GRU</span></code>)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formulacion-matematica-de-la-celda-lstm">3.30.1.1. Formulación matemática de la celda <code class="docutils literal notranslate"><span class="pre">LSTM</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-iii-aprendizaje-profundo-para-series-de-tiempo">5.30. Parte III. Aprendizaje Profundo para Series de Tiempo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-redes-recurrentes-lstm-gru">5.30.1. Extensión: Redes Recurrentes (<code class="docutils literal notranslate"><span class="pre">LSTM</span></code>/<code class="docutils literal notranslate"><span class="pre">GRU</span></code>)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formulacion-matematica-de-la-celda-lstm">5.30.1.1. Formulación matemática de la celda <code class="docutils literal notranslate"><span class="pre">LSTM</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-iv-comparacion-critica-modelos-clasicos-vs-aprendizaje-profundo">3.31. Parte IV. Comparación Crítica: Modelos Clásicos vs. Aprendizaje Profundo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-del-capitulo">3.32. Resumen del Capítulo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice-proyecto-integrador-actividad-evaluativa">3.33. Apéndice: Proyecto Integrador (Actividad Evaluativa)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proyecto-integrador-de-deep-learning">3.34. Proyecto Integrador de Deep Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-iv-comparacion-critica-modelos-clasicos-vs-aprendizaje-profundo">5.31. Parte IV. Comparación Crítica: Modelos Clásicos vs. Aprendizaje Profundo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-del-capitulo">5.32. Resumen del Capítulo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice-proyecto-integrador-actividad-evaluativa">5.33. Apéndice: Proyecto Integrador (Actividad Evaluativa)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proyecto-integrador-de-deep-learning">5.34. Proyecto Integrador de Deep Learning</a></li>
 </ul>
             </nav>
         </div>
@@ -382,8 +386,8 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="series-de-tiempo">
-<h1><span class="section-number">3. </span>Series de Tiempo<a class="headerlink" href="#series-de-tiempo" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="time-series">
+<h1><span class="section-number">5. </span>Time Series<a class="headerlink" href="#time-series" title="Link to this heading">#</a></h1>
 <div class="tip admonition">
 <p class="admonition-title">Introducción del capítulo</p>
 <ul class="simple">
@@ -401,13 +405,13 @@
 </ul>
 </div>
 <section id="parte-i-fundamentos-teoricos">
-<h2><span class="section-number">3.1. </span>Parte I. Fundamentos Teóricos<a class="headerlink" href="#parte-i-fundamentos-teoricos" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.1. </span>Parte I. Fundamentos Teóricos<a class="headerlink" href="#parte-i-fundamentos-teoricos" title="Link to this heading">#</a></h2>
 </section>
 <section id="analisis">
-<h2><span class="section-number">3.2. </span>Análisis<a class="headerlink" href="#analisis" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.2. </span>Análisis<a class="headerlink" href="#analisis" title="Link to this heading">#</a></h2>
 </section>
 <section id="modelos-lineales-para-series-de-tiempo-estacionarias">
-<h2><span class="section-number">3.3. </span>Modelos lineales para series de tiempo estacionarias<a class="headerlink" href="#modelos-lineales-para-series-de-tiempo-estacionarias" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.3. </span>Modelos lineales para series de tiempo estacionarias<a class="headerlink" href="#modelos-lineales-para-series-de-tiempo-estacionarias" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>En el ámbito del modelado estadístico, a menudo nos esforzamos por descubrir la genuina conexión entre entradas específicas y la variable de salida. <em>Nuestros esfuerzos suelen dar como resultado modelos que simplemente aproximan la “verdadera” relación</em>.</p></li>
 <li><p>Este resultado comúnmente se origina en las decisiones estratégicas del analista para facilitar el proceso de modelado. Una suposición fundamental que a menudo simplifica los esfuerzos de modelado es la <em><strong>suposición de linealidad</strong></em>.</p></li>
@@ -417,7 +421,7 @@
 <ul>
 <li><p>Un <strong>filtro lineal</strong> constituye una transformación lineal de una serie temporal, <span class="math notranslate nohighlight">\(x_{t}\)</span> a otra serie de tiempo <span class="math notranslate nohighlight">\(y_{t}\)</span>,</p>
 <div class="math notranslate nohighlight" id="equation-linear-filter-yt">
-<span class="eqno">(3.1)<a class="headerlink" href="#equation-linear-filter-yt" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.1)<a class="headerlink" href="#equation-linear-filter-yt" title="Link to this equation">#</a></span>\[
   y_{t}=L(x_{t})=\sum_{i=-\infty}^{+\infty}\psi_{i}x_{t-i},~\text{con}~t=,\dots,-1,0,1,\dots,
   \]</div>
 </li>
@@ -425,7 +429,7 @@
 </div>
 <ul class="simple">
 <li><p>En ese sentido, el <strong>filtro lineal</strong> puede verse como un “proceso” que convierte la entrada, <span class="math notranslate nohighlight">\(x_{t}\)</span>, en una salida, <span class="math notranslate nohighlight">\(y_{t}\)</span>, y esa conversión no es instantánea, sino que involucra todos (<em><strong>presente, pasado y futuro</strong></em>) los valores de la entrada en forma de suma con diferentes “pesos”, <span class="math notranslate nohighlight">\(\psi_{i}\)</span>, en cada <span class="math notranslate nohighlight">\(x_{t-i}\)</span>.</p></li>
-<li><p>Además, el filtro lineal en la Ecuación <a class="reference internal" href="#equation-linear-filter-yt">(3.1)</a> se dice que tiene las siguientes propiedades:</p>
+<li><p>Además, el filtro lineal en la Ecuación <a class="reference internal" href="#equation-linear-filter-yt">(5.1)</a> se dice que tiene las siguientes propiedades:</p>
 <ol class="arabic simple">
 <li><p><strong>Invariante en el tiempo</strong>, ya que los coeficientes <span class="math notranslate nohighlight">\(\psi_{i}\)</span> no dependen del tiempo.</p></li>
 <li><p><strong>Físicamente realizable</strong> si <span class="math notranslate nohighlight">\(\psi_{i}=0\)</span> para <span class="math notranslate nohighlight">\(i&lt;0\)</span>; esto es, el output <span class="math notranslate nohighlight">\(y_{t}\)</span> es una función lineal de los actuales y pasados valores del input: <span class="math notranslate nohighlight">\(y_{t}=\psi_{0}x_{t}+\psi_{1}x_{t-1}+\cdots\)</span></p></li>
@@ -438,7 +442,7 @@
 </ul>
 </section>
 <section id="estacionariedad">
-<h2><span class="section-number">3.4. </span>Estacionariedad<a class="headerlink" href="#estacionariedad" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.4. </span>Estacionariedad<a class="headerlink" href="#estacionariedad" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>La <strong>estacionariedad</strong> de una serie temporal está relacionada con sus <em>propiedades estadísticas en el tiempo</em>. Es decir, en un sentido más estricto, <em><strong>una serie temporal estacionaria exhibe un comportamiento estadístico similar en el tiempo</strong></em>, lo que a menudo se caracteriza como una distribución de probabilidad constante en el tiempo.</p></li>
 <li><p>Sin embargo, por lo general, es satisfactorio considerar los dos primeros momentos de la serie temporal y definir la <strong>estacionariedad</strong> (o <em>estacionariedad débil</em>) de la siguiente manera:</p></li>
@@ -456,24 +460,24 @@
 </ul>
 </div>
 <div class="proof theorem admonition" id="theorem1">
-<p class="admonition-title"><span class="caption-number">Theorem 3.1 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 5.1 </span></p>
 <section class="theorem-content" id="proof-content">
 <ul>
 <li><p>Dado un <em><strong>filtro lineal invariante en el tiempo y estable</strong></em> y una serie de tiempo con <em><strong>input</strong></em> <span class="math notranslate nohighlight">\(x_{t}\)</span> <em><strong>estacionario</strong></em>, con <span class="math notranslate nohighlight">\(\mu_{x}=\text{E}(x_{t})\)</span> y <span class="math notranslate nohighlight">\(\gamma_{x}(k)=\text{Cov}(x_{t}, x_{t+k})\)</span>, la serie de tiempo</p>
 <div class="math notranslate nohighlight" id="equation-linear-invariant-process">
-<span class="eqno">(3.2)<a class="headerlink" href="#equation-linear-invariant-process" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.2)<a class="headerlink" href="#equation-linear-invariant-process" title="Link to this equation">#</a></span>\[
     y_{t}=L(x_{t})=\sum_{i=-\infty}^{\infty}\psi_{i}x_{t-i},
     \]</div>
 <p>donde <span class="math notranslate nohighlight">\(t=,\dots,-1,0,1,\dots,\)</span> <em><strong>es también estacionaria</strong></em>.</p>
 </li>
 <li><p>El siguiente proceso lineal estable con <em><strong>ruido blanco</strong></em> <span class="math notranslate nohighlight">\(\varepsilon_{t}\)</span> <em><strong>es también estacionario</strong></em></p>
 <div class="math notranslate nohighlight" id="equation-linear-filter-white-noise">
-<span class="eqno">(3.3)<a class="headerlink" href="#equation-linear-filter-white-noise" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.3)<a class="headerlink" href="#equation-linear-filter-white-noise" title="Link to this equation">#</a></span>\[
     y_{t}=\mu+\sum_{i=-\infty}^{\infty}\psi_{i}\varepsilon_{t-i},
     \]</div>
 <p>y además puede reescribirse como sigue, en términos del <em><strong>operado backshift</strong></em> <span class="math notranslate nohighlight">\(B\)</span> como</p>
 <div class="math notranslate nohighlight" id="equation-moving-average-backshift">
-<span class="eqno">(3.4)<a class="headerlink" href="#equation-moving-average-backshift" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.4)<a class="headerlink" href="#equation-moving-average-backshift" title="Link to this equation">#</a></span>\[
     y_{t}=\mu+\left(\sum_{i=0}^{\infty}\psi_{i}B^{i}\right)\varepsilon_{t}=\mu+\Psi(B)\varepsilon_{t}.
     \]</div>
 </li>
@@ -481,7 +485,7 @@
 </section>
 </div><p><em><strong><code class="docutils literal notranslate"><span class="pre">Demostración</span></code></strong></em></p>
 <ul class="simple">
-<li><p>Calculemos <em><strong>valor esperado</strong></em> para la serie <span class="math notranslate nohighlight">\(y_{t}\)</span> dada en la Ecuación <a class="reference internal" href="#equation-linear-invariant-process">(3.2)</a>. Nótese que es constante respecto a <span class="math notranslate nohighlight">\(t\)</span></p></li>
+<li><p>Calculemos <em><strong>valor esperado</strong></em> para la serie <span class="math notranslate nohighlight">\(y_{t}\)</span> dada en la Ecuación <a class="reference internal" href="#equation-linear-invariant-process">(5.2)</a>. Nótese que es constante respecto a <span class="math notranslate nohighlight">\(t\)</span></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -501,14 +505,14 @@
 \end{align*}
 \end{split}\]</div>
 <ul class="simple">
-<li><p>Por lo tanto, la serie de tiempo definida como en la Ecuación <a class="reference internal" href="#equation-linear-invariant-process">(3.2)</a> es estacionaria. Consideremos ahora la serie de la Ecuación <a class="reference internal" href="#equation-linear-filter-white-noise">(3.3)</a> y verifiquemos que es estacionaría</p></li>
+<li><p>Por lo tanto, la serie de tiempo definida como en la Ecuación <a class="reference internal" href="#equation-linear-invariant-process">(5.2)</a> es estacionaria. Consideremos ahora la serie de la Ecuación <a class="reference internal" href="#equation-linear-filter-white-noise">(5.3)</a> y verifiquemos que es estacionaría</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
 \text{E}(y_{t})=\text{E}\left(\mu+\sum_{i=0}^{\infty}\psi_{i}\varepsilon_{t-i}\right)=\mu+\sum_{i=0}^{\infty}\psi_{i}\cancelto{0}{\text{E}(\varepsilon_{t-i})}=\mu.
 \]</div>
 <ul class="simple">
-<li><p>Dado que <span class="math notranslate nohighlight">\(\gamma_{c}(k)=\text{Cov}(c,c)=\text{Var}(c)=0,~\forall c\in\mathbb{R}\)</span>, la autocovarianza de la Ecuación <a class="reference internal" href="#equation-linear-filter-white-noise">(3.3)</a> está dada por</p></li>
+<li><p>Dado que <span class="math notranslate nohighlight">\(\gamma_{c}(k)=\text{Cov}(c,c)=\text{Var}(c)=0,~\forall c\in\mathbb{R}\)</span>, la autocovarianza de la Ecuación <a class="reference internal" href="#equation-linear-filter-white-noise">(5.3)</a> está dada por</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -522,7 +526,7 @@
 \end{split}\]</div>
 <ul class="simple">
 <li><p>Nótese que la última igualdad es independiente de <span class="math notranslate nohighlight">\(t\)</span>. Además, se usó el hecho de que: <span class="math notranslate nohighlight">\(h=k+i-j=0\)</span> entonces <span class="math notranslate nohighlight">\(\gamma_{\varepsilon}(h)=\sigma^{2}\)</span>.</p></li>
-<li><p>La Ecuación <a class="reference internal" href="#equation-linear-filter-white-noise">(3.3)</a> puede reescribirse como</p></li>
+<li><p>La Ecuación <a class="reference internal" href="#equation-linear-filter-white-noise">(5.3)</a> puede reescribirse como</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -536,8 +540,8 @@ y_{t}=\mu+\sum_{i=0}^{\infty}\psi_{i}\varepsilon_{t-i}&amp;=\mu+\psi_{0}\varepsi
 <div class="admonition-observacion admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
-<li><p>La Ecuación <a class="reference internal" href="#equation-moving-average-backshift">(3.4)</a> se le conoce como el <em><strong>promedio móvil infinito</strong></em> y sirve como una clase general de <em><strong>modelos para cualquier serie temporal estacionaria</strong></em> <span class="bibtex-citation" id="id1">[<a class="reference internal" href="biblio.html#id92" title="Herman Wold. A study in the analysis of stationary time series. PhD thesis, Almqvist &amp; Wiksell, 1938.">Wold, 1938</a>]</span>.</p></li>
-<li><p>Básicamente, establece que <em><strong>cualquier serie temporal</strong></em> <span class="math notranslate nohighlight">\(y_{t}\)</span> <em><strong>no determinística y estacionaria débil puede ser representada como en la Ecuación</strong></em> <a class="reference internal" href="#equation-linear-filter-white-noise">(3.3)</a>, donde <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span> satisfacen <span class="math notranslate nohighlight">\(\sum_{i=0}^{\infty}\psi_{i}^{2}&lt;\infty\)</span>.</p></li>
+<li><p>La Ecuación <a class="reference internal" href="#equation-moving-average-backshift">(5.4)</a> se le conoce como el <em><strong>promedio móvil infinito</strong></em> y sirve como una clase general de <em><strong>modelos para cualquier serie temporal estacionaria</strong></em> <span class="bibtex-citation" id="id1">[<a class="reference internal" href="biblio.html#id92" title="Herman Wold. A study in the analysis of stationary time series. PhD thesis, Almqvist &amp; Wiksell, 1938.">Wold, 1938</a>]</span>.</p></li>
+<li><p>Básicamente, establece que <em><strong>cualquier serie temporal</strong></em> <span class="math notranslate nohighlight">\(y_{t}\)</span> <em><strong>no determinística y estacionaria débil puede ser representada como en la Ecuación</strong></em> <a class="reference internal" href="#equation-linear-filter-white-noise">(5.3)</a>, donde <span class="math notranslate nohighlight">\(\{\psi_{i}\}\)</span> satisfacen <span class="math notranslate nohighlight">\(\sum_{i=0}^{\infty}\psi_{i}^{2}&lt;\infty\)</span>.</p></li>
 <li><p>Una interpretación más intuitiva de este teorema es que <em><strong>una serie temporal estacionaria puede ser vista como la suma ponderada de las “perturbaciones” aleatorias presentes y pasadas</strong></em> <span class="bibtex-citation" id="id2">[<a class="reference internal" href="biblio.html#id94" title="Søren Bisgaard and Murat Kulahci. Time series analysis and forecasting by example. John Wiley &amp; Sons, 2011.">Bisgaard and Kulahci, 2011</a>, <a class="reference internal" href="biblio.html#id93" title="George Udny Yule. On a method of investigating periodicities in disturbed series with special reference to wolfer’s sunspot numbers. Statistical Papers of George Udny Yule, pages 389–420, 1971.">Yule, 1971</a>]</span>.</p></li>
 </ul>
 </div>
@@ -611,13 +615,13 @@ F_{y_{t_1},\dots,y_{t_n}}(x_1,\dots,x_n) = F_{y_{t_1+k},\dots,y_{t_n+k}}(x_1,\do
 </div>
 </section>
 <section id="proceso-de-media-movil-finito-ma-q">
-<h2><span class="section-number">3.5. </span>Proceso de media móvil finito <span class="math notranslate nohighlight">\(MA(q)\)</span><a class="headerlink" href="#proceso-de-media-movil-finito-ma-q" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.5. </span>Proceso de media móvil finito <span class="math notranslate nohighlight">\(MA(q)\)</span><a class="headerlink" href="#proceso-de-media-movil-finito-ma-q" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Proceso de media móvil de orden <span class="math notranslate nohighlight">\(q\)</span> (<span class="math notranslate nohighlight">\(MA(q)\)</span>)</p>
 <ul>
 <li><p>En los <em><strong>modelos de media móvil de orden finito</strong></em> o <span class="math notranslate nohighlight">\(MA\)</span>, convencionalmente <span class="math notranslate nohighlight">\(\psi_{0}\)</span> se establece en 1 y los pesos que no se establecen en 0 se representan con la letra griega <span class="math notranslate nohighlight">\(\theta\)</span> con signo negativo delante. Por lo tanto, un <em><strong>proceso de media móvil de orden</strong></em> <span class="math notranslate nohighlight">\(q\)</span> (<span class="math notranslate nohighlight">\(MA(q)\)</span>) se expresa como</p>
 <div class="math notranslate nohighlight" id="equation-finite-moving-average-orderq">
-<span class="eqno">(3.5)<a class="headerlink" href="#equation-finite-moving-average-orderq" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.5)<a class="headerlink" href="#equation-finite-moving-average-orderq" title="Link to this equation">#</a></span>\[
     y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\cdots-\theta_{q}\varepsilon_{q}
     \]</div>
 <p>donde <span class="math notranslate nohighlight">\(\{\varepsilon_{t}\}\)</span> es <em><strong>ruido blanco</strong></em>.</p>
@@ -625,10 +629,10 @@ F_{y_{t_1},\dots,y_{t_n}}(x_1,\dots,x_n) = F_{y_{t_1+k},\dots,y_{t_n+k}}(x_1,\do
 </ul>
 </div>
 <div class="proof theorem admonition" id="theorem2">
-<p class="admonition-title"><span class="caption-number">Theorem 3.2 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 5.2 </span></p>
 <section class="theorem-content" id="proof-content">
 <ul>
-<li><p>Dado que la Ecuación <a class="reference internal" href="#equation-finite-moving-average-orderq">(3.5)</a> es un caso especial de la Ecuación <a class="reference internal" href="#equation-moving-average-backshift">(3.4)</a> con solo pesos finitos, <em><strong>un proceso</strong></em> <span class="math notranslate nohighlight">\(MA(q)\)</span> <em><strong>siempre es estacionario independientemente de los valores de los pesos</strong></em>. En términos del operador backshift, el proceso <span class="math notranslate nohighlight">\(MA(q)\)</span> está dado por</p>
+<li><p>Dado que la Ecuación <a class="reference internal" href="#equation-finite-moving-average-orderq">(5.5)</a> es un caso especial de la Ecuación <a class="reference internal" href="#equation-moving-average-backshift">(5.4)</a> con solo pesos finitos, <em><strong>un proceso</strong></em> <span class="math notranslate nohighlight">\(MA(q)\)</span> <em><strong>siempre es estacionario independientemente de los valores de los pesos</strong></em>. En términos del operador backshift, el proceso <span class="math notranslate nohighlight">\(MA(q)\)</span> está dado por</p>
 <div class="math notranslate nohighlight">
 \[
     y_{t}=\mu+\Phi(B)\varepsilon_{t},~\text{donde}~\Phi(B)=1-\sum_{i=1}^{q}\theta_{i}B^{i}.
@@ -637,21 +641,21 @@ F_{y_{t_1},\dots,y_{t_n}}(x_1,\dots,x_n) = F_{y_{t_1+k},\dots,y_{t_n+k}}(x_1,\do
 <li><p>Además, dado que <span class="math notranslate nohighlight">\(\{\varepsilon_{t}\}\)</span> es ruido blanco, <em><strong>el valor esperado del proceso</strong></em> <span class="math notranslate nohighlight">\(MA(q)\)</span> es simplemente <span class="math notranslate nohighlight">\(\text{E}(y_{t})=\mu\)</span> y <em><strong>su varianza es</strong></em></p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-variance-finite-moving-averageq">
-<span class="eqno">(3.6)<a class="headerlink" href="#equation-variance-finite-moving-averageq" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.6)<a class="headerlink" href="#equation-variance-finite-moving-averageq" title="Link to this equation">#</a></span>\[
 \text{Var}(y_{t})=\gamma_{y}(0)=\sigma^{2}(1+\theta_{1}^{2}+\theta_{2}^{2}+\cdots+\theta_{q}^{2})
 \]</div>
 <ul class="simple">
 <li><p>Similarmente, la <em><strong>autocovarianza en el lag</strong></em> <span class="math notranslate nohighlight">\(k\)</span> puede ser calculada como</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-autocovariance-atlagk-finite-moving-averageq">
-<span class="eqno">(3.7)<a class="headerlink" href="#equation-autocovariance-atlagk-finite-moving-averageq" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(5.7)<a class="headerlink" href="#equation-autocovariance-atlagk-finite-moving-averageq" title="Link to this equation">#</a></span>\[\begin{split}
 \gamma_{y}(k)=\begin{cases}
 \sigma^{2}(-\theta_{k}+\theta_{1}\theta_{k+1}+\cdots+\theta_{q-k}\theta_{q}), &amp; k=1,2,\dots, q\\
 0, &amp; k&gt;q.
 \end{cases}
 \end{split}\]</div>
 <ul class="simple">
-<li><p>A partir de las Ecuaciones <a class="reference internal" href="#equation-variance-finite-moving-averageq">(3.6)</a>, <a class="reference internal" href="#equation-autocovariance-atlagk-finite-moving-averageq">(3.7)</a>, la <em><strong>función de autocorrelación del proceso</strong></em> <span class="math notranslate nohighlight">\(MA(q)\)</span> es</p></li>
+<li><p>A partir de las Ecuaciones <a class="reference internal" href="#equation-variance-finite-moving-averageq">(5.6)</a>, <a class="reference internal" href="#equation-autocovariance-atlagk-finite-moving-averageq">(5.7)</a>, la <em><strong>función de autocorrelación del proceso</strong></em> <span class="math notranslate nohighlight">\(MA(q)\)</span> es</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -765,11 +769,11 @@ F_{y_{t_1},\dots,y_{t_n}}(x_1,\dots,x_n) = F_{y_{t_1+k},\dots,y_{t_n+k}}(x_1,\do
 </ul>
 </section>
 <section id="el-proceso-de-media-movil-de-primer-orden-ma-1">
-<h2><span class="section-number">3.6. </span>El Proceso de Media Móvil de Primer Orden, <span class="math notranslate nohighlight">\(MA(1)\)</span><a class="headerlink" href="#el-proceso-de-media-movil-de-primer-orden-ma-1" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.6. </span>El Proceso de Media Móvil de Primer Orden, <span class="math notranslate nohighlight">\(MA(1)\)</span><a class="headerlink" href="#el-proceso-de-media-movil-de-primer-orden-ma-1" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Media Móvil de Primer Orden <span class="math notranslate nohighlight">\(MA(1)\)</span></p>
 <ul class="simple">
-<li><p>El modelo <span class="math notranslate nohighlight">\(MA\)</span> de orden finito más simple se obtiene cuando <span class="math notranslate nohighlight">\(q = 1\)</span> en la Ecuación <a class="reference internal" href="#equation-finite-moving-average-orderq">(3.5)</a></p></li>
+<li><p>El modelo <span class="math notranslate nohighlight">\(MA\)</span> de orden finito más simple se obtiene cuando <span class="math notranslate nohighlight">\(q = 1\)</span> en la Ecuación <a class="reference internal" href="#equation-finite-moving-average-orderq">(5.5)</a></p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -790,14 +794,14 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}.
 <li><p>De manera similar, tenemos la función de <em><strong>autocorrelación</strong></em> como</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-acf-maq1">
-<span class="eqno">(3.8)<a class="headerlink" href="#equation-acf-maq1" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(5.8)<a class="headerlink" href="#equation-acf-maq1" title="Link to this equation">#</a></span>\[\begin{split}
 \begin{align*}
 \rho_{y}(1) &amp;=\frac{-\theta_{1}}{1+\theta_{1}^{2}}\\
 \rho_{y}(k) &amp;=0,~k&gt;1.
 \end{align*}
 \end{split}\]</div>
 <ul>
-<li><p>De la Ecuación <a class="reference internal" href="#equation-acf-maq1">(3.8)</a>, podemos ver que la autocorrelación del primer rezago en <span class="math notranslate nohighlight">\(MA(1)\)</span> está limitada a</p>
+<li><p>De la Ecuación <a class="reference internal" href="#equation-acf-maq1">(5.8)</a>, podemos ver que la autocorrelación del primer rezago en <span class="math notranslate nohighlight">\(MA(1)\)</span> está limitada a</p>
 <div class="math notranslate nohighlight">
 \[
     |\rho_{y}(1)|=\frac{|\theta_{1}|}{1+\theta_{1}^{2}}\leq\frac{1}{2}
@@ -913,7 +917,7 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}.
 </div>
 </section>
 <section id="el-proceso-de-media-movil-de-segundo-orden-ma-2">
-<h2><span class="section-number">3.7. </span>El Proceso de Media Móvil de Segundo Orden, <span class="math notranslate nohighlight">\(MA(2)\)</span><a class="headerlink" href="#el-proceso-de-media-movil-de-segundo-orden-ma-2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.7. </span>El Proceso de Media Móvil de Segundo Orden, <span class="math notranslate nohighlight">\(MA(2)\)</span><a class="headerlink" href="#el-proceso-de-media-movil-de-segundo-orden-ma-2" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Media Móvil de Segundo Orden <span class="math notranslate nohighlight">\(MA(2)\)</span></p>
 <ul class="simple">
@@ -990,15 +994,15 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\theta_{2}\varepsilon_{t-2
 </div>
 </section>
 <section id="procesos-autorregresivos-de-orden-finito">
-<h2><span class="section-number">3.8. </span>Procesos autorregresivos de orden finito<a class="headerlink" href="#procesos-autorregresivos-de-orden-finito" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.8. </span>Procesos autorregresivos de orden finito<a class="headerlink" href="#procesos-autorregresivos-de-orden-finito" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Algunos procesos pueden tener las dinámicas intrínsecas mencionadas en la anterior observación, pero para otros, es posible que necesitemos <strong><strong>considerar las contribuciones “persistentes” de las perturbaciones que ocurrieron en el pasado</strong></strong>. Una solución a este problema son los <strong><strong>modelos autorregresivos, en los cuales se asume que los infinitos pesos siguen un patrón distintivo</strong></strong> y pueden ser <strong><strong>representados con éxito con solo unos pocos parámetros</strong></strong>. Ahora consideraremos algunos casos especiales de procesos autorregresivos.</p></li>
 </ul>
 </section>
 <section id="proceso-autorregresivo-de-primer-orden-ar-1">
-<h2><span class="section-number">3.9. </span>Proceso autorregresivo de primer orden, <span class="math notranslate nohighlight">\(AR(1)\)</span><a class="headerlink" href="#proceso-autorregresivo-de-primer-orden-ar-1" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.9. </span>Proceso autorregresivo de primer orden, <span class="math notranslate nohighlight">\(AR(1)\)</span><a class="headerlink" href="#proceso-autorregresivo-de-primer-orden-ar-1" title="Link to this heading">#</a></h2>
 <div class="proof theorem admonition" id="theorem3">
-<p class="admonition-title"><span class="caption-number">Theorem 3.3 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 5.3 </span></p>
 <section class="theorem-content" id="proof-content">
 <ul>
 <li><p>Considere el <em><strong>siguiente proceso lineal estable</strong></em>, con serie de tiempo <span class="math notranslate nohighlight">\({\varepsilon}_{t}\)</span>, ruido blanco,</p>
@@ -1010,14 +1014,14 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\theta_{2}\varepsilon_{t-2
 <li><p>Además, para <em><strong>garantizar decrecimiento exponencial</strong></em>, fije <span class="math notranslate nohighlight">\(\psi_{i}=\phi^{i}\)</span>, donde <span class="math notranslate nohighlight">\(|\phi|&lt;1\)</span>.</p></li>
 <li><p>Demuestre que el <em><strong>proceso autorregresivo de primer orden</strong></em>, está dado por</p>
 <div class="math notranslate nohighlight" id="equation-ar1-process-formula">
-<span class="eqno">(3.9)<a class="headerlink" href="#equation-ar1-process-formula" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.9)<a class="headerlink" href="#equation-ar1-process-formula" title="Link to this equation">#</a></span>\[
     y_{t}=\delta+\phi y_{t-1}+\varepsilon_{t}.
     \]</div>
 </li>
 <li><p>Además, demuestre que si <span class="math notranslate nohighlight">\(|\phi|&gt;1\)</span>, existe una <em><strong>solución estacionaria para el proceso</strong></em> <span class="math notranslate nohighlight">\(AR(1)\)</span>; <em><strong>sin embargo, esta solución es no-causal</strong></em> o no-convergente (<em>requiere conocimiento sobre el futuro para hacer pronósticos sobre él</em>).</p></li>
 <li><p>Pruebe que, para el proceso <span class="math notranslate nohighlight">\(AR(1)\)</span>, el <em><strong>valor esperado, covarianza y autocorrelación</strong></em>, están dados por</p>
 <div class="math notranslate nohighlight" id="equation-ar1-mean-covariance-acf">
-<span class="eqno">(3.10)<a class="headerlink" href="#equation-ar1-mean-covariance-acf" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(5.10)<a class="headerlink" href="#equation-ar1-mean-covariance-acf" title="Link to this equation">#</a></span>\[\begin{split}
     \begin{align*}
     \text{E}(y_{t}) &amp;= \frac{\delta}{1-\phi}\\
     \gamma(k) &amp;= \sigma^{2}\phi^{k}\frac{1}{1-\phi^{2}},~\text{para}~k=0,1,2,\dots\\
@@ -1029,7 +1033,7 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\theta_{2}\varepsilon_{t-2
 </section>
 </div><p><em><strong><code class="docutils literal notranslate"><span class="pre">Demostración</span></code></strong></em></p>
 <ul>
-<li><p>Primero, volvamos a considerar la serie temporal dada en la Ecuación <a class="reference internal" href="#equation-linear-filter-white-noise">(3.3)</a> asociada con el proceso lineal estable</p>
+<li><p>Primero, volvamos a considerar la serie temporal dada en la Ecuación <a class="reference internal" href="#equation-linear-filter-white-noise">(5.3)</a> asociada con el proceso lineal estable</p>
 <div class="math notranslate nohighlight">
 \[
   y_{t}=\mu+\sum_{i=0}^{\infty}\psi_{i}\varepsilon_{t-i}=\mu+\sum_{i=0}^{\infty}\psi_{i}B^{i}\varepsilon_{t}=\mu+\Psi(B)\varepsilon_{t},
@@ -1042,24 +1046,24 @@ y_{t}=\mu+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\theta_{2}\varepsilon_{t-2
 <li><p>Un conjunto simple e intuitivo de <em><strong>estas ponderaciones pueden seguir un patrón de decaimiento exponencial</strong></em>. Para ello, estableceremos <span class="math notranslate nohighlight">\(\psi_{i}=\phi^{i}\)</span>, donde <span class="math notranslate nohighlight">\(|\phi|&lt;1\)</span> para <em><strong>garantizar el “decaimiento” exponencial</strong></em>. Con esta notación, las ponderaciones en las perturbaciones, comenzando desde la perturbación actual y retrocediendo en el tiempo, serán <span class="math notranslate nohighlight">\(1, \phi, \phi^{2}, \phi^{3},\dots\)</span>.</p></li>
 </ul>
 <ul class="simple">
-<li><p>Por lo tanto, la Ecuación <a class="reference internal" href="#equation-linear-filter-white-noise">(3.3)</a> puede escribirse como:</p></li>
+<li><p>Por lo tanto, la Ecuación <a class="reference internal" href="#equation-linear-filter-white-noise">(5.3)</a> puede escribirse como:</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-phii-epsilon-linearcombiantion">
-<span class="eqno">(3.11)<a class="headerlink" href="#equation-phii-epsilon-linearcombiantion" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.11)<a class="headerlink" href="#equation-phii-epsilon-linearcombiantion" title="Link to this equation">#</a></span>\[
 y_{t}=\mu+\varepsilon_{t}+\phi\varepsilon_{t-1}+\phi^{2}\varepsilon_{t-2}+\cdots=\mu+\sum_{i=0}^{\infty}\phi^{i}\varepsilon_{t-i}.
 \]</div>
 <ul>
-<li><p>De la Ecuación <a class="reference internal" href="#equation-phii-epsilon-linearcombiantion">(3.11)</a> obtenemos</p>
+<li><p>De la Ecuación <a class="reference internal" href="#equation-phii-epsilon-linearcombiantion">(5.11)</a> obtenemos</p>
 <div class="math notranslate nohighlight" id="equation-phii-epsilon-linearcombiantion-lag1">
-<span class="eqno">(3.12)<a class="headerlink" href="#equation-phii-epsilon-linearcombiantion-lag1" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.12)<a class="headerlink" href="#equation-phii-epsilon-linearcombiantion-lag1" title="Link to this equation">#</a></span>\[
   y_{t-1}=\mu+\textcolor{blue}{\varepsilon_{t-1}+\phi\varepsilon_{t-2}+\phi^{2}\varepsilon_{t-3}+\cdots}
   \]</div>
 </li>
 </ul>
 <ul>
-<li><p>Usando la Ecuación <a class="reference internal" href="#equation-phii-epsilon-linearcombiantion">(3.11)</a> y Ecuación <a class="reference internal" href="#equation-phii-epsilon-linearcombiantion-lag1">(3.12)</a></p>
+<li><p>Usando la Ecuación <a class="reference internal" href="#equation-phii-epsilon-linearcombiantion">(5.11)</a> y Ecuación <a class="reference internal" href="#equation-phii-epsilon-linearcombiantion-lag1">(5.12)</a></p>
 <div class="math notranslate nohighlight" id="equation-first-ar-model-proof">
-<span class="eqno">(3.13)<a class="headerlink" href="#equation-first-ar-model-proof" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(5.13)<a class="headerlink" href="#equation-first-ar-model-proof" title="Link to this equation">#</a></span>\[\begin{split}
   \begin{align*}
   y_{t} &amp;= \mu+\varepsilon_{t}+\phi\varepsilon_{t-1}+\phi^{2}\varepsilon_{t-2}+\cdots\\
   &amp;= \mu+\varepsilon_{t}+\phi(\textcolor{blue}{\varepsilon_{t-1}+\phi\varepsilon_{t-2}+\cdots})\\
@@ -1072,7 +1076,7 @@ y_{t}=\mu+\varepsilon_{t}+\phi\varepsilon_{t-1}+\phi^{2}\varepsilon_{t-2}+\cdots
 </li>
 </ul>
 <ul class="simple">
-<li><p>El proceso de la Ecuación <a class="reference internal" href="#equation-first-ar-model-proof">(3.13)</a> es llamado <em><strong>proceso autorregresivo de primer orden</strong></em>, <span class="math notranslate nohighlight">\(AR(1)\)</span>, dado que Ecuación <a class="reference internal" href="#equation-first-ar-model-proof">(3.13)</a> puede verse como una <strong>regresión de</strong> <span class="math notranslate nohighlight">\(y_{t}\)</span> <strong>sobre</strong> <span class="math notranslate nohighlight">\(y_{t-1}\)</span>, es por esto que se usa el término autorregresivo.</p></li>
+<li><p>El proceso de la Ecuación <a class="reference internal" href="#equation-first-ar-model-proof">(5.13)</a> es llamado <em><strong>proceso autorregresivo de primer orden</strong></em>, <span class="math notranslate nohighlight">\(AR(1)\)</span>, dado que Ecuación <a class="reference internal" href="#equation-first-ar-model-proof">(5.13)</a> puede verse como una <strong>regresión de</strong> <span class="math notranslate nohighlight">\(y_{t}\)</span> <strong>sobre</strong> <span class="math notranslate nohighlight">\(y_{t-1}\)</span>, es por esto que se usa el término autorregresivo.</p></li>
 </ul>
 <div class="admonition-observacion admonition">
 <p class="admonition-title">Observación</p>
@@ -1082,9 +1086,9 @@ y_{t}=\mu+\varepsilon_{t}+\phi\varepsilon_{t-1}+\phi^{2}\varepsilon_{t-2}+\cdots
 </ul>
 </div>
 <ul>
-<li><p>La solución en Ecuación <a class="reference internal" href="#equation-phii-epsilon-linearcombiantion">(3.11)</a> de hecho no converge para <span class="math notranslate nohighlight">\(|\phi|&gt;1\)</span>. Sin embargo, podemos reescribir el proceso <span class="math notranslate nohighlight">\(AR(1)\)</span> para <span class="math notranslate nohighlight">\(y_{t+1}\)</span> como <span class="math notranslate nohighlight">\(y_{t+1}=\delta+\phi y_{t}+\varepsilon_{t+1}\)</span>. Entonces, por medio de operaciones de despeje en esta última igualdad, obtenemos</p>
+<li><p>La solución en Ecuación <a class="reference internal" href="#equation-phii-epsilon-linearcombiantion">(5.11)</a> de hecho no converge para <span class="math notranslate nohighlight">\(|\phi|&gt;1\)</span>. Sin embargo, podemos reescribir el proceso <span class="math notranslate nohighlight">\(AR(1)\)</span> para <span class="math notranslate nohighlight">\(y_{t+1}\)</span> como <span class="math notranslate nohighlight">\(y_{t+1}=\delta+\phi y_{t}+\varepsilon_{t+1}\)</span>. Entonces, por medio de operaciones de despeje en esta última igualdad, obtenemos</p>
 <div class="math notranslate nohighlight" id="equation-noncasual-ar1-proof">
-<span class="eqno">(3.14)<a class="headerlink" href="#equation-noncasual-ar1-proof" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(5.14)<a class="headerlink" href="#equation-noncasual-ar1-proof" title="Link to this equation">#</a></span>\[\begin{split}
   \begin{align*}
   y_{t} &amp;= -\phi^{-1}\delta+\phi^{-1}y_{t+1}-\phi^{-1}\varepsilon_{t+1}\\
   &amp;=-\phi^{-1}\delta+\phi^{-1}(-\phi^{-1}\delta+\phi^{-1}y_{t+2}-\phi^{-1}\varepsilon_{t+2})-\phi^{-1}\varepsilon_{t+1}\\
@@ -1097,18 +1101,18 @@ y_{t}=\mu+\varepsilon_{t}+\phi\varepsilon_{t-1}+\phi^{2}\varepsilon_{t-2}+\cdots
 </li>
 </ul>
 <ul class="simple">
-<li><p>Nótese que para <span class="math notranslate nohighlight">\(|\phi|&gt;1\)</span> se tiene que <span class="math notranslate nohighlight">\(|\phi^{-i}|&lt;1\)</span>. Por lo tanto, la solución vía <span class="math notranslate nohighlight">\(AR(1)\)</span> es estacionaria para <span class="math notranslate nohighlight">\(|\phi|&gt;1\)</span>. Sin embargo, <em><strong>la solución dada por la Ecuación</strong></em> <a class="reference internal" href="#equation-noncasual-ar1-proof">(3.14)</a> <em><strong>involucra futuras perturbaciones</strong></em>, las cuales deseamos predecir, lo cual es <em>impráctico</em>. Este tipo de modelos son conocidos como, <em><strong>modelos no-causales</strong></em>.</p></li>
+<li><p>Nótese que para <span class="math notranslate nohighlight">\(|\phi|&gt;1\)</span> se tiene que <span class="math notranslate nohighlight">\(|\phi^{-i}|&lt;1\)</span>. Por lo tanto, la solución vía <span class="math notranslate nohighlight">\(AR(1)\)</span> es estacionaria para <span class="math notranslate nohighlight">\(|\phi|&gt;1\)</span>. Sin embargo, <em><strong>la solución dada por la Ecuación</strong></em> <a class="reference internal" href="#equation-noncasual-ar1-proof">(5.14)</a> <em><strong>involucra futuras perturbaciones</strong></em>, las cuales deseamos predecir, lo cual es <em>impráctico</em>. Este tipo de modelos son conocidos como, <em><strong>modelos no-causales</strong></em>.</p></li>
 </ul>
 <ul>
 <li><p>Calculemos ahora, la media del <em><strong>proceso estacionario</strong></em> <span class="math notranslate nohighlight">\(AR(1)\)</span>. Nótese que</p>
 <div class="math notranslate nohighlight" id="equation-exp-value-ar1-calculus">
-<span class="eqno">(3.15)<a class="headerlink" href="#equation-exp-value-ar1-calculus" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.15)<a class="headerlink" href="#equation-exp-value-ar1-calculus" title="Link to this equation">#</a></span>\[
   \text{E}(y_{t})=\text{E}(\delta+\phi y_{t-1}+\varepsilon_{t})=\delta+\phi\text{E}(y_{t-1})+\text{E}(\varepsilon_{t})=\delta+\phi\text{E}(y_{t-1})
   \]</div>
 </li>
 </ul>
 <ul>
-<li><p>Dado que el proceso <span class="math notranslate nohighlight">\(AR(1)\)</span> es estacionario <span class="math notranslate nohighlight">\(\text{E}(y_{t})=\text{E}(y_{t-1})\)</span>. Entonces, despejando en la Ecuación <a class="reference internal" href="#equation-exp-value-ar1-calculus">(3.15)</a>, obtenemos que la media del proceso <span class="math notranslate nohighlight">\(AR(1)\)</span> está dada por</p>
+<li><p>Dado que el proceso <span class="math notranslate nohighlight">\(AR(1)\)</span> es estacionario <span class="math notranslate nohighlight">\(\text{E}(y_{t})=\text{E}(y_{t-1})\)</span>. Entonces, despejando en la Ecuación <a class="reference internal" href="#equation-exp-value-ar1-calculus">(5.15)</a>, obtenemos que la media del proceso <span class="math notranslate nohighlight">\(AR(1)\)</span> está dada por</p>
 <div class="math notranslate nohighlight">
 \[
   \text{E}(y_{t})=\frac{\delta}{1-\phi}.
@@ -1221,29 +1225,29 @@ y_{t}=\mu+\varepsilon_{t}+\phi\varepsilon_{t-1}+\phi^{2}\varepsilon_{t-2}+\cdots
 </ul>
 </section>
 <section id="proceso-autorregresivo-de-segundo-orden-ar-2">
-<h2><span class="section-number">3.10. </span>Proceso autorregresivo de segundo orden, <span class="math notranslate nohighlight">\(AR(2)\)</span><a class="headerlink" href="#proceso-autorregresivo-de-segundo-orden-ar-2" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.10. </span>Proceso autorregresivo de segundo orden, <span class="math notranslate nohighlight">\(AR(2)\)</span><a class="headerlink" href="#proceso-autorregresivo-de-segundo-orden-ar-2" title="Link to this heading">#</a></h2>
 <div class="proof theorem admonition" id="theorem4">
-<p class="admonition-title"><span class="caption-number">Theorem 3.4 </span></p>
+<p class="admonition-title"><span class="caption-number">Theorem 5.4 </span></p>
 <section class="theorem-content" id="proof-content">
 <ul class="simple">
-<li><p>La clara extensión de la Ecuación <a class="reference internal" href="#equation-ar1-process-formula">(3.9)</a> incluye la observación <span class="math notranslate nohighlight">\(y_{t-2}\)</span> y define el <em><strong>proceso autorregresivo de segundo orden</strong></em> <span class="math notranslate nohighlight">\(AR(2)\)</span> como</p></li>
+<li><p>La clara extensión de la Ecuación <a class="reference internal" href="#equation-ar1-process-formula">(5.9)</a> incluye la observación <span class="math notranslate nohighlight">\(y_{t-2}\)</span> y define el <em><strong>proceso autorregresivo de segundo orden</strong></em> <span class="math notranslate nohighlight">\(AR(2)\)</span> como</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-ar2-process-formula">
-<span class="eqno">(3.16)<a class="headerlink" href="#equation-ar2-process-formula" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.16)<a class="headerlink" href="#equation-ar2-process-formula" title="Link to this equation">#</a></span>\[
 y_{t}=\delta+\phi_{1}y_{t-1}+\phi_{2}y_{t-2}+\varepsilon_{t}.
 \]</div>
 <ul class="simple">
 <li><p>Demuestre que el proceso <span class="math notranslate nohighlight">\(AR(2)\)</span> <em><strong>es estacionario si los parámetros</strong></em> <span class="math notranslate nohighlight">\(\phi_{1}, \phi_{2}\)</span> <em><strong>satisfacen</strong></em></p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-stationarity-conditions-ar2">
-<span class="eqno">(3.17)<a class="headerlink" href="#equation-stationarity-conditions-ar2" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.17)<a class="headerlink" href="#equation-stationarity-conditions-ar2" title="Link to this equation">#</a></span>\[
 \phi_{1}+\phi_{2}&lt;1,~\phi_{2}-\phi_{1}&lt;1,~|\phi_{2}|&lt;1.
 \]</div>
 <ul class="simple">
 <li><p>Además,</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-mean-autocovariance-autocorrelation">
-<span class="eqno">(3.18)<a class="headerlink" href="#equation-mean-autocovariance-autocorrelation" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(5.18)<a class="headerlink" href="#equation-mean-autocovariance-autocorrelation" title="Link to this equation">#</a></span>\[\begin{split}
 \begin{align*}
 \text{E}(y_{t}) &amp;= \frac{\delta}{1-\phi_{1}-\phi_{2}}\\
 \gamma(k) &amp;=\phi_{1}\gamma(k-1)+\phi_{2}\gamma(k-2)+\begin{cases} \sigma^{2} &amp; k=0\\ 0 &amp; k&gt;0\end{cases},~\textsf{Yule-Walker}\\
@@ -1256,7 +1260,7 @@ y_{t}=\delta+\phi_{1}y_{t-1}+\phi_{2}y_{t-2}+\varepsilon_{t}.
 </section>
 </div><p><em><strong><code class="docutils literal notranslate"><span class="pre">Demostración</span></code></strong></em></p>
 <ul>
-<li><p>Nótese que la Ecuación <a class="reference internal" href="#equation-ar2-process-formula">(3.16)</a> puede reescribirse como</p>
+<li><p>Nótese que la Ecuación <a class="reference internal" href="#equation-ar2-process-formula">(5.16)</a> puede reescribirse como</p>
 <div class="math notranslate nohighlight">
 \[
   y_{t}=\delta+\phi_{1}By_{t}+\phi_{2}B^{2}y_{t}+\varepsilon_{t}\Rightarrow(1-\phi_{1}B-\phi_{2}B^{2})y_{t}=\delta+\varepsilon_{t}\Rightarrow\Phi(B)y_{t}=\delta+\varepsilon_{t}.
@@ -1282,7 +1286,7 @@ y_{t}=\textcolor{red}{\Phi(B)^{-1}\delta}+\textcolor{red}{\Phi(B)^{-1}}\varepsil
 </li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-diff-eq-second-order">
-<span class="eqno">(3.19)<a class="headerlink" href="#equation-diff-eq-second-order" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(5.19)<a class="headerlink" href="#equation-diff-eq-second-order" title="Link to this equation">#</a></span>\[\begin{split}
 \begin{align*}
 \psi_{0} &amp;= 1\\
 \psi_{1}-\phi_{1}\psi_{0} &amp;= 0\\
@@ -1295,22 +1299,22 @@ y_{t}=\textcolor{red}{\Phi(B)^{-1}\delta}+\textcolor{red}{\Phi(B)^{-1}}\varepsil
 <ul>
 <li><p>Una <em><strong>ecuación en diferencias lineal homogénea de orden</strong></em> <span class="math notranslate nohighlight">\(n\)</span> está dada por</p>
 <div class="math notranslate nohighlight" id="equation-homogeneous-difference-equation">
-<span class="eqno">(3.20)<a class="headerlink" href="#equation-homogeneous-difference-equation" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.20)<a class="headerlink" href="#equation-homogeneous-difference-equation" title="Link to this equation">#</a></span>\[
     y(t+n)+a_{1}y(t+n-1)+\cdots+a_{n-1}y(t+1)+a_{n}y(t)=0,~\text{con}~a_{i}\in\mathbb{R},
     \]</div>
 <p><span class="math notranslate nohighlight">\(\forall i~\text{y}~a_{n}\neq0\)</span>.</p>
 </li>
 <li><p>A la siguiente ecuación</p>
 <div class="math notranslate nohighlight" id="equation-characteristic-equation-ngrade">
-<span class="eqno">(3.21)<a class="headerlink" href="#equation-characteristic-equation-ngrade" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.21)<a class="headerlink" href="#equation-characteristic-equation-ngrade" title="Link to this equation">#</a></span>\[
     P(r)=m^{n}+a_{1}m^{n-1}+a_{2}m^{n-2}+\cdots+a_{n-1}m+a_{n}=0,
     \]</div>
-<p>la llamamos <em><strong>ecuación característica asociada a la ecuación en diferencias lineal homogénea de orden</strong></em> <span class="math notranslate nohighlight">\(n\)</span> <a class="reference internal" href="#equation-homogeneous-difference-equation">(3.20)</a>.</p>
+<p>la llamamos <em><strong>ecuación característica asociada a la ecuación en diferencias lineal homogénea de orden</strong></em> <span class="math notranslate nohighlight">\(n\)</span> <a class="reference internal" href="#equation-homogeneous-difference-equation">(5.20)</a>.</p>
 </li>
 </ul>
 </div>
 <ul>
-<li><p>Para encontrar <em><strong>soluciones homogéneas no triviales</strong></em>, asumimos soluciones de la forma <span class="math notranslate nohighlight">\(\psi_{j}=Am^{j}\)</span>, <span class="math notranslate nohighlight">\(~A, m\in\mathbb{R}\setminus\{0\}\)</span>. Entonces la <em><strong>ecuación característica</strong></em> asociada a la Ecuación <a class="reference internal" href="#equation-diff-eq-second-order">(3.19)</a> tomaría la forma</p>
+<li><p>Para encontrar <em><strong>soluciones homogéneas no triviales</strong></em>, asumimos soluciones de la forma <span class="math notranslate nohighlight">\(\psi_{j}=Am^{j}\)</span>, <span class="math notranslate nohighlight">\(~A, m\in\mathbb{R}\setminus\{0\}\)</span>. Entonces la <em><strong>ecuación característica</strong></em> asociada a la Ecuación <a class="reference internal" href="#equation-diff-eq-second-order">(5.19)</a> tomaría la forma</p>
 <div class="math notranslate nohighlight">
 \[
   \psi_{j}-\phi_{1}\psi_{j-1}-\phi_{2}\psi_{j-2}=Am^{j}-\phi_{1}Am^{j-1}-\phi_{2}Am^{j-2}=0\Leftrightarrow m^{2}-\phi_{1}m-\phi_{2}=0.
@@ -1321,11 +1325,11 @@ y_{t}=\textcolor{red}{\Phi(B)^{-1}\delta}+\textcolor{red}{\Phi(B)^{-1}}\varepsil
 <li><p>Las raíces son obtenidas por medio del uso de la fórmula general. Estudiaremos <em><strong>tres casos para sus posibles raíces</strong></em></p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-roots-diff-equations-ar2">
-<span class="eqno">(3.22)<a class="headerlink" href="#equation-roots-diff-equations-ar2" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.22)<a class="headerlink" href="#equation-roots-diff-equations-ar2" title="Link to this equation">#</a></span>\[
 m_{1,2}=\frac{\phi_{1}\pm\sqrt{\phi_{1}^{2}+4\phi_{2}}}{2}
 \]</div>
 <ul>
-<li><p>Nótese que si <span class="math notranslate nohighlight">\(|m_{i}|&lt;1,~i=1,2\)</span> entonces <span class="math notranslate nohighlight">\(\sum_{i=0}^{\infty}|\psi_{i}|&lt;\infty\)</span>. Por lo tanto, el modelo sería <em><strong>causal estacionario</strong></em>. Además, si las <em><strong>raices de la Ecuación</strong></em> <a class="reference internal" href="#equation-roots-diff-equations-ar2">(3.22)</a> <em><strong>son complejas</strong></em>, esto es, de la forma <span class="math notranslate nohighlight">\(a+bi,~i=\sqrt{-1}\)</span>, la <em><strong>estacionariedad se tendría si</strong></em></p>
+<li><p>Nótese que si <span class="math notranslate nohighlight">\(|m_{i}|&lt;1,~i=1,2\)</span> entonces <span class="math notranslate nohighlight">\(\sum_{i=0}^{\infty}|\psi_{i}|&lt;\infty\)</span>. Por lo tanto, el modelo sería <em><strong>causal estacionario</strong></em>. Además, si las <em><strong>raices de la Ecuación</strong></em> <a class="reference internal" href="#equation-roots-diff-equations-ar2">(5.22)</a> <em><strong>son complejas</strong></em>, esto es, de la forma <span class="math notranslate nohighlight">\(a+bi,~i=\sqrt{-1}\)</span>, la <em><strong>estacionariedad se tendría si</strong></em></p>
 <div class="math notranslate nohighlight">
 \[
   |a+bi|=\sqrt{a^{2}+b^{2}}&lt;1
@@ -1333,7 +1337,7 @@ m_{1,2}=\frac{\phi_{1}\pm\sqrt{\phi_{1}^{2}+4\phi_{2}}}{2}
 </li>
 </ul>
 <ul>
-<li><p>Además, bajo estas condiciones <span class="math notranslate nohighlight">\(\{y_{t}\}_{t}\)</span> tendría una representación como <span class="math notranslate nohighlight">\(MA\)</span> infinito (ver Ecuación <a class="reference internal" href="#equation-moving-average-backshift">(3.4)</a>). Dado que se tiene <em><strong>estacionariedad si</strong></em> <span class="math notranslate nohighlight">\(|m_{i}|&lt;1,~i=1,2\)</span>, entonces</p>
+<li><p>Además, bajo estas condiciones <span class="math notranslate nohighlight">\(\{y_{t}\}_{t}\)</span> tendría una representación como <span class="math notranslate nohighlight">\(MA\)</span> infinito (ver Ecuación <a class="reference internal" href="#equation-moving-average-backshift">(5.4)</a>). Dado que se tiene <em><strong>estacionariedad si</strong></em> <span class="math notranslate nohighlight">\(|m_{i}|&lt;1,~i=1,2\)</span>, entonces</p>
 <div class="math notranslate nohighlight">
 \[
   -1&lt;\frac{\phi_{1}\pm\sqrt{\phi_{1}^{2}+4\phi_{2}}}{2}&lt;1\Leftrightarrow-2&lt;\phi_{1}\pm\sqrt{\phi_{1}^{2}+4\phi_{2}}&lt;2.
@@ -1343,7 +1347,7 @@ m_{1,2}=\frac{\phi_{1}\pm\sqrt{\phi_{1}^{2}+4\phi_{2}}}{2}
 <ul>
 <li><p>Analicemos el valor más grande de <span class="math notranslate nohighlight">\(m_{i},~i=1,2\)</span>, el cual es acotado por <span class="math notranslate nohighlight">\(\phi_{1}+\sqrt{\phi_{1}^{2}+4\phi_{2}}&lt;2\)</span></p>
 <div class="math notranslate nohighlight" id="equation-complex-root-inequality1">
-<span class="eqno">(3.23)<a class="headerlink" href="#equation-complex-root-inequality1" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(5.23)<a class="headerlink" href="#equation-complex-root-inequality1" title="Link to this equation">#</a></span>\[\begin{split}
   \begin{align*}
   \phi_{1}+\sqrt{\phi_{1}^{2}+4\phi_{2}}&lt;2 &amp;\Rightarrow \sqrt{\phi_{1}^{2}+4\phi_{2}}&lt;2-\phi_{1}\\
   &amp;\Rightarrow\phi_{1}^{2}+4\phi_{2}&lt;(2-\phi_{1})^{2}\\[1mm]
@@ -1356,7 +1360,7 @@ m_{1,2}=\frac{\phi_{1}\pm\sqrt{\phi_{1}^{2}+4\phi_{2}}}{2}
 <ul>
 <li><p>Usando la otra desigualdad <span class="math notranslate nohighlight">\(-2&lt;\phi_{1}\pm\sqrt{\phi_{1}^{2}+4\phi_{2}}\)</span>, se tiene que (<em><strong><code class="docutils literal notranslate"><span class="pre">verifíquelo</span></code></strong></em>)</p>
 <div class="math notranslate nohighlight" id="equation-complex-root-inequality2">
-<span class="eqno">(3.24)<a class="headerlink" href="#equation-complex-root-inequality2" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.24)<a class="headerlink" href="#equation-complex-root-inequality2" title="Link to this equation">#</a></span>\[
   \textcolor{red}{\phi_{2}-\phi_{1}&lt;1}.
   \]</div>
 </li>
@@ -1377,7 +1381,7 @@ m_{1,2}=\frac{\phi_{1}\pm\sqrt{\phi_{1}^{2}+4\phi_{2}}}{2}
 |m_{1,2}|=\left(\frac{\phi_{1}}{2}\right)^{2}+\left(\frac{\sqrt{-\left(\phi_{1}^{2}+4\phi_{2}\right)}}{2}\right)^{2}=\frac{1}{4}\phi_{1}^{2}-\frac{1}{4}(\phi_{1}^{2}+4\phi_{2})=-\phi_{2}.
 \]</div>
 <ul>
-<li><p>Entonces, se tiene <em><strong>estabilidad si</strong></em> <span class="math notranslate nohighlight">\(|m_{i}|&lt;1\)</span>, esto es,  si <span class="math notranslate nohighlight">\(-\phi_{2}&lt;1\Rightarrow\phi_{2}&gt;-1\)</span>. Las Ecuaciones <a class="reference internal" href="#equation-complex-root-inequality1">(3.23)</a>-<a class="reference internal" href="#equation-complex-root-inequality2">(3.24)</a> entregan vía método de eliminación que <span class="math notranslate nohighlight">\(\phi_{2}&lt;1\)</span>, por lo tanto, <span class="math notranslate nohighlight">\(\textcolor{red}{|\phi_{2}|&lt;1}\)</span>. De esta forma, las <em><strong>condiciones de estacionariedad</strong></em> son las siguientes:</p>
+<li><p>Entonces, se tiene <em><strong>estabilidad si</strong></em> <span class="math notranslate nohighlight">\(|m_{i}|&lt;1\)</span>, esto es,  si <span class="math notranslate nohighlight">\(-\phi_{2}&lt;1\Rightarrow\phi_{2}&gt;-1\)</span>. Las Ecuaciones <a class="reference internal" href="#equation-complex-root-inequality1">(5.23)</a>-<a class="reference internal" href="#equation-complex-root-inequality2">(5.24)</a> entregan vía método de eliminación que <span class="math notranslate nohighlight">\(\phi_{2}&lt;1\)</span>, por lo tanto, <span class="math notranslate nohighlight">\(\textcolor{red}{|\phi_{2}|&lt;1}\)</span>. De esta forma, las <em><strong>condiciones de estacionariedad</strong></em> son las siguientes:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
   \begin{align*}
@@ -1391,11 +1395,11 @@ m_{1,2}=\frac{\phi_{1}\pm\sqrt{\phi_{1}^{2}+4\phi_{2}}}{2}
 <figure class="align-center" id="complex-roots-ar2-model-fig">
 <img alt="_images/complex_roots_ar2_model.png" src="_images/complex_roots_ar2_model.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.1 </span><span class="caption-text">Funciones típicas de <em><strong>autocorrelación y autocorrelación parcial</strong></em> <span class="math notranslate nohighlight">\(\rho_{k}\)</span> y <span class="math notranslate nohighlight">\(\phi_{kk}\)</span> para varios modelos <span class="math notranslate nohighlight">\(AR(2)\)</span> estacionarios. (Fuente: <span class="bibtex-citation" id="id5">[<a class="reference internal" href="biblio.html#id95" title="Casimir Michael Stralkowski. Lower order autoregressive-moving average stochastic models and their use for the characterization of abrasive cutting tools. PhD thesis, University of Wisconsin, 1968.">Stralkowski, 1968</a>]</span>).</span><a class="headerlink" href="#complex-roots-ar2-model-fig" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 5.1 </span><span class="caption-text">Funciones típicas de <em><strong>autocorrelación y autocorrelación parcial</strong></em> <span class="math notranslate nohighlight">\(\rho_{k}\)</span> y <span class="math notranslate nohighlight">\(\phi_{kk}\)</span> para varios modelos <span class="math notranslate nohighlight">\(AR(2)\)</span> estacionarios. (Fuente: <span class="bibtex-citation" id="id5">[<a class="reference internal" href="biblio.html#id95" title="Casimir Michael Stralkowski. Lower order autoregressive-moving average stochastic models and their use for the characterization of abrasive cutting tools. PhD thesis, University of Wisconsin, 1968.">Stralkowski, 1968</a>]</span>).</span><a class="headerlink" href="#complex-roots-ar2-model-fig" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>Procedemos a calcular ahora, <em><strong>media y autocovarianza</strong></em>. Si se satisface la Ecuación <a class="reference internal" href="#equation-stationarity-conditions-ar2">(3.17)</a>, el proceso <span class="math notranslate nohighlight">\(AR(2)\)</span> <em><strong>es estacionario</strong></em>, y, por lo tanto,</p></li>
+<li><p>Procedemos a calcular ahora, <em><strong>media y autocovarianza</strong></em>. Si se satisface la Ecuación <a class="reference internal" href="#equation-stationarity-conditions-ar2">(5.17)</a>, el proceso <span class="math notranslate nohighlight">\(AR(2)\)</span> <em><strong>es estacionario</strong></em>, y, por lo tanto,</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -1421,15 +1425,15 @@ m_{1,2}=\frac{\phi_{1}\pm\sqrt{\phi_{1}^{2}+4\phi_{2}}}{2}
 <ul>
 <li><p>Entonces, si <span class="math notranslate nohighlight">\(k=0\)</span>, se tiene que <span class="math notranslate nohighlight">\(\gamma(0)=\phi_{1}\gamma(1)+\phi_{2}\gamma(2)+\sigma^{2}\)</span> (<code class="docutils literal notranslate"><span class="pre">¿por</span> <span class="pre">qué?</span></code>) y además</p>
 <div class="math notranslate nohighlight" id="equation-yuli-walker-equation-ar2">
-<span class="eqno">(3.25)<a class="headerlink" href="#equation-yuli-walker-equation-ar2" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.25)<a class="headerlink" href="#equation-yuli-walker-equation-ar2" title="Link to this equation">#</a></span>\[
   \gamma(k)=\phi_{1}\gamma(k-1)+\phi_{2}\gamma(k-2).
   \]</div>
 </li>
 </ul>
 <ul>
-<li><p>Las Ecuaciones en <a class="reference internal" href="#equation-yuli-walker-equation-ar2">(3.25)</a> se llaman las <em><strong>Ecuaciones de Yule-Walker</strong></em> para <span class="math notranslate nohighlight">\(\gamma(k)\)</span>. De manera similar, podemos obtener la <em><strong>función de autocorrelación</strong></em> al dividir la Ecuación <a class="reference internal" href="#equation-yuli-walker-equation-ar2">(3.25)</a> por <span class="math notranslate nohighlight">\(\gamma(0)\)</span>:</p>
+<li><p>Las Ecuaciones en <a class="reference internal" href="#equation-yuli-walker-equation-ar2">(5.25)</a> se llaman las <em><strong>Ecuaciones de Yule-Walker</strong></em> para <span class="math notranslate nohighlight">\(\gamma(k)\)</span>. De manera similar, podemos obtener la <em><strong>función de autocorrelación</strong></em> al dividir la Ecuación <a class="reference internal" href="#equation-yuli-walker-equation-ar2">(5.25)</a> por <span class="math notranslate nohighlight">\(\gamma(0)\)</span>:</p>
 <div class="math notranslate nohighlight" id="equation-yule-walker-autocorrelation-ar2">
-<span class="eqno">(3.26)<a class="headerlink" href="#equation-yule-walker-autocorrelation-ar2" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(5.26)<a class="headerlink" href="#equation-yule-walker-autocorrelation-ar2" title="Link to this equation">#</a></span>\[\begin{split}
   \begin{align*}
   \rho(k) &amp;= \frac{\gamma(k)}{\gamma(0)}\\
   &amp;= \phi_{1}\frac{\gamma(k-1)}{\gamma(0)}+\phi_{2}\frac{\gamma(k-2)}{\gamma(0)}\\[2mm]
@@ -1439,10 +1443,10 @@ m_{1,2}=\frac{\phi_{1}\pm\sqrt{\phi_{1}^{2}+4\phi_{2}}}{2}
 </li>
 </ul>
 <ul class="simple">
-<li><p>Las <em><strong>Ecuaciones de Yule-Walker</strong></em> para <span class="math notranslate nohighlight">\(\rho(k)\)</span> en Ecuación <a class="reference internal" href="#equation-yule-walker-autocorrelation-ar2">(3.26)</a> pueden ser resueltas de manera iterativa</p></li>
+<li><p>Las <em><strong>Ecuaciones de Yule-Walker</strong></em> para <span class="math notranslate nohighlight">\(\rho(k)\)</span> en Ecuación <a class="reference internal" href="#equation-yule-walker-autocorrelation-ar2">(5.26)</a> pueden ser resueltas de manera iterativa</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-yule-walker-autocorrelation-ar2-rho">
-<span class="eqno">(3.27)<a class="headerlink" href="#equation-yule-walker-autocorrelation-ar2-rho" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(5.27)<a class="headerlink" href="#equation-yule-walker-autocorrelation-ar2-rho" title="Link to this equation">#</a></span>\[\begin{split}
 \begin{align*}
 k=1 &amp; \Rightarrow\rho(1)=\phi_{1}\rho(0)+\phi_{2}\rho(-1)=\phi_{1}\cdot1+\phi_{2}\rho(1)\Rightarrow\rho_{1}=\frac{\phi_{1}}{1-\phi_{2}}\\
 k=2 &amp; \Rightarrow\rho(2)=\phi_{1}\rho(1)+\phi_{2}\rho(0)=\phi_{1}\left(\frac{\phi_{1}}{1-\phi_{2}}\right)+\phi_{2}=\frac{\phi_{1}^{2}+\phi_{2}(1-\phi_{2})}{1-\phi_{2}}\\[3mm]
@@ -1453,7 +1457,7 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 \end{align*}
 \end{split}\]</div>
 <ul>
-<li><p>Considerando <span class="math notranslate nohighlight">\(\rho(j)=Am^{j},~A, m\in\mathbb{R}\setminus\{0\}\)</span> entonces, la <em><strong>Ecuación Característica</strong></em> asociada a la Ecuación <a class="reference internal" href="#equation-yule-walker-autocorrelation-ar2-rho">(3.27)</a> puede ser escrita como</p>
+<li><p>Considerando <span class="math notranslate nohighlight">\(\rho(j)=Am^{j},~A, m\in\mathbb{R}\setminus\{0\}\)</span> entonces, la <em><strong>Ecuación Característica</strong></em> asociada a la Ecuación <a class="reference internal" href="#equation-yule-walker-autocorrelation-ar2-rho">(5.27)</a> puede ser escrita como</p>
 <div class="math notranslate nohighlight">
 \[
   Am^{j}=\phi_{1}Am^{j-1}+\phi_{2}Am^{j-2}\Leftrightarrow m^{2}-\phi_{1}m-\phi_{2}=0.
@@ -1463,24 +1467,24 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 <div class="dropdown admonition">
 <p class="admonition-title">Ecuación característica</p>
 <ul>
-<li><p>Si <span class="math notranslate nohighlight">\(m_{0}\)</span> es solución de la ecuación característica <a class="reference internal" href="#equation-characteristic-equation-ngrade">(3.21)</a>, entonces <span class="math notranslate nohighlight">\(y_{t}=Am_{0}^{t}\)</span> es solución de <a class="reference internal" href="#equation-homogeneous-difference-equation">(3.20)</a></p></li>
+<li><p>Si <span class="math notranslate nohighlight">\(m_{0}\)</span> es solución de la ecuación característica <a class="reference internal" href="#equation-characteristic-equation-ngrade">(5.21)</a>, entonces <span class="math notranslate nohighlight">\(y_{t}=Am_{0}^{t}\)</span> es solución de <a class="reference internal" href="#equation-homogeneous-difference-equation">(5.20)</a></p></li>
 <li><p>Al resolver la <em><strong>ecuación característica</strong></em> pueden ocurrir los siguientes casos:</p>
 <ol class="arabic simple">
-<li><p>La ecuación característica <a class="reference internal" href="#equation-characteristic-equation-ngrade">(3.21)</a> tiene todas sus <em><strong>raíces reales y simples</strong></em> <span class="math notranslate nohighlight">\(m_{1}, m_{2},\dots, m_{n}\)</span>, entonces</p></li>
+<li><p>La ecuación característica <a class="reference internal" href="#equation-characteristic-equation-ngrade">(5.21)</a> tiene todas sus <em><strong>raíces reales y simples</strong></em> <span class="math notranslate nohighlight">\(m_{1}, m_{2},\dots, m_{n}\)</span>, entonces</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[
     y_{h}(t)=c_{1}m_{1}^{t}+c_{2}m_{2}^{t}+\cdots+c_{n}m_{n}^{t}
     \]</div>
 <ol class="arabic simple" start="2">
-<li><p>La ecuación característica <a class="reference internal" href="#equation-characteristic-equation-ngrade">(3.21)</a> tiene todas <em><strong>sus raíces reales</strong></em>: <span class="math notranslate nohighlight">\(m_{1}\)</span> <em><strong>con multiplicidad</strong></em>, <span class="math notranslate nohighlight">\(k\)</span> y <span class="math notranslate nohighlight">\(m_{k+1}, \dots, m_{n}\)</span> simples, entonces</p></li>
+<li><p>La ecuación característica <a class="reference internal" href="#equation-characteristic-equation-ngrade">(5.21)</a> tiene todas <em><strong>sus raíces reales</strong></em>: <span class="math notranslate nohighlight">\(m_{1}\)</span> <em><strong>con multiplicidad</strong></em>, <span class="math notranslate nohighlight">\(k\)</span> y <span class="math notranslate nohighlight">\(m_{k+1}, \dots, m_{n}\)</span> simples, entonces</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[
     y_{h}(t)=c_{1}m_{1}^{t}+c_{2}tm_{1}^{t}+\cdots+c_{k}t^{k-1}m_{1}^{t}+c_{k+1}t^{k}m_{k+1}^{t}+\cdots+c_{n}m_{n}^{t}.
     \]</div>
 <ol class="arabic simple" start="3">
-<li><p>La ecuación característica <a class="reference internal" href="#equation-characteristic-equation-ngrade">(3.21)</a> tiene <em><strong>raíces complejas simples</strong></em>. Si <span class="math notranslate nohighlight">\(m_{1,2}=\alpha\pm\beta i\)</span>, son raices complejas conjugadas, siendo <span class="math notranslate nohighlight">\(\rho=\sqrt{\alpha^{2}+\beta^{2}}\)</span> el módulo y <span class="math notranslate nohighlight">\(\theta=\textsf{arctan}(\beta/\alpha)\)</span> el argumento correspondiente, entonces la solución asociada a las raíces <span class="math notranslate nohighlight">\(m_{1}, m_{2}\)</span> es</p></li>
+<li><p>La ecuación característica <a class="reference internal" href="#equation-characteristic-equation-ngrade">(5.21)</a> tiene <em><strong>raíces complejas simples</strong></em>. Si <span class="math notranslate nohighlight">\(m_{1,2}=\alpha\pm\beta i\)</span>, son raices complejas conjugadas, siendo <span class="math notranslate nohighlight">\(\rho=\sqrt{\alpha^{2}+\beta^{2}}\)</span> el módulo y <span class="math notranslate nohighlight">\(\theta=\textsf{arctan}(\beta/\alpha)\)</span> el argumento correspondiente, entonces la solución asociada a las raíces <span class="math notranslate nohighlight">\(m_{1}, m_{2}\)</span> es</p></li>
 </ol>
 <div class="math notranslate nohighlight">
 \[
@@ -1582,18 +1586,18 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 </ul>
 </section>
 <section id="proceso-autorregresivo-general-ar-p">
-<h2><span class="section-number">3.11. </span>Proceso autorregresivo general, <span class="math notranslate nohighlight">\(AR(p)\)</span><a class="headerlink" href="#proceso-autorregresivo-general-ar-p" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.11. </span>Proceso autorregresivo general, <span class="math notranslate nohighlight">\(AR(p)\)</span><a class="headerlink" href="#proceso-autorregresivo-general-ar-p" title="Link to this heading">#</a></h2>
 <ul>
 <li><p>En las dos secciones anteriores, se presenta un <em><strong>modelo</strong></em> <span class="math notranslate nohighlight">\(AR\)</span> <em><strong>general de orden</strong></em> <span class="math notranslate nohighlight">\(p\)</span></p>
 <div class="math notranslate nohighlight" id="equation-general-autorregresive-process-arp">
-<span class="eqno">(3.28)<a class="headerlink" href="#equation-general-autorregresive-process-arp" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.28)<a class="headerlink" href="#equation-general-autorregresive-process-arp" title="Link to this equation">#</a></span>\[
   y_{t}=\delta+\phi_{1}y_{t-1}+\phi_{2}y_{t-2}+\cdots+\phi_{p}y_{t-p}+\varepsilon_{t}
   \]</div>
 <p>donde <span class="math notranslate nohighlight">\(\varepsilon_{t}\)</span> es <em><strong>ruido blanco</strong></em>.</p>
 </li>
 </ul>
 <ul>
-<li><p>Otra representación de la Ecuación <a class="reference internal" href="#equation-general-autorregresive-process-arp">(3.28)</a> se puede dar como</p>
+<li><p>Otra representación de la Ecuación <a class="reference internal" href="#equation-general-autorregresive-process-arp">(5.28)</a> se puede dar como</p>
 <div class="math notranslate nohighlight">
 \[
   \Phi(B)y_{t}=\delta+\varepsilon_{t}
@@ -1602,9 +1606,9 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 </li>
 </ul>
 <ul>
-<li><p>La serie temporal <span class="math notranslate nohighlight">\(AR(p)\)</span>, <span class="math notranslate nohighlight">\(\{y_{t}\}\)</span> en la Ecuación <a class="reference internal" href="#equation-general-autorregresive-process-arp">(3.28)</a> es <em><strong>causal y estacionaria si las raíces del polinomio asociado</strong></em></p>
+<li><p>La serie temporal <span class="math notranslate nohighlight">\(AR(p)\)</span>, <span class="math notranslate nohighlight">\(\{y_{t}\}\)</span> en la Ecuación <a class="reference internal" href="#equation-general-autorregresive-process-arp">(5.28)</a> es <em><strong>causal y estacionaria si las raíces del polinomio asociado</strong></em></p>
 <div class="math notranslate nohighlight" id="equation-characteristic-equation-arp">
-<span class="eqno">(3.29)<a class="headerlink" href="#equation-characteristic-equation-arp" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.29)<a class="headerlink" href="#equation-characteristic-equation-arp" title="Link to this equation">#</a></span>\[
   m^{p}-\phi_{1}m^{p-1}-\phi_{2}m^{p-2}-\cdots-\phi_{p}=0
   \]</div>
 <p><em><strong>son menores que uno, en valor absoluto</strong></em>.</p>
@@ -1613,14 +1617,14 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 <ul>
 <li><p>Además, bajo esta condición, la serie temporal <span class="math notranslate nohighlight">\(\{y_{t}\},~ AR(p)\)</span> también se dice que tiene una <em><strong>representación</strong></em> <span class="math notranslate nohighlight">\(MA\)</span> <em><strong>infinita, absolutamente sumable</strong></em></p>
 <div class="math notranslate nohighlight" id="equation-infinite-movingaverage-representation-arp">
-<span class="eqno">(3.30)<a class="headerlink" href="#equation-infinite-movingaverage-representation-arp" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.30)<a class="headerlink" href="#equation-infinite-movingaverage-representation-arp" title="Link to this equation">#</a></span>\[
   y_{t}=\mu+\Psi(B)\varepsilon_{t}=\mu+\sum_{i=0}^{\infty}\psi_{i}\varepsilon_{t-i},
   \]</div>
 <p>donde <span class="math notranslate nohighlight">\(\Psi(B)=\Phi(B)^{-1}\)</span> con <span class="math notranslate nohighlight">\(\sum_{i=0}^{\infty}|\psi_{i}|&lt;\infty\)</span>.</p>
 </li>
 </ul>
 <ul>
-<li><p>Al igual que en <span class="math notranslate nohighlight">\(AR(2)\)</span>, los <em><strong>pesos de los choques aleatorios en la Ecuación</strong></em> <a class="reference internal" href="#equation-infinite-movingaverage-representation-arp">(3.30)</a> <em><strong>pueden obtenerse de</strong></em> <span class="math notranslate nohighlight">\(\Phi(B)\Psi(B)=1\)</span> como</p>
+<li><p>Al igual que en <span class="math notranslate nohighlight">\(AR(2)\)</span>, los <em><strong>pesos de los choques aleatorios en la Ecuación</strong></em> <a class="reference internal" href="#equation-infinite-movingaverage-representation-arp">(5.30)</a> <em><strong>pueden obtenerse de</strong></em> <span class="math notranslate nohighlight">\(\Phi(B)\Psi(B)=1\)</span> como</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
   \begin{align*}
@@ -1639,7 +1643,7 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
   \]</div>
 <p>y</p>
 <div class="math notranslate nohighlight" id="equation-covariance-autorregresive-arp">
-<span class="eqno">(3.31)<a class="headerlink" href="#equation-covariance-autorregresive-arp" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(5.31)<a class="headerlink" href="#equation-covariance-autorregresive-arp" title="Link to this equation">#</a></span>\[\begin{split}
   \begin{align*}
   \gamma(k) &amp;= \text{Cov}(y_{t}, y_{t-k})\\[5mm]
   &amp;= \text{Cov}(\delta+\phi_{1}y_{t-1}+\phi_{2}y_{t-2}+\cdots+\phi_{p}y_{t-p}+\varepsilon_{t}, y_{t-k})\\[2mm]
@@ -1660,14 +1664,14 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 \end{align*}
 \end{split}\]</div>
 <ul class="simple">
-<li><p>Al dividir la Ecuación <a class="reference internal" href="#equation-covariance-autorregresive-arp">(3.31)</a> por <span class="math notranslate nohighlight">\(\gamma(0)\)</span> para <span class="math notranslate nohighlight">\(k &gt; 0\)</span>, se puede observar que la <em><strong>función de autocorrelación (ACF) de un proceso</strong></em> <span class="math notranslate nohighlight">\(AR(p)\)</span> <em><strong>satisface las ecuaciones de Yule–Walker</strong></em></p></li>
+<li><p>Al dividir la Ecuación <a class="reference internal" href="#equation-covariance-autorregresive-arp">(5.31)</a> por <span class="math notranslate nohighlight">\(\gamma(0)\)</span> para <span class="math notranslate nohighlight">\(k &gt; 0\)</span>, se puede observar que la <em><strong>función de autocorrelación (ACF) de un proceso</strong></em> <span class="math notranslate nohighlight">\(AR(p)\)</span> <em><strong>satisface las ecuaciones de Yule–Walker</strong></em></p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-yule-walker-equation-arp">
-<span class="eqno">(3.32)<a class="headerlink" href="#equation-yule-walker-equation-arp" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.32)<a class="headerlink" href="#equation-yule-walker-equation-arp" title="Link to this equation">#</a></span>\[
 \rho(k)=\sum_{i=1}^{p}\phi_{i}\rho(k-i),~k=1,2,\dots
 \]</div>
 <ul>
-<li><p>Las Ecuaciones <a class="reference internal" href="#equation-yule-walker-equation-arp">(3.32)</a> son ecuaciones lineales de orden <span class="math notranslate nohighlight">\(p\)</span>, lo que implica que la <em><strong>función de autocorrelación (ACF) para un modelo</strong></em> <span class="math notranslate nohighlight">\(AR(p)\)</span> se puede encontrar a través de las <span class="math notranslate nohighlight">\(p\)</span> ***raíces del polinomio asociado con la Ecuación <a class="reference internal" href="#equation-characteristic-equation-arp">(3.29)</a>. Por ejemplo, si todas las <em><strong>raíces son distintas y reales</strong></em>, tenemos</p>
+<li><p>Las Ecuaciones <a class="reference internal" href="#equation-yule-walker-equation-arp">(5.32)</a> son ecuaciones lineales de orden <span class="math notranslate nohighlight">\(p\)</span>, lo que implica que la <em><strong>función de autocorrelación (ACF) para un modelo</strong></em> <span class="math notranslate nohighlight">\(AR(p)\)</span> se puede encontrar a través de las <span class="math notranslate nohighlight">\(p\)</span> ***raíces del polinomio asociado con la Ecuación <a class="reference internal" href="#equation-characteristic-equation-arp">(5.29)</a>. Por ejemplo, si todas las <em><strong>raíces son distintas y reales</strong></em>, tenemos</p>
 <div class="math notranslate nohighlight">
 \[
   \rho(k)=c_{1}m_{1}^{k}+c_{2}m_{2}^{k}+\cdots+c_{p}m_{p}^{k},~k=1,2,\dots
@@ -1676,11 +1680,11 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 </li>
 </ul>
 <ul class="simple">
-<li><p>Sin embargo, en general, las raíces pueden no ser todas distintas o reales. Por lo tanto, la <em><strong>función de autocorrelación (ACF) de un proceso</strong></em> <span class="math notranslate nohighlight">\(AR(p)\)</span> puede ser una <em><strong>mezcla de expresiones de decaimiento exponencial y de seno amortiguado</strong></em> dependiendo de las raíces de la Ecuación <a class="reference internal" href="#equation-characteristic-equation-arp">(3.29)</a>.</p></li>
+<li><p>Sin embargo, en general, las raíces pueden no ser todas distintas o reales. Por lo tanto, la <em><strong>función de autocorrelación (ACF) de un proceso</strong></em> <span class="math notranslate nohighlight">\(AR(p)\)</span> puede ser una <em><strong>mezcla de expresiones de decaimiento exponencial y de seno amortiguado</strong></em> dependiendo de las raíces de la Ecuación <a class="reference internal" href="#equation-characteristic-equation-arp">(5.29)</a>.</p></li>
 </ul>
 </section>
 <section id="funcion-de-autocorrelacion-parcial-pacf">
-<h2><span class="section-number">3.12. </span>Función de Autocorrelación Parcial, <span class="math notranslate nohighlight">\(PACF\)</span><a class="headerlink" href="#funcion-de-autocorrelacion-parcial-pacf" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.12. </span>Función de Autocorrelación Parcial, <span class="math notranslate nohighlight">\(PACF\)</span><a class="headerlink" href="#funcion-de-autocorrelacion-parcial-pacf" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Introducción</p>
 <ul class="simple">
@@ -1722,7 +1726,7 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 <li><p>Es decir, <em><strong>PACF mide la correlación “pura” entre</strong></em> <span class="math notranslate nohighlight">\(y_{t}\)</span> y <span class="math notranslate nohighlight">\(y_{t-k}\)</span> <em><strong>ajustada por las correlaciones en todos los desfases menores</strong></em>. Por lo tanto, para un modelo <span class="math notranslate nohighlight">\(AR(p)\)</span> la <span class="math notranslate nohighlight">\(PACF\)</span> entre <span class="math notranslate nohighlight">\(y_{t}\)</span> y <span class="math notranslate nohighlight">\(y_{t−k}\)</span> para <span class="math notranslate nohighlight">\(k &gt; p\)</span> debería ser igual a cero. Una definición más formal se puede encontrar a continuación.</p></li>
 </ul>
 <ul class="simple">
-<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Función</span> <span class="pre">de</span> <span class="pre">Autocorrelación</span> <span class="pre">Parcial</span></code></strong></em>: Considera un <em><strong>modelo de series temporales estacionario</strong></em> <span class="math notranslate nohighlight">\(\{y_{t}\}_{t}\)</span> que <em><strong>no necesariamente es un proceso AR</strong></em>. Además, considera, para cualquier valor fijo de <span class="math notranslate nohighlight">\(k\)</span>, las <em><strong>Ecuaciones de Yule-Walker para la ACF de un proceso</strong></em> <span class="math notranslate nohighlight">\(AR(p)\)</span> dadas en la Ecuación <a class="reference internal" href="#equation-yule-walker-equation-arp">(3.32)</a> como</p></li>
+<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Función</span> <span class="pre">de</span> <span class="pre">Autocorrelación</span> <span class="pre">Parcial</span></code></strong></em>: Considera un <em><strong>modelo de series temporales estacionario</strong></em> <span class="math notranslate nohighlight">\(\{y_{t}\}_{t}\)</span> que <em><strong>no necesariamente es un proceso AR</strong></em>. Además, considera, para cualquier valor fijo de <span class="math notranslate nohighlight">\(k\)</span>, las <em><strong>Ecuaciones de Yule-Walker para la ACF de un proceso</strong></em> <span class="math notranslate nohighlight">\(AR(p)\)</span> dadas en la Ecuación <a class="reference internal" href="#equation-yule-walker-equation-arp">(5.32)</a> como</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[
@@ -1732,7 +1736,7 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 <li><p>Equivalentemente</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-yule-walker-system-arp">
-<span class="eqno">(3.33)<a class="headerlink" href="#equation-yule-walker-system-arp" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(5.33)<a class="headerlink" href="#equation-yule-walker-system-arp" title="Link to this equation">#</a></span>\[\begin{split}
 \begin{align*}
 \rho(1) &amp;= \phi_{1k}+\phi_{2k}\rho(1)+\cdots+\phi_{kk}\rho(k-1)\\
 \rho(2) &amp;= \phi_{1k}\rho(1)+\phi_{2}+\cdots+\phi_{kk}\rho(k-2)\\
@@ -1766,7 +1770,7 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
     \rho(k-1) &amp; \rho(k-2) &amp; \rho(k-3) &amp; \cdots &amp; 1\\
     \end{pmatrix}
     \end{split}\]</div>
-<p>la solución de <a class="reference internal" href="#equation-yule-walker-system-arp">(3.33)</a> para los parámetros <span class="math notranslate nohighlight">\(\boldsymbol{\phi}\)</span> en términos de las autocorrelaciones pueden ser escritos como</p>
+<p>la solución de <a class="reference internal" href="#equation-yule-walker-system-arp">(5.33)</a> para los parámetros <span class="math notranslate nohighlight">\(\boldsymbol{\phi}\)</span> en términos de las autocorrelaciones pueden ser escritos como</p>
 <div class="math notranslate nohighlight">
 \[
     \boldsymbol{\phi}=\boldsymbol{P}_{k}^{-1}\boldsymbol{\rho}_{k}.
@@ -1834,7 +1838,7 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 </div>
 </section>
 <section id="procesos-mixtos-autorregresivos-media-movil">
-<h2><span class="section-number">3.13. </span>Procesos Mixtos Autorregresivos-Media Movil<a class="headerlink" href="#procesos-mixtos-autorregresivos-media-movil" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.13. </span>Procesos Mixtos Autorregresivos-Media Movil<a class="headerlink" href="#procesos-mixtos-autorregresivos-media-movil" title="Link to this heading">#</a></h2>
 <div class="admonition-introduccion admonition">
 <p class="admonition-title">Introducción</p>
 <ul class="simple">
@@ -1847,7 +1851,7 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 <ul>
 <li><p>En general, un <em><strong>modelo</strong></em> <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span> se define como:</p>
 <div class="math notranslate nohighlight" id="equation-arma-process-orderpq">
-<span class="eqno">(3.34)<a class="headerlink" href="#equation-arma-process-orderpq" title="Link to this equation">#</a></span>\[\begin{split}
+<span class="eqno">(5.34)<a class="headerlink" href="#equation-arma-process-orderpq" title="Link to this equation">#</a></span>\[\begin{split}
     \begin{align*}
     y_{t} &amp;= \delta+\phi_{1}y_{t-1}+\phi_{2}y_{t-2}+\cdots+\phi_{p}y_{t-p}+\varepsilon_{t}-\theta_{1}\varepsilon_{t-1}-\theta_{2}\varepsilon_{t-2}-\cdots-\theta_{q}\varepsilon_{t-q}\\
     &amp;= \delta + \sum_{i=1}^{p}\phi_{i}y_{t-i}+\varepsilon_{t}-\sum_{i=1}^{q}\theta_{i}\varepsilon_{t-i}
@@ -1855,7 +1859,7 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
     \end{split}\]</div>
 <p>o</p>
 <div class="math notranslate nohighlight" id="equation-arma-process-orderpq-phitheta">
-<span class="eqno">(3.35)<a class="headerlink" href="#equation-arma-process-orderpq-phitheta" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.35)<a class="headerlink" href="#equation-arma-process-orderpq-phitheta" title="Link to this equation">#</a></span>\[
     \Phi(B)y_{t}=\delta+\Theta(B)\varepsilon_{t}
     \]</div>
 <p>donde <span class="math notranslate nohighlight">\(\varepsilon_{t}\)</span> es un <em><strong>proceso ruido blanco</strong></em>.</p>
@@ -1864,19 +1868,19 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 </div>
 </section>
 <section id="estacionariedad-del-proceso-arma-p-q">
-<h2><span class="section-number">3.14. </span>Estacionariedad del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span><a class="headerlink" href="#estacionariedad-del-proceso-arma-p-q" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.14. </span>Estacionariedad del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span><a class="headerlink" href="#estacionariedad-del-proceso-arma-p-q" title="Link to this heading">#</a></h2>
 <ul>
 <li><p>La <em><strong>estacionariedad de un proceso</strong></em> <span class="math notranslate nohighlight">\(ARMA\)</span> está <em><strong>relacionada con el componente</strong></em> <span class="math notranslate nohighlight">\(AR\)</span> en el modelo y <em><strong>puede verificarse a través de las raíces del polinomio asociado</strong></em></p>
 <div class="math notranslate nohighlight" id="equation-characteristic-eq-armapq-process">
-<span class="eqno">(3.36)<a class="headerlink" href="#equation-characteristic-eq-armapq-process" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.36)<a class="headerlink" href="#equation-characteristic-eq-armapq-process" title="Link to this equation">#</a></span>\[
   m^{p}-\phi_{1}m^{p-1}-\phi_{2}m^{p-2}-\cdots-\phi_{p}=0
   \]</div>
 </li>
 </ul>
 <ul>
-<li><p>Si todas las <em><strong>raíces de la Ecuación</strong></em> <a class="reference internal" href="#equation-characteristic-eq-armapq-process">(3.36)</a> <em><strong>son menores que uno en valor absoluto, entonces el</strong></em> <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span> <em><strong>es estacionario</strong></em>. Esto también implica que, bajo esta condición, el <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span> tiene una <em><strong>representación MA infinita</strong></em> como</p>
+<li><p>Si todas las <em><strong>raíces de la Ecuación</strong></em> <a class="reference internal" href="#equation-characteristic-eq-armapq-process">(5.36)</a> <em><strong>son menores que uno en valor absoluto, entonces el</strong></em> <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span> <em><strong>es estacionario</strong></em>. Esto también implica que, bajo esta condición, el <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span> tiene una <em><strong>representación MA infinita</strong></em> como</p>
 <div class="math notranslate nohighlight" id="equation-armapq-ma-infinite-representation">
-<span class="eqno">(3.37)<a class="headerlink" href="#equation-armapq-ma-infinite-representation" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.37)<a class="headerlink" href="#equation-armapq-ma-infinite-representation" title="Link to this equation">#</a></span>\[
   y_{t}=\mu+\sum_{i=0}^{\infty}\psi_{i}\varepsilon_{t-i}=\mu+\Psi(B)\varepsilon_{t},
   \]</div>
 <p>con <span class="math notranslate nohighlight">\(\Psi(B)=\Phi(B)^{-1}\Phi(B)\)</span>. Los <em><strong>coeficientes en</strong></em> <span class="math notranslate nohighlight">\(\Psi(B)\)</span> pueden ser calculados usando</p>
@@ -1893,7 +1897,7 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 </ul>
 </section>
 <section id="invertibilidad-del-proceso-arma-p-q">
-<h2><span class="section-number">3.15. </span>Invertibilidad del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span><a class="headerlink" href="#invertibilidad-del-proceso-arma-p-q" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.15. </span>Invertibilidad del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span><a class="headerlink" href="#invertibilidad-del-proceso-arma-p-q" title="Link to this heading">#</a></h2>
 <ul>
 <li><p>La <em><strong>invertibilidad de un proceso</strong></em> <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span> está relacionada con el <em><strong>componente</strong></em> <span class="math notranslate nohighlight">\(AR\)</span> del modelo y <em><strong>puede verificarse a través de las raíces del polinomio asociado</strong></em></p>
 <div class="math notranslate nohighlight">
@@ -1903,7 +1907,7 @@ k=j &amp; \Rightarrow\rho(j)=\phi_{1}\rho(j-1)+\phi_{2}\rho(j-2)\\
 </li>
 </ul>
 <ul>
-<li><p>Si todas las <em><strong>raíces de la Ecuación</strong></em> <a class="reference internal" href="#equation-armapq-ma-infinite-representation">(3.37)</a> son <em><strong>menores que uno en valor absoluto</strong></em>, entonces se dice que el <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span> <em><strong>es invertible y tiene una representación</strong></em> <span class="math notranslate nohighlight">\(AR\)</span> <em><strong>infinita</strong></em></p>
+<li><p>Si todas las <em><strong>raíces de la Ecuación</strong></em> <a class="reference internal" href="#equation-armapq-ma-infinite-representation">(5.37)</a> son <em><strong>menores que uno en valor absoluto</strong></em>, entonces se dice que el <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span> <em><strong>es invertible y tiene una representación</strong></em> <span class="math notranslate nohighlight">\(AR\)</span> <em><strong>infinita</strong></em></p>
 <div class="math notranslate nohighlight">
 \[
   \Pi(B)y_{t}= \alpha +\varepsilon_{t}
@@ -1989,14 +1993,14 @@ y_{t}=16-0.7y_{t-1}+\varepsilon_{t}-0.6\varepsilon_{t-1}
 </div>
 </section>
 <section id="funciones-de-autocorrelacion-acf-y-autocorrelacion-parcial-pacf-del-proceso-arma-p-q">
-<h2><span class="section-number">3.16. </span>Funciones de autocorrelación (<span class="math notranslate nohighlight">\(ACF\)</span>) y autocorrelación parcial (<span class="math notranslate nohighlight">\(PACF\)</span>) del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span><a class="headerlink" href="#funciones-de-autocorrelacion-acf-y-autocorrelacion-parcial-pacf-del-proceso-arma-p-q" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.16. </span>Funciones de autocorrelación (<span class="math notranslate nohighlight">\(ACF\)</span>) y autocorrelación parcial (<span class="math notranslate nohighlight">\(PACF\)</span>) del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span><a class="headerlink" href="#funciones-de-autocorrelacion-acf-y-autocorrelacion-parcial-pacf-del-proceso-arma-p-q" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Las <em><strong>funciones de autocorrelación (ACF) y autocorrelación parcial (PACF) de un proceso ARMA son determinadas por las componentes AR y MA</strong></em>, respectivamente. Por lo tanto, tanto la ACF como la PACF de un <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span> <em><strong>exhiben patrones de decaimiento exponencial y/o sinusoidales amortiguados</strong></em>, lo que <em>dificulta relativamente la identificación del orden del modelo</em> <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span>.</p></li>
 <li><p>Para ello, se pueden utilizar funciones de muestra adicionales como la <em><strong>ACF de muestra extendida (ESACF), la PACF de muestra generalizada (GPACF), la ACF inversa (IACF) y correlaciones canónicas</strong></em> <span class="bibtex-citation" id="id9">[<a class="reference internal" href="biblio.html#id99" title="George EP Box, Gwilym M Jenkins, Gregory C Reinsel, and Greta M Ljung. Time series analysis: forecasting and control. John Wiley &amp; Sons, 2015.">Box <em>et al.</em>, 2015</a>, <a class="reference internal" href="biblio.html#id103" title="Johannes Ledolter and Bovas Abraham. Some comments on the initialization of exponential smoothing. Journal of Forecasting, 3(1):79–84, 1984.">Ledolter and Abraham, 1984</a>, <a class="reference internal" href="biblio.html#id101" title="George C Tiao and George EP Box. Modeling multiple time series with applications. journal of the American Statistical Association, 76(376):802–816, 1981.">Tiao and Box, 1981</a>, <a class="reference internal" href="biblio.html#id102" title="Ruey S Tsay and George C Tiao. Consistent estimates of autoregressive parameters and extended sample autocorrelation function for stationary and nonstationary arma models. Journal of the American Statistical Association, 79(385):84–96, 1984.">Tsay and Tiao, 1984</a>, <a class="reference internal" href="biblio.html#id100" title="Wei William and S Wei. Time series analysis: univariate and multivariate methods. USA, Pearson Addison Wesley, Segunda edicion. Cap, 10:212–235, 2006.">William and Wei, 2006</a>]</span>.</p></li>
 <li><p>Sin embargo, la <em><strong>disponibilidad de librerías en <code class="docutils literal notranslate"><span class="pre">Python</span></code></strong></em> permite al profesional considerar varios modelos con diferentes órdenes y compararlos según los <em><strong>criterios de selección de modelos como AIC, AICC y BIC</strong></em>. Los valores teóricos de la <em><strong>ACF y la PACF para series de tiempo estacionarias se resumen en la siguiente tabla</strong></em>.</p></li>
 </ul>
 <div class="pst-scrollable-table-container"><table class="table" id="table-acf-pacf-arima-process">
-<caption><span class="caption-number">Table 3.1 </span><span class="caption-text">Comportamiento de las ACF, PACF teóricas para procesos estacionarios</span><a class="headerlink" href="#table-acf-pacf-arima-process" title="Link to this table">#</a></caption>
+<caption><span class="caption-number">Table 5.1 </span><span class="caption-text">Comportamiento de las ACF, PACF teóricas para procesos estacionarios</span><a class="headerlink" href="#table-acf-pacf-arima-process" title="Link to this table">#</a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>Modelo</p></th>
 <th class="head text-center"><p>ACF</p></th>
@@ -2021,7 +2025,7 @@ y_{t}=16-0.7y_{t-1}+\varepsilon_{t}-0.6\varepsilon_{t-1}
 </div>
 </section>
 <section id="procesos-no-estacionarios">
-<h2><span class="section-number">3.17. </span>Procesos No Estacionarios<a class="headerlink" href="#procesos-no-estacionarios" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.17. </span>Procesos No Estacionarios<a class="headerlink" href="#procesos-no-estacionarios" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Introducción</p>
 <ul class="simple">
@@ -2041,7 +2045,7 @@ y_{t} &amp;= w_{t}+y_{t-1}\\
 <ul>
 <li><p>Por lo tanto, un proceso <span class="math notranslate nohighlight">\(ARIMA(p, d, q)\)</span> puede ser escrito como</p>
 <div class="math notranslate nohighlight" id="equation-arimapdq-model-phitheta-representation">
-<span class="eqno">(3.38)<a class="headerlink" href="#equation-arimapdq-model-phitheta-representation" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.38)<a class="headerlink" href="#equation-arimapdq-model-phitheta-representation" title="Link to this equation">#</a></span>\[
   \Phi(B)(1-B)^{d}y_{t}=\delta+\Phi(B)\varepsilon_{t}
   \]</div>
 </li>
@@ -2056,7 +2060,7 @@ y_{t} &amp;= w_{t}+y_{t-1}\\
 </div>
 </section>
 <section id="construccion-de-modelos-de-series-temporales">
-<h2><span class="section-number">3.18. </span>Construcción de Modelos de Series Temporales<a class="headerlink" href="#construccion-de-modelos-de-series-temporales" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.18. </span>Construcción de Modelos de Series Temporales<a class="headerlink" href="#construccion-de-modelos-de-series-temporales" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Introducción</p>
 <ul class="simple">
@@ -2065,7 +2069,7 @@ y_{t} &amp;= w_{t}+y_{t-1}\\
 </div>
 </section>
 <section id="identificacion-de-modelos">
-<h2><span class="section-number">3.19. </span>Identificación de modelos<a class="headerlink" href="#identificacion-de-modelos" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.19. </span>Identificación de modelos<a class="headerlink" href="#identificacion-de-modelos" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><em><strong>Antes de comenzar con esfuerzos rigurosos de construcción de modelos estadísticos</strong></em>, se recomienda el uso de <em><strong>gráficos descriptivos, como los gráficos de series temporales simples y los gráficos de dispersión de los datos de series temporales</strong></em> <span class="math notranslate nohighlight">\(y_{t}\)</span> vs <span class="math notranslate nohighlight">\(y_{t−1}, y_{t−2},\dots,\)</span>.</p></li>
 <li><p>Si se <em><strong>sospecha de no estacionariedad</strong></em>, también se debe considerar el <em><strong>gráfico de la primera (o <em><strong><span class="math notranslate nohighlight">\(d\)</span></strong></em>-ésima) diferencia</strong></em>. La prueba de <em><strong>raíz unitaria</strong></em> <span class="bibtex-citation" id="id10">[<a class="reference internal" href="biblio.html#id104" title="David A Dickey and Wayne A Fuller. Distribution of the estimators for autoregressive time series with a unit root. Journal of the American statistical association, 74(366a):427–431, 1979.">Dickey and Fuller, 1979</a>]</span> también se puede realizar para asegurarse de que se necesite realmente la diferenciación.</p></li>
@@ -2074,7 +2078,7 @@ y_{t} &amp;= w_{t}+y_{t-1}\\
 </ul>
 </section>
 <section id="estimacion-de-parametros">
-<h2><span class="section-number">3.20. </span>Estimación de Parámetros<a class="headerlink" href="#estimacion-de-parametros" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.20. </span>Estimación de Parámetros<a class="headerlink" href="#estimacion-de-parametros" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Existen varios métodos, como el <em><strong>método de momentos, método de máxima verosimilitud y mínimos cuadrados</strong></em> que pueden ser utilizados para <em><strong>estimar los parámetros en el posible modelo identificado</strong></em>. A continuación se desarrolla, con detalle matemático, la estimación por <strong>Máxima Verosimilitud (MLE)</strong>, que es el método utilizado internamente por <code class="docutils literal notranslate"><span class="pre">statsmodels</span></code> y por la mayoría de los paquetes de referencia.</p></li>
 </ul>
@@ -2164,18 +2168,18 @@ H_{k+1}^{-1}=H_{k}^{-1}+\frac{y_{k}y_{k}^{T}}{y_{k}^{T}s_{k}}-\frac{H_{k}^{-1}s_
 </div>
 </section>
 <section id="diagnostico-checking">
-<h2><span class="section-number">3.21. </span>Diagnostico Checking<a class="headerlink" href="#diagnostico-checking" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.21. </span>Diagnostico Checking<a class="headerlink" href="#diagnostico-checking" title="Link to this heading">#</a></h2>
 <ul>
 <li><p>Despues que un posible modelo ha sido ajustado a los datos, debemos <em><strong>examinar si es adecuado, y si es necesario, sugerir mejoras potenciales</strong></em>. Esto puede ser realizado a traves del <em><strong>análisis de residuales</strong></em>.</p></li>
 <li><p>Los residuales para un <em><strong>proceso</strong></em> <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span> puden ser <em><strong>obtenidos a partir de</strong></em></p>
 <div class="math notranslate nohighlight" id="equation-residual-whitenoise-armapq">
-<span class="eqno">(3.39)<a class="headerlink" href="#equation-residual-whitenoise-armapq" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.39)<a class="headerlink" href="#equation-residual-whitenoise-armapq" title="Link to this equation">#</a></span>\[
   \hat{\varepsilon}_{t}=y_{t}-\left(\hat{\delta}+\sum_{i=1}^{p}\hat{\phi}_{i}y_{t-i}-\sum_{i=1}^{q}\hat{\theta_{i}}\hat{\varepsilon}_{t-i}\right)
   \]</div>
 </li>
 </ul>
 <ul class="simple">
-<li><p>Si el <em><strong>modelo especificado es adecuado</strong></em>, y por lo tanto los ordenes aproximados <span class="math notranslate nohighlight">\(p\)</span> y <span class="math notranslate nohighlight">\(q\)</span> son identificados, este <em><strong>debería transformar las observaciones a un proceso ruido blanco</strong></em>. Esto es, el comportamiento de los residuales en la Ecuación <a class="reference internal" href="#equation-residual-whitenoise-armapq">(3.39)</a> debería ser ruido blanco.</p></li>
+<li><p>Si el <em><strong>modelo especificado es adecuado</strong></em>, y por lo tanto los ordenes aproximados <span class="math notranslate nohighlight">\(p\)</span> y <span class="math notranslate nohighlight">\(q\)</span> son identificados, este <em><strong>debería transformar las observaciones a un proceso ruido blanco</strong></em>. Esto es, el comportamiento de los residuales en la Ecuación <a class="reference internal" href="#equation-residual-whitenoise-armapq">(5.39)</a> debería ser ruido blanco.</p></li>
 </ul>
 <ul class="simple">
 <li><p>Denotemos la <em><strong>función de autocorrelación muestral</strong></em> de los residuales por <span class="math notranslate nohighlight">\(\{r_{e}(k)\}\)</span>. Si el modelo es apropiado, la función de autocorrelación muestral de los residuos no debería tener una estructura a identificar. Esto es, <em><strong>la autocorrelación no debería diferir significativamente de cero para todos los lags mayores que uno</strong></em>. Si conocemos los verdaderos valores de los parámetros y la forma del modelo es correcta, los <em><strong>errores estándar de los residuos de autocorrelación</strong></em> serían <span class="math notranslate nohighlight">\(N^{-1/2}\)</span>.</p></li>
@@ -2194,7 +2198,7 @@ H_{k+1}^{-1}=H_{k}^{-1}+\frac{y_{k}y_{k}^{T}}{y_{k}^{T}s_{k}}-\frac{H_{k}^{-1}s_
 </div>
 </section>
 <section id="pronostico-con-proceso-arima">
-<h2><span class="section-number">3.22. </span>Pronóstico con proceso ARIMA<a class="headerlink" href="#pronostico-con-proceso-arima" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.22. </span>Pronóstico con proceso ARIMA<a class="headerlink" href="#pronostico-con-proceso-arima" title="Link to this heading">#</a></h2>
 <div class="admonition-introduccion admonition">
 <p class="admonition-title">Introducción</p>
 <ul>
@@ -2225,13 +2229,13 @@ H_{k+1}^{-1}=H_{k}^{-1}+\frac{y_{k}y_{k}^{T}}{y_{k}^{T}s_{k}}-\frac{H_{k}^{-1}s_
 <ul>
 <li><p>Además, considere su <em><strong>representación infinita</strong></em> <span class="math notranslate nohighlight">\(MA\)</span></p>
 <div class="math notranslate nohighlight" id="equation-ma-infinite-representation-arimapdq">
-<span class="eqno">(3.40)<a class="headerlink" href="#equation-ma-infinite-representation-arimapdq" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.40)<a class="headerlink" href="#equation-ma-infinite-representation-arimapdq" title="Link to this equation">#</a></span>\[
   y_{T+\tau}=\mu+\sum_{i=0}^{\infty}\psi_{i}\varepsilon_{T+\tau-i}
   \]</div>
 </li>
 </ul>
 <ul>
-<li><p>Podemos <em><strong>particionar la Ecuación</strong></em> <a class="reference internal" href="#equation-ma-infinite-representation-arimapdq">(3.40)</a> como</p>
+<li><p>Podemos <em><strong>particionar la Ecuación</strong></em> <a class="reference internal" href="#equation-ma-infinite-representation-arimapdq">(5.40)</a> como</p>
 <div class="math notranslate nohighlight">
 \[
   y_{T+\tau}=\mu+\sum_{i=0}^{\tau-1}\psi_{i}\varepsilon_{T+\tau-i}+\sum_{i=\tau}^{\infty}\psi_{i}\varepsilon_{T+\tau-i}
@@ -2261,13 +2265,13 @@ H_{k+1}^{-1}=H_{k}^{-1}+\frac{y_{k}y_{k}^{T}}{y_{k}^{T}s_{k}}-\frac{H_{k}^{-1}s_
 <ul>
 <li><p>Seguidamente, el <em><strong>error del pronóstico</strong></em> es calculado a partir de</p>
 <div class="math notranslate nohighlight" id="equation-forecasting-error-attau-arimapdq">
-<span class="eqno">(3.41)<a class="headerlink" href="#equation-forecasting-error-attau-arimapdq" title="Link to this equation">#</a></span>\[
+<span class="eqno">(5.41)<a class="headerlink" href="#equation-forecasting-error-attau-arimapdq" title="Link to this equation">#</a></span>\[
   e_{T}(\tau)=y_{T+\tau}-\hat{y}_{T+\tau}(T)=\sum_{i=0}^{\tau-1}\psi_{i}\varepsilon_{T+\tau-i}
   \]</div>
 </li>
 </ul>
 <ul>
-<li><p>Dado que el <em><strong>error de pronóstico</strong></em> en la Ecuación <a class="reference internal" href="#equation-forecasting-error-attau-arimapdq">(3.41)</a> es una <em><strong>combinación lineal de random shocks</strong></em>, tenemos que</p>
+<li><p>Dado que el <em><strong>error de pronóstico</strong></em> en la Ecuación <a class="reference internal" href="#equation-forecasting-error-attau-arimapdq">(5.41)</a> es una <em><strong>combinación lineal de random shocks</strong></em>, tenemos que</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
   \begin{align*}
@@ -2282,13 +2286,13 @@ H_{k+1}^{-1}=H_{k}^{-1}+\frac{y_{k}y_{k}^{T}}{y_{k}^{T}s_{k}}-\frac{H_{k}^{-1}s_
 </ul>
 </section>
 <section id="parte-ii-implementacion-computacional-modelos-clasicos">
-<h2><span class="section-number">3.23. </span>Parte II. Implementación Computacional: Modelos Clásicos<a class="headerlink" href="#parte-ii-implementacion-computacional-modelos-clasicos" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.23. </span>Parte II. Implementación Computacional: Modelos Clásicos<a class="headerlink" href="#parte-ii-implementacion-computacional-modelos-clasicos" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>En esta parte se traduce el marco teórico anterior a código ejecutable. Se simulan procesos <span class="math notranslate nohighlight">\(AR\)</span>, <span class="math notranslate nohighlight">\(MA\)</span> y <span class="math notranslate nohighlight">\(ARMA\)</span> para verificar visualmente sus firmas en las funciones <code class="docutils literal notranslate"><span class="pre">ACF</span></code>/<code class="docutils literal notranslate"><span class="pre">PACF</span></code>, se ajustan modelos sobre series reales (<code class="docutils literal notranslate"><span class="pre">IBM</span></code>, <code class="docutils literal notranslate"><span class="pre">DJIA</span></code>, <code class="docutils literal notranslate"><span class="pre">AAPL</span></code>), se seleccionan órdenes <span class="math notranslate nohighlight">\((p,d,q)\)</span> mediante el <strong>Criterio de Información de Akaike (<code class="docutils literal notranslate"><span class="pre">AIC</span></code>)</strong>, y se evalúa la calidad del pronóstico mediante <em>rolling forecasting</em> y métricas de error estándar.</p></li>
 </ul>
 </section>
 <section id="implementacion">
-<h2><span class="section-number">3.24. </span>Implementación<a class="headerlink" href="#implementacion" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.24. </span>Implementación<a class="headerlink" href="#implementacion" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Estudiemos implicaciones de los modelos de componentes <span class="math notranslate nohighlight">\(AR\)</span>. El conjunto de datos <code class="docutils literal notranslate"><span class="pre">AR(1)</span></code> puede ser generado utilizando la función <code class="docutils literal notranslate"><span class="pre">arma_generate_sample</span></code> del módulo <code class="docutils literal notranslate"><span class="pre">statsmodels.tsa</span></code></p></li>
 </ul>
@@ -2501,7 +2505,7 @@ y_{t}=\phi y_{t-1}+\varepsilon_{t}=\phi (\phi y_{t-2} + \varepsilon_{t-1})+\vare
 </ul>
 </section>
 <section id="modelos-de-media-movil">
-<h2><span class="section-number">3.25. </span>Modelos de media móvil<a class="headerlink" href="#modelos-de-media-movil" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.25. </span>Modelos de media móvil<a class="headerlink" href="#modelos-de-media-movil" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Observación (Cross Validated)</p>
 <ul class="simple">
@@ -2749,7 +2753,7 @@ y_{t}=0.7\varepsilon_{t-1}+\varepsilon_{t}
 </ul>
 </section>
 <section id="creacion-de-conjuntos-de-datos-con-arima">
-<h2><span class="section-number">3.26. </span>Creación de conjuntos de datos con ARIMA<a class="headerlink" href="#creacion-de-conjuntos-de-datos-con-arima" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.26. </span>Creación de conjuntos de datos con ARIMA<a class="headerlink" href="#creacion-de-conjuntos-de-datos-con-arima" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Las dos secciones anteriores describen el modelo autorregresivo <span class="math notranslate nohighlight">\(AR(p)\)</span>, que realiza una <em><strong>regresión sobre sus propios términos rezagados</strong></em> y el modelo de media móvil <span class="math notranslate nohighlight">\(MA(q)\)</span> construye una <em><strong>función en términos de errores pasados</strong></em>. Los modelos <span class="math notranslate nohighlight">\(AR(p)\)</span> tienden a <em><strong>captar el efecto de reversión a la media (mean reversion)</strong></em>, mientras que los modelos <span class="math notranslate nohighlight">\(MA(q)\)</span> <em><strong>tienden a captar el efecto de choque en el error</strong></em>, que no son normales o imprevistos. <em>La reversión a la media es un término financiero para la suposición de que el precio de un activo tenderá a converger al precio promedio a lo largo del tiempo</em>. Así pues, <em><strong>el modelo</strong></em> <span class="math notranslate nohighlight">\(ARMA\)</span> <em><strong>combina la potencia de los componentes</strong></em> <span class="math notranslate nohighlight">\(AR\)</span> <em><strong>y</strong></em> <span class="math notranslate nohighlight">\(MA\)</span>. Un modelo de previsión de series temporales <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span> incorpora el modelo <span class="math notranslate nohighlight">\(AR\)</span> de orden <span class="math notranslate nohighlight">\(p\)</span> y el modelo <span class="math notranslate nohighlight">\(MA\)</span> de orden <span class="math notranslate nohighlight">\(q\)</span>, respectivamente.</p></li>
 </ul>
@@ -3253,7 +3257,7 @@ y_{t}=0.7\varepsilon_{t-1}+\varepsilon_{t}
 </ul>
 </section>
 <section id="arima">
-<h2><span class="section-number">3.27. </span>ARIMA<a class="headerlink" href="#arima" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.27. </span>ARIMA<a class="headerlink" href="#arima" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(ARIMA\)</span>, también conocido como <em><strong>modelo Box-Jenkins</strong></em>, es una generalización del modelo <span class="math notranslate nohighlight">\(ARMA\)</span> <em><strong>incluyendo componentes integrados</strong></em>. Los componentes integrados son útiles cuando los datos son <em><strong>no estacionarios</strong></em>, y la parte integrada del <span class="math notranslate nohighlight">\(ARIMA\)</span> ayuda a <em><strong>reducir la no estacionariedad</strong></em>. <span class="math notranslate nohighlight">\(ARIMA\)</span> <em><strong>aplica la diferenciación a las series temporales una o más veces para eliminar el efecto de no estacionariedad</strong></em>. Los ordenes <span class="math notranslate nohighlight">\(p, d, q\)</span> del modelo <span class="math notranslate nohighlight">\(ARIMA(p, d, q)\)</span> representan el orden de los componentes <span class="math notranslate nohighlight">\(AR\)</span>, de <em><strong>diferenciación</strong></em> y <span class="math notranslate nohighlight">\(MA\)</span>.</p></li>
 <li><p>La principal diferencia entre los modelos <span class="math notranslate nohighlight">\(ARMA\)</span> y <span class="math notranslate nohighlight">\(ARIMA\)</span> es el componente <span class="math notranslate nohighlight">\(d\)</span>, que actualiza la serie sobre la que se construye el modelo de predicción. El componente <span class="math notranslate nohighlight">\(d\)</span> <em><strong>tiene por objeto hacer la serie estacionaria</strong></em> y de esta forma el modelo <span class="math notranslate nohighlight">\(ARMA\)</span> puede aplicarse al conjunto de datos sin tendencia.</p></li>
@@ -4033,7 +4037,7 @@ CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_&lt;=_PGTOL
 </ul>
 </section>
 <section id="intervalo-de-confianza">
-<h2><span class="section-number">3.28. </span>Intervalo de confianza<a class="headerlink" href="#intervalo-de-confianza" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.28. </span>Intervalo de confianza<a class="headerlink" href="#intervalo-de-confianza" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Una de las preguntas más frecuentes en previsión es: <em><strong>¿Cuál es el intervalo de confianza de las estimaciones?</strong></em> El nivel de confianza de un modelo de previsión viene definido por el parámetro <span class="math notranslate nohighlight">\(\alpha\)</span> de la función de previsión. El valor <span class="math notranslate nohighlight">\(\alpha = 0.05\)</span> representa una estimación con un 95% de confianza, lo que puede interpretarse como que las estimaciones devueltas por el modelo tienen una probabilidad del 5% de no caer en el intervalo de distribución definido. <em><strong>El intervalo de confianza se evalúa del siguiente modo</strong></em></p></li>
 </ul>
@@ -4087,7 +4091,7 @@ CONVERGENCE: NORM_OF_PROJECTED_GRADIENT_&lt;=_PGTOL
 </div>
 </section>
 <section id="yahoo-finance">
-<h2><span class="section-number">3.29. </span>Yahoo Finance<a class="headerlink" href="#yahoo-finance" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.29. </span>Yahoo Finance<a class="headerlink" href="#yahoo-finance" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Una opción gratuita, en el caso de que no desee pagar por los servicios de APIs tales como la de finnhub, es <em>Yahoo Finance</em>. En esta sección estudiaremos como hacer uso de la <em>API de Yahoo Finance</em> y además, como podemos descargar la <em>información necesaria para un EDA</em> y graficos de velas por ejemplo.</p></li>
 <li><p>Descargaremos para este ejemplo los datos de las acciones de <strong>Apple</strong> utilizando la API de yahoo Finance. Para esto debe primero que todo, debe instalar la librería que le permitirá hacer uso de API</p></li>
@@ -4946,7 +4950,7 @@ Null hypothesis is accepted at lag = 19 for p-val = 0.9999999999999734
 </div>
 </div>
 <section id="rolling-forecast">
-<h3><span class="section-number">3.29.1. </span>Rolling forecast<a class="headerlink" href="#rolling-forecast" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">5.29.1. </span>Rolling forecast<a class="headerlink" href="#rolling-forecast" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Realizamos ahora predicciones utilizando <em>rolling forecasting</em>. El <em>rolling forecast</em> entrega reportes que utilizan datos históricos para predecir cifras futuras de forma continua durante un periodo de tiempo. Las previsiones continuas se utilizan a menudo en los reportes financieros, la gestión de la cadena de suministro, la planificación y la elaboración de presupuestos.</p></li>
 <li><p>El <em>rolling forecast</em> es una ayuda esencial para tomar decisiones empresariales acertadas. Gracias a su capacidad de respuesta, las previsiones continuas ayudan a las empresas a responder más rápidamente a las condiciones cambiantes del mercado. Si se utilizan con eficacia, las previsiones continuas pueden ayudar a identificar las deficiencias de rendimiento, acortar los ciclos de planificación y tomar la mejor decisión para los resultados. Para nuestros ejemplos, nuestro horizonte de predicción será de un día</p></li>
@@ -5145,7 +5149,7 @@ Null hypothesis is accepted at lag = 19 for p-val = 0.7889573239171491
 </section>
 </section>
 <section id="parte-iii-aprendizaje-profundo-para-series-de-tiempo">
-<h2><span class="section-number">3.30. </span>Parte III. Aprendizaje Profundo para Series de Tiempo<a class="headerlink" href="#parte-iii-aprendizaje-profundo-para-series-de-tiempo" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.30. </span>Parte III. Aprendizaje Profundo para Series de Tiempo<a class="headerlink" href="#parte-iii-aprendizaje-profundo-para-series-de-tiempo" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">De los modelos lineales a los modelos no lineales</p>
 <ul class="simple">
@@ -6303,7 +6307,7 @@ I0000 00:00:1785120726.930006   10698 device_compiler.h:188] Compiled cluster us
 </div>
 </div>
 <section id="extension-redes-recurrentes-lstm-gru">
-<h3><span class="section-number">3.30.1. </span>Extensión: Redes Recurrentes (<code class="docutils literal notranslate"><span class="pre">LSTM</span></code>/<code class="docutils literal notranslate"><span class="pre">GRU</span></code>)<a class="headerlink" href="#extension-redes-recurrentes-lstm-gru" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">5.30.1. </span>Extensión: Redes Recurrentes (<code class="docutils literal notranslate"><span class="pre">LSTM</span></code>/<code class="docutils literal notranslate"><span class="pre">GRU</span></code>)<a class="headerlink" href="#extension-redes-recurrentes-lstm-gru" title="Link to this heading">#</a></h3>
 <div class="tip admonition">
 <p class="admonition-title">Limitación del MLP y motivación de las redes recurrentes</p>
 <ul class="simple">
@@ -6312,7 +6316,7 @@ I0000 00:00:1785120726.930006   10698 device_compiler.h:188] Compiled cluster us
 </ul>
 </div>
 <section id="formulacion-matematica-de-la-celda-lstm">
-<h4><span class="section-number">3.30.1.1. </span>Formulación matemática de la celda <code class="docutils literal notranslate"><span class="pre">LSTM</span></code><a class="headerlink" href="#formulacion-matematica-de-la-celda-lstm" title="Link to this heading">#</a></h4>
+<h4><span class="section-number">5.30.1.1. </span>Formulación matemática de la celda <code class="docutils literal notranslate"><span class="pre">LSTM</span></code><a class="headerlink" href="#formulacion-matematica-de-la-celda-lstm" title="Link to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Sea <span class="math notranslate nohighlight">\(x_{t}\)</span> la entrada en el instante <span class="math notranslate nohighlight">\(t\)</span> (en nuestro caso, el valor rezagado de la serie), <span class="math notranslate nohighlight">\(h_{t-1}\)</span> el estado oculto anterior y <span class="math notranslate nohighlight">\(c_{t-1}\)</span> el estado de celda (memoria de largo plazo) anterior. La celda <code class="docutils literal notranslate"><span class="pre">LSTM</span></code> actualiza su estado mediante tres <strong>compuertas</strong> (<em>gates</em>) y una <strong>entrada candidata</strong>, todas ellas capas densas con función de activación no lineal:</p></li>
 </ul>
@@ -6432,7 +6436,7 @@ h_{t}=o_{t}\odot \tanh(c_{t}),
 </section>
 </section>
 <section id="parte-iv-comparacion-critica-modelos-clasicos-vs-aprendizaje-profundo">
-<h2><span class="section-number">3.31. </span>Parte IV. Comparación Crítica: Modelos Clásicos vs. Aprendizaje Profundo<a class="headerlink" href="#parte-iv-comparacion-critica-modelos-clasicos-vs-aprendizaje-profundo" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.31. </span>Parte IV. Comparación Crítica: Modelos Clásicos vs. Aprendizaje Profundo<a class="headerlink" href="#parte-iv-comparacion-critica-modelos-clasicos-vs-aprendizaje-profundo" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Criterios de comparación entre paradigmas</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -6495,7 +6499,7 @@ h_{t}=o_{t}\odot \tanh(c_{t}),
 </div>
 </section>
 <section id="resumen-del-capitulo">
-<h2><span class="section-number">3.32. </span>Resumen del Capítulo<a class="headerlink" href="#resumen-del-capitulo" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.32. </span>Resumen del Capítulo<a class="headerlink" href="#resumen-del-capitulo" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Resumen</p>
 <ul class="simple">
@@ -6513,10 +6517,10 @@ h_{t}=o_{t}\odot \tanh(c_{t}),
 </div>
 </section>
 <section id="apendice-proyecto-integrador-actividad-evaluativa">
-<h2><span class="section-number">3.33. </span>Apéndice: Proyecto Integrador (Actividad Evaluativa)<a class="headerlink" href="#apendice-proyecto-integrador-actividad-evaluativa" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.33. </span>Apéndice: Proyecto Integrador (Actividad Evaluativa)<a class="headerlink" href="#apendice-proyecto-integrador-actividad-evaluativa" title="Link to this heading">#</a></h2>
 </section>
 <section id="proyecto-integrador-de-deep-learning">
-<h2><span class="section-number">3.34. </span>Proyecto Integrador de Deep Learning<a class="headerlink" href="#proyecto-integrador-de-deep-learning" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">5.34. </span>Proyecto Integrador de Deep Learning<a class="headerlink" href="#proyecto-integrador-de-deep-learning" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p><strong>Objetivo</strong></p></li>
 </ol>
@@ -7043,20 +7047,20 @@ arch
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="ann_theory.html"
+       href="rnn_model.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title"><span class="section-number">2. </span>Deep Learning</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Recurrent Neural Networks</p>
       </div>
     </a>
     <a class="right-next"
-       href="appendix.html"
+       href="auto_encoders.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">4. </span>Apéndice</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Autoencoders</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -7078,49 +7082,49 @@ arch
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-i-fundamentos-teoricos">3.1. Parte I. Fundamentos Teóricos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis">3.2. Análisis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-lineales-para-series-de-tiempo-estacionarias">3.3. Modelos lineales para series de tiempo estacionarias</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estacionariedad">3.4. Estacionariedad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-de-media-movil-finito-ma-q">3.5. Proceso de media móvil finito <span class="math notranslate nohighlight">\(MA(q)\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-proceso-de-media-movil-de-primer-orden-ma-1">3.6. El Proceso de Media Móvil de Primer Orden, <span class="math notranslate nohighlight">\(MA(1)\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-proceso-de-media-movil-de-segundo-orden-ma-2">3.7. El Proceso de Media Móvil de Segundo Orden, <span class="math notranslate nohighlight">\(MA(2)\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesos-autorregresivos-de-orden-finito">3.8. Procesos autorregresivos de orden finito</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-autorregresivo-de-primer-orden-ar-1">3.9. Proceso autorregresivo de primer orden, <span class="math notranslate nohighlight">\(AR(1)\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-autorregresivo-de-segundo-orden-ar-2">3.10. Proceso autorregresivo de segundo orden, <span class="math notranslate nohighlight">\(AR(2)\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-autorregresivo-general-ar-p">3.11. Proceso autorregresivo general, <span class="math notranslate nohighlight">\(AR(p)\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-de-autocorrelacion-parcial-pacf">3.12. Función de Autocorrelación Parcial, <span class="math notranslate nohighlight">\(PACF\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesos-mixtos-autorregresivos-media-movil">3.13. Procesos Mixtos Autorregresivos-Media Movil</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estacionariedad-del-proceso-arma-p-q">3.14. Estacionariedad del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invertibilidad-del-proceso-arma-p-q">3.15. Invertibilidad del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-de-autocorrelacion-acf-y-autocorrelacion-parcial-pacf-del-proceso-arma-p-q">3.16. Funciones de autocorrelación (<span class="math notranslate nohighlight">\(ACF\)</span>) y autocorrelación parcial (<span class="math notranslate nohighlight">\(PACF\)</span>) del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesos-no-estacionarios">3.17. Procesos No Estacionarios</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-de-modelos-de-series-temporales">3.18. Construcción de Modelos de Series Temporales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identificacion-de-modelos">3.19. Identificación de modelos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimacion-de-parametros">3.20. Estimación de Parámetros</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostico-checking">3.21. Diagnostico Checking</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pronostico-con-proceso-arima">3.22. Pronóstico con proceso ARIMA</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-ii-implementacion-computacional-modelos-clasicos">3.23. Parte II. Implementación Computacional: Modelos Clásicos</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion">3.24. Implementación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-media-movil">3.25. Modelos de media móvil</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-de-conjuntos-de-datos-con-arima">3.26. Creación de conjuntos de datos con ARIMA</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arima">3.27. ARIMA</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalo-de-confianza">3.28. Intervalo de confianza</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#yahoo-finance">3.29. Yahoo Finance</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-forecast">3.29.1. Rolling forecast</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-i-fundamentos-teoricos">5.1. Parte I. Fundamentos Teóricos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis">5.2. Análisis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-lineales-para-series-de-tiempo-estacionarias">5.3. Modelos lineales para series de tiempo estacionarias</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estacionariedad">5.4. Estacionariedad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-de-media-movil-finito-ma-q">5.5. Proceso de media móvil finito <span class="math notranslate nohighlight">\(MA(q)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-proceso-de-media-movil-de-primer-orden-ma-1">5.6. El Proceso de Media Móvil de Primer Orden, <span class="math notranslate nohighlight">\(MA(1)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-proceso-de-media-movil-de-segundo-orden-ma-2">5.7. El Proceso de Media Móvil de Segundo Orden, <span class="math notranslate nohighlight">\(MA(2)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesos-autorregresivos-de-orden-finito">5.8. Procesos autorregresivos de orden finito</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-autorregresivo-de-primer-orden-ar-1">5.9. Proceso autorregresivo de primer orden, <span class="math notranslate nohighlight">\(AR(1)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-autorregresivo-de-segundo-orden-ar-2">5.10. Proceso autorregresivo de segundo orden, <span class="math notranslate nohighlight">\(AR(2)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proceso-autorregresivo-general-ar-p">5.11. Proceso autorregresivo general, <span class="math notranslate nohighlight">\(AR(p)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funcion-de-autocorrelacion-parcial-pacf">5.12. Función de Autocorrelación Parcial, <span class="math notranslate nohighlight">\(PACF\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesos-mixtos-autorregresivos-media-movil">5.13. Procesos Mixtos Autorregresivos-Media Movil</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estacionariedad-del-proceso-arma-p-q">5.14. Estacionariedad del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#invertibilidad-del-proceso-arma-p-q">5.15. Invertibilidad del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#funciones-de-autocorrelacion-acf-y-autocorrelacion-parcial-pacf-del-proceso-arma-p-q">5.16. Funciones de autocorrelación (<span class="math notranslate nohighlight">\(ACF\)</span>) y autocorrelación parcial (<span class="math notranslate nohighlight">\(PACF\)</span>) del proceso <span class="math notranslate nohighlight">\(ARMA(p, q)\)</span></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#procesos-no-estacionarios">5.17. Procesos No Estacionarios</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-de-modelos-de-series-temporales">5.18. Construcción de Modelos de Series Temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identificacion-de-modelos">5.19. Identificación de modelos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estimacion-de-parametros">5.20. Estimación de Parámetros</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diagnostico-checking">5.21. Diagnostico Checking</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pronostico-con-proceso-arima">5.22. Pronóstico con proceso ARIMA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-ii-implementacion-computacional-modelos-clasicos">5.23. Parte II. Implementación Computacional: Modelos Clásicos</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementacion">5.24. Implementación</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelos-de-media-movil">5.25. Modelos de media móvil</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creacion-de-conjuntos-de-datos-con-arima">5.26. Creación de conjuntos de datos con ARIMA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#arima">5.27. ARIMA</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intervalo-de-confianza">5.28. Intervalo de confianza</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#yahoo-finance">5.29. Yahoo Finance</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#rolling-forecast">5.29.1. Rolling forecast</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-iii-aprendizaje-profundo-para-series-de-tiempo">3.30. Parte III. Aprendizaje Profundo para Series de Tiempo</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-redes-recurrentes-lstm-gru">3.30.1. Extensión: Redes Recurrentes (<code class="docutils literal notranslate"><span class="pre">LSTM</span></code>/<code class="docutils literal notranslate"><span class="pre">GRU</span></code>)</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formulacion-matematica-de-la-celda-lstm">3.30.1.1. Formulación matemática de la celda <code class="docutils literal notranslate"><span class="pre">LSTM</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-iii-aprendizaje-profundo-para-series-de-tiempo">5.30. Parte III. Aprendizaje Profundo para Series de Tiempo</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#extension-redes-recurrentes-lstm-gru">5.30.1. Extensión: Redes Recurrentes (<code class="docutils literal notranslate"><span class="pre">LSTM</span></code>/<code class="docutils literal notranslate"><span class="pre">GRU</span></code>)</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#formulacion-matematica-de-la-celda-lstm">5.30.1.1. Formulación matemática de la celda <code class="docutils literal notranslate"><span class="pre">LSTM</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-iv-comparacion-critica-modelos-clasicos-vs-aprendizaje-profundo">3.31. Parte IV. Comparación Crítica: Modelos Clásicos vs. Aprendizaje Profundo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-del-capitulo">3.32. Resumen del Capítulo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice-proyecto-integrador-actividad-evaluativa">3.33. Apéndice: Proyecto Integrador (Actividad Evaluativa)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proyecto-integrador-de-deep-learning">3.34. Proyecto Integrador de Deep Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parte-iv-comparacion-critica-modelos-clasicos-vs-aprendizaje-profundo">5.31. Parte IV. Comparación Crítica: Modelos Clásicos vs. Aprendizaje Profundo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#resumen-del-capitulo">5.32. Resumen del Capítulo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apendice-proyecto-integrador-actividad-evaluativa">5.33. Apéndice: Proyecto Integrador (Actividad Evaluativa)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proyecto-integrador-de-deep-learning">5.34. Proyecto Integrador de Deep Learning</a></li>
 </ul>
   </nav></div>
 
