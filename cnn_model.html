@@ -1296,6 +1296,16 @@ O_{r}=I_{r}\star H_{r},\quad r=1,2,\dots,d.
 \[
 y^r = y^{r-1} + F(y^{r-1})
 \]</div>
+<div class="tip admonition">
+<p class="admonition-title">Observación</p>
+<p>El objetivo real es que <strong>la salida de la función residual sea cero, <span class="math notranslate nohighlight">\(F(y^{r-1}) = 0\)</span>, no que los pesos sean cero por sí mismos</strong>. Sin embargo, <strong>el mecanismo más simple para lograrlo es llevar los pesos <span class="math notranslate nohighlight">\(W\)</span> de esa rama hacia valores cercanos a cero</strong>: si <span class="math notranslate nohighlight">\(W \approx 0\)</span>, la transformación lineal produce salidas cercanas a cero, y tras la no linealidad (por ejemplo ReLU) el resultado sigue siendo cero o muy pequeño.</p>
+<p><strong>En resumen:</strong></p>
+<ul class="simple">
+<li><p><strong>Objetivo real</strong>: <span class="math notranslate nohighlight">\(F(y^{r-1}) = 0\)</span> (la salida del bloque residual).</p></li>
+<li><p><strong>Mecanismo para lograrlo</strong>: pesos <span class="math notranslate nohighlight">\(W\)</span> pequeños o nulos.</p></li>
+</ul>
+<p>La ventaja pedagógica es que <strong>“pesos pequeños” es un punto de partida natural, cercano a la inicialización típica de una red</strong> y fácil de alcanzar por gradiente descendente, mientras que <strong>“pesos que reproducen exactamente la matriz identidad” es una configuración específica y difícil de encontrar</strong> mediante optimización.</p>
+</div>
 <ul class="simple">
 <li><p>El uso de la <em><strong>representación residual</strong></em> no es nuevo y ya <em><strong>se ha utilizado anteriormente en el contexto de la cuantificación vectorial</strong></em>. La esencia del aprendizaje residual es <em><strong>introducir el llamado bloque de construcción residual</strong></em>, que se muestra en la <a class="reference internal" href="#residual-architecture-cnn-numref"><span class="std std-numref">Fig. 3.21</span></a>.</p></li>
 </ul>

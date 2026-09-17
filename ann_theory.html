@@ -6389,31 +6389,48 @@ Accuracy on test set: 0.972
 </section>
 <section id="analisis-de-malware-por-api-calls">
 <h2><span class="section-number">2.11. </span>Análisis de Malware por API calls<a class="headerlink" href="#analisis-de-malware-por-api-calls" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>El siguiente conjunto de datos forma parte de una investigación sobre la <em><strong>detección y clasificación de Malware mediante Deep Learning</strong></em> (ver <a class="reference external" href="https://www.techrxiv.org/articles/preprint/Behavioral_Malware_Detection_Using_Deep_Graph_Convolutional_Neural_Networks/10043099">Oliveira, Angelo; Sassi, Renato José (2019)</a>). Contiene <em><strong>42.797 secuencias de llamadas a la API de malware y 1.079 secuencias de llamadas a la API de goodware</strong></em>. Cada secuencia de llamadas a la API se compone de las <em><strong>100 primeras llamadas a la API consecutivas no repetidas asociadas al proceso principal</strong></em>, extraídas de los elementos <em><strong>“calls”</strong></em> de los informes de <a class="reference external" href="https://cuckoosandbox.org/">Cuckoo Sandbox</a>.</p></li>
-<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Características</span></code></strong></em></p>
+<div class="tip admonition">
+<p class="admonition-title">¿Por qué es importante este caso de estudio?</p>
+<p>El análisis de comportamiento de malware mediante <strong>secuencias de llamadas a la API (API calls)</strong> es una de las aplicaciones más relevantes del aprendizaje profundo en ciberseguridad. A diferencia del análisis estático (inspeccionar el código sin ejecutarlo), este enfoque es <strong>dinámico</strong>: observa cómo se comporta un programa mientras se ejecuta en un entorno controlado (<em>sandbox</em>), registrando el orden en que invoca funciones del sistema operativo.</p>
+<p>En esta sección aprenderemos a:</p>
 <ol class="arabic simple">
-<li><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">Nombre</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">columna</span></code>: hash</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Descripción</span></code>: El hash MD5 del ejemplo</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Tipo</span></code>: Cadena de 32 bytes</p></li>
-</ul>
-</li>
-<li><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">Nombre</span> <span class="pre">de</span> <span class="pre">columna</span></code>: t_0, t_1,…, t99</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Descripción</span></code>: Llamada a la API</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Tipo</span></code>: Entero (0-306)</p></li>
-</ul>
-</li>
-<li><ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">Nombre</span> <span class="pre">de</span> <span class="pre">columna</span></code>: malware</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Descripción</span></code>: Clase</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Tipo</span></code>: Entero: 0 (Goodware) o 1 (Malware)</p></li>
-</ul>
-</li>
+<li><p>Interpretar un conjunto de datos de secuencias de llamadas a la API y entender qué información captura (y cuál pierde) su representación tabular.</p></li>
+<li><p>Construir un flujo de trabajo de preprocesamiento y modelado <strong>libre de fuga de información (<em>data leakage</em>)</strong>.</p></li>
+<li><p>Ajustar hiperparámetros de una red neuronal <code class="docutils literal notranslate"><span class="pre">MLPClassifier</span></code> mediante validación cruzada, evitando el sobreajuste (<em>overfitting</em>).</p></li>
+<li><p>Evaluar el modelo con métricas apropiadas para datos desbalanceados.</p></li>
 </ol>
-</li>
+</div>
+<ul class="simple">
+<li><p>El siguiente conjunto de datos forma parte de una investigación sobre la <em><strong>detección y clasificación de Malware mediante Deep Learning</strong></em> (ver <a class="reference external" href="https://www.techrxiv.org/articles/preprint/Behavioral_Malware_Detection_Using_Deep_Graph_Convolutional_Neural_Networks/10043099">Oliveira, Angelo; Sassi, Renato José (2019)</a>). Contiene <em><strong>42.797 secuencias de llamadas a la API de malware y 1.079 secuencias de llamadas a la API de goodware</strong></em>. Cada secuencia se compone de las <em><strong>100 primeras llamadas a la API consecutivas no repetidas</strong></em> asociadas al proceso principal, extraídas del elemento <em><strong>“calls”</strong></em> de los informes de <a class="reference external" href="https://cuckoosandbox.org/">Cuckoo Sandbox</a>.</p></li>
+<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Características</span></code></strong></em></p></li>
 </ul>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Columna</p></th>
+<th class="head"><p>Descripción</p></th>
+<th class="head"><p>Tipo</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hash</span></code></p></td>
+<td><p>Hash MD5 del ejemplo (identificador único de la muestra)</p></td>
+<td><p>Cadena de 32 bytes</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">t_0,</span> <span class="pre">t_1,</span> <span class="pre">...,</span> <span class="pre">t_99</span></code></p></td>
+<td><p>Código numérico de la llamada a la API observada en la posición <span class="math notranslate nohighlight">\(i\)</span> de la secuencia</p></td>
+<td><p>Entero (0-306)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">malware</span></code></p></td>
+<td><p>Etiqueta de clase</p></td>
+<td><p>Entero: 0 (Goodware) o 1 (Malware)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Nota sobre la naturaleza de los datos</p>
+<p>Cada fila <strong>no</strong> es un vector de características independientes entre sí: es una <strong>secuencia ordenada</strong> de 100 pasos temporales. La columna <code class="docutils literal notranslate"><span class="pre">t_0</span></code> corresponde a la primera llamada a la API observada, <code class="docutils literal notranslate"><span class="pre">t_1</span></code> a la segunda, y así sucesivamente. Esto significa que, en principio, <em><strong>el orden importa</strong></em>: dos muestras podrían compartir exactamente las mismas 100 llamadas pero en distinto orden, y representar comportamientos completamente diferentes. Más adelante retomaremos esta observación al decidir cómo las representamos para el modelo.</p>
+</div>
 <figure class="align-center" id="trojan-horse-malware">
 <a class="reference internal image-reference" href="_images/trojan_horse_malware.png"><img alt="_images/trojan_horse_malware.png" src="_images/trojan_horse_malware.png" style="width: 495.0px; height: 483.59999999999997px;" />
 </a>

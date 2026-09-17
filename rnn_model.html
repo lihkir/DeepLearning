@@ -886,6 +886,8 @@ Usamos la retropropagación a través del tiempo (BPTT). Los gradientes para <sp
 <ul class="simple">
 <li><p>Actualización de los pesos para <span class="math notranslate nohighlight">\(V\)</span>:</p></li>
 </ul>
+</li>
+</ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}
     V_{\text{nuevo}} = V - 0.01 \times \begin{bmatrix} 0.4852 &amp; 0.4852 \\ -0.4852 &amp; -0.4852 \\ 0.5148 &amp; -0.5148 \end{bmatrix}=\begin{bmatrix} 
@@ -893,11 +895,9 @@ Usamos la retropropagación a través del tiempo (BPTT). Los gradientes para <sp
 0.404852 &amp; 0.304852 \\ 
 -0.005148 &amp; 0.005148 
 \end{bmatrix}
-    \end{split}\]</div>
+\end{split}\]</div>
 <ul class="simple">
-<li><p>Realiza las actualizaciones análogas para <span class="math notranslate nohighlight">\(W\)</span> y <span class="math notranslate nohighlight">\(U\)</span>.</p></li>
-</ul>
-</li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">Tarea</span></code></strong>: Realice las actualizaciones análogas para <span class="math notranslate nohighlight">\(W\)</span> y <span class="math notranslate nohighlight">\(U\)</span>, con al menos tres iteraciones en las que se note el decrecimiento del error.</p></li>
 </ul>
 </section>
 <section id="red-de-memoria-a-largo-plazo-lstm">
@@ -935,6 +935,82 @@ se muestra en la <a class="reference internal" href="#lstm-arch-rnn-numref"><spa
 \end{align*}
 \end{split}\]</div>
 <p>donde <span class="math notranslate nohighlight">\(\circ\)</span> denota el <em><strong>producto elemento a elemento entre vectores o matrices</strong></em> (producto de <em><strong>Hadamard</strong></em>), es decir, <span class="math notranslate nohighlight">\((s\circ f)_{i} = s_{i}f_{i}\)</span>, y <span class="math notranslate nohighlight">\(\sigma\)</span> denota la <em><strong>función sigmoidea logística</strong></em>.</p>
+<ol class="arabic">
+<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Puerta</span> <span class="pre">de</span> <span class="pre">olvido</span></code></strong></em> (<span class="math notranslate nohighlight">\(\boldsymbol{f}\)</span>)</p>
+<p>Esta puerta decide <em><strong>qué información se debe olvidar de la celda</strong></em>. Se calcula de la siguiente manera:</p>
+<div class="math notranslate nohighlight">
+\[
+   \boldsymbol{f} = \sigma(U^{f} \boldsymbol{x}_{n} + W^{f} \boldsymbol{h}_{n-1} + \boldsymbol{b}^{f})
+   \]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( U^{f} \)</span>: pesos de la puerta de olvido aplicados a la entrada actual <span class="math notranslate nohighlight">\( \boldsymbol{x}_{n} \)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( W^{f} \)</span>: pesos de la puerta de olvido aplicados al estado oculto anterior <span class="math notranslate nohighlight">\( \boldsymbol{h}_{n-1} \)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \boldsymbol{b}^{f} \)</span>: sesgo de la puerta de olvido.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \sigma \)</span>: función sigmoide.</p></li>
+</ul>
+</li>
+<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Puerta</span> <span class="pre">de</span> <span class="pre">entrada</span></code></strong></em> (<span class="math notranslate nohighlight">\(\boldsymbol{i}\)</span>)</p>
+<p>Esta puerta decide <em><strong>qué nueva información se almacenará en la celda</strong></em>:</p>
+<div class="math notranslate nohighlight">
+\[
+   \boldsymbol{i} = \sigma(U^{i} \boldsymbol{x}_{n} + W^{i} \boldsymbol{h}_{n-1} + \boldsymbol{b}^{i})
+   \]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( U^{i} \)</span>: pesos de la puerta de entrada aplicados a la entrada actual <span class="math notranslate nohighlight">\( \boldsymbol{x}_{n} \)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( W^{i} \)</span>: pesos de la puerta de entrada aplicados al estado oculto anterior <span class="math notranslate nohighlight">\( \boldsymbol{h}_{n-1} \)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \boldsymbol{b}^{i} \)</span>: sesgo de la puerta de entrada.</p></li>
+</ul>
+</li>
+<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Candidato</span> <span class="pre">de</span> <span class="pre">estado</span></code></strong></em> (<span class="math notranslate nohighlight">\( \tilde{\boldsymbol{s}} \)</span>)</p>
+<p>Genera <em><strong>nuevas candidaturas para el estado de la celda</strong></em>:</p>
+<div class="math notranslate nohighlight">
+\[
+   \tilde{\boldsymbol{s}} = \tanh(U^{s} \boldsymbol{x}_{n} + W^{s} \boldsymbol{h}_{n-1} + \boldsymbol{b}^{s})
+   \]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( U^{s} \)</span>: pesos del candidato de estado aplicados a la entrada actual <span class="math notranslate nohighlight">\( \boldsymbol{x}_{n} \)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( W^{s} \)</span>: pesos del candidato de estado aplicados al estado oculto anterior <span class="math notranslate nohighlight">\( \boldsymbol{h}_{n-1} \)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \boldsymbol{b}^{s} \)</span>: sesgo del candidato de estado.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \tanh \)</span>: función tangente hiperbólica.</p></li>
+</ul>
+</li>
+<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Estado</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">celda</span></code></strong></em> (<span class="math notranslate nohighlight">\( \boldsymbol{s}_{n} \)</span>)</p>
+<p><em><strong>Actualiza el estado de la celda</strong></em> utilizando la puerta de olvido y la puerta de entrada:</p>
+<div class="math notranslate nohighlight">
+\[
+   \boldsymbol{s}_{n} = \boldsymbol{s}_{n-1} \circ \boldsymbol{f} + \boldsymbol{i} \circ \tilde{\boldsymbol{s}}
+   \]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( \circ \)</span>: multiplicación elemento a elemento.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \boldsymbol{s}_{n-1} \)</span>: estado de la celda en el paso temporal anterior.</p></li>
+</ul>
+</li>
+<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Puerta</span> <span class="pre">de</span> <span class="pre">salida</span></code></strong></em> (<span class="math notranslate nohighlight">\( \boldsymbol{o} \)</span>)</p>
+<p>Decide <em><strong>qué parte del estado de la celda se enviará a la salida</strong></em>:</p>
+<div class="math notranslate nohighlight">
+\[
+   \boldsymbol{o} = \sigma(U^{o} \boldsymbol{x}_{n} + W^{o} \boldsymbol{h}_{n-1} + \boldsymbol{b}^{o})
+   \]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( U^{o} \)</span>: pesos de la puerta de salida aplicados a la entrada actual <span class="math notranslate nohighlight">\( \boldsymbol{x}_{n} \)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( W^{o} \)</span>: pesos de la puerta de salida aplicados al estado oculto anterior <span class="math notranslate nohighlight">\( \boldsymbol{h}_{n-1} \)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( \boldsymbol{b}^{o} \)</span>: sesgo de la puerta de salida.</p></li>
+</ul>
+</li>
+<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Estado</span> <span class="pre">oculto</span></code></strong></em> (<span class="math notranslate nohighlight">\(\boldsymbol{h}_{n}\)</span>)</p>
+<p>Finalmente, se <em><strong>calcula el estado oculto, que es la salida de la celda</strong></em> LSTM:</p>
+<div class="math notranslate nohighlight">
+\[
+    \boldsymbol{h}_{n} = \boldsymbol{o} \circ \tanh(\boldsymbol{s}_{n})
+    \]</div>
+</li>
+<li><p><em><strong><code class="docutils literal notranslate"><span class="pre">Resumen</span> <span class="pre">de</span> <span class="pre">salida</span> <span class="pre">de</span> <span class="pre">una</span> <span class="pre">red</span></code></strong></em> <code class="docutils literal notranslate"><span class="pre">LSTM</span></code></p>
+<ul class="simple">
+<li><p><strong>Estado de la Celda (<span class="math notranslate nohighlight">\( \boldsymbol{s}_{n} \)</span>)</strong>: almacena información a largo plazo, afectada por las puertas de olvido y entrada.</p></li>
+<li><p><strong>Estado Oculto (<span class="math notranslate nohighlight">\( \boldsymbol{h}_{n} \)</span>)</strong>: representa la salida de la celda LSTM en el tiempo <span class="math notranslate nohighlight">\( n \)</span>, que se utiliza como entrada para el siguiente paso temporal y puede usarse como salida de la red.</p></li>
+</ul>
+</li>
+</ol>
 <div class="proof observation admonition" id="observation_ann11">
 <p class="admonition-title"><span class="caption-number">Observation 4.3 </span></p>
 <section class="observation-content" id="proof-content">
