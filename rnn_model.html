@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
@@ -42,10 +42,10 @@
     <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/custom-checkpoint.css" />
   
   <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -66,6 +66,7 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'rnn_model';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/custom.js?v=14184634"></script>
     <script src="_static/.ipynb_checkpoints/custom-checkpoint.js"></script>
@@ -76,20 +77,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -115,7 +122,51 @@
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
     </header>
   
 
@@ -331,7 +382,7 @@
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation-en-tiempo">4.1. Backpropagation en tiempo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desvanecimiento-y-explosion-de-gradientes">4.2. Desvanecimiento y explosión de gradientes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#red-de-memoria-a-largo-plazo-lstm">4.3. Red de memoria a largo plazo (LSTM)</a></li>
@@ -1037,12 +1088,128 @@ se muestra en la <a class="reference internal" href="#lstm-arch-rnn-numref"><spa
 </ul>
 </li>
 </ol>
+<ul>
+<li><p><strong>Cómo se transfiere la información dentro de la celda, paso a paso</strong></p>
+<ul>
+<li><p><strong>Paso 1, olvidar:</strong> la compuerta <span class="math notranslate nohighlight">\(f_t\)</span> se multiplica elemento a elemento con la memoria vieja, <span class="math notranslate nohighlight">\(f_t \odot c_{t-1}\)</span>. Si un componente de <span class="math notranslate nohighlight">\(f_t\)</span> es cercano a 0, ese dato de la memoria se borra; si es cercano a 1, se conserva. Aquí es donde actúa el pasado de largo plazo.</p></li>
+<li><p><strong>Paso 2, escribir:</strong> el candidato <span class="math notranslate nohighlight">\(\tilde{c}_t\)</span> propone información nueva, construida con el presente <span class="math notranslate nohighlight">\(x_t\)</span> y con <span class="math notranslate nohighlight">\(h_{t-1}\)</span>. La compuerta <span class="math notranslate nohighlight">\(i_t\)</span> decide cuánto de ese candidato se guarda: <span class="math notranslate nohighlight">\(i_t \odot \tilde{c}_t\)</span>.</p></li>
+<li><p><strong>Paso 3, actualizar la memoria:</strong> se suman ambos resultados,</p>
+<div class="math notranslate nohighlight">
+\[
+    c_t = f_t \odot c_{t-1} + i_t \odot \tilde{c}_t
+    \]</div>
+<p>Esta suma es el “camino directo” del pasado al futuro que menciona la Observación 4.3. La memoria vieja pasa casi intacta, salvo por la multiplicación por <span class="math notranslate nohighlight">\(f_t\)</span>, y no atraviesa una no linealidad en cada paso. Por eso la LSTM recuerda mejor a largo plazo que una RNN básica.</p>
+</li>
+<li><p><strong>Paso 4, leer:</strong> la compuerta <span class="math notranslate nohighlight">\(o_t\)</span> decide qué parte de la memoria se expone hacia afuera:</p>
+<div class="math notranslate nohighlight">
+\[
+    h_t = o_t \odot \tanh(c_t)
+    \]</div>
+<p>Este <span class="math notranslate nohighlight">\(h_t\)</span> es la salida de la celda en el tiempo <span class="math notranslate nohighlight">\(t\)</span>. Es el nuevo “pasado de corto plazo” que llegará a las compuertas del paso siguiente.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Ejemplo: una celda con dos componentes</strong></p>
+<ul>
+<li><p><strong>Escenario:</strong> la celda guarda dos datos sobre un texto que está leyendo. El componente 1 representa el <strong>tema general</strong> (información de largo plazo, conviene conservarla). El componente 2 representa un <strong>detalle de la frase anterior</strong> (información que ya no sirve y debe reemplazarse).</p></li>
+<li><p><strong>Datos de partida</strong> (las compuertas ya fueron calculadas por la red a partir de <span class="math notranslate nohighlight">\(x_t\)</span> y <span class="math notranslate nohighlight">\(h_{t-1}\)</span>; aquí se dan directamente para concentrarse en el flujo):</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variable</p></th>
+<th class="head"><p>Componente 1 (tema)</p></th>
+<th class="head"><p>Componente 2 (detalle)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Memoria vieja <span class="math notranslate nohighlight">\(c_{t-1}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(2.0\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(-1.0\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Compuerta de olvido <span class="math notranslate nohighlight">\(f_t\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.9\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.1\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Compuerta de entrada <span class="math notranslate nohighlight">\(i_t\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.8\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Candidato <span class="math notranslate nohighlight">\(\tilde{c}_t\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.5\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(1.0\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Compuerta de salida <span class="math notranslate nohighlight">\(o_t\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.9\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(0.2\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</li>
+<li><p><strong>Paso 1, olvidar:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+    f_t \odot c_{t-1} = [0.9 \cdot 2.0,\; 0.1 \cdot (-1.0)] = [1.8,\; -0.1]
+    \]</div>
+<p>El tema se conserva casi completo (<span class="math notranslate nohighlight">\(2.0 \to 1.8\)</span>). El detalle viejo casi desaparece (<span class="math notranslate nohighlight">\(-1.0 \to -0.1\)</span>).</p>
+</li>
+<li><p><strong>Paso 2, escribir:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+    i_t \odot \tilde{c}_t = [0.2 \cdot 0.5,\; 0.8 \cdot 1.0] = [0.1,\; 0.8]
+    \]</div>
+<p>Al tema casi no se le añade nada nuevo. En cambio, el espacio liberado del detalle se llena con información nueva.</p>
+</li>
+<li><p><strong>Paso 3, actualizar la memoria:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+    c_t = [1.8 + 0.1,\; -0.1 + 0.8] = [1.9,\; 0.7]
+    \]</div>
+</li>
+<li><p><strong>Paso 4, leer:</strong></p>
+<div class="math notranslate nohighlight">
+\[
+    \tanh(c_t) \approx [0.956,\; 0.604], \qquad
+    h_t = [0.9 \cdot 0.956,\; 0.2 \cdot 0.604] \approx [0.861,\; 0.121]
+    \]</div>
+<p>La celda expone casi todo el tema, pero casi oculta el detalle nuevo, aunque lo guardó en <span class="math notranslate nohighlight">\(c_t\)</span>. Este <span class="math notranslate nohighlight">\(h_t\)</span> viaja al paso <span class="math notranslate nohighlight">\(t+1\)</span>.</p>
+</li>
+</ul>
+</li>
+<li><p><strong>Verificación numérica en Python</strong></p>
+<ul class="simple">
+<li><p>El siguiente código reproduce el ejemplo, con comentarios línea a línea:</p></li>
+</ul>
+</li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>  <span class="c1"># Importamos NumPy para trabajar con vectores</span>
+
+    <span class="n">c_prev</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">])</span>  <span class="c1"># Memoria vieja c_{t-1}: [tema, detalle]</span>
+    <span class="n">f_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">])</span>      <span class="c1"># Compuerta de olvido: cuánto de la memoria vieja se conserva</span>
+    <span class="n">i_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">])</span>      <span class="c1"># Compuerta de entrada: cuánto del candidato se escribe</span>
+    <span class="n">c_tilde</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">])</span>  <span class="c1"># Candidato: información nueva propuesta</span>
+    <span class="n">o_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">])</span>      <span class="c1"># Compuerta de salida: cuánto de la memoria se expone</span>
+
+    <span class="n">olvidado</span> <span class="o">=</span> <span class="n">f_t</span> <span class="o">*</span> <span class="n">c_prev</span>         <span class="c1"># Paso 1: producto elemento a elemento, filtra la memoria vieja</span>
+    <span class="n">escrito</span> <span class="o">=</span> <span class="n">i_t</span> <span class="o">*</span> <span class="n">c_tilde</span>         <span class="c1"># Paso 2: filtra el candidato con la compuerta de entrada</span>
+    <span class="n">c_t</span> <span class="o">=</span> <span class="n">olvidado</span> <span class="o">+</span> <span class="n">escrito</span>        <span class="c1"># Paso 3: nueva memoria = memoria filtrada + información nueva</span>
+    <span class="n">h_t</span> <span class="o">=</span> <span class="n">o_t</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">c_t</span><span class="p">)</span>        <span class="c1"># Paso 4: salida = compuerta de salida por tanh de la memoria</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Paso 1 (olvidado):&quot;</span><span class="p">,</span> <span class="n">olvidado</span><span class="p">)</span>  <span class="c1"># Muestra [ 1.8 -0.1]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Paso 2 (escrito): &quot;</span><span class="p">,</span> <span class="n">escrito</span><span class="p">)</span>   <span class="c1"># Muestra [0.1 0.8]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Paso 3 (c_t):     &quot;</span><span class="p">,</span> <span class="n">c_t</span><span class="p">)</span>       <span class="c1"># Muestra [1.9 0.7]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Paso 4 (h_t):     &quot;</span><span class="p">,</span> <span class="n">h_t</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># Muestra [0.861 0.121]</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cambiar <span class="math notranslate nohighlight">\(f_t\)</span> a <span class="math notranslate nohighlight">\([0.1, 0.1]\)</span> y recalculen <span class="math notranslate nohighlight">\(c_t\)</span>. Verán que el tema se pierde por completo, lo que ilustra por qué la compuerta de olvido es la clave de la memoria a largo plazo.</p>
+</div>
 <div class="proof observation admonition" id="observation_ann11">
 <p class="admonition-title"><span class="caption-number">Observation 4.3 </span></p>
 <section class="observation-content" id="proof-content">
 <ul class="simple">
-<li><p>Nótese que el <em><strong>celda de estado</strong></em>, <span class="math notranslate nohighlight">\(\boldsymbol{s}\)</span>, <em><strong>pasa información directa del instante anterior al siguiente</strong></em>. Esta información es <em><strong>controlada primero por la primera puerta</strong></em>, según los elementos en <span class="math notranslate nohighlight">\(f\)</span>, que toman valores en el rango <span class="math notranslate nohighlight">\([0, 1]\)</span>, <em><strong>dependiendo de la entrada actual y de las variables ocultas que se reciben de la etapa anterior</strong></em>. Esto es lo que decíamos antes, es decir, que <em><strong>la ponderación se ajusta en “contexto”</strong></em>. A continuación, <em><strong>se añade nueva información</strong></em>, es decir, <span class="math notranslate nohighlight">\(\tilde{\boldsymbol{s}}\)</span>, a <span class="math notranslate nohighlight">\(\boldsymbol{s}_{n-1}\)</span>, que también está <em><strong>controlada por la segunda red de puertas sigmoidales</strong></em> (es decir, <span class="math notranslate nohighlight">\(\boldsymbol{i}\)</span>). Así se garantiza que la <em><strong>información del pasado se transmita al futuro de forma directa, lo cual, ayuda a la red a memorizar información.</strong></em>.</p></li>
-<li><p>Resulta que este tipo de memoria <em><strong>explota mejor las dependencias de largo alcance en los datos</strong></em>, en comparación con la estructura <em><strong>RNN básica</strong></em>. El vector de variables ocultas <span class="math notranslate nohighlight">\(\boldsymbol{h}\)</span> <em><strong>está controlado tanto por el celda de estado como por los valores actuales de las variables de entrada y de estados anteriores</strong></em>. Todas las <em><strong>matrices y vectores implicados se aprenden en la fase de entrenamiento</strong></em>. Nótese que hay dos líneas asociadas a <span class="math notranslate nohighlight">\(\boldsymbol{h}_{n}\)</span>. La de <em><strong>la derecha conduce a la siguiente etapa</strong></em> y la de <em><strong>la parte superior se utiliza para proporcionar la salida</strong></em>, <span class="math notranslate nohighlight">\(\hat{\boldsymbol{y}}_{n}\)</span>, en el tiempo <span class="math notranslate nohighlight">\(n\)</span>, a <em><strong>través de, digamos, la no linealidad softmax</strong></em>, como en las RNN estándar en Eq. <a class="reference internal" href="#equation-rnn-system-eq">(4.1)</a>.</p></li>
+<li><p>La <em><strong>celda de estado</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{s}\)</span> <em><strong>transmite información directa del instante anterior al siguiente</strong></em>. La puerta de olvido <span class="math notranslate nohighlight">\(\boldsymbol{f}\)</span>, con valores en <span class="math notranslate nohighlight">\([0, 1]\)</span>, la pondera <em><strong>según la entrada actual y las variables ocultas previas</strong></em> (la ponderación se ajusta en “contexto”). Luego se añade la nueva información <span class="math notranslate nohighlight">\(\tilde{\boldsymbol{s}}\)</span>, <em><strong>controlada por la puerta de entrada</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{i}\)</span>. Así <em><strong>el pasado llega al futuro de forma directa</strong></em>, lo que ayuda a la red a memorizar.</p></li>
+<li><p>Esta memoria <em><strong>explota mejor las dependencias de largo alcance</strong></em> que una <em><strong>RNN básica</strong></em>. El vector oculto <span class="math notranslate nohighlight">\(\boldsymbol{h}\)</span> depende de la celda de estado, de la entrada actual y de los estados anteriores, y todas las <em><strong>matrices y vectores se aprenden en el entrenamiento</strong></em>. <span class="math notranslate nohighlight">\(\boldsymbol{h}_{n}\)</span> tiene dos salidas: <em><strong>hacia la siguiente etapa</strong></em> y <em><strong>hacia la predicción</strong></em> <span class="math notranslate nohighlight">\(\hat{\boldsymbol{y}}_{n}\)</span> (por ejemplo, vía softmax, como en Eq. <a class="reference internal" href="#equation-rnn-system-eq">(4.1)</a>).</p></li>
 </ul>
 </section>
 </div><div class="admonition-variantes-y-aplicaciones admonition">
@@ -1087,23 +1254,46 @@ se muestra en la <a class="reference internal" href="#lstm-arch-rnn-numref"><spa
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tensor Flow Version: </span><span class="si">{</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.python.platform</span><span class="w"> </span><span class="kn">import</span> <span class="n">build_info</span> <span class="k">as</span> <span class="n">tf_build_info</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Tensor Flow Version: </span><span class="si">{</span><span class="n">tf</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Python </span><span class="si">{</span><span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Pandas </span><span class="si">{</span><span class="n">pd</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Scikit-Learn </span><span class="si">{</span><span class="n">sk</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="n">gpu</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s1">&#39;GPU&#39;</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;GPU is&quot;</span><span class="p">,</span> <span class="s2">&quot;available&quot;</span> <span class="k">if</span> <span class="n">gpu</span> <span class="k">else</span> <span class="s2">&quot;NOT AVAILABLE&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Detalle de dispositivos físicos ===&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">(</span><span class="s1">&#39;GPU&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">details</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">get_device_details</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">details</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;=== Versiones de CUDA/cuDNN con las que se compiló TensorFlow ===&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;CUDA build version: </span><span class="si">{</span><span class="n">tf_build_info</span><span class="o">.</span><span class="n">build_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cuda_version&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;N/A&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;cuDNN build version: </span><span class="si">{</span><span class="n">tf_build_info</span><span class="o">.</span><span class="n">build_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cudnn_version&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;N/A&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tensor Flow Version: 2.20.0-dev0+selfbuilt
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tensor Flow Version: 2.21.0
 
-Python 3.12.13 | packaged by conda-forge | (main, Mar  5 2026, 16:50:00) [GCC 14.3.0]
-Pandas 3.0.3
-Scikit-Learn 1.9.0
+Python 3.12.14 | packaged by Anaconda, Inc. | (main, Aug 27 2026, 14:46:43) [GCC 14.3.0]
+Pandas 2.3.1
+Scikit-Learn 1.7.0
 GPU is available
+
+=== Detalle de dispositivos físicos ===
+PhysicalDevice(name=&#39;/physical_device:GPU:0&#39;, device_type=&#39;GPU&#39;)
+{&#39;compute_capability&#39;: (8, 9), &#39;device_name&#39;: &#39;NVIDIA GeForce RTX 4070&#39;}
+
+=== Versiones de CUDA/cuDNN con las que se compiló TensorFlow ===
+CUDA build version: 12.5.1
+cuDNN build version: 9
 </pre></div>
 </div>
 </div>
@@ -1280,7 +1470,7 @@ cos(resultado, avion     ) = -0.6091
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/bf3ef24bb8644a2d7b68c92c6505a8cce055b4760bb331a9a5ffa6e0dd97c569.png" src="_images/bf3ef24bb8644a2d7b68c92c6505a8cce055b4760bb331a9a5ffa6e0dd97c569.png" />
+<img alt="_images/a47cbfad80f9dcf0742fc4e567192a56403f5bf8878cf756f89f1423db53d832.png" src="_images/a47cbfad80f9dcf0742fc4e567192a56403f5bf8878cf756f89f1423db53d832.png" />
 </div>
 </div>
 </section>
@@ -1609,7 +1799,7 @@ W1 (V x D) ahora contiene los embeddings de palabras APRENDIDOS. Shape: (11, 5)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/683bdd3e79d53f189079c2e6ed0b1cffb5a9ed3c2025f864108215a15d799b77.png" src="_images/683bdd3e79d53f189079c2e6ed0b1cffb5a9ed3c2025f864108215a15d799b77.png" />
+<img alt="_images/ff51582d676abce64915c1084accbd6123b28065a2bcfdbbaee0175bb24b0ffd.png" src="_images/ff51582d676abce64915c1084accbd6123b28065a2bcfdbbaee0175bb24b0ffd.png" />
 </div>
 </div>
 <p><strong>Paso 4:  Verificar que el embedding capturó relaciones semánticas.</strong></p>
@@ -1728,7 +1918,7 @@ W1 (V x D) ahora contiene los embeddings de palabras APRENDIDOS. Shape: (11, 5)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/5d18bdef969fd5e652f56c9f5aaf118da171d5b7ceb08c2641b6207153d11427.png" src="_images/5d18bdef969fd5e652f56c9f5aaf118da171d5b7ceb08c2641b6207153d11427.png" />
+<img alt="_images/09cceb6fb0ad53589834d0aee419f50d80cad7a602a8f33f3373f1b284951ef3.png" src="_images/09cceb6fb0ad53589834d0aee419f50d80cad7a602a8f33f3373f1b284951ef3.png" />
 </div>
 </div>
 <p><strong>Preprocesamiento de texto.</strong> Limpiamos HTML, URLs y normalizamos a minúsculas.</p>
@@ -1874,7 +2064,7 @@ W1 (V x D) ahora contiene los embeddings de palabras APRENDIDOS. Shape: (11, 5)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>progress-bar: 100%|██████████| 5572/5572 [00:01&lt;00:00, 4955.60it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>progress-bar: 100%|██████████| 5572/5572 [00:00&lt;00:00, 20633.05it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;go&#39;, &#39;until&#39;, &#39;jurong&#39;, &#39;point&#39;, &#39;,&#39;, &#39;crazy&#39;, &#39;..&#39;, &#39;available&#39;, &#39;only&#39;, &#39;in&#39;, &#39;bugis&#39;, &#39;n&#39;, &#39;great&#39;, &#39;world&#39;, &#39;la&#39;, &#39;e&#39;, &#39;buffet&#39;, &#39;...&#39;, &#39;cine&#39;, &#39;there&#39;, &#39;got&#39;, &#39;amore&#39;, &#39;wat&#39;, &#39;...&#39;]
@@ -2007,7 +2197,7 @@ Vocabulario Skip-gram: 4429 palabras
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Embedding de la palabra &#39;urgent&#39; (primeras 10 dimensiones de 100):
-[-0.42 -0.42  0.24 -0.14  0.14  0.58 -0.61  0.96 -1.18  0.26]
+[-0.28  0.08  0.49 -0.01  0.09  0.33 -0.47  1.18 -1.18 -0.26]
 
 Shape completo del vector: (100,)
 </pre></div>
@@ -2028,24 +2218,24 @@ Shape completo del vector: (100,)
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Palabras más similares a &#39;urgent&#39; (Skip-gram):
-  09066612661      similitud=0.7511
-  09066350750      similitud=0.7436
-  09061213237      similitud=0.7243
-  abta             similitud=0.7109
-  complimentary    similitud=0.7008
-  07xxxxxxxxx      similitud=0.6849
-  gent             similitud=0.6738
-  09066362231      similitud=0.6567
+  09066350750      similitud=0.7553
+  09066612661      similitud=0.7549
+  abta             similitud=0.7200
+  09061213237      similitud=0.7108
+  complimentary    similitud=0.7033
+  09066362231      similitud=0.6740
+  gent             similitud=0.6713
+  07xxxxxxxxx      similitud=0.6699
 
 Palabras más similares a &#39;free&#39; (Skip-gram):
-  100              similitud=0.5476
-  phones           similitud=0.5340
-  200              similitud=0.5297
-  unlimited        similitud=0.5271
-  bluetooth        similitud=0.5263
-  hardcore         similitud=0.5258
-  co               similitud=0.5248
-  camera/video     similitud=0.5209
+  200              similitud=0.5482
+  100              similitud=0.5437
+  -sub             similitud=0.5369
+  08002986906      similitud=0.5361
+  unlimited        similitud=0.5351
+  co               similitud=0.5349
+  bluetooth        similitud=0.5253
+  08002986030      similitud=0.5197
 </pre></div>
 </div>
 </div>
@@ -2076,7 +2266,7 @@ Palabras más similares a &#39;free&#39; (Skip-gram):
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6bb34f5d6d0b7e6ea7a77a1c1fed9c50edf575ab7d088094454a0afd62d06378.png" src="_images/6bb34f5d6d0b7e6ea7a77a1c1fed9c50edf575ab7d088094454a0afd62d06378.png" />
+<img alt="_images/16fe0b9223ee8c5a193ae415c794b2b53494126273ac842132fe2965aa56db2b.png" src="_images/16fe0b9223ee8c5a193ae415c794b2b53494126273ac842132fe2965aa56db2b.png" />
 </div>
 </div>
 <ul class="simple">
@@ -2218,7 +2408,7 @@ Palabras más similares a &#39;free&#39; (Skip-gram):
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 4457/4457 [00:00&lt;00:00, 3958918.45it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 4457/4457 [00:00&lt;00:00, 4794566.02it/s]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Documentos aprendidos por Doc2Vec: 4457
@@ -2389,17 +2579,38 @@ Shape final de embedding_matrix: (5001, 100)
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">values</span>   <span class="c1"># one-hot: [ham, spam]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="c1"># --- Tu código original, sin cambios ---</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">values</span>   <span class="c1"># one-hot: [ham, spam]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Orden de columnas de Y:&quot;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
-    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">Y</span>  <span class="c1"># stratify: mantiene la proporción spam/ham en ambos splits</span>
+    <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.20</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">Y</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X_train:&quot;</span><span class="p">,</span> <span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">&quot; Y_train:&quot;</span><span class="p">,</span> <span class="n">Y_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X_test :&quot;</span><span class="p">,</span> <span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>  <span class="s2">&quot; Y_test :&quot;</span><span class="p">,</span> <span class="n">Y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Proporción de spam en train:&quot;</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Proporción de spam en test :&quot;</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+
+<span class="c1"># --- Conversión a binario plano para Dense(1, sigmoid) ---</span>
+<span class="c1"># Columna 1 = spam, así que argmax ya da 1=spam, 0=ham correctamente (sin invertir)</span>
+<span class="n">Y_train_binary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">Y_train</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">Y_test_binary</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">Y_test</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Y_train[:5] (one-hot):&quot;</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Y_train_binary[:5]   :&quot;</span><span class="p">,</span> <span class="n">Y_train_binary</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
+
+<span class="c1"># --- Split manual train/val (evita el bug de Keras 3 con class_weight + validation_split) ---</span>
+<span class="n">X_train_fit</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">Y_train_fit</span><span class="p">,</span> <span class="n">Y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train_binary</span><span class="p">,</span>
+    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
+    <span class="n">stratify</span><span class="o">=</span><span class="n">Y_train_binary</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -2410,6 +2621,9 @@ X_test : (1115, 50)  Y_test : (1115, 2)
 
 Proporción de spam en train: 0.134
 Proporción de spam en test : 0.134
+
+Y_train[:5] (one-hot): [[True, False], [True, False], [True, False], [True, False], [True, False]]
+Y_train_binary[:5]   : [0 0 0 0 0]
 </pre></div>
 </div>
 </div>
@@ -2428,40 +2642,49 @@ Proporción de spam en test : 0.134
 <span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.keras.optimizers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Adam</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.keras.initializers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Constant</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.keras.callbacks</span><span class="w"> </span><span class="kn">import</span> <span class="n">EarlyStopping</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.keras.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">AUC</span>
 
 <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
     <span class="n">Embedding</span><span class="p">(</span>
-        <span class="n">input_dim</span><span class="o">=</span><span class="n">vocab_size</span><span class="p">,</span>
-        <span class="n">output_dim</span><span class="o">=</span><span class="n">EMBEDDING_DIM</span><span class="p">,</span>
-        <span class="n">embeddings_initializer</span><span class="o">=</span><span class="n">Constant</span><span class="p">(</span><span class="n">embedding_matrix</span><span class="p">),</span>
-        <span class="n">trainable</span><span class="o">=</span><span class="kc">True</span>
+        <span class="n">input_dim</span><span class="o">=</span><span class="n">vocab_size</span><span class="p">,</span>           <span class="c1"># Tamaño del vocabulario</span>
+        <span class="n">output_dim</span><span class="o">=</span><span class="n">EMBEDDING_DIM</span><span class="p">,</span>       <span class="c1"># Dimensión de cada vector de palabra</span>
+        <span class="n">embeddings_initializer</span><span class="o">=</span><span class="n">Constant</span><span class="p">(</span><span class="n">embedding_matrix</span><span class="p">),</span>  <span class="c1"># Pesos preentrenados (ej. GloVe/Word2Vec)</span>
+        <span class="n">trainable</span><span class="o">=</span><span class="kc">True</span>                  <span class="c1"># Permite ajustar los embeddings durante el entrenamiento</span>
     <span class="p">),</span>
-    <span class="n">LSTM</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span>   <span class="c1"># sin recurrent_dropout -&gt; usa cuDNN</span>
-    <span class="n">Dense</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>
-    <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>
-    <span class="n">Dense</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">)</span>
+    <span class="n">LSTM</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.5</span><span class="p">),</span>   <span class="c1"># Sin recurrent_dropout para poder usar el kernel cuDNN (más rápido en GPU)</span>
+    <span class="n">Dense</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">),</span>       <span class="c1"># Capa densa intermedia</span>
+    <span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span>                        <span class="c1"># Regularización para evitar overfitting</span>
+    <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)</span>      <span class="c1"># Una sola salida: probabilidad de la clase positiva</span>
 <span class="p">])</span>
 
-<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">),</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="n">optimizer</span><span class="o">=</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">),</span>
+    <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span>         <span class="c1"># Coherente ahora con la salida sigmoide de 1 neurona</span>
+    <span class="n">metrics</span><span class="o">=</span><span class="p">[</span>
+        <span class="s1">&#39;accuracy&#39;</span><span class="p">,</span>
+        <span class="n">AUC</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;auc_roc&#39;</span><span class="p">,</span> <span class="n">curve</span><span class="o">=</span><span class="s1">&#39;ROC&#39;</span><span class="p">),</span>  <span class="c1"># Área bajo la curva ROC</span>
+        <span class="n">AUC</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;auc_pr&#39;</span><span class="p">,</span> <span class="n">curve</span><span class="o">=</span><span class="s1">&#39;PR&#39;</span><span class="p">)</span>     <span class="c1"># Área bajo la curva Precision-Recall (mejor con desbalance)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
 <span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "sequential_8"</span>
+<div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold">Model: "sequential_11"</span>
 </pre>
 </div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace">┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
 ┃<span style="font-weight: bold"> Layer (type)                    </span>┃<span style="font-weight: bold"> Output Shape           </span>┃<span style="font-weight: bold">       Param # </span>┃
 ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
-│ embedding_8 (<span style="color: #0087ff; text-decoration-color: #0087ff">Embedding</span>)         │ ?                      │   <span style="color: #00af00; text-decoration-color: #00af00">0</span> (unbuilt) │
+│ embedding_11 (<span style="color: #0087ff; text-decoration-color: #0087ff">Embedding</span>)        │ ?                      │   <span style="color: #00af00; text-decoration-color: #00af00">0</span> (unbuilt) │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ lstm_8 (<span style="color: #0087ff; text-decoration-color: #0087ff">LSTM</span>)                   │ ?                      │   <span style="color: #00af00; text-decoration-color: #00af00">0</span> (unbuilt) │
+│ lstm_11 (<span style="color: #0087ff; text-decoration-color: #0087ff">LSTM</span>)                  │ ?                      │   <span style="color: #00af00; text-decoration-color: #00af00">0</span> (unbuilt) │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dense_16 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                │ ?                      │   <span style="color: #00af00; text-decoration-color: #00af00">0</span> (unbuilt) │
+│ dense_22 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                │ ?                      │   <span style="color: #00af00; text-decoration-color: #00af00">0</span> (unbuilt) │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dropout_8 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dropout</span>)             │ ?                      │             <span style="color: #00af00; text-decoration-color: #00af00">0</span> │
+│ dropout_11 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dropout</span>)            │ ?                      │             <span style="color: #00af00; text-decoration-color: #00af00">0</span> │
 ├─────────────────────────────────┼────────────────────────┼───────────────┤
-│ dense_17 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                │ ?                      │   <span style="color: #00af00; text-decoration-color: #00af00">0</span> (unbuilt) │
+│ dense_23 (<span style="color: #0087ff; text-decoration-color: #0087ff">Dense</span>)                │ ?                      │   <span style="color: #00af00; text-decoration-color: #00af00">0</span> (unbuilt) │
 └─────────────────────────────────┴────────────────────────┴───────────────┘
 </pre>
 </div><div class="output text_html"><pre style="white-space:pre;overflow-x:auto;line-height:normal;font-family:Menlo,'DejaVu Sans Mono',consolas,'Courier New',monospace"><span style="font-weight: bold"> Total params: </span><span style="color: #00af00; text-decoration-color: #00af00">0</span> (0.00 B)
@@ -2485,21 +2708,22 @@ Proporción de spam en test : 0.134
 <p>Se agrega <code class="docutils literal notranslate"><span class="pre">EarlyStopping</span></code> (paraba el entrenamiento si la pérdida de validación deja de mejorar, evitando sobreajuste y tiempo de cómputo desperdiciado) y <code class="docutils literal notranslate"><span class="pre">validation_split</span></code> para monitorear el desempeño durante el entrenamiento (el notebook original entrenaba sin ningún conjunto de validación, por lo que no había forma de detectar sobreajuste ni el estancamiento del modelo antes de llegar al conjunto de test).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">64</span>  <span class="c1"># batches pequeños: gradientes más ruidosos -&gt; mejor generalización y curvas train/val más pegadas</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">64</span>
 
 <span class="n">early_stop</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span>
-    <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span>
-    <span class="n">patience</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>             <span class="c1"># como no hay restricción de cómputo, damos mucho más margen antes de detener</span>
+    <span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_auc_pr&#39;</span><span class="p">,</span>
+    <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;max&#39;</span><span class="p">,</span>
+    <span class="n">patience</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
     <span class="n">restore_best_weights</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">)</span>
 
 <span class="n">history_lstm</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
-    <span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span>
-    <span class="n">epochs</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>              <span class="c1"># tope alto; EarlyStopping decide el punto real de parada</span>
+    <span class="n">X_train_fit</span><span class="p">,</span> <span class="n">Y_train_fit</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span>
     <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
-    <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span>
+    <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_val</span><span class="p">,</span> <span class="n">Y_val</span><span class="p">),</span>
     <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">early_stop</span><span class="p">],</span>
-    <span class="n">class_weight</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">},</span>   <span class="c1"># spam pesa 3 veces más; ajusta según el desbalance: loss_total = promedio(peso_de_su_clase × error_del_mensaje)</span>
+    <span class="n">class_weight</span><span class="o">=</span><span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="mf">8.0</span><span class="p">},</span>
     <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span>
 <span class="p">)</span>
 </pre></div>
@@ -2509,84 +2733,102 @@ Proporción de spam en test : 0.134
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/300
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-09-21 11:01:16.896776: E tensorflow/core/framework/node_def_util.cc:680] NodeDef mentions attribute use_unbounded_threadpool which is not in the op definition: Op&lt;name=MapDataset; signature=input_dataset:variant, other_arguments: -&gt; handle:variant; attr=f:func; attr=Targuments:list(type),min=0; attr=output_types:list(type),min=1; attr=output_shapes:list(shape),min=1; attr=use_inter_op_parallelism:bool,default=true; attr=preserve_cardinality:bool,default=false; attr=force_synchronous:bool,default=false; attr=metadata:string,default=&quot;&quot;&gt; This may be expected if your graph generating binary is newer  than this binary. Unknown attributes will be ignored. NodeDef: {{node ParallelMapDatasetV2/_16}}
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>E0000 00:00:1790040262.748991    6975 node_def_util.cc:682] NodeDef mentions attribute use_unbounded_threadpool which is not in the op definition: Op&lt;name=MapDataset; signature=input_dataset:variant, other_arguments: -&gt; handle:variant; attr=f:func; attr=Targuments:list(type),min=0; attr=output_types:list(type),min=1; attr=output_shapes:list(shape),min=1; attr=use_inter_op_parallelism:bool,default=true; attr=preserve_cardinality:bool,default=false; attr=force_synchronous:bool,default=false; attr=metadata:string,default=&quot;&quot;&gt; This may be expected if your graph generating binary is newer  than this binary. Unknown attributes will be ignored. NodeDef: {{node ParallelMapDatasetV2/_16}}
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60/60 - 6s - 99ms/step - accuracy: 0.8923 - loss: 0.6018 - val_accuracy: 0.9656 - val_loss: 0.1283
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60/60 - 3s - 47ms/step - accuracy: 0.8411 - auc_pr: 0.7908 - auc_roc: 0.9300 - loss: 0.7662 - val_accuracy: 0.9731 - val_auc_pr: 0.9570 - val_auc_roc: 0.9899 - val_loss: 0.1497
 Epoch 2/300
-60/60 - 2s - 30ms/step - accuracy: 0.9725 - loss: 0.2239 - val_accuracy: 0.9791 - val_loss: 0.0731
+60/60 - 1s - 24ms/step - accuracy: 0.9586 - auc_pr: 0.9367 - auc_roc: 0.9782 - loss: 0.3258 - val_accuracy: 0.9880 - val_auc_pr: 0.9471 - val_auc_roc: 0.9855 - val_loss: 0.0812
 Epoch 3/300
-60/60 - 2s - 33ms/step - accuracy: 0.9768 - loss: 0.1531 - val_accuracy: 0.9821 - val_loss: 0.0651
+60/60 - 1s - 24ms/step - accuracy: 0.9670 - auc_pr: 0.9561 - auc_roc: 0.9861 - loss: 0.2542 - val_accuracy: 0.9821 - val_auc_pr: 0.9398 - val_auc_roc: 0.9855 - val_loss: 0.0898
 Epoch 4/300
-60/60 - 2s - 32ms/step - accuracy: 0.9850 - loss: 0.1200 - val_accuracy: 0.9851 - val_loss: 0.0627
+60/60 - 1s - 23ms/step - accuracy: 0.9702 - auc_pr: 0.9549 - auc_roc: 0.9889 - loss: 0.2285 - val_accuracy: 0.9821 - val_auc_pr: 0.9407 - val_auc_roc: 0.9846 - val_loss: 0.0799
 Epoch 5/300
-60/60 - 2s - 31ms/step - accuracy: 0.9847 - loss: 0.1002 - val_accuracy: 0.9865 - val_loss: 0.0579
+60/60 - 1s - 24ms/step - accuracy: 0.9786 - auc_pr: 0.9716 - auc_roc: 0.9906 - loss: 0.1893 - val_accuracy: 0.9821 - val_auc_pr: 0.9434 - val_auc_roc: 0.9863 - val_loss: 0.0716
 Epoch 6/300
-60/60 - 2s - 30ms/step - accuracy: 0.9855 - loss: 0.0970 - val_accuracy: 0.9880 - val_loss: 0.0545
+60/60 - 1s - 24ms/step - accuracy: 0.9850 - auc_pr: 0.9817 - auc_roc: 0.9915 - loss: 0.1608 - val_accuracy: 0.9851 - val_auc_pr: 0.9443 - val_auc_roc: 0.9883 - val_loss: 0.0716
 Epoch 7/300
-60/60 - 2s - 31ms/step - accuracy: 0.9892 - loss: 0.0676 - val_accuracy: 0.9865 - val_loss: 0.0697
+60/60 - 1s - 23ms/step - accuracy: 0.9815 - auc_pr: 0.9812 - auc_roc: 0.9940 - loss: 0.1569 - val_accuracy: 0.9851 - val_auc_pr: 0.9658 - val_auc_roc: 0.9912 - val_loss: 0.0547
 Epoch 8/300
-60/60 - 2s - 35ms/step - accuracy: 0.9900 - loss: 0.0649 - val_accuracy: 0.9865 - val_loss: 0.0538
+60/60 - 1s - 22ms/step - accuracy: 0.9860 - auc_pr: 0.9840 - auc_roc: 0.9955 - loss: 0.1330 - val_accuracy: 0.9865 - val_auc_pr: 0.9671 - val_auc_roc: 0.9884 - val_loss: 0.0661
 Epoch 9/300
-60/60 - 0s - 5ms/step - accuracy: 0.9902 - loss: 0.0615 - val_accuracy: 0.9880 - val_loss: 0.0627
+60/60 - 1s - 22ms/step - accuracy: 0.9823 - auc_pr: 0.9826 - auc_roc: 0.9959 - loss: 0.1147 - val_accuracy: 0.9865 - val_auc_pr: 0.9678 - val_auc_roc: 0.9894 - val_loss: 0.0589
 Epoch 10/300
-60/60 - 2s - 32ms/step - accuracy: 0.9913 - loss: 0.0491 - val_accuracy: 0.9880 - val_loss: 0.0621
+60/60 - 1s - 24ms/step - accuracy: 0.9886 - auc_pr: 0.9912 - auc_roc: 0.9980 - loss: 0.0952 - val_accuracy: 0.9865 - val_auc_pr: 0.9680 - val_auc_roc: 0.9900 - val_loss: 0.0548
 Epoch 11/300
-60/60 - 2s - 30ms/step - accuracy: 0.9934 - loss: 0.0367 - val_accuracy: 0.9880 - val_loss: 0.0714
+60/60 - 1s - 23ms/step - accuracy: 0.9897 - auc_pr: 0.9874 - auc_roc: 0.9973 - loss: 0.0891 - val_accuracy: 0.9865 - val_auc_pr: 0.9695 - val_auc_roc: 0.9904 - val_loss: 0.0502
 Epoch 12/300
-60/60 - 2s - 31ms/step - accuracy: 0.9934 - loss: 0.0391 - val_accuracy: 0.9880 - val_loss: 0.0821
+60/60 - 1s - 23ms/step - accuracy: 0.9871 - auc_pr: 0.9878 - auc_roc: 0.9980 - loss: 0.0866 - val_accuracy: 0.9865 - val_auc_pr: 0.9698 - val_auc_roc: 0.9904 - val_loss: 0.0553
 Epoch 13/300
-60/60 - 2s - 34ms/step - accuracy: 0.9942 - loss: 0.0341 - val_accuracy: 0.9865 - val_loss: 0.0900
+60/60 - 1s - 23ms/step - accuracy: 0.9923 - auc_pr: 0.9955 - auc_roc: 0.9990 - loss: 0.0719 - val_accuracy: 0.9865 - val_auc_pr: 0.9704 - val_auc_roc: 0.9907 - val_loss: 0.0538
 Epoch 14/300
-60/60 - 2s - 41ms/step - accuracy: 0.9937 - loss: 0.0406 - val_accuracy: 0.9880 - val_loss: 0.0739
+60/60 - 1s - 22ms/step - accuracy: 0.9913 - auc_pr: 0.9970 - auc_roc: 0.9994 - loss: 0.0593 - val_accuracy: 0.9880 - val_auc_pr: 0.9656 - val_auc_roc: 0.9861 - val_loss: 0.0548
 Epoch 15/300
-60/60 - 2s - 32ms/step - accuracy: 0.9939 - loss: 0.0282 - val_accuracy: 0.9865 - val_loss: 0.0612
+60/60 - 1s - 22ms/step - accuracy: 0.9926 - auc_pr: 0.9968 - auc_roc: 0.9997 - loss: 0.0376 - val_accuracy: 0.9880 - val_auc_pr: 0.9599 - val_auc_roc: 0.9808 - val_loss: 0.0593
 Epoch 16/300
-60/60 - 2s - 31ms/step - accuracy: 0.9929 - loss: 0.0305 - val_accuracy: 0.9865 - val_loss: 0.0936
+60/60 - 1s - 21ms/step - accuracy: 0.9921 - auc_pr: 0.9971 - auc_roc: 0.9986 - loss: 0.0527 - val_accuracy: 0.9865 - val_auc_pr: 0.9734 - val_auc_roc: 0.9913 - val_loss: 0.0447
 Epoch 17/300
-60/60 - 2s - 32ms/step - accuracy: 0.9960 - loss: 0.0252 - val_accuracy: 0.9880 - val_loss: 0.0876
+60/60 - 1s - 23ms/step - accuracy: 0.9908 - auc_pr: 0.9961 - auc_roc: 0.9995 - loss: 0.0484 - val_accuracy: 0.9865 - val_auc_pr: 0.9736 - val_auc_roc: 0.9916 - val_loss: 0.0484
 Epoch 18/300
-60/60 - 2s - 32ms/step - accuracy: 0.9960 - loss: 0.0161 - val_accuracy: 0.9851 - val_loss: 0.1041
+60/60 - 1s - 22ms/step - accuracy: 0.9939 - auc_pr: 0.9966 - auc_roc: 0.9996 - loss: 0.0387 - val_accuracy: 0.9895 - val_auc_pr: 0.9678 - val_auc_roc: 0.9866 - val_loss: 0.0532
 Epoch 19/300
-60/60 - 2s - 30ms/step - accuracy: 0.9971 - loss: 0.0180 - val_accuracy: 0.9865 - val_loss: 0.0790
+60/60 - 1s - 22ms/step - accuracy: 0.9952 - auc_pr: 0.9954 - auc_roc: 0.9996 - loss: 0.0271 - val_accuracy: 0.9895 - val_auc_pr: 0.9684 - val_auc_roc: 0.9866 - val_loss: 0.0500
 Epoch 20/300
-60/60 - 2s - 31ms/step - accuracy: 0.9966 - loss: 0.0169 - val_accuracy: 0.9865 - val_loss: 0.0605
+60/60 - 1s - 21ms/step - accuracy: 0.9947 - auc_pr: 0.9934 - auc_roc: 0.9995 - loss: 0.0257 - val_accuracy: 0.9895 - val_auc_pr: 0.9554 - val_auc_roc: 0.9762 - val_loss: 0.0757
 Epoch 21/300
-60/60 - 2s - 31ms/step - accuracy: 0.9974 - loss: 0.0135 - val_accuracy: 0.9880 - val_loss: 0.0925
+60/60 - 1s - 23ms/step - accuracy: 0.9963 - auc_pr: 0.9955 - auc_roc: 0.9996 - loss: 0.0198 - val_accuracy: 0.9880 - val_auc_pr: 0.9482 - val_auc_roc: 0.9708 - val_loss: 0.0801
 Epoch 22/300
-60/60 - 2s - 32ms/step - accuracy: 0.9984 - loss: 0.0091 - val_accuracy: 0.9836 - val_loss: 0.1048
+60/60 - 1s - 23ms/step - accuracy: 0.9968 - auc_pr: 0.9955 - auc_roc: 0.9996 - loss: 0.0235 - val_accuracy: 0.9880 - val_auc_pr: 0.9623 - val_auc_roc: 0.9815 - val_loss: 0.0626
 Epoch 23/300
-60/60 - 2s - 28ms/step - accuracy: 0.9971 - loss: 0.0134 - val_accuracy: 0.9865 - val_loss: 0.0969
+60/60 - 1s - 21ms/step - accuracy: 0.9939 - auc_pr: 0.9974 - auc_roc: 0.9998 - loss: 0.0279 - val_accuracy: 0.9880 - val_auc_pr: 0.9691 - val_auc_roc: 0.9871 - val_loss: 0.0611
 Epoch 24/300
-60/60 - 2s - 29ms/step - accuracy: 0.9979 - loss: 0.0127 - val_accuracy: 0.9880 - val_loss: 0.0653
+60/60 - 1s - 21ms/step - accuracy: 0.9968 - auc_pr: 0.9984 - auc_roc: 0.9989 - loss: 0.0268 - val_accuracy: 0.9895 - val_auc_pr: 0.9689 - val_auc_roc: 0.9869 - val_loss: 0.0574
 Epoch 25/300
-60/60 - 2s - 30ms/step - accuracy: 0.9989 - loss: 0.0088 - val_accuracy: 0.9880 - val_loss: 0.0919
+60/60 - 1s - 22ms/step - accuracy: 0.9939 - auc_pr: 0.9931 - auc_roc: 0.9994 - loss: 0.0273 - val_accuracy: 0.9851 - val_auc_pr: 0.9476 - val_auc_roc: 0.9707 - val_loss: 0.0798
 Epoch 26/300
-60/60 - 0s - 4ms/step - accuracy: 0.9971 - loss: 0.0111 - val_accuracy: 0.9880 - val_loss: 0.0723
+60/60 - 1s - 21ms/step - accuracy: 0.9968 - auc_pr: 0.9999 - auc_roc: 1.0000 - loss: 0.0132 - val_accuracy: 0.9851 - val_auc_pr: 0.9410 - val_auc_roc: 0.9654 - val_loss: 0.0878
 Epoch 27/300
-60/60 - 2s - 33ms/step - accuracy: 0.9979 - loss: 0.0096 - val_accuracy: 0.9880 - val_loss: 0.0873
+60/60 - 1s - 23ms/step - accuracy: 0.9952 - auc_pr: 0.9956 - auc_roc: 0.9996 - loss: 0.0224 - val_accuracy: 0.9851 - val_auc_pr: 0.9409 - val_auc_roc: 0.9653 - val_loss: 0.0991
 Epoch 28/300
-60/60 - 2s - 30ms/step - accuracy: 0.9995 - loss: 0.0061 - val_accuracy: 0.9880 - val_loss: 0.1015
+60/60 - 1s - 22ms/step - accuracy: 0.9947 - auc_pr: 0.9940 - auc_roc: 0.9985 - loss: 0.0347 - val_accuracy: 0.9880 - val_auc_pr: 0.9552 - val_auc_roc: 0.9763 - val_loss: 0.0765
 Epoch 29/300
-60/60 - 2s - 30ms/step - accuracy: 0.9971 - loss: 0.0092 - val_accuracy: 0.9836 - val_loss: 0.1439
+60/60 - 1s - 22ms/step - accuracy: 0.9982 - auc_pr: 0.9999 - auc_roc: 1.0000 - loss: 0.0102 - val_accuracy: 0.9880 - val_auc_pr: 0.9414 - val_auc_roc: 0.9654 - val_loss: 0.0849
 Epoch 30/300
-60/60 - 2s - 32ms/step - accuracy: 0.9974 - loss: 0.0143 - val_accuracy: 0.9865 - val_loss: 0.0775
+60/60 - 1s - 23ms/step - accuracy: 0.9992 - auc_pr: 0.9999 - auc_roc: 1.0000 - loss: 0.0101 - val_accuracy: 0.9880 - val_auc_pr: 0.9414 - val_auc_roc: 0.9654 - val_loss: 0.0852
 Epoch 31/300
-60/60 - 2s - 32ms/step - accuracy: 0.9989 - loss: 0.0081 - val_accuracy: 0.9836 - val_loss: 0.0763
+60/60 - 1s - 22ms/step - accuracy: 0.9982 - auc_pr: 0.9980 - auc_roc: 0.9998 - loss: 0.0091 - val_accuracy: 0.9865 - val_auc_pr: 0.9415 - val_auc_roc: 0.9655 - val_loss: 0.0910
 Epoch 32/300
-60/60 - 2s - 33ms/step - accuracy: 0.9987 - loss: 0.0069 - val_accuracy: 0.9865 - val_loss: 0.0934
+60/60 - 1s - 22ms/step - accuracy: 0.9968 - auc_pr: 0.9998 - auc_roc: 1.0000 - loss: 0.0141 - val_accuracy: 0.9880 - val_auc_pr: 0.9695 - val_auc_roc: 0.9873 - val_loss: 0.0647
 Epoch 33/300
-60/60 - 2s - 32ms/step - accuracy: 0.9997 - loss: 0.0028 - val_accuracy: 0.9865 - val_loss: 0.1144
+60/60 - 1s - 23ms/step - accuracy: 0.9982 - auc_pr: 1.0000 - auc_roc: 1.0000 - loss: 0.0088 - val_accuracy: 0.9895 - val_auc_pr: 0.9556 - val_auc_roc: 0.9764 - val_loss: 0.0775
 Epoch 34/300
-60/60 - 2s - 28ms/step - accuracy: 0.9992 - loss: 0.0049 - val_accuracy: 0.9865 - val_loss: 0.1202
+60/60 - 1s - 20ms/step - accuracy: 0.9982 - auc_pr: 1.0000 - auc_roc: 1.0000 - loss: 0.0079 - val_accuracy: 0.9895 - val_auc_pr: 0.9417 - val_auc_roc: 0.9656 - val_loss: 0.0929
 Epoch 35/300
-60/60 - 2s - 32ms/step - accuracy: 0.9995 - loss: 0.0027 - val_accuracy: 0.9865 - val_loss: 0.1200
+60/60 - 1s - 22ms/step - accuracy: 0.9982 - auc_pr: 0.9979 - auc_roc: 0.9998 - loss: 0.0110 - val_accuracy: 0.9880 - val_auc_pr: 0.9493 - val_auc_roc: 0.9711 - val_loss: 0.0839
 Epoch 36/300
-60/60 - 3s - 44ms/step - accuracy: 0.9995 - loss: 0.0037 - val_accuracy: 0.9851 - val_loss: 0.0932
+60/60 - 1s - 22ms/step - accuracy: 0.9992 - auc_pr: 1.0000 - auc_roc: 1.0000 - loss: 0.0070 - val_accuracy: 0.9895 - val_auc_pr: 0.9494 - val_auc_roc: 0.9710 - val_loss: 0.0794
 Epoch 37/300
-60/60 - 2s - 29ms/step - accuracy: 1.0000 - loss: 0.0027 - val_accuracy: 0.9865 - val_loss: 0.1007
+60/60 - 1s - 24ms/step - accuracy: 0.9984 - auc_pr: 0.9979 - auc_roc: 0.9998 - loss: 0.0082 - val_accuracy: 0.9895 - val_auc_pr: 0.9490 - val_auc_roc: 0.9711 - val_loss: 0.0873
 Epoch 38/300
-60/60 - 2s - 29ms/step - accuracy: 0.9979 - loss: 0.0087 - val_accuracy: 0.9865 - val_loss: 0.0726
+60/60 - 1s - 23ms/step - accuracy: 0.9992 - auc_pr: 1.0000 - auc_roc: 1.0000 - loss: 0.0039 - val_accuracy: 0.9880 - val_auc_pr: 0.9415 - val_auc_roc: 0.9656 - val_loss: 0.1023
+Epoch 39/300
+60/60 - 1s - 22ms/step - accuracy: 0.9992 - auc_pr: 0.9979 - auc_roc: 0.9998 - loss: 0.0077 - val_accuracy: 0.9895 - val_auc_pr: 0.9417 - val_auc_roc: 0.9656 - val_loss: 0.0936
+Epoch 40/300
+60/60 - 1s - 22ms/step - accuracy: 0.9992 - auc_pr: 1.0000 - auc_roc: 1.0000 - loss: 0.0046 - val_accuracy: 0.9880 - val_auc_pr: 0.9415 - val_auc_roc: 0.9656 - val_loss: 0.1004
+Epoch 41/300
+60/60 - 1s - 23ms/step - accuracy: 0.9979 - auc_pr: 1.0000 - auc_roc: 1.0000 - loss: 0.0063 - val_accuracy: 0.9865 - val_auc_pr: 0.9415 - val_auc_roc: 0.9656 - val_loss: 0.0997
+Epoch 42/300
+60/60 - 1s - 23ms/step - accuracy: 0.9971 - auc_pr: 0.9999 - auc_roc: 1.0000 - loss: 0.0123 - val_accuracy: 0.9880 - val_auc_pr: 0.9415 - val_auc_roc: 0.9656 - val_loss: 0.0984
+Epoch 43/300
+60/60 - 1s - 23ms/step - accuracy: 0.9987 - auc_pr: 0.9996 - auc_roc: 0.9999 - loss: 0.0169 - val_accuracy: 0.9880 - val_auc_pr: 0.9665 - val_auc_roc: 0.9770 - val_loss: 0.0710
+Epoch 44/300
+60/60 - 1s - 23ms/step - accuracy: 0.9992 - auc_pr: 1.0000 - auc_roc: 1.0000 - loss: 0.0056 - val_accuracy: 0.9880 - val_auc_pr: 0.9488 - val_auc_roc: 0.9709 - val_loss: 0.0805
+Epoch 45/300
+60/60 - 1s - 23ms/step - accuracy: 0.9989 - auc_pr: 1.0000 - auc_roc: 1.0000 - loss: 0.0043 - val_accuracy: 0.9880 - val_auc_pr: 0.9491 - val_auc_roc: 0.9712 - val_loss: 0.0902
+Epoch 46/300
+60/60 - 1s - 22ms/step - accuracy: 0.9992 - auc_pr: 0.9980 - auc_roc: 0.9998 - loss: 0.0047 - val_accuracy: 0.9880 - val_auc_pr: 0.9414 - val_auc_roc: 0.9656 - val_loss: 0.0998
+Epoch 47/300
+60/60 - 1s - 22ms/step - accuracy: 0.9984 - auc_pr: 0.9986 - auc_roc: 0.9990 - loss: 0.0193 - val_accuracy: 0.9880 - val_auc_pr: 0.9491 - val_auc_roc: 0.9711 - val_loss: 0.0863
 </pre></div>
 </div>
 </div>
@@ -2595,13 +2837,13 @@ Epoch 38/300
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
-<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history_lstm</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history_lstm</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_accuracy&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;validation&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Accuracy por época&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history_lstm</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;auc_pr&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history_lstm</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;val_auc_pr&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;validation&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;AUC-PR por época&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Época&#39;</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Accuracy&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;AUC-PR&#39;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">history_lstm</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s1">&#39;loss&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;train&#39;</span><span class="p">)</span>
@@ -2617,30 +2859,34 @@ Epoch 38/300
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/c4e5afaddd1801d79ae0a9fbdcfc878e4764467b400ed086b90df3ae25d50c8a.png" src="_images/c4e5afaddd1801d79ae0a9fbdcfc878e4764467b400ed086b90df3ae25d50c8a.png" />
+<img alt="_images/5c730429f20718b7476a65117f054646c64a46e35ff52c4ae45a9f580cae73af.png" src="_images/5c730429f20718b7476a65117f054646c64a46e35ff52c4ae45a9f580cae73af.png" />
 </div>
 </div>
 <blockquote>
-<div><p>✅ Ahora sí podemos ver <strong>dos curvas</strong> (entrenamiento y validación) en cada gráfico, algo imposible en la versión original porque nunca se separó un conjunto de validación durante <code class="docutils literal notranslate"><span class="pre">model.fit</span></code>.</p>
+<div><p>Ahora sí podemos ver <strong>dos curvas</strong> (entrenamiento y validación) en cada gráfico, algo imposible en la versión original porque nunca se separó un conjunto de validación durante <code class="docutils literal notranslate"><span class="pre">model.fit</span></code>.</p>
 </div></blockquote>
 </section>
 <section id="evaluacion-del-modelo">
 <h3><span class="section-number">4.7.4. </span>Evaluación del modelo<a class="headerlink" href="#evaluacion-del-modelo" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_loss</span><span class="p">,</span> <span class="n">train_acc</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">test_loss</span><span class="p">,</span> <span class="n">test_acc</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Train -&gt; loss: </span><span class="si">{</span><span class="n">train_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  accuracy: </span><span class="si">{</span><span class="n">train_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test  -&gt; loss: </span><span class="si">{</span><span class="n">test_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  accuracy: </span><span class="si">{</span><span class="n">test_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train_results</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train_binary</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">test_results</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">Y_test_binary</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">train_loss</span><span class="p">,</span> <span class="n">train_acc</span><span class="p">,</span> <span class="n">train_auc_roc</span><span class="p">,</span> <span class="n">train_auc_pr</span> <span class="o">=</span> <span class="n">train_results</span>
+<span class="n">test_loss</span><span class="p">,</span> <span class="n">test_acc</span><span class="p">,</span> <span class="n">test_auc_roc</span><span class="p">,</span> <span class="n">test_auc_pr</span> <span class="o">=</span> <span class="n">test_results</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Train -&gt; loss: </span><span class="si">{</span><span class="n">train_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  accuracy: </span><span class="si">{</span><span class="n">train_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  AUC-ROC: </span><span class="si">{</span><span class="n">train_auc_roc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  AUC-PR: </span><span class="si">{</span><span class="n">train_auc_pr</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test  -&gt; loss: </span><span class="si">{</span><span class="n">test_loss</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  accuracy: </span><span class="si">{</span><span class="n">test_acc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  AUC-ROC: </span><span class="si">{</span><span class="n">test_auc_roc</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  AUC-PR: </span><span class="si">{</span><span class="n">test_auc_pr</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-09-21 11:02:30.756584: E tensorflow/core/framework/node_def_util.cc:680] NodeDef mentions attribute use_unbounded_threadpool which is not in the op definition: Op&lt;name=MapDataset; signature=input_dataset:variant, other_arguments: -&gt; handle:variant; attr=f:func; attr=Targuments:list(type),min=0; attr=output_types:list(type),min=1; attr=output_shapes:list(shape),min=1; attr=use_inter_op_parallelism:bool,default=true; attr=preserve_cardinality:bool,default=false; attr=force_synchronous:bool,default=false; attr=metadata:string,default=&quot;&quot;&gt; This may be expected if your graph generating binary is newer  than this binary. Unknown attributes will be ignored. NodeDef: {{node ParallelMapDatasetV2/_15}}
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>E0000 00:00:1790040327.944413    6975 node_def_util.cc:682] NodeDef mentions attribute use_unbounded_threadpool which is not in the op definition: Op&lt;name=MapDataset; signature=input_dataset:variant, other_arguments: -&gt; handle:variant; attr=f:func; attr=Targuments:list(type),min=0; attr=output_types:list(type),min=1; attr=output_shapes:list(shape),min=1; attr=use_inter_op_parallelism:bool,default=true; attr=preserve_cardinality:bool,default=false; attr=force_synchronous:bool,default=false; attr=metadata:string,default=&quot;&quot;&gt; This may be expected if your graph generating binary is newer  than this binary. Unknown attributes will be ignored. NodeDef: {{node ParallelMapDatasetV2/_15}}
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train -&gt; loss: 0.0234  accuracy: 0.9933
-Test  -&gt; loss: 0.0567  accuracy: 0.9865
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train -&gt; loss: 0.0165  accuracy: 0.9946  AUC-ROC: 0.9988  AUC-PR: 0.9962
+Test  -&gt; loss: 0.0756  accuracy: 0.9794  AUC-ROC: 0.9831  AUC-PR: 0.9665
 </pre></div>
 </div>
 </div>
@@ -2653,8 +2899,8 @@ Test  -&gt; loss: 0.0567  accuracy: 0.9865
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span>
 
 <span class="n">yhat_probs</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">yhat_classes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">yhat_probs</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">true_classes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">Y_test</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">yhat_classes</span> <span class="o">=</span> <span class="p">(</span><span class="n">yhat_probs</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>   <span class="c1"># umbral 0.5 sobre la probabilidad sigmoide -&gt; 0/1</span>
+<span class="n">true_classes</span> <span class="o">=</span> <span class="n">Y_test_binary</span>                             <span class="c1"># ya está en formato binario plano</span>
 
 <span class="n">labels_names</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>  <span class="c1"># [&#39;ham&#39;, &#39;spam&#39;] en orden alfabético</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">true_classes</span><span class="p">,</span> <span class="n">yhat_classes</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="n">labels_names</span><span class="p">))</span>
@@ -2664,12 +2910,12 @@ Test  -&gt; loss: 0.0567  accuracy: 0.9865
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>              precision    recall  f1-score   support
 
-         ham       0.99      0.99      0.99       966
-        spam       0.95      0.95      0.95       149
+         ham       0.99      0.98      0.99       966
+        spam       0.90      0.95      0.92       149
 
-    accuracy                           0.99      1115
-   macro avg       0.97      0.97      0.97      1115
-weighted avg       0.99      0.99      0.99      1115
+    accuracy                           0.98      1115
+   macro avg       0.95      0.97      0.96      1115
+weighted avg       0.98      0.98      0.98      1115
 </pre></div>
 </div>
 </div>
@@ -2689,7 +2935,7 @@ weighted avg       0.99      0.99      0.99      1115
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4d3a387fb5be01f253fe4610e92f8acd8da04c34a5649f84d21ee7fe9b601b52.png" src="_images/4d3a387fb5be01f253fe4610e92f8acd8da04c34a5649f84d21ee7fe9b601b52.png" />
+<img alt="_images/ae53f514e26c6a91cf50f19b51387bd80613011057b38429f52fee6b6e3adea4.png" src="_images/ae53f514e26c6a91cf50f19b51387bd80613011057b38429f52fee6b6e3adea4.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -2710,13 +2956,13 @@ weighted avg       0.99      0.99      0.99      1115
 <h3><span class="section-number">4.7.5. </span>Pruebas con mensajes nuevos<a class="headerlink" href="#pruebas-con-mensajes-nuevos" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">predecir_mensaje</span><span class="p">(</span><span class="n">texto</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="n">MAX_SEQUENCE_LENGTH</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;ham&#39;</span><span class="p">,</span> <span class="s1">&#39;spam&#39;</span><span class="p">)):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">predecir_mensaje</span><span class="p">(</span><span class="n">texto</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="n">MAX_SEQUENCE_LENGTH</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;ham&#39;</span><span class="p">,</span> <span class="s1">&#39;spam&#39;</span><span class="p">),</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
     <span class="n">texto_limpio</span> <span class="o">=</span> <span class="n">cleanText</span><span class="p">(</span><span class="n">texto</span><span class="p">)</span>
     <span class="n">seq</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">texts_to_sequences</span><span class="p">([</span><span class="n">texto_limpio</span><span class="p">])</span>
     <span class="n">padded</span> <span class="o">=</span> <span class="n">pad_sequences</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="n">maxlen</span><span class="p">)</span>
-    <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">padded</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">clase</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">pred</span><span class="p">)]</span>
-    <span class="k">return</span> <span class="n">clase</span><span class="p">,</span> <span class="n">pred</span>
+    <span class="n">prob_spam</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">padded</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>   <span class="c1"># una sola probabilidad (la de spam), no un vector de 2</span>
+    <span class="n">clase</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">if</span> <span class="n">prob_spam</span> <span class="o">&gt;</span> <span class="n">threshold</span> <span class="k">else</span> <span class="n">labels</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">clase</span><span class="p">,</span> <span class="n">prob_spam</span>
 
 <span class="n">mensajes_prueba</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s2">&quot;Congratulations! you have won a $1,000 Walmart gift card. Go to http://bit.ly/123456 to claim now.&quot;</span><span class="p">,</span>
@@ -2726,28 +2972,24 @@ weighted avg       0.99      0.99      0.99      1115
 <span class="p">]</span>
 
 <span class="k">for</span> <span class="n">msg</span> <span class="ow">in</span> <span class="n">mensajes_prueba</span><span class="p">:</span>
-    <span class="n">clase</span><span class="p">,</span> <span class="n">prob</span> <span class="o">=</span> <span class="n">predecir_mensaje</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
+    <span class="n">clase</span><span class="p">,</span> <span class="n">prob_spam</span> <span class="o">=</span> <span class="n">predecir_mensaje</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">,</span> <span class="n">model</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mensaje: </span><span class="si">{</span><span class="n">msg</span><span class="p">[:</span><span class="mi">60</span><span class="p">]</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  -&gt; Predicción: </span><span class="si">{</span><span class="n">clase</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">   (probabilidades ham/spam: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  -&gt; Predicción: </span><span class="si">{</span><span class="n">clase</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">   (probabilidad de spam: </span><span class="si">{</span><span class="n">prob_spam</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mensaje: Congratulations! you have won a $1,000 Walmart gift card. Go...
-  -&gt; Predicción: SPAM   (probabilidades ham/spam: [0. 1.])
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-09-21 11:02:38.171071: E tensorflow/core/framework/node_def_util.cc:680] NodeDef mentions attribute use_unbounded_threadpool which is not in the op definition: Op&lt;name=MapDataset; signature=input_dataset:variant, other_arguments: -&gt; handle:variant; attr=f:func; attr=Targuments:list(type),min=0; attr=output_types:list(type),min=1; attr=output_shapes:list(shape),min=1; attr=use_inter_op_parallelism:bool,default=true; attr=preserve_cardinality:bool,default=false; attr=force_synchronous:bool,default=false; attr=metadata:string,default=&quot;&quot;&gt; This may be expected if your graph generating binary is newer  than this binary. Unknown attributes will be ignored. NodeDef: {{node ParallelMapDatasetV2/_14}}
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mensaje: thanks for accepting my request to connect...
-  -&gt; Predicción: HAM   (probabilidades ham/spam: [1. 0.])
+  -&gt; Predicción: SPAM   (probabilidad de spam: 1.000)
+
+Mensaje: thanks for accepting my request to connect...
+  -&gt; Predicción: HAM   (probabilidad de spam: 0.000)
 
 Mensaje: URGENT! Call this number now to claim your free prize before...
-  -&gt; Predicción: SPAM   (probabilidades ham/spam: [0. 1.])
+  -&gt; Predicción: SPAM   (probabilidad de spam: 1.000)
 
 Mensaje: Hey, are we still meeting for lunch tomorrow at noon?...
-  -&gt; Predicción: HAM   (probabilidades ham/spam: [1. 0.])
+  -&gt; Predicción: HAM   (probabilidad de spam: 0.000)
 </pre></div>
 </div>
 </div>
@@ -4213,16 +4455,16 @@ características:</p></li>
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "tf_gpu"
         },
         kernelOptions: {
-            name: "python3",
+            name: "tf_gpu",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'tf_gpu'</script>
 
                 </article>
               
@@ -4269,7 +4511,7 @@ características:</p></li>
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation-en-tiempo">4.1. Backpropagation en tiempo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desvanecimiento-y-explosion-de-gradientes">4.2. Desvanecimiento y explosión de gradientes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#red-de-memoria-a-largo-plazo-lstm">4.3. Red de memoria a largo plazo (LSTM)</a></li>
@@ -4453,8 +4695,8 @@ By Lihki Rubio, Ph.D.
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
 
   <footer class="bd-footer">
   </footer>
