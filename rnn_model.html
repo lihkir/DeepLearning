@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
@@ -42,10 +42,10 @@
     <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/custom-checkpoint.css" />
   
   <!-- So that users can add custom icons -->
-  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -66,7 +66,6 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'rnn_model';</script>
-    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/custom.js?v=14184634"></script>
     <script src="_static/.ipynb_checkpoints/custom-checkpoint.js"></script>
@@ -77,26 +76,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
-  
-    
-    <script src="_static/searchtools.js"></script>
-    <script src="_static/language_data.js"></script>
-    <script src="searchindex.js"></script>
-  
   </head>
-  <body data-default-mode="">
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
-
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-  
-  
-  
+
   
   <dialog id="pst-search-dialog">
     
@@ -122,51 +115,7 @@
 </div>
 
   
-    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
-<div class="bd-header__inner bd-page-width">
-  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
-    <span class="fa-solid fa-bars"></span>
-  </button>
-  
-  
-  <div class="col-lg-9 navbar-header-items">
-    
-    
-    <div class="navbar-header-items__end">
-      
-        <div class="navbar-item navbar-persistent--container">
-          
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-        </div>
-      
-      
-    </div>
-    
-  </div>
-  
-  
-    <div class="navbar-persistent--mobile">
-
-<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
- <i class="fa-solid fa-magnifying-glass"></i>
- <span class="search-button__default-text">Search</span>
- <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-</button>
-    </div>
-  
-
-  
-    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
-      <span class="fa-solid fa-outdent"></span>
-    </button>
-  
-</div>
-
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
     </header>
   
 
@@ -382,7 +331,7 @@
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="pst-show_toc_level nav section-nav flex-column">
+                <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation-en-tiempo">4.1. Backpropagation en tiempo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desvanecimiento-y-explosion-de-gradientes">4.2. Desvanecimiento y explosión de gradientes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#red-de-memoria-a-largo-plazo-lstm">4.3. Red de memoria a largo plazo (LSTM)</a></li>
@@ -1318,7 +1267,7 @@ cuDNN build version: 9
 <p>Word2Vec parte de la <strong>hipótesis distribucional: palabras que aparecen en contextos similares tienden a tener significados similares</strong>. En vez de representar palabras como categorías discretas (one-hot encoding, donde “gato” y “perro” son igual de distintos que “gato” y “avión”), Word2Vec les asigna un <strong>vector denso de números reales</strong> (por ejemplo, 100 o 300 dimensiones) de forma que:</p>
 <ul class="simple">
 <li><p>Palabras que aparecen en contextos parecidos <span class="math notranslate nohighlight">\(\rightarrow\)</span> vectores cercanos (similitud coseno alta).</p></li>
-<li><p>Las relaciones semánticas quedan codificadas como <strong>direcciones</strong> en el espacio vectorial. El ejemplo clásico:</p></li>
+<li><p>Las <strong>relaciones semánticas quedan codificadas como direcciones en el espacio vectorial</strong>. El ejemplo clásico:</p></li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\vec{v}(\text{rey}) - \vec{v}(\text{hombre}) + \vec{v}(\text{mujer}) \approx \vec{v}(\text{reina})\]</div>
@@ -1554,7 +1503,7 @@ cos(resultado, avion     ) = -0.6091
 <p>Para cualquier otra palabra (por ejemplo “perro”) basta poner el 1 en su posición: la capa oculta mostrará su fila de <span class="math notranslate nohighlight">\(W_1\)</span>.</p>
 <div class="tip admonition">
 <p class="admonition-title">Regla para recordar</p>
-<p>Al terminar el entrenamiento se guarda <span class="math notranslate nohighlight">\(W_1\)</span>. El embedding de la palabra <span class="math notranslate nohighlight">\(i\)</span> es la fila <span class="math notranslate nohighlight">\(i\)</span> de <span class="math notranslate nohighlight">\(W_1\)</span>. La capa oculta es solo el lugar donde esa fila aparece durante el cálculo.</p>
+<p>Al terminar el entrenamiento se guarda <span class="math notranslate nohighlight">\(W_1\)</span>. <strong>El embedding de la palabra <span class="math notranslate nohighlight">\(i\)</span> es la fila <span class="math notranslate nohighlight">\(i\)</span> de <span class="math notranslate nohighlight">\(W_1\)</span></strong>. La capa oculta es solo el lugar donde esa fila aparece durante el cálculo.</p>
 </div>
 </section>
 <section id="la-funcion-de-perdida">
@@ -1566,10 +1515,10 @@ cos(resultado, avion     ) = -0.6091
 \[u = W_2^\top h \quad \text{(puntuación para cada palabra del vocabulario)}\]</div>
 <div class="math notranslate nohighlight">
 \[\hat{y} = \text{softmax}(u), \qquad \hat{y}_i = \frac{e^{u_i}}{\sum_{j=1}^{V} e^{u_j}}\]</div>
-<p>Y se minimiza la entropía cruzada entre <span class="math notranslate nohighlight">\(\hat y\)</span> y la palabra de contexto real (codificada one-hot):</p>
+<p>Y se minimiza la entropía cruzada entre <span class="math notranslate nohighlight">\(\hat y\)</span> y la palabra de contexto real (codificada one-hot). Como todos los componentes de <span class="math notranslate nohighlight">\(y\)</span> son cero salvo <span class="math notranslate nohighlight">\(y_{w_c} = 1\)</span>, la entropía cruzada completa, <span class="math notranslate nohighlight">\(-\sum_i y_i \log \hat{y}_i\)</span>, se reduce a un solo término:</p>
 <div class="math notranslate nohighlight">
 \[\mathcal{L} = -\log \hat{y}_{w_c}\]</div>
-<p>El descenso de gradiente ajusta <span class="math notranslate nohighlight">\(W_1\)</span> y <span class="math notranslate nohighlight">\(W_2\)</span> para que la probabilidad de la palabra de contexto correcta aumente. <strong>Después de miles de estas actualizaciones sobre todo el corpus, las filas de <span class="math notranslate nohighlight">\(W_1\)</span> (los embeddings) terminan organizándose de forma que palabras con contextos parecidos quedan cerca en el espacio vectorial</strong>, sin que nadie le haya dicho explícitamente al modelo qué significa cada palabra.</p>
+<p>Minimizar esta pérdida equivale a aumentar la probabilidad que la red asigna a la palabra de contexto observada. El descenso de gradiente ajusta <span class="math notranslate nohighlight">\(W_1\)</span> y <span class="math notranslate nohighlight">\(W_2\)</span> en ese sentido. <strong>Después de miles de estas actualizaciones sobre todo el corpus, las filas de <span class="math notranslate nohighlight">\(W_1\)</span> (los embeddings) terminan organizándose de forma que palabras con contextos parecidos quedan cerca en el espacio vectorial</strong>, sin que nadie le haya dicho explícitamente al modelo qué significa cada palabra.</p>
 <blockquote>
 <div><p>En la práctica, gensim (y Word2Vec original) no usa softmax completo por ser muy costoso computacionalmente con vocabularios grandes; usa aproximaciones como <strong>negative sampling</strong> o <strong>hierarchical softmax</strong>. La idea conceptual es la misma.</p>
 </div></blockquote>
@@ -4455,16 +4404,16 @@ características:</p></li>
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "tf_gpu"
+            mode: "python"
         },
         kernelOptions: {
-            name: "tf_gpu",
+            name: "python3",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'tf_gpu'</script>
+    <script>kernelName = 'python3'</script>
 
                 </article>
               
@@ -4511,7 +4460,7 @@ características:</p></li>
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="pst-show_toc_level nav section-nav flex-column">
+    <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation-en-tiempo">4.1. Backpropagation en tiempo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desvanecimiento-y-explosion-de-gradientes">4.2. Desvanecimiento y explosión de gradientes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#red-de-memoria-a-largo-plazo-lstm">4.3. Red de memoria a largo plazo (LSTM)</a></li>
@@ -4695,8 +4644,8 @@ By Lihki Rubio, Ph.D.
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
   </footer>
