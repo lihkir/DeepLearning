@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
@@ -42,10 +42,10 @@
     <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/custom-checkpoint.css" />
   
   <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -66,6 +66,7 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'rnn_model';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/custom.js?v=14184634"></script>
     <script src="_static/.ipynb_checkpoints/custom-checkpoint.js"></script>
@@ -76,20 +77,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -115,7 +122,51 @@
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
     </header>
   
 
@@ -331,7 +382,7 @@
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation-en-tiempo">4.1. Backpropagation en tiempo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desvanecimiento-y-explosion-de-gradientes">4.2. Desvanecimiento y explosión de gradientes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#red-de-memoria-a-largo-plazo-lstm">4.3. Red de memoria a largo plazo (LSTM)</a></li>
@@ -355,7 +406,7 @@
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#doc2vec-extendiendo-word2vec-a-documentos-completos">4.6. Doc2Vec: extendiendo Word2Vec a documentos completos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-con-lstm">4.7. Clasificación con LSTM</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-correcta-de-la-matriz-de-embeddings">4.7.1. Construcción CORRECTA de la matriz de embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-de-la-matriz-de-embeddings">4.7.1. Construcción de la matriz de embeddings</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura-del-modelo">4.7.2. Arquitectura del modelo</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">4.7.3. Entrenamiento</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-del-modelo">4.7.4. Evaluación del modelo</a></li>
@@ -1474,7 +1525,7 @@ cos(resultado, avion     ) = -0.6091
 </div>
 <p><strong>Arquitectura de la red (Skip-gram):</strong></p>
 <figure class="align-center" id="word2vec-arquitectura">
-<img alt="_images/word2vec_arquitectura.png" src="_images/word2vec_arquitectura.png" />
+<img alt="_images/word2vec_architecture.png" src="_images/word2vec_architecture.png" />
 <figcaption>
 <p><span class="caption-number">Fig. 4.3 </span><span class="caption-text">Arquitectura Word2Vec.</span><a class="headerlink" href="#word2vec-arquitectura" title="Link to this image">#</a></p>
 </figcaption>
@@ -1485,10 +1536,29 @@ cos(resultado, avion     ) = -0.6091
 <li><p><span class="math notranslate nohighlight">\(W_1\)</span> es una matriz <span class="math notranslate nohighlight">\(V \times D\)</span>: <strong>cada fila de <span class="math notranslate nohighlight">\(W_1\)</span> es el embedding de una palabra</strong>. ¡Este es el origen de los embeddings!</p></li>
 <li><p><span class="math notranslate nohighlight">\(W_2\)</span> es una matriz <span class="math notranslate nohighlight">\(D \times V\)</span> usada solo durante el entrenamiento (se descarta después).</p></li>
 </ul>
+<div class="tip admonition">
+<p class="admonition-title">Observación</p>
+<ul class="simple">
+<li><p><strong>La salida no reconstruye la entrada (no es un autoencoder).</strong> Skip-gram recibe una palabra central y predice la distribución de probabilidad de las palabras de su <strong>contexto</strong> (su ventana), es decir <span class="math notranslate nohighlight">\(P(\text{contexto} \mid \text{gato})\)</span> y no <span class="math notranslate nohighlight">\(P(\text{gato} \mid \text{gato})\)</span>.</p></li>
+<li><p><strong>Por qué “perro” tiene 0.60 y “gato” solo 0.03:</strong></p>
+<ul>
+<li><p>“gato” aparece con frecuencia junto a “perro” en un corpus real (“el perro y el gato”), por lo que <span class="math notranslate nohighlight">\(P(\text{perro} \mid \text{gato})\)</span> es alta.</p></li>
+<li><p>Una palabra casi nunca aparece en su propia ventana de contexto, por lo que <span class="math notranslate nohighlight">\(P(\text{gato} \mid \text{gato})\)</span> es baja.</p></li>
+<li><p>Los pares de entrenamiento son (palabra central, palabra vecina), como (gato, perro) o (gato, come), y casi nunca (gato, gato); la salida refleja esa estadística.</p></li>
+</ul>
+</li>
+<li><p><strong>Conexión con la idea de fondo:</strong></p>
+<ul>
+<li><p>“gato” y “perro” comparten contextos, por lo que sus embeddings resultan parecidos.</p></li>
+<li><p>El objetivo real es el vector <span class="math notranslate nohighlight">\(h\)</span> (fila de “gato” en <span class="math notranslate nohighlight">\(W_1\)</span>), no la salida: <span class="math notranslate nohighlight">\(W_2\)</span> solo puntúa el contexto y se descarta, y lo que se conserva es la tabla de embeddings <span class="math notranslate nohighlight">\(W_1\)</span>.</p></li>
+</ul>
+</li>
+</ul>
+</div>
 </section>
 <section id="skip-gram-que-entra-que-sale-y-donde-esta-el-embedding">
 <h3><span class="section-number">4.5.2. </span>Skip-gram: qué entra, qué sale y dónde está el embedding<a class="headerlink" href="#skip-gram-que-entra-que-sale-y-donde-esta-el-embedding" title="Link to this heading">#</a></h3>
-<p><strong>Qué entra y qué sale.</strong> Entra “gato” como vector one-hot. No sale una palabra, sino una <strong>distribución de probabilidad</strong> sobre todo el vocabulario <span class="math notranslate nohighlight">\(V\)</span> (suma 1). Cada valor responde: <em>dado que “gato” es la palabra central, ¿qué tan probable es que la palabra de esa fila aparezca en su contexto?</em> Por eso “perro” obtiene <span class="math notranslate nohighlight">\(0.60\)</span>: suele aparecer cerca de “gato” (por ejemplo, “el gato y el perro”). La red <strong>no convierte</strong> gato en perro: Skip-gram predice vecinos, no traduce ni sustituye. Entrada y salida comparten el mismo vocabulario.</p>
+<p><strong>Qué entra y qué sale.</strong> Entra “gato” como vector one-hot. No sale una palabra, sino una <strong>distribución de probabilidad</strong> sobre todo el vocabulario <span class="math notranslate nohighlight">\(V\)</span> (suma 1). Cada valor responde: <em>dado que “gato” es la palabra central, ¿qué tan probable es que la palabra de esa fila aparezca en su contexto?</em> Por eso “perro” obtiene <span class="math notranslate nohighlight">\(0.60\)</span>: suele aparecer cerca de “gato” (por ejemplo, “el gato y el perro”). <strong>La red no convierte gato en perro: <code class="docutils literal notranslate"><span class="pre">Skip-gram</span></code> predice vecinos, no traduce ni sustituye</strong>. Entrada y salida comparten el mismo vocabulario.</p>
 <p><strong>De dónde sale el embedding.</strong></p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(W_1 \in \mathbb{R}^{V \times D}\)</span> es la <strong>tabla de embeddings</strong>: una fila por palabra.</p></li>
@@ -1525,7 +1595,7 @@ cos(resultado, avion     ) = -0.6091
 </section>
 <section id="ejemplo-numerico-implementando-skip-gram-desde-cero">
 <h3><span class="section-number">4.5.4. </span>Ejemplo numérico: implementando Skip-gram desde cero<a class="headerlink" href="#ejemplo-numerico-implementando-skip-gram-desde-cero" title="Link to this heading">#</a></h3>
-<p>Para desmitificar completamente el proceso, vamos a implementar un Word2Vec (Skip-gram) <strong>minúsculo, sin gensim, solo con NumPy</strong>, sobre un corpus de juguete de 4 oraciones. Así veremos con nuestros propios ojos cómo, partiendo de vectores aleatorios, el entrenamiento los organiza según el significado.</p>
+<p>Vamos a implementar un Word2Vec (Skip-gram) <strong>minúsculo, sin gensim, solo con NumPy</strong>, sobre un corpus de juguete de 4 oraciones. Así veremos con nuestros propios ojos cómo, partiendo de vectores aleatorios, el entrenamiento los organiza según el significado.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span>
@@ -1549,6 +1619,50 @@ cos(resultado, avion     ) = -0.6091
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Vocabulario: [&#39;cama&#39;, &#39;carne&#39;, &#39;come&#39;, &#39;duerme&#39;, &#39;el&#39;, &#39;en&#39;, &#39;gato&#39;, &#39;la&#39;, &#39;perro&#39;, &#39;pescado&#39;, &#39;sofa&#39;]
 Tamaño del vocabulario (V): 11
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">word2idx</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;cama&#39;: 0,
+ &#39;carne&#39;: 1,
+ &#39;come&#39;: 2,
+ &#39;duerme&#39;: 3,
+ &#39;el&#39;: 4,
+ &#39;en&#39;: 5,
+ &#39;gato&#39;: 6,
+ &#39;la&#39;: 7,
+ &#39;perro&#39;: 8,
+ &#39;pescado&#39;: 9,
+ &#39;sofa&#39;: 10}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">idx2word</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: &#39;cama&#39;,
+ 1: &#39;carne&#39;,
+ 2: &#39;come&#39;,
+ 3: &#39;duerme&#39;,
+ 4: &#39;el&#39;,
+ 5: &#39;en&#39;,
+ 6: &#39;gato&#39;,
+ 7: &#39;la&#39;,
+ 8: &#39;perro&#39;,
+ 9: &#39;pescado&#39;,
+ 10: &#39;sofa&#39;}
 </pre></div>
 </div>
 </div>
@@ -1579,7 +1693,7 @@ Tamaño del vocabulario (V): 11
             <span class="n">pairs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">center_id</span><span class="p">,</span> <span class="n">idxs</span><span class="p">[</span><span class="n">ctx_pos</span><span class="p">]))</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ejemplos de pares (target -&gt; contexto):&quot;</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">[:</span><span class="mi">12</span><span class="p">]:</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">[:</span><span class="mi">18</span><span class="p">]:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">idx2word</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="si">:</span><span class="s2">8s</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="n">idx2word</span><span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Total de pares de entrenamiento generados: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">pairs</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
@@ -1599,6 +1713,12 @@ Tamaño del vocabulario (V): 11
   en       -&gt; gato
   en       -&gt; duerme
   en       -&gt; el
+  en       -&gt; sofa
+  el       -&gt; duerme
+  el       -&gt; en
+  el       -&gt; sofa
+  sofa     -&gt; en
+  sofa     -&gt; el
 
 Total de pares de entrenamiento generados: 56
 </pre></div>
@@ -1775,7 +1895,7 @@ W1 (V x D) ahora contiene los embeddings de palabras APRENDIDOS. Shape: (11, 5)
 </div>
 </div>
 <blockquote>
-<div><p><strong>Conclusión clave</strong>: los embeddings <strong>no se diseñan a mano</strong>; emergen como los pesos <span class="math notranslate nohighlight">\(W_1\)</span> de una red neuronal entrenada para resolver una tarea de predicción de contexto. gensim hace exactamente esto (con optimizaciones como <em>negative sampling</em>, submuestreo de palabras frecuentes y multithreading), pero el principio matemático es el que acabamos de programar.</p>
+<div><p><strong>Conclusión clave</strong>: <strong>los embeddings no se diseñan a mano; emergen como los pesos <span class="math notranslate nohighlight">\(W_1\)</span> de una red neuronal entrenada para resolver una tarea de predicción de contexto</strong>. gensim hace exactamente esto (con optimizaciones como <em>negative sampling</em>, submuestreo de palabras frecuentes y multithreading), pero el principio matemático es el que acabamos de programar.</p>
 </div></blockquote>
 </section>
 <section id="word2vec-con-gensim-sobre-nuestro-dataset-de-sms">
@@ -1873,17 +1993,15 @@ W1 (V x D) ahora contiene los embeddings de palabras APRENDIDOS. Shape: (11, 5)
 <p><strong>Preprocesamiento de texto.</strong> Limpiamos HTML, URLs y normalizamos a minúsculas.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bs4</span><span class="w"> </span><span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>                                             <span class="c1"># módulo de expresiones regulares (falta en tu fragmento)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bs4</span><span class="w"> </span><span class="kn">import</span> <span class="n">BeautifulSoup</span>                         <span class="c1"># librería para interpretar HTML</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">cleanText</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\|\|\|&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;http\S+&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;&lt;URL&gt;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">text</span>
-
-<span class="n">df</span><span class="p">[</span><span class="s1">&#39;Message_clean&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;Message&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">cleanText</span><span class="p">)</span>
-<span class="n">df</span><span class="p">[[</span><span class="s1">&#39;Message&#39;</span><span class="p">,</span> <span class="s1">&#39;Message_clean&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cleanText</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>                                  <span class="c1"># recibe un mensaje crudo</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">text</span>    <span class="c1"># quita etiquetas HTML y deja solo el texto visible</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\|\|\|&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>              <span class="c1"># reemplaza cada &quot;|||&quot; por un espacio</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;http\S+&#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;&lt;URL&gt;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>         <span class="c1"># reemplaza cada enlace por la marca &lt;URL&gt;</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>                               <span class="c1"># pasa todo a minúsculas</span>
+    <span class="k">return</span> <span class="n">text</span>             
 </pre></div>
 </div>
 </div>
@@ -1987,7 +2105,7 @@ W1 (V x D) ahora contiene los embeddings de palabras APRENDIDOS. Shape: (11, 5)
 <div class="tip admonition">
 <p class="admonition-title">Precauciones</p>
 <ul class="simple">
-<li><p>En español hay que incluir las tildes y la ñ en el conjunto permitido. Si se usa solo <code class="docutils literal notranslate"><span class="pre">[^a-z\s]</span></code>, “sofá” se convierte en “sof” y “año” en “ao”.</p></li>
+<li><p><strong>En español hay que incluir las tildes y la ñ en el conjunto permitido</strong>. Si se usa solo <code class="docutils literal notranslate"><span class="pre">[^a-z\s]</span></code>, “sofá” se convierte en “sof” y “año” en “ao”.</p></li>
 <li><p>Eliminar puntuación también borra los límites de oración. Si la ventana de contexto no debe cruzar oraciones, conviene <strong>separar en oraciones antes</strong> de limpiar.</p></li>
 <li><p>Es una decisión de diseño: para tareas donde los números o los signos importan (fechas, emoticones, código), no deben eliminarse.</p></li>
 </ul>
@@ -2090,7 +2208,15 @@ Vocabulario Skip-gram: 4429 palabras
 <li><p><strong>Idea general:</strong> los hiperparámetros están elegidos para un corpus de tamaño moderado (mensajes cortos) y para poder comparar de forma justa CBOW contra Skip-gram: se cambia solo <code class="docutils literal notranslate"><span class="pre">sg</span></code> y todo lo demás se mantiene igual.</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">vector_size=100</span></code>:</strong> dimensión del vector de cada palabra.</p>
 <ul>
-<li><p><strong>Por qué 100:</strong> valor estándar (el rango habitual es 100 a 300). Con un corpus pequeño, más dimensiones aportan poca información adicional y aumentan el riesgo de sobreajuste y el costo computacional.</p></li>
+<li><p><strong>El valor 100 no se calcula, se elige.</strong> <code class="docutils literal notranslate"><span class="pre">vector_size</span></code> es un hiperparámetro fijado por el analista, sin fórmula que lo derive del corpus. Corresponde a <span class="math notranslate nohighlight">\(D\)</span> en <span class="math notranslate nohighlight">\(W_1\in\mathbb{R}^{V\times D}\)</span> (neuronas de la capa oculta) y define cuántos números describen a cada palabra. Con <span class="math notranslate nohighlight">\(V = 4429\)</span> y <span class="math notranslate nohighlight">\(D = 100\)</span>, <span class="math notranslate nohighlight">\(W_1\)</span> tiene <span class="math notranslate nohighlight">\(4429 \times 100 = 442{,}900\)</span> parámetros (y <span class="math notranslate nohighlight">\(W_2\)</span> otros tantos).</p></li>
+<li><p><strong>En qué se basa la elección:</strong></p>
+<ul>
+<li><p><strong>Convención de la literatura:</strong> los trabajos originales usaron entre 100 y 300 dimensiones (300 en corpus enormes como Google News); es un punto de partida estándar, no un óptimo demostrado.</p></li>
+<li><p><strong>Tamaño del corpus:</strong> con pocos datos, más dimensiones aportan poca información útil y no hay ejemplos suficientes para estimarlas; con corpus muy grandes se justifican 200 a 300.</p></li>
+<li><p><strong>Regla heurística <span class="math notranslate nohighlight">\(D \approx V^{1/4}\)</span>:</strong> daría <span class="math notranslate nohighlight">\(4429^{1/4} \approx 8\)</span>; casi no se usa en Word2Vec porque los embeddings de palabras requieren más capacidad, pero sirve como referencia del extremo bajo.</p></li>
+</ul>
+</li>
+<li><p><strong>Cómo se decide en la práctica:</strong> se prueban varios valores y se comparan con una tarea concreta (similitud de palabras, analogías o desempeño de un clasificador). Si pasar de 100 a 200 mejora poco, 100 es suficiente.</p></li>
 </ul>
 </li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">window=5</span></code>:</strong> número de palabras a cada lado de la palabra central que se consideran contexto.</p>
@@ -2189,7 +2315,7 @@ Palabras más similares a &#39;free&#39; (Skip-gram):
 </div>
 </div>
 </div>
-<p>Observa cómo palabras típicas de mensajes <em>spam</em> (“urgent”, “free”, “win”, “claim”, “prize”, números de teléfono) tienden a aparecer cercanas entre sí en el espacio de embeddings, precisamente porque <strong>coocurren en los mismos contextos</strong> dentro del corpus (ofertas, premios, urgencia). Esta estructura es la que después aprovechará nuestra LSTM.</p>
+<p>Observa cómo <strong>palabras típicas de mensajes <em>spam</em> (“urgent”, “free”, “win”, “claim”, “prize”, números de teléfono) tienden a aparecer cercanas entre sí en el espacio de embeddings, precisamente porque coocurren en los mismos contextos</strong> dentro del corpus (ofertas, premios, urgencia). Esta estructura es la que después aprovechará nuestra LSTM.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualizamos el vecindario semántico con PCA (reducimos 100D -&gt; 2D solo para graficar)</span>
@@ -2220,7 +2346,7 @@ Palabras más similares a &#39;free&#39; (Skip-gram):
 </div>
 <ul class="simple">
 <li><p><strong>Idea central:</strong> cada punto es una palabra y la <strong>cercanía indica contextos de aparición parecidos</strong>, no igual significado. Los ejes de PCA no tienen interpretación semántica y su signo es arbitrario; solo importan las distancias relativas y los grupos.</p></li>
-<li><p><strong>Lectura del gráfico:</strong> el Componente 1 separa dos grupos de vocabulario.</p>
+<li><p>Nótese que, el <strong>Componente 1 separa dos grupos</strong> de vocabulario.</p>
 <ul>
 <li><p><strong>Derecha (promocional o spam):</strong> <code class="docutils literal notranslate"><span class="pre">prize</span></code>, <code class="docutils literal notranslate"><span class="pre">claim</span></code>, <code class="docutils literal notranslate"><span class="pre">win</span></code>, <code class="docutils literal notranslate"><span class="pre">cash</span></code>, <code class="docutils literal notranslate"><span class="pre">urgent</span></code>. <code class="docutils literal notranslate"><span class="pre">prize</span></code> y <code class="docutils literal notranslate"><span class="pre">claim</span></code> están muy juntas, lo que indica coocurrencia fuerte.</p></li>
 <li><p><strong>Izquierda (conversacional):</strong> <code class="docutils literal notranslate"><span class="pre">love</span></code>, <code class="docutils literal notranslate"><span class="pre">dinner</span></code>, <code class="docutils literal notranslate"><span class="pre">home</span></code>, <code class="docutils literal notranslate"><span class="pre">thanks</span></code>, <code class="docutils literal notranslate"><span class="pre">meeting</span></code>. <code class="docutils literal notranslate"><span class="pre">dinner</span></code> y <code class="docutils literal notranslate"><span class="pre">home</span></code> casi se superponen.</p></li>
@@ -2277,7 +2403,7 @@ Palabras más similares a &#39;free&#39; (Skip-gram):
 <p>Word2Vec nos da un vector <strong>por palabra</strong>. Pero para clasificar mensajes SMS completos (¿es spam o no?) necesitamos, en algún punto, un vector <strong>por mensaje</strong>. Existen dos estrategias:</p>
 <ol class="arabic simple">
 <li><p><strong>Promediar los embeddings de Word2Vec</strong> de todas las palabras del mensaje (simple y efectivo).</p></li>
-<li><p><strong>Doc2Vec</strong> (Le &amp; Mikolov, 2014): una extensión de Word2Vec que aprende directamente un vector para cada documento, agregando un “pseudo-token” que identifica al documento durante el entrenamiento (arquitectura <em>Distributed Memory</em>, análoga a CBOW pero con un vector de documento adicional en el contexto).</p></li>
+<li><p><strong>Doc2Vec</strong> (Le &amp; Mikolov, 2014): una extensión de <strong>Word2Vec que aprende directamente un vector para cada documento, agregando un “pseudo-token” que identifica al documento durante el entrenamiento</strong> (arquitectura <em>Distributed Memory</em>, análoga a CBOW pero con un vector de documento adicional en el contexto).</p></li>
 </ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2435,7 +2561,7 @@ Palabras más similares a &#39;free&#39; (Skip-gram):
 <span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.keras.preprocessing.sequence</span><span class="w"> </span><span class="kn">import</span> <span class="n">pad_sequences</span>
 
 <span class="c1"># Usamos df[&#39;Message_clean&#39;] (ya sin HTML/URLs, en minúsculas) definido en 4.4.1.2</span>
-<span class="n">max_features</span> <span class="o">=</span> <span class="mi">5000</span>   <span class="c1"># nº máximo de palabras del vocabulario (las más frecuentes)</span>
+<span class="n">max_features</span> <span class="o">=</span> <span class="mi">5000</span>   <span class="c1"># nº máximo de palabras del vocabulario (las más frecuentes) &quot;Hiperparámetro elegido por el analista&quot;</span>
 
 <span class="n">tokenizer</span> <span class="o">=</span> <span class="n">Tokenizer</span><span class="p">(</span><span class="n">num_words</span><span class="o">=</span><span class="n">max_features</span><span class="p">,</span> <span class="n">filters</span><span class="o">=</span><span class="s1">&#39;!&quot;#$%&amp;()*+,-./:;&lt;=&gt;?@[</span><span class="se">\\</span><span class="s1">]^_`{|}~&#39;</span><span class="p">,</span> <span class="n">lower</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">tokenizer</span><span class="o">.</span><span class="n">fit_on_texts</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Message_clean&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
@@ -2452,6 +2578,28 @@ Tamaño de vocabulario efectivo usado (vocab_size): 5001
 </pre></div>
 </div>
 </div>
+</div>
+<p>No basta con mirar cuántas palabras únicas se descartan: lo relevante es <strong>qué porcentaje de las apariciones totales queda cubierto</strong>. Las palabras raras (frecuencia 1 o 2) son muchas en el vocabulario, pero pesan muy poco en el texto.</p>
+<p><strong>Sugerencia</strong></p>
+<ul class="simple">
+<li><p>Si con 5000 palabras la cobertura ya es ~97-99 %, el resto es ruido y <code class="docutils literal notranslate"><span class="pre">max_features</span> <span class="pre">=</span> <span class="pre">5000</span></code> es una buena elección.</p></li>
+<li><p>Si la cobertura sigue subiendo de forma notable entre 5000 y 8990, conviene usar todo el vocabulario.</p></li>
+<li><p>Las palabras con frecuencia 1 casi nunca ayudan: el modelo no tiene ejemplos suficientes para aprender su significado, y Word2Vec tampoco les da un buen vector.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+
+<span class="c1"># Frecuencia de cada palabra, ordenada de mayor a menor</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">tokenizer</span><span class="o">.</span><span class="n">word_counts</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">total</span> <span class="o">=</span> <span class="n">counts</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">5000</span><span class="p">,</span> <span class="mi">8000</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">counts</span><span class="p">)]:</span>
+    <span class="n">cobertura</span> <span class="o">=</span> <span class="n">counts</span><span class="p">[:</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="n">total</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Top </span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2"> palabras -&gt; cubren </span><span class="si">{</span><span class="n">cobertura</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2"> del texto&quot;</span><span class="p">)</span>
+
+<span class="c1"># Cuántas palabras aparecen solo 1 o 2 veces</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Palabras con frecuencia 1:&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">counts</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Palabras con frecuencia &lt;=2:&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">counts</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2491,8 +2639,31 @@ Name: n_words, dtype: float64
 </div>
 </div>
 </div>
-<section id="construccion-correcta-de-la-matriz-de-embeddings">
-<h3><span class="section-number">4.7.1. </span>Construcción CORRECTA de la matriz de embeddings<a class="headerlink" href="#construccion-correcta-de-la-matriz-de-embeddings" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">MAX_SEQUENCE_LENGTH</span> <span class="pre">=</span> <span class="pre">50</span></code></p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">vector_size</span> <span class="pre">=</span> <span class="pre">100</span></code></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Qué es</strong></p></td>
+<td><p>Cuántas <strong>palabras</strong> por mensaje (longitud de la secuencia)</p></td>
+<td><p>Cuántas <strong>dimensiones</strong> tiene el vector de cada documento en Doc2Vec</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Dónde se usa</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pad_sequences</span></code> para el LSTM</p></td>
+<td><p>Modelo Doc2Vec</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Unidad</strong></p></td>
+<td><p>Palabras / pasos de tiempo</p></td>
+<td><p>Números decimales por vector</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<section id="construccion-de-la-matriz-de-embeddings">
+<h3><span class="section-number">4.7.1. </span>Construcción de la matriz de embeddings<a class="headerlink" href="#construccion-de-la-matriz-de-embeddings" title="Link to this heading">#</a></h3>
 <p>Ahora sí construimos <code class="docutils literal notranslate"><span class="pre">embedding_matrix</span></code> usando <strong>el mismo vocabulario e índices del <code class="docutils literal notranslate"><span class="pre">Tokenizer</span></code></strong> (no los índices internos de gensim), tomando el vector de Word2Vec para cada palabra cuando exista, e inicializando aleatoriamente las que no se encuentren en el vocabulario de Word2Vec (palabras muy raras que gensim descartó por <code class="docutils literal notranslate"><span class="pre">min_count</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2531,7 +2702,6 @@ Shape final de embedding_matrix: (5001, 100)
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
 
-<span class="c1"># --- Tu código original, sin cambios ---</span>
 <span class="n">Y</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">values</span>   <span class="c1"># one-hot: [ham, spam]</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Orden de columnas de Y:&quot;</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;Category&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 
@@ -2553,7 +2723,6 @@ Shape final de embedding_matrix: (5001, 100)
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Y_train[:5] (one-hot):&quot;</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Y_train_binary[:5]   :&quot;</span><span class="p">,</span> <span class="n">Y_train_binary</span><span class="p">[:</span><span class="mi">5</span><span class="p">])</span>
 
-<span class="c1"># --- Split manual train/val (evita el bug de Keras 3 con class_weight + validation_split) ---</span>
 <span class="n">X_train_fit</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">Y_train_fit</span><span class="p">,</span> <span class="n">Y_val</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
     <span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train_binary</span><span class="p">,</span>
     <span class="n">test_size</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span>
@@ -4404,16 +4573,16 @@ características:</p></li>
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "tf_gpu"
         },
         kernelOptions: {
-            name: "python3",
+            name: "tf_gpu",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'tf_gpu'</script>
 
                 </article>
               
@@ -4460,7 +4629,7 @@ características:</p></li>
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation-en-tiempo">4.1. Backpropagation en tiempo</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#desvanecimiento-y-explosion-de-gradientes">4.2. Desvanecimiento y explosión de gradientes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#red-de-memoria-a-largo-plazo-lstm">4.3. Red de memoria a largo plazo (LSTM)</a></li>
@@ -4484,7 +4653,7 @@ características:</p></li>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#doc2vec-extendiendo-word2vec-a-documentos-completos">4.6. Doc2Vec: extendiendo Word2Vec a documentos completos</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clasificacion-con-lstm">4.7. Clasificación con LSTM</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-correcta-de-la-matriz-de-embeddings">4.7.1. Construcción CORRECTA de la matriz de embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-de-la-matriz-de-embeddings">4.7.1. Construcción de la matriz de embeddings</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#arquitectura-del-modelo">4.7.2. Arquitectura del modelo</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento">4.7.3. Entrenamiento</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-del-modelo">4.7.4. Evaluación del modelo</a></li>
@@ -4644,8 +4813,8 @@ By Lihki Rubio, Ph.D.
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
 
   <footer class="bd-footer">
   </footer>
