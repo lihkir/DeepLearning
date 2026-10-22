@@ -2578,30 +2578,6 @@ f(X, Y)=f_{X}(X)f_{Y}(Y).
 <li><p>Así, <span class="math notranslate nohighlight">\(X\)</span> e <span class="math notranslate nohighlight">\(Y=|X|\)</span> son no correlacionadas, pero no son independientes, pues <span class="math notranslate nohighlight">\(Y\)</span> queda completamente determinada por <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
 </ul>
 </div>
-<div class="note admonition">
-<p class="admonition-title">Precisión formal: estacionariedad estricta vs. estacionariedad débil</p>
-<ul class="simple">
-<li><p>Es importante distinguir con precisión dos nociones de estacionariedad que en la práctica suelen confundirse.</p></li>
-</ul>
-<p><strong>Estacionariedad estricta (o fuerte).</strong> Un proceso <span class="math notranslate nohighlight">\(\{y_t\}\)</span> es <em>estrictamente estacionario</em> si, para todo entero <span class="math notranslate nohighlight">\(k\)</span> y todo conjunto de índices <span class="math notranslate nohighlight">\(t_1,\dots,t_n\)</span>, la distribución conjunta de <span class="math notranslate nohighlight">\((y_{t_1},\dots,y_{t_n})\)</span> es idéntica a la de <span class="math notranslate nohighlight">\((y_{t_1+k},\dots,y_{t_n+k})\)</span>:</p>
-<div class="math notranslate nohighlight">
-\[
-F_{y_{t_1},\dots,y_{t_n}}(x_1,\dots,x_n) = F_{y_{t_1+k},\dots,y_{t_n+k}}(x_1,\dots,x_n),\qquad \forall\, k,n,\{t_i\}.
-\]</div>
-<p>Es decir, <strong>toda</strong> la estructura probabilística del proceso es invariante ante desplazamientos temporales.</p>
-<p><strong>Estacionariedad débil (o de segundo orden).</strong> Un proceso <span class="math notranslate nohighlight">\(\{y_t\}\)</span> es <em>débilmente estacionario</em> si únicamente sus dos primeros momentos son invariantes en el tiempo:</p>
-<div class="math notranslate nohighlight">
-\[
-\text{E}(y_t) = \mu &lt; \infty \quad \forall t, \qquad \text{Cov}(y_t, y_{t+k}) = \gamma(k) &lt; \infty \quad \forall t,k,
-\]</div>
-<p>es decir, la media es constante y la autocovarianza <span class="math notranslate nohighlight">\(\gamma(k)\)</span> depende únicamente del rezago <span class="math notranslate nohighlight">\(k\)</span>, no del instante <span class="math notranslate nohighlight">\(t\)</span>.</p>
-<p><strong>Relación entre ambas nociones.</strong></p>
-<ul class="simple">
-<li><p>La estacionariedad estricta <strong>no implica</strong> en general la débil, salvo que existan los momentos de segundo orden (<span class="math notranslate nohighlight">\(\text{E}(y_t^2)&lt;\infty\)</span>).</p></li>
-<li><p>La estacionariedad débil <strong>no implica</strong> la estricta, excepto en el caso particular en que <span class="math notranslate nohighlight">\(\{y_t\}\)</span> sea un proceso <strong>Gaussiano</strong>, para el cual la distribución conjunta queda completamente determinada por su media y su estructura de covarianzas; en ese caso especial, ambas nociones <strong>coinciden</strong>.</p></li>
-<li><p>Toda la teoría de los procesos <span class="math notranslate nohighlight">\(MA(q)\)</span>, <span class="math notranslate nohighlight">\(AR(p)\)</span> y <span class="math notranslate nohighlight">\(ARMA(p,q)\)</span> que se desarrolla a continuación se apoya <strong>exclusivamente en estacionariedad débil</strong>, que es la condición relevante para que la función de autocovarianza <span class="math notranslate nohighlight">\(\gamma(k)\)</span> y la función de autocorrelación <span class="math notranslate nohighlight">\(\rho(k)=\gamma(k)/\gamma(0)\)</span> estén bien definidas y sean estimables consistentemente a partir de una única realización del proceso (bajo el supuesto adicional de <strong>ergodicidad</strong>).</p></li>
-</ul>
-</div>
 </section>
 <section id="proceso-de-media-movil-finito-ma-q">
 <h2><span class="section-number">5.18. </span>Proceso de media móvil finito <span class="math notranslate nohighlight">\(MA(q)\)</span><a class="headerlink" href="#proceso-de-media-movil-finito-ma-q" title="Link to this heading">#</a></h2>
