@@ -230,7 +230,6 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="deep_learning_intro.html">1. Deep Learning</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">2. Multilayer Perceptron</a></li>
-
 <li class="toctree-l1"><a class="reference internal" href="cnn_model.html">3. Convolutional Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rnn_model.html">4. Recurrent Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="time_series.html">5. Time Series</a></li>
@@ -383,7 +382,6 @@
             </div>
             <nav aria-label="Page">
                 <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2. Multilayer Perceptron</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradiente-descendente">2.1. Gradiente descendente</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-neuronales">2.2. Redes neuronales</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-perceptron">2.3. El perceptrón</a></li>
@@ -403,27 +401,22 @@
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo">2.12.1. Objetivo</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediccion-de-series-temporales">2.13. Predicción de series temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-y-ordenamiento-temporal">2.14. Carga y ordenamiento temporal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particion-cronologica-train-validation-test">2.15. Partición cronológica Train/Validation/Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#escalado-sin-fuga">2.16. Escalado (sin fuga)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-de-regresores-y-objetivo">2.17. Construcción de regresores y objetivo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-mlp-con-regularizacion">2.18. Modelo MLP con regularización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-train-con-early-stopping-validation">2.19. 6. Entrenamiento (Train) con <em>early stopping</em> (Validation)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-de-aprendizaje-diagnostico-de-overfitting">2.19.1. Curvas de aprendizaje (diagnóstico de overfitting)</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#prediccion-de-series-temporales">2. Predicción de series temporales</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-y-ordenamiento-temporal">2.1. Carga y ordenamiento temporal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particion-cronologica-train-validation-test">2.2. Partición cronológica Train/Validation/Test</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#escalado-sin-fuga">2.3. Escalado (sin fuga)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-de-regresores-y-objetivo">2.4. Construcción de regresores y objetivo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-mlp-con-regularizacion">2.5. Modelo MLP con regularización</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-train-con-early-stopping-validation">2.6. 6. Entrenamiento (Train) con <em>early stopping</em> (Validation)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-de-aprendizaje-diagnostico-de-overfitting">2.6.1. Curvas de aprendizaje (diagnóstico de overfitting)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-final-en-el-conjunto-de-test-se-usa-una-sola-vez">2.20. Evaluación final en el conjunto de <strong>Test</strong> (se usa una sola vez)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figuras-de-prediccion-y-error-en-el-conjunto-de-test">2.20.1. Figuras de predicción y error en el conjunto de Test</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-final-en-el-conjunto-de-test-se-usa-una-sola-vez">2.7. Evaluación final en el conjunto de <strong>Test</strong> (se usa una sola vez)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figuras-de-prediccion-y-error-en-el-conjunto-de-test">2.7.1. Figuras de predicción y error en el conjunto de Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2.21. Proyecto Integrador de Deep Learning</a></li>
 </ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2.8. Proyecto Integrador de Deep Learning</a></li>
-</ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -5653,9 +5646,8 @@ Name: count, dtype: int64
 </ul>
 </section>
 </section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="prediccion-de-series-temporales">
-<h1><span class="section-number">2. </span>Predicción de series temporales<a class="headerlink" href="#prediccion-de-series-temporales" title="Link to this heading">#</a></h1>
+<section id="prediccion-de-series-temporales">
+<h2><span class="section-number">2.13. </span>Predicción de series temporales<a class="headerlink" href="#prediccion-de-series-temporales" title="Link to this heading">#</a></h2>
 <div class="tip admonition">
 <p class="admonition-title">Series de tiempo</p>
 <ul>
@@ -5715,8 +5707,9 @@ I0000 00:00:1793649266.294041  193235 port.cc:153] oneDNN custom operations are 
 </div>
 </div>
 </div>
+</section>
 <section id="carga-y-ordenamiento-temporal">
-<h2><span class="section-number">2.1. </span>Carga y ordenamiento temporal<a class="headerlink" href="#carga-y-ordenamiento-temporal" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.14. </span>Carga y ordenamiento temporal<a class="headerlink" href="#carga-y-ordenamiento-temporal" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;https://raw.githubusercontent.com/lihkir/Data/refs/heads/main/PRSA_data_2010.1.1-2014.12.31.csv&#39;</span>
@@ -5790,7 +5783,7 @@ Nulos en PRES: 0
 </div>
 </section>
 <section id="particion-cronologica-train-validation-test">
-<h2><span class="section-number">2.2. </span>Partición cronológica Train/Validation/Test<a class="headerlink" href="#particion-cronologica-train-validation-test" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.15. </span>Partición cronológica Train/Validation/Test<a class="headerlink" href="#particion-cronologica-train-validation-test" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">TARGET</span> <span class="o">=</span> <span class="s1">&#39;PRES&#39;</span>
@@ -5836,7 +5829,7 @@ Test        2014-01-01 00:00:00 -&gt; 2014-12-31 23:00:00  (n=8760)
 </div>
 </section>
 <section id="escalado-sin-fuga">
-<h2><span class="section-number">2.3. </span>Escalado (sin fuga)<a class="headerlink" href="#escalado-sin-fuga" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.16. </span>Escalado (sin fuga)<a class="headerlink" href="#escalado-sin-fuga" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>El <code class="docutils literal notranslate"><span class="pre">MinMaxScaler</span></code> se <strong>ajusta únicamente con Train</strong> y se aplica (<code class="docutils literal notranslate"><span class="pre">transform</span></code>) a Validation y Test. Valores fuera del rango de train pueden salir ligeramente de <span class="math notranslate nohighlight">\([0,1]\)</span>: es el comportamiento correcto, pues no debemos “ver” el futuro.</p></li>
 </ul>
@@ -5854,7 +5847,7 @@ Test        2014-01-01 00:00:00 -&gt; 2014-12-31 23:00:00  (n=8760)
 </div>
 </section>
 <section id="construccion-de-regresores-y-objetivo">
-<h2><span class="section-number">2.4. </span>Construcción de regresores y objetivo<a class="headerlink" href="#construccion-de-regresores-y-objetivo" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.17. </span>Construcción de regresores y objetivo<a class="headerlink" href="#construccion-de-regresores-y-objetivo" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Para que la <strong>primera</strong> observación de Validation/Test también tenga 7 rezagos, se antepone como <strong>contexto</strong> el final del segmento anterior. Esto usa solo información <strong>pasada</strong>, por lo que no hay leakage, y evita perder muestras y desalinear índices.</p></li>
 </ul>
@@ -5893,7 +5886,7 @@ Test : (8760, 7) (8760,)
 </div>
 </section>
 <section id="modelo-mlp-con-regularizacion">
-<h2><span class="section-number">2.5. </span>Modelo MLP con regularización<a class="headerlink" href="#modelo-mlp-con-regularizacion" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.18. </span>Modelo MLP con regularización<a class="headerlink" href="#modelo-mlp-con-regularizacion" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Misma arquitectura base (<span class="math notranslate nohighlight">\(32\to16\to16\)</span>, <code class="docutils literal notranslate"><span class="pre">tanh</span></code>) pero con <strong>L2</strong> en las capas densas, <strong>Dropout</strong> y control del entrenamiento mediante <strong>EarlyStopping</strong> sobre Validation.</p></li>
 </ul>
@@ -5926,7 +5919,7 @@ Test : (8760, 7) (8760,)
 </div>
 </section>
 <section id="entrenamiento-train-con-early-stopping-validation">
-<h2><span class="section-number">2.6. </span>6. Entrenamiento (Train) con <em>early stopping</em> (Validation)<a class="headerlink" href="#entrenamiento-train-con-early-stopping-validation" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.19. </span>6. Entrenamiento (Train) con <em>early stopping</em> (Validation)<a class="headerlink" href="#entrenamiento-train-con-early-stopping-validation" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">EarlyStopping(restore_best_weights=True)</span></code> detiene el entrenamiento cuando <code class="docutils literal notranslate"><span class="pre">val_loss</span></code> deja de mejorar y <strong>restaura los mejores pesos</strong>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ReduceLROnPlateau</span></code> reduce la tasa de aprendizaje si Validation se estanca.</p></li>
@@ -6289,7 +6282,7 @@ Restoring model weights from the end of the best epoch: 112.
 </div>
 </div>
 <section id="curvas-de-aprendizaje-diagnostico-de-overfitting">
-<h3><span class="section-number">2.6.1. </span>Curvas de aprendizaje (diagnóstico de overfitting)<a class="headerlink" href="#curvas-de-aprendizaje-diagnostico-de-overfitting" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.19.1. </span>Curvas de aprendizaje (diagnóstico de overfitting)<a class="headerlink" href="#curvas-de-aprendizaje-diagnostico-de-overfitting" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">)</span>
@@ -6340,7 +6333,7 @@ Desviación estándar de las predicciones: 0.196327
 </section>
 </section>
 <section id="evaluacion-final-en-el-conjunto-de-test-se-usa-una-sola-vez">
-<h2><span class="section-number">2.7. </span>Evaluación final en el conjunto de <strong>Test</strong> (se usa una sola vez)<a class="headerlink" href="#evaluacion-final-en-el-conjunto-de-test-se-usa-una-sola-vez" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.20. </span>Evaluación final en el conjunto de <strong>Test</strong> (se usa una sola vez)<a class="headerlink" href="#evaluacion-final-en-el-conjunto-de-test-se-usa-una-sola-vez" title="Link to this heading">#</a></h2>
 <p>Las métricas se calculan en la <strong>escala original (hPa)</strong> y se comparan con un <strong>modelo naive de persistencia</strong> (<span class="math notranslate nohighlight">\(\hat y_t = y_{t-1}\)</span>), la línea base mínima que debe superar cualquier modelo de series temporales.</p>
 <div class="math notranslate nohighlight">
 \[\text{MAE}=\frac1n\sum|y_t-\hat y_t|,\quad \text{RMSE}=\sqrt{\frac1n\sum(y_t-\hat y_t)^2},\quad \text{MAPE}=\frac{100}{n}\sum\left|\frac{y_t-\hat y_t}{y_t}\right|\]</div>
@@ -6473,7 +6466,7 @@ Desviación estándar de las predicciones: 0.196327
 </div></div></div>
 </div>
 <section id="figuras-de-prediccion-y-error-en-el-conjunto-de-test">
-<h3><span class="section-number">2.7.1. </span>Figuras de predicción y error en el conjunto de Test<a class="headerlink" href="#figuras-de-prediccion-y-error-en-el-conjunto-de-test" title="Link to this heading">#</a></h3>
+<h3><span class="section-number">2.20.1. </span>Figuras de predicción y error en el conjunto de Test<a class="headerlink" href="#figuras-de-prediccion-y-error-en-el-conjunto-de-test" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">err</span> <span class="o">=</span> <span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span>
@@ -6530,7 +6523,7 @@ Desviación estándar de las predicciones: 0.196327
 </section>
 </section>
 <section id="id8">
-<h2><span class="section-number">2.8. </span>Proyecto Integrador de Deep Learning<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">2.21. </span>Proyecto Integrador de Deep Learning<a class="headerlink" href="#id8" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p><strong>Objetivo</strong></p></li>
 </ol>
@@ -7380,7 +7373,6 @@ curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </spa
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2. Multilayer Perceptron</a><ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradiente-descendente">2.1. Gradiente descendente</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-neuronales">2.2. Redes neuronales</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#el-perceptron">2.3. El perceptrón</a></li>
@@ -7400,27 +7392,22 @@ curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </spa
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#objetivo">2.12.1. Objetivo</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prediccion-de-series-temporales">2.13. Predicción de series temporales</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-y-ordenamiento-temporal">2.14. Carga y ordenamiento temporal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particion-cronologica-train-validation-test">2.15. Partición cronológica Train/Validation/Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#escalado-sin-fuga">2.16. Escalado (sin fuga)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-de-regresores-y-objetivo">2.17. Construcción de regresores y objetivo</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-mlp-con-regularizacion">2.18. Modelo MLP con regularización</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-train-con-early-stopping-validation">2.19. 6. Entrenamiento (Train) con <em>early stopping</em> (Validation)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-de-aprendizaje-diagnostico-de-overfitting">2.19.1. Curvas de aprendizaje (diagnóstico de overfitting)</a></li>
 </ul>
 </li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#prediccion-de-series-temporales">2. Predicción de series temporales</a><ul class="pst-show_toc_level nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#carga-y-ordenamiento-temporal">2.1. Carga y ordenamiento temporal</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#particion-cronologica-train-validation-test">2.2. Partición cronológica Train/Validation/Test</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#escalado-sin-fuga">2.3. Escalado (sin fuga)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#construccion-de-regresores-y-objetivo">2.4. Construcción de regresores y objetivo</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modelo-mlp-con-regularizacion">2.5. Modelo MLP con regularización</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#entrenamiento-train-con-early-stopping-validation">2.6. 6. Entrenamiento (Train) con <em>early stopping</em> (Validation)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#curvas-de-aprendizaje-diagnostico-de-overfitting">2.6.1. Curvas de aprendizaje (diagnóstico de overfitting)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-final-en-el-conjunto-de-test-se-usa-una-sola-vez">2.20. Evaluación final en el conjunto de <strong>Test</strong> (se usa una sola vez)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figuras-de-prediccion-y-error-en-el-conjunto-de-test">2.20.1. Figuras de predicción y error en el conjunto de Test</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#evaluacion-final-en-el-conjunto-de-test-se-usa-una-sola-vez">2.7. Evaluación final en el conjunto de <strong>Test</strong> (se usa una sola vez)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#figuras-de-prediccion-y-error-en-el-conjunto-de-test">2.7.1. Figuras de predicción y error en el conjunto de Test</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2.21. Proyecto Integrador de Deep Learning</a></li>
 </ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">2.8. Proyecto Integrador de Deep Learning</a></li>
-</ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
