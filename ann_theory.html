@@ -6535,14 +6535,18 @@ Desviación estándar de las predicciones: 0.196327
 <li><p><strong>Objetivo</strong></p></li>
 </ol>
 <ul class="simple">
-<li><p>El proyecto busca <strong>predecir una variable temporal de interés</strong>, como el <strong>precio de cierre de criptomonedas</strong> o la <strong>velocidad del viento</strong>, utilizando exclusivamente su <strong>histórico temporal</strong> (por ejemplo, fecha y valores observados). Para ello, se emplea la librería <a class="reference external" href="https://pypi.org/project/timeseries-cv/">timeseries-cv</a>, junto con <strong>estrategias de validación temporal</strong>, una red neuronal tipo MLP y un análisis riguroso de residuos.</p></li>
+<li><p>El proyecto busca <strong>predecir una variable temporal de interés</strong>, como el <strong>precio de cierre de criptomonedas</strong> o la <strong>velocidad del viento</strong>, utilizando exclusivamente su <strong>histórico temporal</strong> (por ejemplo, fecha y valores observados). Para ello, se emplea la librería <a class="reference external" href="https://pypi.org/project/timeseries-cv/">timeseries-cv</a>, junto con <strong>estrategias de validación temporal</strong>, una red neuronal tipo MLP y un análisis riguroso de residuos. La validación se realiza comparando <strong>tres estrategias de partición temporal</strong>: <code class="docutils literal notranslate"><span class="pre">split_train_val_groupKFold</span></code>, <code class="docutils literal notranslate"><span class="pre">split_train_val_forwardChaining</span></code> y <code class="docutils literal notranslate"><span class="pre">split_train_val_kFold</span></code> (las tres de <code class="docutils literal notranslate"><span class="pre">tsxv.splitTrainVal</span></code>, que particionan en <strong>train / validación</strong>).</p></li>
 <li><p>Adicionalmente, se propone <strong>construir, validar y desplegar un modelo robusto de deep learning</strong>, orientado tanto a la <strong>predicción del nivel de la serie</strong> como a la <strong>modelación de su volatilidad o variabilidad</strong>, partiendo únicamente de observaciones históricas.</p></li>
+<li><p>El proyecto debe evaluar <strong>múltiples horizontes de predicción</strong>: <strong>7, 14, 21 y 28 días</strong> (antes solo se consideraba un horizonte de 7 días). Cada horizonte se combina con cada tamaño de ventana de entrada (lags de 7, 14, 21 y 28 días), generando una <strong>matriz de experimentos lag × horizonte (4 × 4 = 16 configuraciones)</strong>.</p></li>
+<li><p>Además, el proyecto exige <strong>encontrar la mejor arquitectura de MLP</strong> mediante una <strong>búsqueda sistemática de arquitecturas</strong> (número de capas, neuronas por capa y uso de <em>dropout</em> por capa), siguiendo la metodología del notebook <code class="docutils literal notranslate"><span class="pre">architectures_dropout.ipynb</span></code>, y justificar la selección con criterios de error de validación y control de sobreajuste (<em>gap</em> entre train y validación).</p></li>
 <li><p>El flujo de trabajo incluye:</p>
 <ul>
 <li><p>Exploración y caracterización de la variabilidad de la serie</p></li>
 <li><p>Construcción de ventanas temporales</p></li>
-<li><p>Validación cruzada para datos secuenciales</p></li>
-<li><p>Evaluación mediante métricas específicas</p></li>
+<li><p>Generación de targets multi-step para los horizontes <strong>7, 14, 21 y 28 días</strong></p></li>
+<li><p>Validación cruzada para datos secuenciales con <strong>tres estrategias</strong>: <em>Group K-Fold</em>, <em>Forward Chaining</em> y <em>K-Fold</em> (<code class="docutils literal notranslate"><span class="pre">timeseries-cv</span></code>)</p></li>
+<li><p><strong>Búsqueda de la mejor arquitectura MLP (capas, neuronas y dropout)</strong></p></li>
+<li><p>Evaluación mediante métricas específicas (por lag y por horizonte)</p></li>
 <li><p>Análisis de residuos</p></li>
 </ul>
 </li>
@@ -6655,17 +6659,96 @@ Desviación estándar de las predicciones: 0.196327
 <li><p>Cálculo de <strong>retornos logarítmicos</strong>.</p></li>
 <li><p>Cálculo de <strong>volatilidad histórica (rolling std)</strong> para inspección (variable objetivo alternativa).</p></li>
 <li><p>Generación de <strong>lags del precio</strong> (ventanas previas) para los siguientes tamaños: 7, 14, 21, 28 días.</p></li>
-<li><p>Generación de <strong>targets multi-step</strong>: horizonte de 7 días (salida multisalida de longitud 7).</p></li>
-<li><p><strong>Split temporal y validación cruzada</strong></p></li>
-<li><p>Usar <code class="docutils literal notranslate"><span class="pre">split_train_val_test_groupKFold</span></code> (de <a class="reference external" href="https://pypi.org/project/timeseries-cv/"><strong>timeseries-cv / tsxv</strong></a>) para crear splits <strong>train / val / test</strong> sin data leakage.</p></li>
-<li><p>Escalado: <strong>fit del scaler solo con el train</strong> en cada fold; transformar val/test con ese scaler.</p></li>
-<li><p><strong>Modelado con Deep Learning</strong></p></li>
-<li><p>Entrenar <strong>MLP multisalida</strong> (por ejemplo <code class="docutils literal notranslate"><span class="pre">MLPRegressor</span></code> o un keras MLP con salida 7) fold a fold.</p></li>
-<li><p>Guardar por fold: <strong>predicciones para train, val y test</strong> (todas las muestras del fold).</p></li>
-<li><p>Evaluación: calcular <strong>métricas por horizonte (1..7) y agregadas (promedio sobre horizontes)</strong>.</p></li>
-<li><p><strong>Métricas obligatorias — tablas por tamaño de input</strong></p></li>
+<li><p>Generación de <strong>targets multi-step</strong> para <strong>cada uno de los siguientes horizontes de predicción: 7, 14, 21 y 28 días</strong> (salida multisalida de longitud <span class="math notranslate nohighlight">\(H \in \{7, 14, 21, 28\}\)</span>). Es decir, se debe construir una <strong>matriz de experimentos lag × horizonte</strong> (4 tamaños de input × 4 horizontes = 16 configuraciones), usando <code class="docutils literal notranslate"><span class="pre">n_steps_input</span></code> <span class="math notranslate nohighlight">\(\in\)</span> [7, 14, 21, 28] y <code class="docutils literal notranslate"><span class="pre">n_steps_forecast</span></code> <span class="math notranslate nohighlight">\(\in\)</span> [7, 14, 21, 28].</p></li>
+<li><p><strong>Split temporal y validación cruzada (tres estrategias)</strong></p></li>
 </ul>
-<p>Por cada tamaño de input (7, 14, 21, 28) se debe entregar una <strong>tabla (en el conjunto de test)</strong> que incluya, idealmente por fold y con su promedio (y std):</p>
+<p>Se deben implementar y <strong>comparar tres estrategias de validación cruzada</strong> de la librería <a class="reference external" href="https://pypi.org/project/timeseries-cv/"><strong>timeseries-cv / tsxv</strong></a>, todas del módulo <code class="docutils literal notranslate"><span class="pre">tsxv.splitTrainVal</span></code>, con la misma interfaz y parametrizadas con <code class="docutils literal notranslate"><span class="pre">n_steps_input</span></code> (lag), <code class="docutils literal notranslate"><span class="pre">n_steps_forecast</span></code> (horizonte <span class="math notranslate nohighlight">\(H\)</span>) y <code class="docutils literal notranslate"><span class="pre">n_steps_jump</span></code>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Estrategia</p></th>
+<th class="head"><p>Función</p></th>
+<th class="head"><p>Módulo</p></th>
+<th class="head"><p>Retorna</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Group K-Fold</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">split_train_val_groupKFold</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tsxv.splitTrainVal</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">X,</span> <span class="pre">y,</span> <span class="pre">Xcv,</span> <span class="pre">ycv</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Forward Chaining</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">split_train_val_forwardChaining</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tsxv.splitTrainVal</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">X,</span> <span class="pre">y,</span> <span class="pre">Xcv,</span> <span class="pre">ycv</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><strong>K-Fold</strong></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">split_train_val_kFold</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tsxv.splitTrainVal</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">X,</span> <span class="pre">y,</span> <span class="pre">Xcv,</span> <span class="pre">ycv</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Las tres estrategias particionan la serie solo en <strong>train</strong> (<code class="docutils literal notranslate"><span class="pre">X,</span> <span class="pre">y</span></code>) y <strong>validación</strong> (<code class="docutils literal notranslate"><span class="pre">Xcv,</span> <span class="pre">ycv</span></code>); <strong>no generan conjunto de test</strong>.</p>
+<ul class="simple">
+<li><p><strong>Group K-Fold</strong> (<code class="docutils literal notranslate"><span class="pre">split_train_val_groupKFold</span></code>): divide la serie en grupos contiguos de observaciones y, en cada fold, un grupo actúa como validación y el resto como entrenamiento.</p></li>
+<li><p><strong>Forward Chaining</strong> (<code class="docutils literal notranslate"><span class="pre">split_train_val_forwardChaining</span></code>): <em>walk-forward</em> con ventana de entrenamiento expansiva; en cada fold el train crece y la validación siempre queda en el futuro inmediato (la estrategia que mejor respeta la causalidad temporal).</p></li>
+<li><p><strong>K-Fold</strong> (<code class="docutils literal notranslate"><span class="pre">split_train_val_kFold</span></code>): partición en <em>k</em> bloques de la serie. Debe discutirse explícitamente su <strong>limitación temporal</strong>: algunos folds de validación quedan <em>antes</em> del train (se entrena con datos futuros para predecir el pasado), por lo que puede introducir optimismo en el error.</p></li>
+<li><p><strong>Evaluación sobre validación:</strong> como ninguna de las tres estrategias entrega test, las métricas (MAPE, MAE, RMSE, MSE, BDS) se calculan sobre el <strong>conjunto de validación de cada fold</strong> (<code class="docutils literal notranslate"><span class="pre">Xcv,</span> <span class="pre">ycv</span></code>). Debe indicarse claramente en cada tabla y gráfica que las métricas corresponden a validación.</p></li>
+<li><p><strong>Hold-out temporal final (recomendado):</strong> como las métricas de validación también se usan para elegir la arquitectura y la estrategia, existe riesgo de sesgo optimista. Por ello, antes de aplicar cualquiera de las tres estrategias, se debe <strong>reservar un tramo final de la serie</strong> (por ejemplo, los últimos 10–15 % de las observaciones, nunca menor a <span class="math notranslate nohighlight">\(2H\)</span> días) como <strong>hold-out temporal</strong>, que <strong>no participe</strong> en la validación cruzada, en la búsqueda de arquitectura ni en el ajuste de los <em>scalers</em>. Con el modelo final (mejor arquitectura + mejor estrategia, reentrenado con toda la serie previa al hold-out) se reporta una <strong>evaluación definitiva en el hold-out</strong>.</p></li>
+<li><p><strong>Comparación entre estrategias:</strong> para cada configuración lag × horizonte, comparar el RMSE, MAPE y p-value BDS obtenidos con las tres estrategias, y analizar cuál es más realista y cuál es más optimista, justificando la elección de la estrategia final.</p></li>
+<li><p>Escalado: <strong>fit del scaler solo con el train</strong> en cada fold; transformar la validación (y el hold-out) con ese scaler (aplica a las tres estrategias).</p></li>
+<li><p><strong>Búsqueda de la mejor arquitectura MLP (basada en <code class="docutils literal notranslate"><span class="pre">architectures_dropout.ipynb</span></code>)</strong></p></li>
+</ul>
+<p>Antes del entrenamiento final se debe <strong>encontrar la mejor arquitectura de MLP</strong> mediante una búsqueda exhaustiva (<em>grid search</em>) sobre la <strong>topología de la red</strong> y el <strong>uso de dropout por capa</strong>, siguiendo la metodología del notebook <code class="docutils literal notranslate"><span class="pre">architectures_dropout.ipynb</span></code>:</p>
+<ul class="simple">
+<li><p><strong>Espacio de búsqueda de arquitecturas:</strong></p>
+<ul>
+<li><p>Neuronas por capa: <code class="docutils literal notranslate"><span class="pre">neuronas</span> <span class="pre">=</span> <span class="pre">[32,</span> <span class="pre">64,</span> <span class="pre">128,</span> <span class="pre">256]</span></code>.</p></li>
+<li><p>Número de capas ocultas: de 1 hasta <code class="docutils literal notranslate"><span class="pre">max_capas</span></code> (mínimo 3; se recomienda 3 o 4 si el costo computacional lo permite).</p></li>
+<li><p>Todas las combinaciones con repetición: <code class="docutils literal notranslate"><span class="pre">itertools.product(neuronas,</span> <span class="pre">repeat=num_capas)</span></code> (por ejemplo <code class="docutils literal notranslate"><span class="pre">(32,)</span></code>, <code class="docutils literal notranslate"><span class="pre">(64,</span> <span class="pre">32)</span></code>, <code class="docutils literal notranslate"><span class="pre">(256,</span> <span class="pre">128,</span> <span class="pre">256)</span></code>, etc.).</p></li>
+</ul>
+</li>
+<li><p><strong>Espacio de búsqueda de dropout:</strong></p>
+<ul>
+<li><p>Para cada arquitectura de <span class="math notranslate nohighlight">\(n\)</span> capas se prueban las <span class="math notranslate nohighlight">\(2^n\)</span> <strong>máscaras booleanas de dropout</strong> (activar/desactivar <code class="docutils literal notranslate"><span class="pre">Dropout</span></code> después de cada capa oculta), por ejemplo <code class="docutils literal notranslate"><span class="pre">(False,</span> <span class="pre">True,</span> <span class="pre">False)</span></code>. Se recomienda usar <code class="docutils literal notranslate"><span class="pre">Dropout(0.5)</span></code> como en el notebook de referencia, y opcionalmente explorar tasas adicionales (0.2, 0.3).</p></li>
+</ul>
+</li>
+<li><p><strong>Modelo Keras a construir (salida multisalida de tamaño <span class="math notranslate nohighlight">\(H\)</span>):</strong></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Input(shape=(n_steps_input,))</span></code> → <code class="docutils literal notranslate"><span class="pre">Dense(units,</span> <span class="pre">activation=&quot;relu&quot;)</span></code> [+ <code class="docutils literal notranslate"><span class="pre">Dropout</span></code>] por cada capa oculta → <code class="docutils literal notranslate"><span class="pre">Dense(H)</span></code> (en lugar de <code class="docutils literal notranslate"><span class="pre">Dense(1)</span></code>, ya que el modelo es <strong>multisalida</strong> con <span class="math notranslate nohighlight">\(H \in \{7, 14, 21, 28\}\)</span>).</p></li>
+<li><p>Compilar con <code class="docutils literal notranslate"><span class="pre">optimizer=&quot;adam&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">loss=&quot;mse&quot;</span></code> y métrica <code class="docutils literal notranslate"><span class="pre">RootMeanSquaredError</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Protocolo de evaluación de cada candidato:</strong></p>
+<ul>
+<li><p>Entrenar (por ejemplo 30 épocas, <code class="docutils literal notranslate"><span class="pre">batch_size=32</span></code>) con <strong>validación temporal sin <em>shuffle</em></strong> (usando los splits de <code class="docutils literal notranslate"><span class="pre">split_train_val_groupKFold</span></code>, <code class="docutils literal notranslate"><span class="pre">split_train_val_forwardChaining</span></code> o <code class="docutils literal notranslate"><span class="pre">split_train_val_kFold</span></code>; no usar <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> con mezcla aleatoria). La búsqueda se hace con una estrategia principal (se recomienda <em>Forward Chaining</em> o <em>Group K-Fold</em>) y la arquitectura ganadora se <strong>re-evalúa con las otras dos estrategias</strong>. Se debe respetar el <strong>escalado con <code class="docutils literal notranslate"><span class="pre">fit</span></code> solo sobre train</strong>.</p></li>
+<li><p>Registrar por candidato: <code class="docutils literal notranslate"><span class="pre">best_val_rmse</span></code> (mínimo del RMSE de validación), <code class="docutils literal notranslate"><span class="pre">last_train_rmse</span></code>, <code class="docutils literal notranslate"><span class="pre">gap</span> <span class="pre">=</span> <span class="pre">|last_train_rmse</span> <span class="pre">-</span> <span class="pre">best_val_rmse|</span></code>, <code class="docutils literal notranslate"><span class="pre">holdout_rmse</span></code> (RMSE en el hold-out temporal, solo como evidencia final) y las curvas de aprendizaje (<code class="docutils literal notranslate"><span class="pre">train_curve</span></code>, <code class="docutils literal notranslate"><span class="pre">val_curve</span></code>).</p></li>
+<li><p>Calcular <code class="docutils literal notranslate"><span class="pre">gap_ratio</span> <span class="pre">=</span> <span class="pre">gap</span> <span class="pre">/</span> <span class="pre">best_val_rmse</span></code> como indicador de sobreajuste.</p></li>
+</ul>
+</li>
+<li><p><strong>Criterio de selección automática de la mejor arquitectura:</strong></p>
+<ul>
+<li><p>Filtrar <strong>candidatos balanceados</strong>: <code class="docutils literal notranslate"><span class="pre">gap_ratio</span> <span class="pre">&lt;</span> <span class="pre">0.15</span></code>.</p></li>
+<li><p>Ordenar los candidatos por <code class="docutils literal notranslate"><span class="pre">best_val_rmse</span></code> ascendente y seleccionar la mejor arquitectura (la selección se hace con <strong>validación</strong>, nunca con el hold-out, para evitar <em>data leakage</em>; el <code class="docutils literal notranslate"><span class="pre">holdout_rmse</span></code> solo se reporta como evidencia final).</p></li>
+<li><p>Reportar el <strong>Top-5</strong> de arquitecturas candidatas (tabla con <code class="docutils literal notranslate"><span class="pre">arquitectura</span></code>, <code class="docutils literal notranslate"><span class="pre">dropout_mask</span></code>, <code class="docutils literal notranslate"><span class="pre">best_val_rmse</span></code>, <code class="docutils literal notranslate"><span class="pre">holdout_rmse</span></code>) y graficar las <strong>curvas de aprendizaje (Train RMSE vs Val RMSE por época) del Top-3</strong>.</p></li>
+</ul>
+</li>
+<li><p><strong>Alcance de la búsqueda:</strong></p>
+<ul>
+<li><p>La búsqueda debe realizarse <strong>para cada combinación lag × horizonte</strong> (o, como mínimo, justificar y documentar si se realiza sobre una configuración representativa y luego se reutiliza la arquitectura en las demás). Se debe entregar una <strong>tabla resumen con la mejor arquitectura por cada (lag, horizonte)</strong> y analizar si la arquitectura óptima cambia al aumentar el horizonte (7 → 14 → 21 → 28 días).</p></li>
+<li><p>Guardar la tabla completa de resultados de la búsqueda en <code class="docutils literal notranslate"><span class="pre">results/architecture_search_lag{L}_h{H}.csv</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Discusión requerida:</strong> analizar el efecto del número de capas, del ancho de las capas y del dropout sobre el error de validación y sobre el <em>gap</em> train–val, y justificar la arquitectura finalmente elegida.</p></li>
+<li><p><strong>Modelado con Deep Learning</strong></p></li>
+<li><p>Entrenar el <strong>MLP multisalida con la mejor arquitectura encontrada</strong> (keras MLP con salida <span class="math notranslate nohighlight">\(H\)</span>; <code class="docutils literal notranslate"><span class="pre">MLPRegressor</span></code> de scikit-learn solo como <em>baseline</em> de referencia) fold a fold, para cada horizonte <span class="math notranslate nohighlight">\(H \in \{7, 14, 21, 28\}\)</span> y para <strong>cada una de las tres estrategias de validación</strong> (Group K-Fold, Forward Chaining y K-Fold).</p></li>
+<li><p>Guardar por fold: <strong>predicciones para train y val</strong> (todas las muestras del fold) y, para el modelo final, también para el <strong>hold-out</strong>.</p></li>
+<li><p>Evaluación: calcular <strong>métricas por horizonte (<span class="math notranslate nohighlight">\(h = 1, \dots, H\)</span>) y agregadas (promedio sobre horizontes)</strong>, para cada <span class="math notranslate nohighlight">\(H \in \{7, 14, 21, 28\}\)</span>.</p></li>
+<li><p><strong>Métricas obligatorias: tablas por tamaño de input y por horizonte de predicción</strong> (calculadas sobre validación; el hold-out se reporta aparte para el modelo final)</p></li>
+</ul>
+<p>Por cada tamaño de input (7, 14, 21, 28) <strong>y por cada horizonte de predicción <span class="math notranslate nohighlight">\(H\)</span> (7, 14, 21, 28)</strong> se debe entregar una <strong>tabla (en el conjunto de validación)</strong> que incluya, idealmente por fold y con su promedio (y std):</p>
 <ul class="simple">
 <li><p><strong>MAPE</strong> (Mean Absolute Percentage Error) — por horizonte y promedio.</p></li>
 <li><p><strong>MAE</strong> (Mean Absolute Error).</p></li>
@@ -6673,28 +6756,33 @@ Desviación estándar de las predicciones: 0.196327
 <li><p><strong>MSE</strong> (Mean Squared Error).</p></li>
 <li><p><strong><span class="math notranslate nohighlight">\(p\)</span>-value BDS test</strong> aplicado a los residuos del primer horizonte (<span class="math notranslate nohighlight">\(h=1\)</span>) (por fold) — y su promedio.</p></li>
 </ul>
-<p><strong>Formato recomendado de la tabla (por lag):</strong></p>
+<p><strong>Formato recomendado de la tabla (por lag y por horizonte <span class="math notranslate nohighlight">\(H\)</span>):</strong></p>
 <ul class="simple">
 <li><p>Filas = folds (Fold 1, Fold 2, … , Mean ± Std).</p></li>
-<li><p>Columnas = métricas por horizonte (<span class="math notranslate nohighlight">\(h=1,\dots,7\)</span>) o resumen por horizonte + columna con <strong>BDS_pvalue_h1</strong>.</p></li>
+<li><p>Columnas = métricas por paso de horizonte (<span class="math notranslate nohighlight">\(h=1,\dots,H\)</span>) o resumen por horizonte + columna con <strong>BDS_pvalue_h1</strong>.</p></li>
+<li><p>Además, incluir una <strong>tabla consolidada (lag × horizonte <span class="math notranslate nohighlight">\(H\)</span>)</strong> con el RMSE/MAPE promedio de validación, para comparar el desempeño a 7, 14, 21 y 28 días.</p></li>
+<li><p>Incluir una <strong>tabla comparativa por estrategia de validación</strong> (Group K-Fold vs Forward Chaining vs K-Fold) con columnas: <code class="docutils literal notranslate"><span class="pre">estrategia</span></code>, <code class="docutils literal notranslate"><span class="pre">lag</span></code>, <code class="docutils literal notranslate"><span class="pre">horizonte</span> <span class="pre">H</span></code>, <code class="docutils literal notranslate"><span class="pre">RMSE</span></code>, <code class="docutils literal notranslate"><span class="pre">MAPE</span></code>, <code class="docutils literal notranslate"><span class="pre">MAE</span></code>, <code class="docutils literal notranslate"><span class="pre">MSE</span></code>, <code class="docutils literal notranslate"><span class="pre">BDS_pvalue_h1</span></code>.</p></li>
 <li><p><strong>Diagnóstico de residuos</strong></p></li>
-<li><p>En cada fold, calcular residuos en test <span class="math notranslate nohighlight">\(\text{resid} = y_{test}^{\text{real}} - y_{pred}\)</span></p></li>
-<li><p>Aplicar <strong>BDS test</strong> a los residuos del horizonte 1 (test de independencia serial / no-iid).</p></li>
+<li><p>En cada fold, calcular residuos en validación <span class="math notranslate nohighlight">\(\text{resid} = y_{val}^{\text{real}} - y_{pred}\)</span> (y, para el modelo final, también en el hold-out)</p></li>
+<li><p>Aplicar <strong>BDS test</strong> a los residuos del horizonte 1 (test de independencia serial / no-iid), para cada una de las tres estrategias de validación (sobre validación; y sobre el hold-out para el modelo final).</p></li>
 <li><p>Reportar el <strong><span class="math notranslate nohighlight">\(p\)</span>-value</strong>.</p></li>
 <li><p>Interpretación: <strong><span class="math notranslate nohighlight">\(p &gt; 0.05\)</span> → no rechazo de iid (mejor señal de independencia residual)</strong>.</p></li>
 <li><p><strong>Visualización y análisis</strong></p></li>
 </ul>
-<p>Para cada tamaño de input:</p>
+<p>Para cada tamaño de input y para cada horizonte de predicción <span class="math notranslate nohighlight">\(H \in \{7, 14, 21, 28\}\)</span>:</p>
 <ul class="simple">
-<li><p>Dibujar una <strong>curva (time series)</strong> que muestre <strong>train / val / test</strong> (validados con sus timestamps) y las <strong>predicciones correspondientes</strong> (por lo menos para el mejor fold, el peor fold y el fold mediano por RMSE).</p></li>
-<li><p>Etiquetar claramente: <strong>train actual, train predicho, val actual, val predicho, test actual, test predicho</strong>.</p></li>
-<li><p>Gráfica de <strong>RMSE por fold</strong> (e.g., barras) y <strong>RMSE promedio por horizonte</strong> (líneas con 7 puntos).</p></li>
-<li><p><strong>Tabla resumen comparativa</strong> de los 4 tamaños de lag con las métricas solicitadas (MAPE, MAE, RMSE, MSE, p-value BDS).</p></li>
+<li><p>Dibujar una <strong>curva (time series)</strong> que muestre <strong>train / val / hold-out</strong> (con sus timestamps) y las <strong>predicciones correspondientes</strong> (por lo menos para el mejor fold, el peor fold y el fold mediano por RMSE).</p></li>
+<li><p>Etiquetar claramente: <strong>train actual, train predicho, val actual, val predicho, hold-out actual, hold-out predicho</strong>.</p></li>
+<li><p>Gráfica de <strong>RMSE por fold</strong> (e.g., barras) y <strong>RMSE promedio por paso de horizonte</strong> (líneas con <span class="math notranslate nohighlight">\(H\)</span> puntos: 7, 14, 21 o 28 según el caso).</p></li>
+<li><p>Gráfica comparativa de <strong>RMSE promedio vs. horizonte de predicción <span class="math notranslate nohighlight">\(H\)</span> (7, 14, 21, 28)</strong> para cada tamaño de lag, analizando cómo se degrada el desempeño al aumentar el horizonte.</p></li>
+<li><p><strong>Tabla resumen comparativa</strong> de los 4 tamaños de lag × 4 horizontes con las métricas solicitadas (MAPE, MAE, RMSE, MSE, p-value BDS).</p></li>
+<li><p>Gráfica comparativa del <strong>RMSE por fold para las tres estrategias de validación</strong> (una línea/barra por estrategia), y esquema ilustrativo de cómo cada estrategia particiona la serie (qué tramo es train y cuál es validación en cada fold, y el hold-out final reservado).</p></li>
+<li><p><strong>Visualización de la búsqueda de arquitectura:</strong> curvas de aprendizaje del Top-3 y tabla Top-5 de arquitecturas candidatas.</p></li>
 <li><p>Guardar figuras en <code class="docutils literal notranslate"><span class="pre">notebooks/figs/</span></code> y las tablas en <code class="docutils literal notranslate"><span class="pre">results/</span></code> (CSV).</p></li>
 <li><p><strong>Documentación y deployment</strong></p>
 <ul>
 <li><p>Entregar <strong>notebook reproducible</strong> con todo el pipeline (<strong>EDA → features → CV → entrenamiento → evaluación → residuos → plots</strong>).</p></li>
-<li><p>Entregar <strong>API (<code class="docutils literal notranslate"><span class="pre">app/api.py</span></code>)</strong> que reciba lags y devuelva <strong>7 predicciones de volatilidad</strong> (lista de floats).</p></li>
+<li><p>Entregar <strong>API (<code class="docutils literal notranslate"><span class="pre">app/api.py</span></code>)</strong> que reciba lags y el horizonte deseado (<code class="docutils literal notranslate"><span class="pre">horizon</span></code> <span class="math notranslate nohighlight">\(\in\)</span> {7, 14, 21, 28}) y devuelva <strong><span class="math notranslate nohighlight">\(H\)</span> predicciones</strong> (lista de floats de longitud igual al horizonte solicitado), usando el modelo con la <strong>mejor arquitectura MLP</strong> encontrada para cada horizonte.</p></li>
 <li><p>Incluir <strong>Dockerfile, tests unitarios y README</strong> con instrucciones de uso.</p></li>
 </ul>
 </li>
@@ -6730,106 +6818,269 @@ Desviación estándar de las predicciones: 0.196327
 <ol class="arabic simple" start="2">
 <li><p>Validación cruzada de series de tiempo (<code class="docutils literal notranslate"><span class="pre">timeseries-cv</span></code>)</p></li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tsxv.splitTrainValTest</span><span class="w"> </span><span class="kn">import</span> <span class="n">split_train_val_test_groupKFold</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">tsxv.splitTrainVal</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+    <span class="n">split_train_val_groupKFold</span><span class="p">,</span>
+    <span class="n">split_train_val_forwardChaining</span><span class="p">,</span>
+    <span class="n">split_train_val_kFold</span><span class="p">,</span>
+<span class="p">)</span>
 
-<span class="n">lags_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">]</span>       <span class="c1"># Diferentes ventanas a probar</span>
-<span class="n">n_steps_forecast</span> <span class="o">=</span> <span class="mi">7</span>              <span class="c1"># Predicción para 7 días adelante</span>
-<span class="n">n_steps_jump</span> <span class="o">=</span> <span class="mi">1</span>                  <span class="c1"># Saltar de a 1 ventana</span>
+<span class="n">lags_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">]</span>        <span class="c1"># Diferentes ventanas de entrada a probar</span>
+<span class="n">horizons_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">]</span>    <span class="c1"># Diferentes horizontes de predicción (días adelante)</span>
+<span class="n">n_steps_jump</span> <span class="o">=</span> <span class="mi">1</span>                   <span class="c1"># Saltar de a 1 ventana</span>
 
-<span class="n">results_lags</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="c1"># Hold-out temporal final: NO participa en CV, búsqueda de arquitectura ni scalers</span>
+<span class="n">holdout_frac</span> <span class="o">=</span> <span class="mf">0.10</span>
+<span class="n">n_hold</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y_full</span><span class="p">)</span> <span class="o">*</span> <span class="n">holdout_frac</span><span class="p">),</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">max</span><span class="p">(</span><span class="n">horizons_list</span><span class="p">))</span>
+<span class="n">serie_cv</span> <span class="o">=</span> <span class="n">y_full</span><span class="p">[:</span><span class="o">-</span><span class="n">n_hold</span><span class="p">]</span>        <span class="c1"># serie usada en la validación cruzada</span>
+<span class="n">serie_holdout</span> <span class="o">=</span> <span class="n">y_full</span><span class="p">[</span><span class="o">-</span><span class="n">n_hold</span><span class="p">:]</span>   <span class="c1"># evaluación definitiva del modelo final</span>
 
-<span class="k">for</span> <span class="n">n_steps_input</span> <span class="ow">in</span> <span class="n">lags_list</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">===== Usando </span><span class="si">{</span><span class="n">n_steps_input</span><span class="si">}</span><span class="s2"> días previos como input =====&quot;</span><span class="p">)</span>
-    <span class="c1"># Split de datos por cada ventana (GroupKFold temporal)</span>
-    <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">Xcv</span><span class="p">,</span> <span class="n">ycv</span><span class="p">,</span> <span class="n">Xtest</span><span class="p">,</span> <span class="n">ytest</span> <span class="o">=</span> <span class="n">split_train_val_test_groupKFold</span><span class="p">(</span>
-        <span class="n">timeSeries</span><span class="p">,</span> <span class="c1">#Reemplazar por lo que corresponda</span>
+<span class="n">split_functions</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;groupKFold&quot;</span><span class="p">:</span> <span class="n">split_train_val_groupKFold</span><span class="p">,</span>
+    <span class="s2">&quot;forwardChaining&quot;</span><span class="p">:</span> <span class="n">split_train_val_forwardChaining</span><span class="p">,</span>
+    <span class="s2">&quot;kFold&quot;</span><span class="p">:</span> <span class="n">split_train_val_kFold</span><span class="p">,</span>
+<span class="p">}</span>
+<span class="n">strategies</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">split_functions</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_splits</span><span class="p">(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">timeSeries</span><span class="p">,</span> <span class="n">n_steps_input</span><span class="p">,</span> <span class="n">n_steps_forecast</span><span class="p">,</span> <span class="n">n_steps_jump</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Las tres estrategias comparten interfaz y retornan (X, y, Xcv, ycv).&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">split_functions</span><span class="p">[</span><span class="n">strategy</span><span class="p">](</span>
+        <span class="n">timeSeries</span><span class="p">,</span>
         <span class="n">n_steps_input</span><span class="o">=</span><span class="n">n_steps_input</span><span class="p">,</span>
         <span class="n">n_steps_forecast</span><span class="o">=</span><span class="n">n_steps_forecast</span><span class="p">,</span>
-        <span class="n">n_steps_jump</span><span class="o">=</span><span class="n">n_steps_jump</span>
+        <span class="n">n_steps_jump</span><span class="o">=</span><span class="n">n_steps_jump</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="n">rmse_test_fold</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">bds_p_fold</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="k">for</span> <span class="n">fold</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
-        <span class="c1"># Escalar solo con train</span>
-        <span class="n">scaler_x</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">fold</span><span class="p">])</span>
-        <span class="n">scaler_y</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">fold</span><span class="p">])</span>
-        <span class="n">X_train</span> <span class="o">=</span> <span class="n">scaler_x</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">fold</span><span class="p">])</span>
-        <span class="n">X_val</span>   <span class="o">=</span> <span class="n">scaler_x</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Xcv</span><span class="p">[</span><span class="n">fold</span><span class="p">])</span>
-        <span class="n">X_test</span>  <span class="o">=</span> <span class="n">scaler_x</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Xtest</span><span class="p">[</span><span class="n">fold</span><span class="p">])</span>
-        <span class="n">y_train</span> <span class="o">=</span> <span class="n">scaler_y</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">fold</span><span class="p">])</span>
-        <span class="n">y_val</span>   <span class="o">=</span> <span class="n">scaler_y</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">ycv</span><span class="p">[</span><span class="n">fold</span><span class="p">])</span>
-        <span class="n">y_test</span>  <span class="o">=</span> <span class="n">scaler_y</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">ytest</span><span class="p">[</span><span class="n">fold</span><span class="p">])</span>
+<span class="c1"># results_lags[(estrategia, lag, horizonte)] -&gt; métricas de esa configuración (sobre VALIDACIÓN)</span>
+<span class="n">results_lags</span> <span class="o">=</span> <span class="p">{}</span>
 
-        <span class="c1"># Modelo MLP multistep</span>
-        <span class="n">model</span> <span class="o">=</span> <span class="n">MLPRegressor</span><span class="p">(</span><span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">32</span><span class="p">),</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">fold</span><span class="p">)</span>
-        <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">strategy</span> <span class="ow">in</span> <span class="n">strategies</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">n_steps_input</span> <span class="ow">in</span> <span class="n">lags_list</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">n_steps_forecast</span> <span class="ow">in</span> <span class="n">horizons_list</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">===== </span><span class="si">{</span><span class="n">strategy</span><span class="si">}</span><span class="s2"> | Input: </span><span class="si">{</span><span class="n">n_steps_input</span><span class="si">}</span><span class="s2"> días | Horizonte: </span><span class="si">{</span><span class="n">n_steps_forecast</span><span class="si">}</span><span class="s2"> días =====&quot;</span><span class="p">)</span>
+            <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">Xcv</span><span class="p">,</span> <span class="n">ycv</span> <span class="o">=</span> <span class="n">get_splits</span><span class="p">(</span>
+                <span class="n">strategy</span><span class="p">,</span> <span class="n">serie_cv</span><span class="p">,</span>   <span class="c1"># Reemplazar serie_cv por lo que corresponda</span>
+                <span class="n">n_steps_input</span><span class="p">,</span> <span class="n">n_steps_forecast</span><span class="p">,</span> <span class="n">n_steps_jump</span><span class="p">)</span>
 
-        <span class="n">yhat_test</span> <span class="o">=</span> <span class="n">scaler_y</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">))</span>
-        <span class="n">ytest_real</span> <span class="o">=</span> <span class="n">scaler_y</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+            <span class="n">rmse_fold</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">bds_p_fold</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="c1"># RMSE por cada horizonte</span>
-        <span class="n">rmse_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">ytest_real</span> <span class="o">-</span> <span class="n">yhat_test</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
-        <span class="n">rmse_prom</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rmse_h</span><span class="p">)</span>
-        <span class="n">rmse_test_fold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rmse_prom</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">fold</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)):</span>
+                <span class="c1"># Escalar solo con train</span>
+                <span class="n">scaler_x</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">fold</span><span class="p">])</span>
+                <span class="n">scaler_y</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">fold</span><span class="p">])</span>
+                <span class="n">X_train</span> <span class="o">=</span> <span class="n">scaler_x</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">fold</span><span class="p">])</span>
+                <span class="n">X_val</span>   <span class="o">=</span> <span class="n">scaler_x</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">Xcv</span><span class="p">[</span><span class="n">fold</span><span class="p">])</span>
+                <span class="n">y_train</span> <span class="o">=</span> <span class="n">scaler_y</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">y</span><span class="p">[</span><span class="n">fold</span><span class="p">])</span>
+                <span class="n">y_val</span>   <span class="o">=</span> <span class="n">scaler_y</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">ycv</span><span class="p">[</span><span class="n">fold</span><span class="p">])</span>
 
-        <span class="c1"># Test BDS (solo horizonte 1)</span>
-        <span class="n">resid_h1</span> <span class="o">=</span> <span class="n">ytest_real</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">yhat_test</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
-        <span class="n">bds_result</span> <span class="o">=</span> <span class="n">bds</span><span class="p">(</span><span class="n">resid_h1</span><span class="p">,</span> <span class="n">max_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-        <span class="n">pval</span> <span class="o">=</span> <span class="n">bds_result</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;p-value&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">bds_result</span><span class="p">,</span> <span class="s1">&#39;iloc&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">bds_result</span><span class="p">[</span><span class="s1">&#39;p-value&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">bds_p_fold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pval</span><span class="p">)</span>
+                <span class="c1"># Modelo MLP multistep (salida = n_steps_forecast)</span>
+                <span class="c1"># Baseline con sklearn; el modelo final debe usar la MEJOR ARQUITECTURA</span>
+                <span class="c1"># encontrada en la búsqueda (ver sección &quot;Búsqueda de la mejor arquitectura MLP&quot;)</span>
+                <span class="n">model</span> <span class="o">=</span> <span class="n">MLPRegressor</span><span class="p">(</span><span class="n">hidden_layer_sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span><span class="mi">32</span><span class="p">),</span> <span class="n">max_iter</span><span class="o">=</span><span class="mi">300</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">fold</span><span class="p">)</span>
+                <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
 
-    <span class="c1"># Guardar resultados por ventana</span>
-    <span class="n">results_lags</span><span class="p">[</span><span class="n">n_steps_input</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;rmse_test_fold&#39;</span><span class="p">:</span> <span class="n">rmse_test_fold</span><span class="p">,</span>
-        <span class="s1">&#39;rmse_test_avg&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rmse_test_fold</span><span class="p">),</span>
-        <span class="s1">&#39;bds_p_fold&#39;</span><span class="p">:</span> <span class="n">bds_p_fold</span><span class="p">,</span>
-        <span class="s1">&#39;bds_p_avg&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bds_p_fold</span><span class="p">)</span>
-    <span class="p">}</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;RMSE test promedio (</span><span class="si">{</span><span class="n">n_steps_input</span><span class="si">}</span><span class="s2"> lags): </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rmse_test_fold</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;BDS p-valor promedio (h1): </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bds_p_fold</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">yhat_val</span> <span class="o">=</span> <span class="n">scaler_y</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_val</span><span class="p">))</span>
+                <span class="n">y_real</span> <span class="o">=</span> <span class="n">scaler_y</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">y_val</span><span class="p">)</span>
+
+                <span class="c1"># RMSE por cada paso del horizonte (h = 1..n_steps_forecast)</span>
+                <span class="n">rmse_h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y_real</span> <span class="o">-</span> <span class="n">yhat_val</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+                <span class="n">rmse_fold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rmse_h</span><span class="p">))</span>
+
+                <span class="c1"># Test BDS (solo horizonte 1) sobre residuos de validación</span>
+                <span class="n">resid_h1</span> <span class="o">=</span> <span class="n">y_real</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">yhat_val</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">bds_result</span> <span class="o">=</span> <span class="n">bds</span><span class="p">(</span><span class="n">resid_h1</span><span class="p">,</span> <span class="n">max_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+                <span class="n">pval</span> <span class="o">=</span> <span class="n">bds_result</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;p-value&#39;</span><span class="p">]</span> <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">bds_result</span><span class="p">,</span> <span class="s1">&#39;iloc&#39;</span><span class="p">)</span> <span class="k">else</span> <span class="n">bds_result</span><span class="p">[</span><span class="s1">&#39;p-value&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">bds_p_fold</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pval</span><span class="p">)</span>
+
+            <span class="c1"># Guardar resultados por (estrategia, lag, horizonte)</span>
+            <span class="n">results_lags</span><span class="p">[(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">n_steps_input</span><span class="p">,</span> <span class="n">n_steps_forecast</span><span class="p">)]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;rmse_fold&#39;</span><span class="p">:</span> <span class="n">rmse_fold</span><span class="p">,</span>
+                <span class="s1">&#39;rmse_avg&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rmse_fold</span><span class="p">),</span>
+                <span class="s1">&#39;bds_p_fold&#39;</span><span class="p">:</span> <span class="n">bds_p_fold</span><span class="p">,</span>
+                <span class="s1">&#39;bds_p_avg&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bds_p_fold</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;[val] RMSE promedio: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rmse_fold</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> | BDS p-valor (h1): </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">bds_p_fold</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">n_steps_input</span> <span class="ow">in</span> <span class="n">lags_list</span><span class="p">:</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">results_lags</span><span class="p">[</span><span class="n">n_steps_input</span><span class="p">][</span><span class="s1">&#39;rmse_test_fold&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">n_steps_input</span><span class="si">}</span><span class="s1"> lags&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;RMSE promedio (7-step) test por fold&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Fold&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;RMSE ($)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="c1"># RMSE por fold: una fila por estrategia, un panel por horizonte</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">strategies</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">horizons_list</span><span class="p">),</span>
+                         <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">horizons_list</span><span class="p">),</span> <span class="mf">3.5</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">strategies</span><span class="p">)))</span>
+<span class="k">for</span> <span class="n">r</span><span class="p">,</span> <span class="n">strategy</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">strategies</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">H</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">horizons_list</span><span class="p">):</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">n_steps_input</span> <span class="ow">in</span> <span class="n">lags_list</span><span class="p">:</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">results_lags</span><span class="p">[(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">n_steps_input</span><span class="p">,</span> <span class="n">H</span><span class="p">)][</span><span class="s1">&#39;rmse_fold&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">n_steps_input</span><span class="si">}</span><span class="s1"> lags&#39;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">strategy</span><span class="si">}</span><span class="s2"> (H=</span><span class="si">{</span><span class="n">H</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Fold&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;RMSE val ($)&quot;</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># RMSE promedio vs horizonte de predicción, por lag y estrategia</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">strategies</span><span class="p">),</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">strategies</span><span class="p">),</span> <span class="mi">4</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">strategy</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="n">strategies</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">n_steps_input</span> <span class="ow">in</span> <span class="n">lags_list</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">horizons_list</span><span class="p">,</span>
+                <span class="p">[</span><span class="n">results_lags</span><span class="p">[(</span><span class="n">strategy</span><span class="p">,</span> <span class="n">n_steps_input</span><span class="p">,</span> <span class="n">H</span><span class="p">)][</span><span class="s1">&#39;rmse_avg&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">H</span> <span class="ow">in</span> <span class="n">horizons_list</span><span class="p">],</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">n_steps_input</span><span class="si">}</span><span class="s1"> lags&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="n">strategy</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Horizonte H (días)&quot;</span><span class="p">);</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;RMSE val promedio ($)&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 
+<span class="c1"># Tabla comparativa por estrategia de validación (métricas sobre validación)</span>
 <span class="n">tabla_summary</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="p">[[</span><span class="n">n</span><span class="p">,</span> <span class="n">results_lags</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="s1">&#39;rmse_test_avg&#39;</span><span class="p">],</span> <span class="n">results_lags</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="s1">&#39;bds_p_avg&#39;</span><span class="p">]]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">lags_list</span><span class="p">],</span>
-    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;# lags&#39;</span><span class="p">,</span> <span class="s1">&#39;avg RMSE test (7-step)&#39;</span><span class="p">,</span> <span class="s1">&#39;avg BDS p-valor (h1)&#39;</span><span class="p">]</span>
+    <span class="p">[[</span><span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">results_lags</span><span class="p">[(</span><span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">H</span><span class="p">)][</span><span class="s1">&#39;rmse_avg&#39;</span><span class="p">],</span> <span class="n">results_lags</span><span class="p">[(</span><span class="n">s</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">H</span><span class="p">)][</span><span class="s1">&#39;bds_p_avg&#39;</span><span class="p">]]</span>
+     <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">strategies</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">lags_list</span> <span class="k">for</span> <span class="n">H</span> <span class="ow">in</span> <span class="n">horizons_list</span><span class="p">],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;estrategia&#39;</span><span class="p">,</span> <span class="s1">&#39;# lags&#39;</span><span class="p">,</span> <span class="s1">&#39;Horizonte H&#39;</span><span class="p">,</span> <span class="s1">&#39;avg RMSE val&#39;</span><span class="p">,</span> <span class="s1">&#39;avg BDS p-valor (h1)&#39;</span><span class="p">]</span>
 <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">tabla_summary</span><span class="p">)</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
-<li><p>Test BDS de independencia serial en residuos de test</p></li>
+<li><p>Búsqueda de la mejor arquitectura MLP (adaptado de <code class="docutils literal notranslate"><span class="pre">architectures_dropout.ipynb</span></code>)</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="c1"># =========================</span>
+<span class="c1"># 1. Espacio de búsqueda: arquitecturas + dropout</span>
+<span class="c1"># =========================</span>
+<span class="n">neuronas</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">]</span>
+<span class="n">max_capas</span> <span class="o">=</span> <span class="mi">3</span>   <span class="c1"># sube a 4 si el costo computacional lo permite</span>
+<span class="n">arquitecturas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">num_capas</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_capas</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">comb</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">neuronas</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="n">num_capas</span><span class="p">):</span>
+        <span class="n">arquitecturas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">comb</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">dropout_configs</span><span class="p">(</span><span class="n">n_capas</span><span class="p">):</span>
+    <span class="c1"># Genera las 2^n máscaras booleanas de dropout para n capas</span>
+    <span class="k">for</span> <span class="n">mask</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">n_capas</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">bool</span><span class="p">((</span><span class="n">mask</span> <span class="o">&gt;&gt;</span> <span class="n">i</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_capas</span><span class="p">))</span>
+
+<span class="c1"># =========================</span>
+<span class="c1"># 2. Modelo Keras MULTISALIDA (n_outputs = horizonte H)</span>
+<span class="c1"># =========================</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">construir_modelo</span><span class="p">(</span><span class="n">arquitectura</span><span class="p">,</span> <span class="n">dropout_mask</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">n_outputs</span><span class="p">,</span> <span class="n">dropout_rate</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,)))</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">units</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">arquitectura</span><span class="p">):</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">dropout_mask</span><span class="p">[</span><span class="n">idx</span><span class="p">]:</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">dropout_rate</span><span class="p">))</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">layers</span><span class="o">.</span><span class="n">Dense</span><span class="p">(</span><span class="n">n_outputs</span><span class="p">))</span>   <span class="c1"># salida = H (7, 14, 21 o 28)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s2">&quot;adam&quot;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s2">&quot;mse&quot;</span><span class="p">,</span>
+                  <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">RootMeanSquaredError</span><span class="p">()])</span>
+    <span class="k">return</span> <span class="n">model</span>
+
+<span class="c1"># =========================</span>
+<span class="c1"># 3. Búsqueda para un (lag, horizonte) dado, usando validación TEMPORAL (sin shuffle)</span>
+<span class="c1">#    X_train, y_train, X_val, y_val provienen de split_train_val_forwardChaining</span>
+<span class="c1">#    (o groupKFold / kFold) y ya están escalados (fit del scaler solo con train).</span>
+<span class="c1">#    X_hold, y_hold: hold-out temporal (escalado con el scaler del train); solo evidencia final.</span>
+<span class="c1"># =========================</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">buscar_mejor_arquitectura</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">,</span> <span class="n">X_hold</span><span class="p">,</span> <span class="n">y_hold</span><span class="p">,</span>
+                              <span class="n">n_steps_input</span><span class="p">,</span> <span class="n">n_steps_forecast</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">32</span><span class="p">):</span>
+    <span class="n">resultados</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">arch</span> <span class="ow">in</span> <span class="n">arquitecturas</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">dmask</span> <span class="ow">in</span> <span class="n">dropout_configs</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arch</span><span class="p">)):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Entrenando arquitectura=</span><span class="si">{</span><span class="n">arch</span><span class="si">}</span><span class="s2">, dropout_mask=</span><span class="si">{</span><span class="n">dmask</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">model</span> <span class="o">=</span> <span class="n">construir_modelo</span><span class="p">(</span><span class="n">arch</span><span class="p">,</span> <span class="n">dmask</span><span class="p">,</span> <span class="n">input_dim</span><span class="o">=</span><span class="n">n_steps_input</span><span class="p">,</span>
+                                     <span class="n">n_outputs</span><span class="o">=</span><span class="n">n_steps_forecast</span><span class="p">)</span>
+            <span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+                <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span>
+                <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_val</span><span class="p">,</span> <span class="n">y_val</span><span class="p">),</span>
+                <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+                <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>           <span class="c1"># respetar el orden temporal</span>
+                <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span>
+            <span class="p">)</span>
+            <span class="n">train_rmse</span> <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;root_mean_squared_error&quot;</span><span class="p">]</span>
+            <span class="n">val_rmse</span>   <span class="o">=</span> <span class="n">history</span><span class="o">.</span><span class="n">history</span><span class="p">[</span><span class="s2">&quot;val_root_mean_squared_error&quot;</span><span class="p">]</span>
+
+            <span class="n">best_val</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">val_rmse</span><span class="p">)</span>
+            <span class="n">last_train</span> <span class="o">=</span> <span class="n">train_rmse</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">gap</span>        <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">last_train</span> <span class="o">-</span> <span class="n">best_val</span><span class="p">)</span>
+
+            <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_hold</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">holdout_rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_hold</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+
+            <span class="n">resultados</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                <span class="s2">&quot;arquitectura&quot;</span><span class="p">:</span> <span class="n">arch</span><span class="p">,</span> <span class="s2">&quot;dropout_mask&quot;</span><span class="p">:</span> <span class="n">dmask</span><span class="p">,</span>
+                <span class="s2">&quot;best_val_rmse&quot;</span><span class="p">:</span> <span class="n">best_val</span><span class="p">,</span> <span class="s2">&quot;last_train_rmse&quot;</span><span class="p">:</span> <span class="n">last_train</span><span class="p">,</span>
+                <span class="s2">&quot;gap&quot;</span><span class="p">:</span> <span class="n">gap</span><span class="p">,</span> <span class="s2">&quot;holdout_rmse&quot;</span><span class="p">:</span> <span class="n">holdout_rmse</span><span class="p">,</span>
+                <span class="s2">&quot;train_curve&quot;</span><span class="p">:</span> <span class="n">train_rmse</span><span class="p">,</span> <span class="s2">&quot;val_curve&quot;</span><span class="p">:</span> <span class="n">val_rmse</span>
+            <span class="p">})</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resultados</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;gap_ratio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;gap&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;best_val_rmse&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Selección automática: candidatos balanceados (poco sobreajuste) y menor val RMSE</span>
+    <span class="n">candidatos</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;gap_ratio&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">0.15</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;best_val_rmse&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Modelos candidatos (balanceados):&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">candidatos</span><span class="p">[[</span><span class="s2">&quot;arquitectura&quot;</span><span class="p">,</span> <span class="s2">&quot;dropout_mask&quot;</span><span class="p">,</span> <span class="s2">&quot;best_val_rmse&quot;</span><span class="p">,</span> <span class="s2">&quot;holdout_rmse&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+
+    <span class="c1"># Curvas de aprendizaje del Top-3</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">candidatos</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;train_curve&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Train RMSE&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;val_curve&quot;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Val RMSE&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Arq=</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;arquitectura&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> Dropout=</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;dropout_mask&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> &quot;</span>
+                  <span class="sa">f</span><span class="s2">&quot;(lag=</span><span class="si">{</span><span class="n">n_steps_input</span><span class="si">}</span><span class="s2">, H=</span><span class="si">{</span><span class="n">n_steps_forecast</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Época&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;RMSE&quot;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;train_curve&quot;</span><span class="p">,</span> <span class="s2">&quot;val_curve&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;results/architecture_search_lag</span><span class="si">{</span><span class="n">n_steps_input</span><span class="si">}</span><span class="s2">_h</span><span class="si">{</span><span class="n">n_steps_forecast</span><span class="si">}</span><span class="s2">.csv&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df</span><span class="p">,</span> <span class="n">candidatos</span>
+
+<span class="c1"># =========================</span>
+<span class="c1"># 4. Ejecutar la búsqueda para cada combinación (lag, horizonte)</span>
+<span class="c1"># =========================</span>
+<span class="n">mejor_arquitectura</span> <span class="o">=</span> <span class="p">{}</span>   <span class="c1"># (lag, H) -&gt; (arquitectura, dropout_mask)</span>
+<span class="k">for</span> <span class="n">n_steps_input</span> <span class="ow">in</span> <span class="n">lags_list</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">n_steps_forecast</span> <span class="ow">in</span> <span class="n">horizons_list</span><span class="p">:</span>
+        <span class="c1"># 1) Obtener splits con get_splits(&quot;forwardChaining&quot;, serie_cv, ...) (n_steps_input, n_steps_forecast)</span>
+        <span class="c1"># 2) Escalar (fit del scaler solo con train)</span>
+        <span class="c1"># 3) df_busqueda, candidatos = buscar_mejor_arquitectura(</span>
+        <span class="c1">#        X_train, y_train, X_val, y_val, X_hold, y_hold,</span>
+        <span class="c1">#        n_steps_input, n_steps_forecast)</span>
+        <span class="c1"># 4) best = candidatos.iloc[0]</span>
+        <span class="c1">#    mejor_arquitectura[(n_steps_input, n_steps_forecast)] = (best[&quot;arquitectura&quot;], best[&quot;dropout_mask&quot;])</span>
+        <span class="k">pass</span>
+
+<span class="c1"># Tabla resumen: mejor arquitectura por (lag, horizonte)</span>
+
+<span class="c1"># Re-evaluar la arquitectura ganadora con las otras dos estrategias</span>
+<span class="c1"># (groupKFold y kFold) usando get_splits(...) y comparar RMSE de validación.</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Test BDS de independencia serial en residuos de validación / hold-out</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">arch.bootstrap</span><span class="w"> </span><span class="kn">import</span> <span class="n">bds</span>
 
 <span class="k">for</span> <span class="n">ix</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_train</span><span class="p">)):</span>
-    <span class="n">resid</span> <span class="o">=</span> <span class="n">dict_rmse</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">ix</span><span class="p">)][</span><span class="s1">&#39;resid_test&#39;</span><span class="p">]</span>
+    <span class="n">resid</span> <span class="o">=</span> <span class="n">dict_rmse</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">ix</span><span class="p">)][</span><span class="s1">&#39;resid_val&#39;</span><span class="p">]</span>   <span class="c1"># o &#39;resid_holdout&#39; para el modelo final</span>
     <span class="n">resultado_bds</span> <span class="o">=</span> <span class="n">bds</span><span class="p">(</span><span class="n">resid</span><span class="p">,</span> <span class="n">max_dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test BDS residuos - Fold </span><span class="si">{</span><span class="n">ix</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">:</span><span class="se">\n</span><span class="si">{</span><span class="n">resultado_bds</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="c1"># Si p-value &gt; 0.05: residuos independientes (buen modelo temporal)</span>
 </pre></div>
 </div>
-<ol class="arabic simple" start="4">
+<ol class="arabic simple" start="5">
 <li><p>Visualización de desempeño</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 
 <span class="n">rmse_train_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">dict_rmse</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)][</span><span class="s1">&#39;rmse_train&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dict_rmse</span><span class="p">))]</span>
 <span class="n">rmse_val_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">dict_rmse</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)][</span><span class="s1">&#39;rmse_val&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dict_rmse</span><span class="p">))]</span>
-<span class="n">rmse_test_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">dict_rmse</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)][</span><span class="s1">&#39;rmse_test&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dict_rmse</span><span class="p">))]</span>
+<span class="n">rmse_holdout</span> <span class="o">=</span> <span class="n">dict_rmse_final</span><span class="p">[</span><span class="s1">&#39;rmse_holdout&#39;</span><span class="p">]</span>   <span class="c1"># evaluación definitiva del modelo final</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rmse_train_list</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Train&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rmse_val_list</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Val&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">rmse_test_list</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Test&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">rmse_holdout</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Hold-out (modelo final)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Fold&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;RMSE ($)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;RMSE por fold (Solo series históricas, univariadas)&quot;</span><span class="p">)</span>
@@ -6837,14 +7088,14 @@ Desviación estándar de las predicciones: 0.196327
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<ol class="arabic simple" start="5">
-<li><p>Muestra, en un fold de test, la predicción vs el valor real:</p></li>
+<ol class="arabic simple" start="6">
+<li><p>Muestra, en un fold de validación, la predicción vs el valor real:</p></li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">rmse_test_list</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_test</span><span class="p">[</span><span class="n">ix</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Real&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dict_rmse</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">ix</span><span class="p">)][</span><span class="s1">&#39;rmse_test&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">y_test</span><span class="p">[</span><span class="n">ix</span><span class="p">]</span><span class="o">*</span><span class="mi">0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;MLP Predicho (solo lags precio)&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">rmse_val_list</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dict_rmse</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">ix</span><span class="p">)][</span><span class="s1">&#39;y_val_real&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Real&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dict_rmse</span><span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">ix</span><span class="p">)][</span><span class="s1">&#39;y_val_pred&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;MLP Predicho (solo lags precio)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Real vs Predicho - Mejor Fold Test (ix=</span><span class="si">{</span><span class="n">ix</span><span class="si">}</span><span class="s2">) (Solo Precio)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Real vs Predicho - Mejor Fold Validación (ix=</span><span class="si">{</span><span class="n">ix</span><span class="si">}</span><span class="s2">) (Solo Precio)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -6862,6 +7113,7 @@ python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </sp
 python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>matplotlib
 python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>tsxv
 python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>arch
+python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>tensorflow
 </pre></div>
 </div>
 <ol class="arabic simple" start="7">
@@ -6872,15 +7124,21 @@ python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </sp
 │   └── dataset.csv                     # Serie temporal (crypto o viento)
 ├── notebooks/
 │   ├── 1_eda.ipynb                    # Exploración y análisis de la serie
-│   ├── 2_model_training.ipynb         # Entrenamiento MLP con validación temporal
-│   ├── 3_residual_analysis.ipynb      # Diagnóstico de residuos
+│   ├── 2_architecture_search.ipynb    # Búsqueda de la mejor arquitectura MLP (capas/neuronas/dropout)
+│   ├── 3_model_training.ipynb         # Entrenamiento MLP (lags x horizontes x 3 estrategias de CV) + hold-out final
+│   ├── 4_residual_analysis.ipynb      # Diagnóstico de residuos
 ├── app/
 │   ├── api.py                         # API para inferencia
 │   ├── schemas.py                     # Modelos Pydantic
-│   └── model.joblib                   # Modelo entrenado (MLP multi-output)
+│   ├── model_h7.keras                 # Mejor MLP multi-output para horizonte 7
+│   ├── model_h14.keras                # Mejor MLP multi-output para horizonte 14
+│   ├── model_h21.keras                # Mejor MLP multi-output para horizonte 21
+│   ├── model_h28.keras                # Mejor MLP multi-output para horizonte 28
+│   └── scalers_h{H}.joblib            # Scalers (x, y) ajustados con train, por horizonte
 ├── tests/
 │   ├── test_api.py                    # Pruebas unitarias de la API
 │   └── test_model.py                  # Validación del modelo
+├── results/                           # CSV de métricas y de la búsqueda de arquitectura
 ├── Dockerfile
 ├── requirements.txt
 ├── .github/workflows/
@@ -6891,22 +7149,37 @@ python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </sp
 <ol class="arabic simple" start="8">
 <li><p>API con FastAPI (<code class="docutils literal notranslate"><span class="pre">api.py</span></code>)</p></li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span>
+<p>La API debe aceptar el <strong>horizonte de predicción</strong> (<code class="docutils literal notranslate"><span class="pre">horizon</span></code> ∈ {7, 14, 21, 28}) y cargar el modelo con la <strong>mejor arquitectura MLP</strong> encontrada para ese horizonte.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Literal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi</span><span class="w"> </span><span class="kn">import</span> <span class="n">FastAPI</span><span class="p">,</span> <span class="n">HTTPException</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">FastAPI</span><span class="p">()</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;app/model.joblib&quot;</span><span class="p">)</span>
+
+<span class="n">VALID_HORIZONS</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">)</span>
+
+<span class="c1"># Un modelo (mejor arquitectura MLP) y un par de scalers por horizonte</span>
+<span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="n">H</span><span class="p">:</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;app/model_h</span><span class="si">{</span><span class="n">H</span><span class="si">}</span><span class="s2">.keras&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">H</span> <span class="ow">in</span> <span class="n">VALID_HORIZONS</span><span class="p">}</span>
+<span class="n">scalers</span> <span class="o">=</span> <span class="p">{</span><span class="n">H</span><span class="p">:</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;app/scalers_h</span><span class="si">{</span><span class="n">H</span><span class="si">}</span><span class="s2">.joblib&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">H</span> <span class="ow">in</span> <span class="n">VALID_HORIZONS</span><span class="p">}</span>  <span class="c1"># {&quot;x&quot;: scaler_x, &quot;y&quot;: scaler_y}</span>
 
 <span class="k">class</span><span class="w"> </span><span class="nc">TimeSeriesData</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
-    <span class="n">lags</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>   <span class="c1"># Ventanas históricas (ej. últimos valores observados)</span>
+    <span class="n">lags</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span>                    <span class="c1"># Ventanas históricas (ej. últimos valores observados)</span>
+    <span class="n">horizon</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">]</span> <span class="o">=</span> <span class="mi">7</span>  <span class="c1"># Horizonte de predicción en días</span>
 
 <span class="nd">@app</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/predict&quot;</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">predict</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">TimeSeriesData</span><span class="p">):</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">horizon</span>
+    <span class="n">scaler_x</span><span class="p">,</span> <span class="n">scaler_y</span> <span class="o">=</span> <span class="n">scalers</span><span class="p">[</span><span class="n">H</span><span class="p">][</span><span class="s2">&quot;x&quot;</span><span class="p">],</span> <span class="n">scalers</span><span class="p">[</span><span class="n">H</span><span class="p">][</span><span class="s2">&quot;y&quot;</span><span class="p">]</span>
     <span class="n">features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">lags</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">prediction</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;prediction&quot;</span><span class="p">:</span> <span class="n">prediction</span><span class="o">.</span><span class="n">tolist</span><span class="p">()}</span>
+    <span class="k">if</span> <span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="n">scaler_x</span><span class="o">.</span><span class="n">n_features_in_</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">HTTPException</span><span class="p">(</span><span class="n">status_code</span><span class="o">=</span><span class="mi">422</span><span class="p">,</span>
+                            <span class="n">detail</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Se esperaban </span><span class="si">{</span><span class="n">scaler_x</span><span class="o">.</span><span class="n">n_features_in_</span><span class="si">}</span><span class="s2"> lags, se recibieron </span><span class="si">{</span><span class="n">features</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">pred_scaled</span> <span class="o">=</span> <span class="n">models</span><span class="p">[</span><span class="n">H</span><span class="p">]</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">scaler_x</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">features</span><span class="p">),</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="n">scaler_y</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">pred_scaled</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;horizon&quot;</span><span class="p">:</span> <span class="n">H</span><span class="p">,</span> <span class="s2">&quot;prediction&quot;</span><span class="p">:</span> <span class="n">prediction</span><span class="o">.</span><span class="n">tolist</span><span class="p">()}</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="9">
@@ -6937,6 +7210,7 @@ joblib
 matplotlib
 tsxv
 arch
+tensorflow
 </pre></div>
 </div>
 <ol class="arabic simple" start="11">
@@ -6969,56 +7243,70 @@ arch
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">joblib</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">test_model_prediction_shape</span><span class="p">():</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;app/model.joblib&quot;</span><span class="p">)</span>
-    <span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+<span class="n">HORIZONS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">]</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">test_prediction_values</span><span class="p">():</span>
-    <span class="n">model</span> <span class="o">=</span> <span class="n">joblib</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;app/model.joblib&quot;</span><span class="p">)</span>
-    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
-    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span> <span class="o">==</span> <span class="mi">7</span>
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="n">HORIZONS</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_model_prediction_shape</span><span class="p">(</span><span class="n">H</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;app/model_h</span><span class="si">{</span><span class="n">H</span><span class="si">}</span><span class="s2">.keras&quot;</span><span class="p">)</span>
+    <span class="n">n_lags</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">input_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_lags</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="n">y_pred</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">H</span><span class="p">)</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="n">HORIZONS</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_prediction_values</span><span class="p">(</span><span class="n">H</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;app/model_h</span><span class="si">{</span><span class="n">H</span><span class="si">}</span><span class="s2">.keras&quot;</span><span class="p">)</span>
+    <span class="n">n_lags</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">input_shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_lags</span><span class="p">)</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_pred</span><span class="p">)</span> <span class="o">==</span> <span class="n">H</span>
     <span class="k">assert</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">floating</span><span class="p">))</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">y_pred</span><span class="p">)</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="13">
 <li><p>Pruebas unitarias de la API</p></li>
 </ol>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.testclient</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestClient</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pytest</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fastapi.testclient</span><span class="w"> </span><span class="kn">import</span> <span class="n">TestClient</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">app.api</span><span class="w"> </span><span class="kn">import</span> <span class="n">app</span>
 
 <span class="n">client</span> <span class="o">=</span> <span class="n">TestClient</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">test_predict_endpoint</span><span class="p">():</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/predict&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;lags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">,</span> <span class="mf">1.28</span><span class="p">,</span> <span class="mf">1.35</span><span class="p">]})</span>
+<span class="n">N_LAGS</span> <span class="o">=</span> <span class="mi">7</span>  <span class="c1"># ajustar al tamaño de ventana usado por el modelo desplegado</span>
+
+<span class="nd">@pytest</span><span class="o">.</span><span class="n">mark</span><span class="o">.</span><span class="n">parametrize</span><span class="p">(</span><span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">28</span><span class="p">])</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test_predict_endpoint</span><span class="p">(</span><span class="n">H</span><span class="p">):</span>
+    <span class="n">lags</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.25</span><span class="p">,</span> <span class="mf">1.28</span><span class="p">,</span> <span class="mf">1.35</span><span class="p">][:</span><span class="n">N_LAGS</span><span class="p">]</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/predict&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;lags&quot;</span><span class="p">:</span> <span class="n">lags</span><span class="p">,</span> <span class="s2">&quot;horizon&quot;</span><span class="p">:</span> <span class="n">H</span><span class="p">})</span>
     <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">200</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
     <span class="k">assert</span> <span class="s2">&quot;prediction&quot;</span> <span class="ow">in</span> <span class="n">data</span>
     <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;prediction&quot;</span><span class="p">],</span> <span class="nb">list</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;prediction&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">7</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;prediction&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="n">H</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">test_invalid_horizon</span><span class="p">():</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/predict&quot;</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;lags&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">]</span> <span class="o">*</span> <span class="mi">7</span><span class="p">,</span> <span class="s2">&quot;horizon&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">})</span>
+    <span class="k">assert</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">422</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="14">
 <li><p>Prueba local con curl</p></li>
 </ol>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/predict<span class="w"> </span><span class="se">\</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Horizonte de 14 días</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:8000/predict<span class="w"> </span><span class="se">\</span>
 <span class="w">   </span>-H<span class="w"> </span><span class="s2">&quot;Content-Type: application/json&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">   </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;lags&quot;: [1.0, 1.2, 1.1, 1.3, 1.25, 1.28, 1.35]}&#39;</span>
+<span class="w">   </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;lags&quot;: [1.0, 1.2, 1.1, 1.3, 1.25, 1.28, 1.35], &quot;horizon&quot;: 14}&#39;</span>
 </pre></div>
 </div>
-<p>Salida esperada:</p>
+<p>Salida esperada (para <code class="docutils literal notranslate"><span class="pre">horizon</span> <span class="pre">=</span> <span class="pre">14</span></code> se devuelven <strong>14 valores</strong>; para 7, 21 o 28 la lista tendrá 7, 21 o 28 valores respectivamente):</p>
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;horizon&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;prediction&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="mf">0.12</span><span class="p">,</span>
-<span class="w">    </span><span class="mf">0.11</span><span class="p">,</span>
-<span class="w">    </span><span class="mf">0.10</span><span class="p">,</span>
-<span class="w">    </span><span class="mf">0.09</span><span class="p">,</span>
-<span class="w">    </span><span class="mf">0.08</span><span class="p">,</span>
-<span class="w">    </span><span class="mf">0.07</span><span class="p">,</span>
-<span class="w">    </span><span class="mf">0.06</span>
+<span class="w">    </span><span class="mf">0.12</span><span class="p">,</span><span class="w"> </span><span class="mf">0.11</span><span class="p">,</span><span class="w"> </span><span class="mf">0.10</span><span class="p">,</span><span class="w"> </span><span class="mf">0.09</span><span class="p">,</span><span class="w"> </span><span class="mf">0.08</span><span class="p">,</span><span class="w"> </span><span class="mf">0.07</span><span class="p">,</span><span class="w"> </span><span class="mf">0.06</span><span class="p">,</span>
+<span class="w">    </span><span class="mf">0.06</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.05</span><span class="p">,</span><span class="w"> </span><span class="mf">0.04</span><span class="p">,</span><span class="w"> </span><span class="mf">0.04</span><span class="p">,</span><span class="w"> </span><span class="mf">0.03</span><span class="p">,</span><span class="w"> </span><span class="mf">0.03</span>
 <span class="w">  </span><span class="p">]</span>
 <span class="p">}</span>
 </pre></div>
