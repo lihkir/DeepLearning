@@ -230,7 +230,6 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="deep_learning_intro.html">1. Deep Learning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ann_theory.html">2. Multilayer Perceptron</a></li>
-
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">3. Convolutional Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="rnn_model.html">4. Recurrent Neural Networks</a></li>
 <li class="toctree-l1"><a class="reference internal" href="time_series.html">5. Time Series</a></li>
@@ -398,21 +397,9 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vgg-16">3.13. VGG-16</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#googlenet-y-la-red-inception">3.14. GoogleNet y la red Inception</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-residuales-resnets">3.15. Redes residuales (ResNets)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id45">3.16. El paso de la no linealidad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id48">3.17. La etapa de agrupación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id53">3.18. Convolución sobre volúmenes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id57">3.19. Red en red y convolución 1 × 1</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id63">3.20. Arquitectura CNN completa</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id66">3.21. Características en una CNN</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id67">3.22. Arquitecturas de Redes Neuronales Convolucionales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id68">3.23. LeNet-5</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id72">3.24. AlexNet</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id76">3.25. VGG-16</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id80">3.26. GoogleNet y la red Inception</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id84">3.27. Redes residuales (ResNets)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#u-net-redes-convolucionales-para-la-segmentacion-de-imagenes-biomedicas">3.28. U-Net: Redes Convolucionales para la Segmentación de Imágenes Biomédicas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-reconocimiento-facial-de-emociones">3.29. Aplicación: Reconocimiento facial de emociones</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-segmentacion-de-imagenes-biomedicas-con-u-net">3.30. Aplicación: Segmentación de Imágenes Biomédicas con U-Net</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#u-net-redes-convolucionales-para-la-segmentacion-de-imagenes-biomedicas">3.16. U-Net: Redes Convolucionales para la Segmentación de Imágenes Biomédicas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-reconocimiento-facial-de-emociones">3.17. Aplicación: Reconocimiento facial de emociones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-segmentacion-de-imagenes-biomedicas-con-u-net">3.18. Aplicación: Segmentación de Imágenes Biomédicas con U-Net</a></li>
 </ul>
             </nav>
         </div>
@@ -687,34 +674,179 @@ H=
 </ul>
 </section>
 </div><ul class="simple">
-<li><p><strong>Fundamento matemático: la convolución es la única operación lineal equivariante a traslaciones.</strong> La observación anterior afirma que, si el objeto se desplaza en la imagen, su contribución a la salida se desplaza la misma cantidad. El siguiente teorema formaliza esa propiedad y muestra que <em><strong>no es una casualidad del diseño, sino una caracterización</strong></em>.</p></li>
-<li><p>Para evitar efectos de borde trabajamos en la <em><strong>cuadrícula periódica</strong></em> <span class="math notranslate nohighlight">\(G=\mathbb{Z}_N\times\mathbb{Z}_N\)</span> (aritmética módulo <span class="math notranslate nohighlight">\(N\)</span>). Una imagen es una función <span class="math notranslate nohighlight">\(x:G\to\mathbb{R}\)</span> y la traslación por <span class="math notranslate nohighlight">\(a\in G\)</span> es <span class="math notranslate nohighlight">\((S_a x)(u)=x(u-a)\)</span>. Con la convención del notebook (correlación cruzada, Eq. <a class="reference internal" href="#equation-conv-oph-eq">(3.1)</a>), la convolución con núcleo <span class="math notranslate nohighlight">\(h:G\to\mathbb{R}\)</span> es</p></li>
+<li><p><strong>La convolución es la única operación lineal equivariante a traslaciones.</strong> La observación anterior afirma que, si el objeto se desplaza en la imagen, su contribución a la salida se desplaza la misma cantidad. El siguiente teorema formaliza esa propiedad y muestra que <em><strong>no es una casualidad del diseño, sino una caracterización</strong></em>.</p></li>
+<li><p>Para evitar efectos de borde trabajamos en la <em><strong>cuadrícula periódica</strong></em> <span class="math notranslate nohighlight">\(G=\mathbb{Z}_N\times\mathbb{Z}_N\)</span> (aritmética módulo <span class="math notranslate nohighlight">\(N\)</span>).</p></li>
+</ul>
+<div class="tip admonition">
+<p class="admonition-title">Cuadrícula periódica</p>
+<ul class="simple">
+<li><p>Una cuadrícula periódica es una imagen en la que <strong>el borde derecho está pegado al izquierdo y el borde de abajo al de arriba</strong>. Si caminas hacia la derecha y te sales de la imagen, reapareces por el lado izquierdo.</p></li>
+</ul>
+<p><strong>Ejemplo 1D.</strong> Con 5 posiciones <span class="math notranslate nohighlight">\(0,\dots,4\)</span>, un paso a la derecha desde la <span class="math notranslate nohighlight">\(4\)</span> lleva a la <span class="math notranslate nohighlight">\(0\)</span> (<span class="math notranslate nohighlight">\(4+1\equiv 0\)</span>), y tres pasos llevan a la <span class="math notranslate nohighlight">\(2\)</span> (<span class="math notranslate nohighlight">\(4+3=7\equiv 2\)</span> módulo <span class="math notranslate nohighlight">\(5\)</span>), como un reloj de 5 horas.</p>
+<p><strong>Ejemplo 2D.</strong> En una imagen <span class="math notranslate nohighlight">\(3\times 3\)</span>, trasladar una columna a la derecha hace que <strong>la última columna pase a ser la primera</strong>, sin perder píxeles (ver <a class="reference internal" href="#periodic-grid-numref"><span class="std std-numref">Fig. 3.4</span></a>B).</p>
+<ul class="simple">
+<li><p>Así <span class="math notranslate nohighlight">\(x(u+v)\)</span> siempre está definido en los bordes y no hay que elegir un padding. Es una idealización; en la práctica se usa padding de ceros.</p></li>
+</ul>
+</div>
+<figure class="align-center" id="periodic-grid-numref">
+<a class="reference internal image-reference" href="_images/periodic_grid.svg"><img alt="_images/periodic_grid.svg" src="_images/periodic_grid.svg" style="width: 802.4000000000001px; height: 391.20000000000005px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 3.4 </span><span class="caption-text">(A) <span class="math notranslate nohighlight">\(\mathbb{Z}_5\)</span> como un reloj de 5 posiciones: tras el <span class="math notranslate nohighlight">\(4\)</span> viene el <span class="math notranslate nohighlight">\(0\)</span>. (B) Traslación de una columna a la derecha en <span class="math notranslate nohighlight">\(\mathbb{Z}_3\times\mathbb{Z}_3\)</span>: la última columna reaparece como primera.</span><a class="headerlink" href="#periodic-grid-numref" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<ul class="simple">
+<li><p>Una imagen es una función <span class="math notranslate nohighlight">\(x:G\to\mathbb{R}\)</span> y la traslación por <span class="math notranslate nohighlight">\(a\in G\)</span> es</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-traslation-eq">
+<span class="eqno">(3.3)<a class="headerlink" href="#equation-traslation-eq" title="Link to this equation">#</a></span>\[
+(S_a x)(\textcolor{red}{u})=x(\textcolor{red}{u}-a).
+\]</div>
+<ul class="simple">
+<li><p>Con la convención, correlación cruzada, Eq. <a class="reference internal" href="#equation-conv-oph-eq">(3.1)</a>, la convolución con núcleo <span class="math notranslate nohighlight">\(h:G\to\mathbb{R}\)</span> es</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-conv-periodic-eq">
-<span class="eqno">(3.3)<a class="headerlink" href="#equation-conv-periodic-eq" title="Link to this equation">#</a></span>\[
-(T_h x)(u)=\sum_{v\in G}h(v)\,x(u+v).
+<span class="eqno">(3.4)<a class="headerlink" href="#equation-conv-periodic-eq" title="Link to this equation">#</a></span>\[
+(T_h x)(\textcolor{red}{u})=\sum_{v\in G}h(v)\,x(\textcolor{red}{u}+v).
 \]</div>
+<div class="tip admonition">
+<p class="admonition-title">Ejemplo</p>
+<p>Con <span class="math notranslate nohighlight">\(x=\begin{bmatrix}1&amp;2&amp;3\\4&amp;5&amp;6\\7&amp;8&amp;9\end{bmatrix}\)</span> (ver <a class="reference internal" href="#periodic-conv-example-numref"><span class="std std-numref">Fig. 3.5</span></a>):</p>
+<ul class="simple">
+<li><p><strong>Traslación</strong> <span class="math notranslate nohighlight">\(a=(0,1)\)</span>: <span class="math notranslate nohighlight">\(S_a x=\begin{bmatrix}3&amp;1&amp;2\\6&amp;4&amp;5\\9&amp;7&amp;8\end{bmatrix}\)</span>, la última columna pasa a ser la primera.</p></li>
+<li><p><strong>Convolución</strong> con <span class="math notranslate nohighlight">\(h\)</span> de <span class="math notranslate nohighlight">\(2\times 2\)</span> con todos sus pesos iguales a <span class="math notranslate nohighlight">\(1\)</span> (suma <span class="math notranslate nohighlight">\(u\)</span>, su derecha, su abajo y su diagonal): en el interior <span class="math notranslate nohighlight">\((T_hx)(0,0)=1+2+4+5=12\)</span>; en la esquina, los vecinos se recuperan por el lado opuesto, <span class="math notranslate nohighlight">\((T_hx)(2,2)=9+7+3+1=20\)</span>.</p></li>
+</ul>
+</div>
+<figure class="align-center" id="periodic-conv-example-numref">
+<a class="reference internal image-reference" href="_images/periodic_conv_example.svg"><img alt="_images/periodic_conv_example.svg" src="_images/periodic_conv_example.svg" style="width: 616.0px; height: 636.0px;" />
+</a>
+<figcaption>
+<p><span class="caption-number">Fig. 3.5 </span><span class="caption-text">(A) Traslación en <span class="math notranslate nohighlight">\(\mathbb{Z}_3\times\mathbb{Z}_3\)</span>. (B) Convolución en el interior. (C) Convolución en la esquina, con la extensión periódica de <span class="math notranslate nohighlight">\(x\)</span> (celdas punteadas).</span><a class="headerlink" href="#periodic-conv-example-numref" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
 <div class="proof theorem admonition" id="thm_equiv">
 <p class="admonition-title"><span class="caption-number">Theorem 3.1 </span> (Equivarianza de la convolución)</p>
 <section class="theorem-content" id="proof-content">
 <p>Sea <span class="math notranslate nohighlight">\(T:\mathbb{R}^{G}\to\mathbb{R}^{G}\)</span> una aplicación lineal. Son equivalentes:</p>
 <ol class="arabic simple">
-<li><p><span class="math notranslate nohighlight">\(T S_a=S_a T\)</span> para todo <span class="math notranslate nohighlight">\(a\in G\)</span> (<em><strong>equivarianza a traslaciones</strong></em>).</p></li>
+<li><p><span class="math notranslate nohighlight">\(T S_a=S_a T\)</span> para todo <span class="math notranslate nohighlight">\(a\in G\)</span> (<strong>equivarianza a traslaciones</strong>).</p></li>
 <li><p>Existe <span class="math notranslate nohighlight">\(h:G\to\mathbb{R}\)</span> tal que <span class="math notranslate nohighlight">\(T=T_h\)</span>, es decir, <span class="math notranslate nohighlight">\(T\)</span> es una convolución.</p></li>
 </ol>
 </section>
-</div><div class="proof admonition" id="proof">
-<p>Proof. - <strong>(2) ⇒ (1).</strong> Para cualquier <span class="math notranslate nohighlight">\(x\)</span> y <span class="math notranslate nohighlight">\(a\)</span>,
-$<span class="math notranslate nohighlight">\(
-  (T_h S_a x)(u)=\sum_{v}h(v)\,x(u+v-a)=(T_h x)(u-a)=(S_a T_h x)(u).
-  \)</span>$</p>
-<ul class="simple">
-<li><p><strong>(1) ⇒ (2).</strong> Sea <span class="math notranslate nohighlight">\(\delta_0\)</span> el impulso en el origen (<span class="math notranslate nohighlight">\(\delta_0(0)=1\)</span>, cero en el resto) y definamos <span class="math notranslate nohighlight">\(g:=T\delta_0\)</span>.</p>
+</div><div class="proof tip admonition" id="proof">
+<p>Proof. <strong>(2) ⇒ (1).</strong> Suponemos <span class="math notranslate nohighlight">\(T=T_h\)</span> (<strong>hipótesis</strong>) y debemos probar <span class="math notranslate nohighlight">\(T_hS_a=S_aT_h\)</span> para todo <span class="math notranslate nohighlight">\(a\in G\)</span> (<strong>tesis</strong>). Fijamos <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(a\)</span> y <span class="math notranslate nohighlight">\(u\)</span>, y evaluamos ambos lados en <span class="math notranslate nohighlight">\(u\)</span> con Eq. <a class="reference internal" href="#equation-traslation-eq">(3.3)</a> y Eq. <a class="reference internal" href="#equation-conv-periodic-eq">(3.4)</a>: como <span class="math notranslate nohighlight">\(u\)</span> y <span class="math notranslate nohighlight">\(x\)</span> son arbitrarios, la igualdad vale como aplicaciones.</p>
 <ul>
-<li><p>Como <span class="math notranslate nohighlight">\((S_a\delta_0)(u)=\delta_0(u-a)\)</span> vale 1 solo en <span class="math notranslate nohighlight">\(u=a\)</span>, toda imagen se escribe como <span class="math notranslate nohighlight">\(x=\sum_{a\in G}x(a)\,S_a\delta_0\)</span>.</p></li>
-<li><p>Por linealidad y equivarianza, <span class="math notranslate nohighlight">\(Tx=\sum_{a}x(a)\,S_a g\)</span>, es decir, <span class="math notranslate nohighlight">\((Tx)(u)=\sum_{a}x(a)\,g(u-a)\)</span>.</p></li>
-<li><p>Con el cambio de índice <span class="math notranslate nohighlight">\(v=a-u\)</span> se obtiene <span class="math notranslate nohighlight">\((Tx)(u)=\sum_{v}g(-v)\,x(u+v)\)</span>, que es <span class="math notranslate nohighlight">\(T_h x\)</span> con <span class="math notranslate nohighlight">\(h(v):=g(-v)\)</span>. <span class="math notranslate nohighlight">\(\qquad\blacksquare\)</span></p></li>
+<li><p><strong>Lado izquierdo, <span class="math notranslate nohighlight">\((T_hS_a x)(u)\)</span>.</strong></p>
+<ul class="simple">
+<li><p>Aplicamos la definición de <span class="math notranslate nohighlight">\(T_h\)</span> a la imagen <span class="math notranslate nohighlight">\(S_a x\)</span></p></li>
 </ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  \begin{align*}
+  (T_hS_a x)(u) &amp;= \sum_{v}h(v)\,(S_a x)(u+v) \\
+                &amp;= \sum_{v}h(v)\,x\big((u+v)-a\big) \\
+                &amp;= \sum_{v}h(v)\,x(u+v-a). \tag{$\ast$}
+  \end{align*}
+  \end{split}\]</div>
+</li>
+<li><p><strong>Lado derecho, <span class="math notranslate nohighlight">\((S_aT_h x)(u)\)</span>.</strong></p>
+<ul>
+<li><p>Aplicamos la definición de traslación, luego la de <span class="math notranslate nohighlight">\(T_h\)</span></p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+    \begin{align*}
+    (S_aT_h x)(u) &amp;= (T_h x)(u-a) \\
+                  &amp;= \sum_{v}h(v)\,x\big((u-a)+v\big) \\
+                  &amp;= \sum_{v}h(v)\,x(u+v-a). \tag{$\ast\ast$}
+    \end{align*}
+    \end{split}\]</div>
+</li>
+</ul>
+</li>
+<li><p>Entonces, <span class="math notranslate nohighlight">\((\ast)\)</span> y <span class="math notranslate nohighlight">\((\ast\ast)\)</span> son <strong>exactamente la misma suma</strong>. Como <span class="math notranslate nohighlight">\(u\)</span> es arbitrario, <span class="math notranslate nohighlight">\(T_hS_ax=S_aT_hx\)</span>.</p></li>
+</ul>
+<p><strong>(1) ⇒ (2).</strong> Suponemos dos hipótesis sobre <span class="math notranslate nohighlight">\(T:\mathbb{R}^{G}\to\mathbb{R}^{G}\)</span>: <strong>H1 (linealidad):</strong> <span class="math notranslate nohighlight">\(T(\alpha x+\beta y)=\alpha\,Tx+\beta\,Ty\)</span> para todo <span class="math notranslate nohighlight">\(x,y\in\mathbb{R}^{G}\)</span> y <span class="math notranslate nohighlight">\(\alpha,\beta\in\mathbb{R}\)</span>. <strong>H2 (equivarianza):</strong> <span class="math notranslate nohighlight">\(T S_a=S_a T\)</span> para todo <span class="math notranslate nohighlight">\(a\in G\)</span>.</p>
+<ul>
+<li><p>Debemos <strong>construir</strong> un <span class="math notranslate nohighlight">\(h:G\to\mathbb{R}\)</span> tal que <span class="math notranslate nohighlight">\(Tx=T_hx\)</span> para toda <span class="math notranslate nohighlight">\(x\)</span>. La estrategia es la de siempre con aplicaciones lineales: <strong>una aplicación lineal queda determinada por lo que hace con una base</strong>. Aquí la equivarianza hará que baste conocer la imagen de <strong>un solo</strong> elemento de la base.</p></li>
+<li><p><strong>Paso 0: la base de impulsos.</strong> Para cada <span class="math notranslate nohighlight">\(a\in G\)</span>, el impulso en <span class="math notranslate nohighlight">\(a\)</span> es la imagen <span class="math notranslate nohighlight">\(\delta_a\)</span> con un único píxel encendido:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  \delta_a(u)=\begin{cases}1 &amp; \text{si } u=a,\\ 0 &amp; \text{si } u\neq a.\end{cases}
+  \end{split}\]</div>
+<p>Como <span class="math notranslate nohighlight">\(G\)</span> es finito (<span class="math notranslate nohighlight">\(N^2\)</span> posiciones), <span class="math notranslate nohighlight">\(\{\delta_a\}_{a\in G}\)</span> es una base de <span class="math notranslate nohighlight">\(\mathbb{R}^{G}\)</span> de <span class="math notranslate nohighlight">\(N^2\)</span> elementos. Escribimos <span class="math notranslate nohighlight">\(\delta_0\)</span> para el impulso en el origen y definimos la <strong>respuesta al impulso</strong></p>
+<div class="math notranslate nohighlight">
+\[
+  g:=T\delta_0\in\mathbb{R}^{G}.
+  \]</div>
+<p>Elegimos <span class="math notranslate nohighlight">\(\delta_0\)</span> porque es el impulso más simple, y el Paso 1 muestra que la traslación genera todos los demás a partir de él.</p>
+</li>
+<li><p><strong>Paso 1: trasladar el impulso da otro impulso, <span class="math notranslate nohighlight">\(S_a\delta_0=\delta_a\)</span>.</strong> Evaluamos en un punto <span class="math notranslate nohighlight">\(u\)</span> cualquiera:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  (S_a\delta_0)(u)=\delta_0(u-a)=\begin{cases}1 &amp; \text{si } u-a=0 \iff u=a,\\ 0 &amp; \text{en otro caso,}\end{cases}
+  \end{split}\]</div>
+<p>que es justamente <span class="math notranslate nohighlight">\(\delta_a(u)\)</span>. Como <span class="math notranslate nohighlight">\(u\)</span> es arbitrario, <span class="math notranslate nohighlight">\(S_a\delta_0=\delta_a\)</span>.</p>
+</li>
+<li><p><strong>Paso 2: toda imagen es combinación lineal de impulsos.</strong> Afirmamos que</p>
+<div class="math notranslate nohighlight">
+\[
+  x=\sum_{a\in G}x(a)\,\delta_a .
+  \]</div>
+<p>Para comprobarlo, evaluamos el lado derecho en un punto <span class="math notranslate nohighlight">\(u\)</span> (la suma de funciones se evalúa punto a punto):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  \begin{align*}
+  \Big(\sum_{a\in G}x(a)\,\delta_a\Big)(u) &amp;= \sum_{a\in G}x(a)\,\delta_a(u) \\
+  &amp;= x(u)\cdot 1 + \sum_{a\neq u}x(a)\cdot 0 \\
+  &amp;= x(u).
+  \end{align*}
+  \end{split}\]</div>
+<p>Solo sobrevive el término <span class="math notranslate nohighlight">\(a=u\)</span> porque <span class="math notranslate nohighlight">\(\delta_a(u)=0\)</span> cuando <span class="math notranslate nohighlight">\(a\neq u\)</span>. Esto vale para todo <span class="math notranslate nohighlight">\(u\)</span>, y la afirmación queda probada.</p>
+</li>
+<li><p><strong>Paso 3: aquí se usa H2 (equivarianza).</strong> Para cada <span class="math notranslate nohighlight">\(a\in G\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  \begin{align*}
+  T\delta_a &amp;= T(S_a\delta_0) &amp;&amp;\text{(Paso 1)} \\
+  &amp;= S_a(T\delta_0) &amp;&amp;\text{(H2: } TS_a=S_aT) \\
+  &amp;= S_a\,g &amp;&amp;\text{(definición de } g).
+  \end{align*}
+  \end{split}\]</div>
+<p>Esta línea es el corazón de la prueba. <strong>Sin H2</strong> habría que conocer <span class="math notranslate nohighlight">\(T\delta_a\)</span> para cada uno de los <span class="math notranslate nohighlight">\(N^2\)</span> impulsos por separado; <strong>con H2</strong> todos salen de la única imagen <span class="math notranslate nohighlight">\(g\)</span>, simplemente trasladada.</p>
+</li>
+<li><p><strong>Paso 4: aquí se usa H1 (linealidad).</strong> Aplicamos <span class="math notranslate nohighlight">\(T\)</span> a la descomposición del Paso 2. Es una suma finita con coeficientes escalares <span class="math notranslate nohighlight">\(x(a)\in\mathbb{R}\)</span>, así que H1 permite sacar <span class="math notranslate nohighlight">\(T\)</span> de la suma y los escalares:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  \begin{align*}
+  Tx &amp;= T\Big(\sum_{a\in G}x(a)\,\delta_a\Big) &amp;&amp;\text{(Paso 2)} \\
+  &amp;= \sum_{a\in G}x(a)\,T\delta_a &amp;&amp;\text{(H1)} \\
+  &amp;= \sum_{a\in G}x(a)\,S_a g &amp;&amp;\text{(Paso 3, que usa H2)}.
+  \end{align*}
+  \end{split}\]</div>
+</li>
+<li><p><strong>Paso 5: evaluamos en un punto <span class="math notranslate nohighlight">\(u\)</span>.</strong> Usando <span class="math notranslate nohighlight">\((S_a g)(u)=g(u-a)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+  (Tx)(u)=\sum_{a\in G}x(a)\,g(u-a).
+  \]</div>
+<p>Esto ya es una “convolución”, pero con el índice de suma <span class="math notranslate nohighlight">\(a\)</span> en <span class="math notranslate nohighlight">\(x(a)\)</span> y en <span class="math notranslate nohighlight">\(g(u-a)\)</span>. La convención del notebook es <span class="math notranslate nohighlight">\(\sum_v h(v)\,x(u+v)\)</span>, así que falta un cambio de variable.</p>
+</li>
+<li><p><strong>Paso 6: cambio de índice <span class="math notranslate nohighlight">\(a=u+v\)</span>.</strong> Fijamos <span class="math notranslate nohighlight">\(u\)</span>. La aplicación <span class="math notranslate nohighlight">\(v\mapsto u+v\)</span> es una <strong>biyección</strong> de <span class="math notranslate nohighlight">\(G\)</span> en <span class="math notranslate nohighlight">\(G\)</span> (su inversa es <span class="math notranslate nohighlight">\(a\mapsto a-u\)</span>). Por eso, cuando <span class="math notranslate nohighlight">\(v\)</span> recorre todo <span class="math notranslate nohighlight">\(G\)</span>, <span class="math notranslate nohighlight">\(a=u+v\)</span> también lo recorre una y solo una vez, y sumar sobre <span class="math notranslate nohighlight">\(a\)</span> equivale a sumar sobre <span class="math notranslate nohighlight">\(v\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+  \begin{align*}
+  (Tx)(u) &amp;= \sum_{a\in G}x(a)\,g(u-a) \\
+  &amp;= \sum_{v\in G}x(u+v)\,g\big(u-(u+v)\big) &amp;&amp;(a=u+v) \\
+  &amp;= \sum_{v\in G}g(-v)\,x(u+v).
+  \end{align*}
+  \end{split}\]</div>
+</li>
+<li><p><strong>Paso 7: conclusión.</strong> Definimos <span class="math notranslate nohighlight">\(h(v):=g(-v)\)</span>. Entonces, para toda <span class="math notranslate nohighlight">\(x\)</span> y todo <span class="math notranslate nohighlight">\(u\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+  (Tx)(u)=\sum_{v\in G}h(v)\,x(u+v)=(T_hx)(u),
+  \]</div>
+<p>es decir, <span class="math notranslate nohighlight">\(T=T_h\)</span> con <span class="math notranslate nohighlight">\(h=g(-\,\cdot\,)\)</span>. <span class="math notranslate nohighlight">\(\qquad\blacksquare\)</span></p>
 </li>
 </ul>
 </div>
@@ -726,32 +858,31 @@ $<span class="math notranslate nohighlight">\(
 <li><p>Para volúmenes con <span class="math notranslate nohighlight">\(d\)</span> canales de entrada y <span class="math notranslate nohighlight">\(d'\)</span> de salida, el mismo argumento (aplicado a los impulsos <span class="math notranslate nohighlight">\(\delta_0\otimes e_c\)</span>) prueba que las aplicaciones lineales equivariantes son exactamente <span class="math notranslate nohighlight">\((Tx)_j(u)=\sum_{v}\sum_{c=1}^{d}h_{jc}(v)\,x_c(u+v)\)</span>, que es la convolución sobre volúmenes que estudiaremos más adelante.</p></li>
 </ul>
 </div>
-<ul class="simple">
-<li><p><strong>Para profundizar.</strong> La demostración anterior es completa para el grupo de traslaciones. Para grupos compactos generales (rotaciones, reflexiones) el resultado análogo es el teorema de Kondor y Trivedi <span class="bibtex-citation" id="id6">[]</span>, que sustenta las redes convolucionales de grupo <span class="bibtex-citation" id="id7">[]</span>. Un panorama unificado del principio de simetría en aprendizaje profundo se encuentra en <span class="bibtex-citation" id="id8">[]</span>.</p></li>
-</ul>
-<ul class="simple">
-<li><p>A continuación, presentamos algunos <em><strong>términos de la jerga utilizada en relación con las CNN:</strong></em></p></li>
-</ul>
+<div class="admonition-observacion admonition">
+<p class="admonition-title">Observación</p>
+<p>La demostración anterior es completa para el grupo de traslaciones. Para grupos compactos generales (rotaciones, reflexiones) el resultado análogo es el teorema de Kondor y Trivedi <span class="bibtex-citation" id="id6">[<a class="reference internal" href="biblio.html#id121" title="Risi Kondor and Shubhendu Trivedi. On the generalization of equivariance and convolution in neural networks to the action of compact groups. In Proceedings of the 35th International Conference on Machine Learning, volume 80 of Proceedings of Machine Learning Research, 2747–2755. 2018.">Kondor and Trivedi, 2018</a>]</span>, que sustenta las redes convolucionales de grupo <span class="bibtex-citation" id="id7">[<a class="reference internal" href="biblio.html#id120" title="Taco Cohen and Max Welling. Group equivariant convolutional networks. In Proceedings of the 33rd International Conference on Machine Learning, volume 48 of Proceedings of Machine Learning Research, 2990–2999. 2016.">Cohen and Welling, 2016</a>]</span>. Un panorama unificado del principio de simetría en aprendizaje profundo se encuentra en <span class="bibtex-citation" id="id8">[<a class="reference internal" href="biblio.html#id122" title="Michael M. Bronstein, Joan Bruna, Taco Cohen, and Petar Veličković. Geometric deep learning: grids, groups, graphs, geodesics, and gauges. arXiv preprint arXiv:2104.13478, 2021.">Bronstein <em>et al.</em>, 2021</a>]</span>.</p>
+</div>
+<p>A continuación, presentamos algunos <strong>términos de la jerga utilizada en relación con las CNN:</strong></p>
 <ol class="arabic simple">
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">Profundidad</span></code></strong>: La <em><strong>profundidad de una capa</strong></em> es el <em><strong>número de matrices de filtro que se emplean en esta capa</strong></em>. No debe confundirse profundidad de la red, que corresponde al número total de capas ocultas utilizadas. <em><strong>A veces, nos referimos al número de filtros como el número de canales</strong></em>.</p></li>
 <li><p><strong><code class="docutils literal notranslate"><span class="pre">Campo</span> <span class="pre">receptivo</span></code></strong>: Cada <em><strong>píxel de una matriz de características de salida</strong></em> resulta como una <em><strong>media ponderada de los píxeles dentro de un área específica de la matriz imagen de entrada</strong></em> (o de la salida de la capa anterior). <em><strong>El área específica que corresponde a un píxel se conoce como su campo receptivo</strong></em> (ver <a class="reference internal" href="#feature-maps-inp-img-numref"><span class="std std-numref">Fig. 3.3</span></a>).</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Deslizamiento</span></code> (stride)</strong>: En la práctica, <em><strong>en lugar de deslizar la matriz de filtros de píxel en píxel, se puede deslizar, por ejemplo,</strong></em> <span class="math notranslate nohighlight">\(s\)</span> <em><strong>píxeles</strong></em>. Este valor se conoce como <em><strong>stride</strong></em>. Para valores de <span class="math notranslate nohighlight">\(s &gt; 1\)</span>, se obtienen matrices de mapas de características de menor tamaño. Esto se ilustra en <code class="xref std std-numref docutils literal notranslate"><span class="pre">stride_conv_prop_numref</span></code>A y B.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">Deslizamiento</span></code> (stride)</strong>: En la práctica, <em><strong>en lugar de deslizar la matriz de filtros de píxel en píxel, se puede deslizar, por ejemplo,</strong></em> <span class="math notranslate nohighlight">\(s\)</span> <em><strong>píxeles</strong></em>. Este valor se conoce como <em><strong>stride</strong></em>. Para valores de <span class="math notranslate nohighlight">\(s &gt; 1\)</span>, se obtienen matrices de mapas de características de menor tamaño. Esto se ilustra en <a class="reference internal" href="#stride-conv-prop-numref"><span class="std std-numref">Fig. 3.6</span></a>A y B.</p></li>
 </ol>
 <figure class="align-center" id="stride-conv-prop-numref">
 <a class="reference internal image-reference" href="_images/stride_conv_prop.png"><img alt="_images/stride_conv_prop.png" src="_images/stride_conv_prop.png" style="width: 671.2px; height: 415.20000000000005px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.4 </span><span class="caption-text">Matriz de entrada y filtro de tamaños 5 × 5 y 3 × 3 respectivamente. En (A), el paso es igual a <span class="math notranslate nohighlight">\(s = 1\)</span> y en (B) es igual a <span class="math notranslate nohighlight">\(s = 2\)</span>. En (A) la salida es una matriz de tamaño 3 × 3 y en (B) de tamaño 2 × 2. Fuente <span class="bibtex-citation" id="id9">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#stride-conv-prop-numref" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.6 </span><span class="caption-text">Matriz de entrada y filtro de tamaños 5 × 5 y 3 × 3 respectivamente. En (A), el paso es igual a <span class="math notranslate nohighlight">\(s = 1\)</span> y en (B) es igual a <span class="math notranslate nohighlight">\(s = 2\)</span>. En (A) la salida es una matriz de tamaño 3 × 3 y en (B) de tamaño 2 × 2. Fuente <span class="bibtex-citation" id="id9">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#stride-conv-prop-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ol class="arabic simple" start="4">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Relleno</span> <span class="pre">de</span> <span class="pre">ceros</span></code> (padding)</strong>: A veces, <em><strong>se utilizan ceros para rellenar la matriz de entrada alrededor de los píxeles del borde</strong></em>. De esta forma, <em><strong>la dimensión de la matriz aumenta</strong></em>. Si la matriz original tiene dimensiones <span class="math notranslate nohighlight">\(l\times l\)</span>, <em><strong>después de expandirla con</strong></em> <span class="math notranslate nohighlight">\(p\)</span> <em><strong>columnas y filas, las nuevas dimensiones pasan a ser</strong></em> (<span class="math notranslate nohighlight">\(l + 2p\)</span>). Esto se muestra en la <code class="xref std std-numref docutils literal notranslate"><span class="pre">zero_fill_conv_numref</span></code>.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">Relleno</span> <span class="pre">de</span> <span class="pre">ceros</span></code> (padding)</strong>: A veces, <em><strong>se utilizan ceros para rellenar la matriz de entrada alrededor de los píxeles del borde</strong></em>. De esta forma, <em><strong>la dimensión de la matriz aumenta</strong></em>. Si la matriz original tiene dimensiones <span class="math notranslate nohighlight">\(l\times l\)</span>, <em><strong>después de expandirla con</strong></em> <span class="math notranslate nohighlight">\(p\)</span> <em><strong>columnas y filas, las nuevas dimensiones pasan a ser</strong></em> (<span class="math notranslate nohighlight">\(l + 2p\)</span>). Esto se muestra en la <a class="reference internal" href="#zero-fill-conv-numref"><span class="std std-numref">Fig. 3.7</span></a>.</p></li>
 </ol>
 <figure class="align-center" id="zero-fill-conv-numref">
 <a class="reference internal image-reference" href="_images/zero_fill_conv.png"><img alt="_images/zero_fill_conv.png" src="_images/zero_fill_conv.png" style="width: 182.4px; height: 180.8px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.5 </span><span class="caption-text">Ejemplo en el que la matriz original es de 5 × 5 y tras rellenarla con <span class="math notranslate nohighlight">\(p = 2\)</span> filas y columnas, su tamaño pasa a ser de
+<p><span class="caption-number">Fig. 3.7 </span><span class="caption-text">Ejemplo en el que la matriz original es de 5 × 5 y tras rellenarla con <span class="math notranslate nohighlight">\(p = 2\)</span> filas y columnas, su tamaño pasa a ser de
 9 × 9. Fuente <span class="bibtex-citation" id="id10">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#zero-fill-conv-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
@@ -769,7 +900,7 @@ $<span class="math notranslate nohighlight">\(
 </li>
 </ul>
 <ul class="simple">
-<li><p>Por ejemplo, si <span class="math notranslate nohighlight">\(l = 5, m = 3, p = 0\)</span> y <span class="math notranslate nohighlight">\(s = 1\)</span>, entonces <span class="math notranslate nohighlight">\(k = 3\)</span>. Por otro lado, si <span class="math notranslate nohighlight">\(l = 5, m = 3, p = 0\)</span> y <span class="math notranslate nohighlight">\(s = 2\)</span>, entonces <span class="math notranslate nohighlight">\(k = 2\)</span> (ver <code class="xref std std-numref docutils literal notranslate"><span class="pre">stride_conv_prop_numref</span></code>A y B). Nótese que si los valores de <span class="math notranslate nohighlight">\(l, m, p\)</span> y <span class="math notranslate nohighlight">\(s\)</span> son tales que <em><strong>la matriz de filtrado, al deslizarse sobre <span class="math notranslate nohighlight">\(I\)</span>, cae fuera de <span class="math notranslate nohighlight">\(I\)</span>, estas operaciones no se realizan. Solo realizamos operaciones mientras la matriz filtro
+<li><p>Por ejemplo, si <span class="math notranslate nohighlight">\(l = 5, m = 3, p = 0\)</span> y <span class="math notranslate nohighlight">\(s = 1\)</span>, entonces <span class="math notranslate nohighlight">\(k = 3\)</span>. Por otro lado, si <span class="math notranslate nohighlight">\(l = 5, m = 3, p = 0\)</span> y <span class="math notranslate nohighlight">\(s = 2\)</span>, entonces <span class="math notranslate nohighlight">\(k = 2\)</span> (ver <a class="reference internal" href="#stride-conv-prop-numref"><span class="std std-numref">Fig. 3.6</span></a>A y B). Nótese que si los valores de <span class="math notranslate nohighlight">\(l, m, p\)</span> y <span class="math notranslate nohighlight">\(s\)</span> son tales que <em><strong>la matriz de filtrado, al deslizarse sobre <span class="math notranslate nohighlight">\(I\)</span>, cae fuera de <span class="math notranslate nohighlight">\(I\)</span>, estas operaciones no se realizan. Solo realizamos operaciones mientras la matriz filtro
 esté contenida dentro de</strong></em> <span class="math notranslate nohighlight">\(I\)</span>.</p></li>
 </ul>
 </section>
@@ -815,13 +946,13 @@ esté contenida dentro de</strong></em> <span class="math notranslate nohighligh
 <p>No obstante, puede generar <strong>neuronas muertas</strong> cuando ciertos pesos anulan permanentemente la activación. Para evitarlo, existen variantes como <strong>Leaky ReLU</strong> y <strong>PReLU</strong>.</p>
 </div>
 <ul class="simple">
-<li><p>La <code class="xref std std-numref docutils literal notranslate"><span class="pre">relu_activ_fn_numref</span></code>A muestra la imagen obtenida después de <em><strong>filtrar la imagen original del barco con el detector de bordes en la</strong></em> <a class="reference internal" href="#equation-h-filter-conv-eq">(3.2)</a> y la <code class="xref std std-numref docutils literal notranslate"><span class="pre">relu_activ_fn_numref</span></code>B muestra el resultado que se obtiene tras la <em><strong>aplicación de la no linealidad en cada píxel individual</strong></em>.</p></li>
+<li><p>La <a class="reference internal" href="#relu-activ-fn-numref"><span class="std std-numref">Fig. 3.8</span></a>A muestra la imagen obtenida después de <em><strong>filtrar la imagen original del barco con el detector de bordes en la</strong></em> <a class="reference internal" href="#equation-h-filter-conv-eq">(3.2)</a> y la <a class="reference internal" href="#relu-activ-fn-numref"><span class="std std-numref">Fig. 3.8</span></a>B muestra el resultado que se obtiene tras la <em><strong>aplicación de la no linealidad en cada píxel individual</strong></em>.</p></li>
 </ul>
 <figure class="align-center" id="relu-activ-fn-numref">
 <a class="reference internal image-reference" href="_images/relu_activ_fn.png"><img alt="_images/relu_activ_fn.png" src="_images/relu_activ_fn.png" style="width: 630.4000000000001px; height: 340.8px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.6 </span><span class="caption-text">(A) Imagen donde se han extraído los bordes y (B) imagen resultante tras aplicar el en cada uno de los píxeles. Fuente <span class="bibtex-citation" id="id11">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#relu-activ-fn-numref" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.8 </span><span class="caption-text">(A) Imagen donde se han extraído los bordes y (B) imagen resultante tras aplicar el en cada uno de los píxeles. Fuente <span class="bibtex-citation" id="id11">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#relu-activ-fn-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -838,7 +969,7 @@ esté contenida dentro de</strong></em> <span class="math notranslate nohighligh
 <p>es denso en <span class="math notranslate nohighlight">\(C(K)\)</span> con la norma del supremo <strong>si y solo si</strong> <span class="math notranslate nohighlight">\(\sigma\)</span> no es un polinomio. En particular, para toda <span class="math notranslate nohighlight">\(f\in C(K)\)</span> y <span class="math notranslate nohighlight">\(\varepsilon&gt;0\)</span> existe <span class="math notranslate nohighlight">\(g\in\mathcal{N}_\sigma\)</span> con <span class="math notranslate nohighlight">\(\sup_{x\in K}|f(x)-g(x)|&lt;\varepsilon\)</span>.</p>
 </section>
 </div><ul class="simple">
-<li><p><em><strong>Nota de alcance.</strong></em> Abajo demostramos la necesidad y la suficiencia para <span class="math notranslate nohighlight">\(\sigma\)</span> sigmoidal continua (Cybenko) y para ReLU. La suficiencia para una <span class="math notranslate nohighlight">\(\sigma\)</span> continua no polinómica arbitraria es el resultado de Leshno et al. <span class="bibtex-citation" id="id12">[]</span>; ver también la revisión <span class="bibtex-citation" id="id13">[]</span>.</p></li>
+<li><p><em><strong>Nota de alcance.</strong></em> Abajo demostramos la necesidad y la suficiencia para <span class="math notranslate nohighlight">\(\sigma\)</span> sigmoidal continua (Cybenko) y para ReLU. La suficiencia para una <span class="math notranslate nohighlight">\(\sigma\)</span> continua no polinómica arbitraria es el resultado de Leshno et al. <span class="bibtex-citation" id="id12">[<a class="reference internal" href="biblio.html#id116" title="Moshe Leshno, Vladimir Ya. Lin, Allan Pinkus, and Shimon Schocken. Multilayer feedforward networks with a nonpolynomial activation function can approximate any function. Neural Networks, 6(6):861–867, 1993.">Leshno <em>et al.</em>, 1993</a>]</span>; ver también la revisión <span class="bibtex-citation" id="id13">[<a class="reference internal" href="biblio.html#id117" title="Allan Pinkus. Approximation theory of the MLP model in neural networks. Acta Numerica, 8:143–195, 1999.">Pinkus, 1999</a>]</span>.</p></li>
 </ul>
 <div class="proof admonition" id="proof">
 <p>Proof. - <strong>Necesidad.</strong> Si <span class="math notranslate nohighlight">\(\sigma\)</span> es un polinomio de grado <span class="math notranslate nohighlight">\(d\)</span>, cada <span class="math notranslate nohighlight">\(\sigma(w^\top x+b)\)</span> es un polinomio de grado a lo sumo <span class="math notranslate nohighlight">\(d\)</span> en <span class="math notranslate nohighlight">\(x\)</span>. Entonces <span class="math notranslate nohighlight">\(\mathcal{N}_\sigma\)</span> está contenido en un espacio de dimensión finita, que es cerrado y no puede ser denso en <span class="math notranslate nohighlight">\(C(K)\)</span>.</p>
@@ -863,9 +994,9 @@ Haciendo \)</span>\theta\to-\infty<span class="math notranslate nohighlight">\( 
 <div class="seealso admonition">
 <p class="admonition-title">Alcance y limitaciones del teorema</p>
 <ul class="simple">
-<li><p>El teorema es <em><strong>de existencia</strong></em>: no dice cuántas neuronas <span class="math notranslate nohighlight">\(N\)</span> se necesitan ni cómo encontrar los parámetros mediante entrenamiento. Bajo condiciones de suavidad de <span class="math notranslate nohighlight">\(f\)</span> (momento de Fourier finito), Barron <span class="bibtex-citation" id="id14">[]</span> da una tasa de aproximación en <span class="math notranslate nohighlight">\(L^2\)</span> del orden de <span class="math notranslate nohighlight">\(N^{-1/2}\)</span> independiente de la dimensión de entrada.</p></li>
-<li><p>Es un resultado para capas totalmente conectadas. Para redes convolucionales profundas, la universalidad fue establecida por Zhou <span class="bibtex-citation" id="id15">[]</span>, lo que muestra que restringir las capas a convoluciones (reparto de pesos) no destruye la capacidad de aproximación.</p></li>
-<li><p>La versión original está en <span class="bibtex-citation" id="id16">[<a class="reference internal" href="biblio.html#id78" title="George Cybenko. Approximation by superpositions of a sigmoidal function. Mathematics of Control, Signals and Systems, 2(4):303–314, 1989. doi:10.1007/BF02551274.">Cybenko, 1989</a>]</span> y la extensión a funciones medibles y a otras normas en <span class="bibtex-citation" id="id17">[<a class="reference internal" href="biblio.html#id79" title="Kurt Hornik, Maxwell Stinchcombe, and Halbert White. Multilayer feedforward networks are universal approximators. Neural Networks, 2(5):359–366, 1989. doi:10.1016/0893-6080(89)90020-8.">Hornik <em>et al.</em>, 1989</a>]</span>. Las herramientas funcionales (Hahn-Banach, Riesz) están en <span class="bibtex-citation" id="id18">[]</span>.</p></li>
+<li><p>El teorema es <em><strong>de existencia</strong></em>: no dice cuántas neuronas <span class="math notranslate nohighlight">\(N\)</span> se necesitan ni cómo encontrar los parámetros mediante entrenamiento. Bajo condiciones de suavidad de <span class="math notranslate nohighlight">\(f\)</span> (momento de Fourier finito), Barron <span class="bibtex-citation" id="id14">[<a class="reference internal" href="biblio.html#id118" title="Andrew R. Barron. Universal approximation bounds for superpositions of a sigmoidal function. IEEE Transactions on Information Theory, 39(3):930–945, 1993.">Barron, 1993</a>]</span> da una tasa de aproximación en <span class="math notranslate nohighlight">\(L^2\)</span> del orden de <span class="math notranslate nohighlight">\(N^{-1/2}\)</span> independiente de la dimensión de entrada.</p></li>
+<li><p>Es un resultado para capas totalmente conectadas. Para redes convolucionales profundas, la universalidad fue establecida por Zhou <span class="bibtex-citation" id="id15">[<a class="reference internal" href="biblio.html#id119" title="Ding-Xuan Zhou. Universality of deep convolutional neural networks. Applied and Computational Harmonic Analysis, 48(2):787–794, 2020.">Zhou, 2020</a>]</span>, lo que muestra que restringir las capas a convoluciones (reparto de pesos) no destruye la capacidad de aproximación.</p></li>
+<li><p>La versión original está en <span class="bibtex-citation" id="id16">[<a class="reference internal" href="biblio.html#id78" title="George Cybenko. Approximation by superpositions of a sigmoidal function. Mathematics of Control, Signals and Systems, 2(4):303–314, 1989. doi:10.1007/BF02551274.">Cybenko, 1989</a>]</span> y la extensión a funciones medibles y a otras normas en <span class="bibtex-citation" id="id17">[<a class="reference internal" href="biblio.html#id79" title="Kurt Hornik, Maxwell Stinchcombe, and Halbert White. Multilayer feedforward networks are universal approximators. Neural Networks, 2(5):359–366, 1989. doi:10.1016/0893-6080(89)90020-8.">Hornik <em>et al.</em>, 1989</a>]</span>. Las herramientas funcionales (Hahn-Banach, Riesz) están en <span class="bibtex-citation" id="id18">[<a class="reference internal" href="biblio.html#id132" title="Walter Rudin. Functional Analysis. McGraw-Hill, 2 edition, 1991.">Rudin, 1991</a>]</span>.</p></li>
 </ul>
 </div>
 </section>
@@ -879,7 +1010,7 @@ Haciendo \)</span>\theta\to-\infty<span class="math notranslate nohighlight">\( 
 <a class="reference internal image-reference" href="_images/pooling_step_conv.png"><img alt="_images/pooling_step_conv.png" src="_images/pooling_step_conv.png" style="width: 333.6px; height: 207.20000000000002px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.7 </span><span class="caption-text">(A) Matriz original de tamaño de 6 × 6. Agrupación mediante una ventana de 2 × 2 y un stride <span class="math notranslate nohighlight">\(s = 2\)</span>. Valor máximo por ubicación de la ventana se indica en negrita. (B) Matriz 3 × 3 resultante tras la agrupación máxima. Fuente <span class="bibtex-citation" id="id19">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#pooling-step-conv-numref" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.9 </span><span class="caption-text">(A) Matriz original de tamaño de 6 × 6. Agrupación mediante una ventana de 2 × 2 y un stride <span class="math notranslate nohighlight">\(s = 2\)</span>. Valor máximo por ubicación de la ventana se indica en negrita. (B) Matriz 3 × 3 resultante tras la agrupación máxima. Fuente <span class="bibtex-citation" id="id19">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#pooling-step-conv-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -889,13 +1020,13 @@ Haciendo \)</span>\theta\to-\infty<span class="math notranslate nohighlight">\( 
 <a class="reference internal image-reference" href="_images/pooling_invariant_conv.png"><img alt="_images/pooling_invariant_conv.png" src="_images/pooling_invariant_conv.png" style="width: 607.2px; height: 375.20000000000005px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.8 </span><span class="caption-text">(A) Bordes de la imagen del barco tras la aplicación de <code class="docutils literal notranslate"><span class="pre">ReLu</span></code> (B) Imagen resultante tras aplicar <code class="docutils literal notranslate"><span class="pre">max-pooling</span></code> utilizando una ventana de 8 × 8. Fuente <span class="bibtex-citation" id="id20">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#pooling-invariant-conv-numref" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.10 </span><span class="caption-text">(A) Bordes de la imagen del barco tras la aplicación de <code class="docutils literal notranslate"><span class="pre">ReLu</span></code> (B) Imagen resultante tras aplicar <code class="docutils literal notranslate"><span class="pre">max-pooling</span></code> utilizando una ventana de 8 × 8. Fuente <span class="bibtex-citation" id="id20">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#pooling-invariant-conv-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="important admonition">
 <p class="admonition-title">Observación</p>
 <ul class="simple">
-<li><p><code class="xref std std-numref docutils literal notranslate"><span class="pre">pooling_invariant_conv_numref</span></code> muestra el efecto de <em><strong>aplicar el pooling a la imagen de la izquierda</strong></em>. Sin duda, <em><strong>los bordes se vuelven más gruesos, pero la información relacionada con los bordes puede extraerse</strong></em>. Nótese que después de la agrupación, el tamaño de la matriz imagen es reducido.</p></li>
+<li><p><a class="reference internal" href="#pooling-invariant-conv-numref"><span class="std std-numref">Fig. 3.10</span></a> muestra el efecto de <em><strong>aplicar el pooling a la imagen de la izquierda</strong></em>. Sin duda, <em><strong>los bordes se vuelven más gruesos, pero la información relacionada con los bordes puede extraerse</strong></em>. Nótese que después de la agrupación, el tamaño de la matriz imagen es reducido.</p></li>
 <li><p>Desde otro punto de vista, <em><strong>el polling resume las estadísticas dentro del área pooling</strong></em>. El pooling puede considerarse un <em><strong>tipo especial de <code class="docutils literal notranslate"><span class="pre">filtrado,</span> <span class="pre">en</span> <span class="pre">el</span> <span class="pre">que,</span> <span class="pre">en</span> <span class="pre">lugar</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">convolución,</span> <span class="pre">se</span> <span class="pre">selecciona</span> <span class="pre">el</span> <span class="pre">valor</span> <span class="pre">máximo</span> <span class="pre">(o</span> <span class="pre">medio)</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">imagen</span></code></strong></em>. El pooling ayuda a que la representación sea aproximadamente invariante a pequeñas traslaciones de la entrada.</p></li>
 </ul>
 </div>
@@ -905,7 +1036,7 @@ Haciendo \)</span>\theta\to-\infty<span class="math notranslate nohighlight">\( 
 <div class="proof corollary admonition" id="cor_pool_invariance">
 <p class="admonition-title"><span class="caption-number">Corollary 3.1 </span> (Invarianza tras agrupación global)</p>
 <section class="corollary-content" id="proof-content">
-<p>Sea <span class="math notranslate nohighlight">\(\Phi=A_L\circ\cdots\circ A_1\)</span> con <span class="math notranslate nohighlight">\(A_l(x)=\rho_l\big(T_{h_l}x+b_l\mathbf{1}\big)\)</span>, donde <span class="math notranslate nohighlight">\(T_{h_l}\)</span> es la convolución periódica de <a class="reference internal" href="#equation-conv-periodic-eq">(3.3)</a> con <em>stride</em> 1, <span class="math notranslate nohighlight">\(b_l\in\mathbb{R}\)</span> es un sesgo compartido y <span class="math notranslate nohighlight">\(\rho_l\)</span> se aplica píxel a píxel. Entonces:</p>
+<p>Sea <span class="math notranslate nohighlight">\(\Phi=A_L\circ\cdots\circ A_1\)</span> con <span class="math notranslate nohighlight">\(A_l(x)=\rho_l\big(T_{h_l}x+b_l\mathbf{1}\big)\)</span>, donde <span class="math notranslate nohighlight">\(T_{h_l}\)</span> es la convolución periódica de <a class="reference internal" href="#equation-conv-periodic-eq">(3.4)</a> con <em>stride</em> 1, <span class="math notranslate nohighlight">\(b_l\in\mathbb{R}\)</span> es un sesgo compartido y <span class="math notranslate nohighlight">\(\rho_l\)</span> se aplica píxel a píxel. Entonces:</p>
 <ol class="arabic simple">
 <li><p><span class="math notranslate nohighlight">\(\Phi(S_a x)=S_a\,\Phi(x)\)</span> para todo <span class="math notranslate nohighlight">\(a\in G\)</span> (equivarianza).</p></li>
 <li><p>Si <span class="math notranslate nohighlight">\(P(y)=\frac{1}{|G|}\sum_{u\in G}y(u)\)</span> es la agrupación promedio global, entonces <span class="math notranslate nohighlight">\(P(\Phi(S_a x))=P(\Phi(x))\)</span> (invarianza).</p></li>
@@ -1037,11 +1168,11 @@ Matriz del canal Azul (B):
 <a class="reference internal image-reference" href="_images/matrix_to_volume_conv.png"><img alt="_images/matrix_to_volume_conv.png" src="_images/matrix_to_volume_conv.png" style="width: 433.6px; height: 172.0px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.9 </span><span class="caption-text">Se apilan <span class="math notranslate nohighlight">\(d\)</span> matrices de tamaño <span class="math notranslate nohighlight">\(h\times w\)</span> cada una para formar un volumen de tamaño <span class="math notranslate nohighlight">\(h \times w\times d\)</span>. En este caso, <span class="math notranslate nohighlight">\(h = w = 5\)</span> y <span class="math notranslate nohighlight">\(d = 3\)</span>. Fuente <span class="bibtex-citation" id="id21">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#matrix-to-volume-conv-numref" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.11 </span><span class="caption-text">Se apilan <span class="math notranslate nohighlight">\(d\)</span> matrices de tamaño <span class="math notranslate nohighlight">\(h\times w\)</span> cada una para formar un volumen de tamaño <span class="math notranslate nohighlight">\(h \times w\times d\)</span>. En este caso, <span class="math notranslate nohighlight">\(h = w = 5\)</span> y <span class="math notranslate nohighlight">\(d = 3\)</span>. Fuente <span class="bibtex-citation" id="id21">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#matrix-to-volume-conv-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>Por convención, las tres dimensiones de un volumen se representarán como <span class="math notranslate nohighlight">\(h\)</span> <em><strong>para la altura,</strong></em> <span class="math notranslate nohighlight">\(w\)</span> <em><strong>para la anchura</strong></em> y <span class="math notranslate nohighlight">\(d\)</span> <em><strong>para la profundidad</strong></em>. Nótese que la profundidad <span class="math notranslate nohighlight">\(d\)</span> <em><strong>corresponde al número de imágenes implicadas</strong></em>. Así pues, si tenemos <em><strong>tres imágenes de 256 × 256</strong></em>, entonces <span class="math notranslate nohighlight">\(h = w = 256\)</span> y <span class="math notranslate nohighlight">\(d = 3\)</span> y diremos que el volumen es de <em><strong>tamaño (dimensión) 256 × 256 × 3</strong></em>. <code class="xref std std-numref docutils literal notranslate"><span class="pre">matrix_to_volume_conv_numref</span></code> ilustra la geometría asociada a las respectivas definiciones.</p></li>
+<li><p>Por convención, las tres dimensiones de un volumen se representarán como <span class="math notranslate nohighlight">\(h\)</span> <em><strong>para la altura,</strong></em> <span class="math notranslate nohighlight">\(w\)</span> <em><strong>para la anchura</strong></em> y <span class="math notranslate nohighlight">\(d\)</span> <em><strong>para la profundidad</strong></em>. Nótese que la profundidad <span class="math notranslate nohighlight">\(d\)</span> <em><strong>corresponde al número de imágenes implicadas</strong></em>. Así pues, si tenemos <em><strong>tres imágenes de 256 × 256</strong></em>, entonces <span class="math notranslate nohighlight">\(h = w = 256\)</span> y <span class="math notranslate nohighlight">\(d = 3\)</span> y diremos que el volumen es de <em><strong>tamaño (dimensión) 256 × 256 × 3</strong></em>. <a class="reference internal" href="#matrix-to-volume-conv-numref"><span class="std std-numref">Fig. 3.11</span></a> ilustra la geometría asociada a las respectivas definiciones.</p></li>
 </ul>
 <div class="information admonition">
 <p class="admonition-title"><strong>Tipos de formas tensoriales</strong></p>
@@ -1171,11 +1302,11 @@ O_{r}=I_{r}\star H_{r},\quad r=1,2,\dots,d.
 <a class="reference internal image-reference" href="_images/volume_conv_3Dto2D.png"><img alt="_images/volume_conv_3Dto2D.png" src="_images/volume_conv_3Dto2D.png" style="width: 749.4px; height: 158.4px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.10 </span><span class="caption-text">Convolución <span class="math notranslate nohighlight">\(\text{3D volume}\star\text{3D volume}=\text{2D array}\)</span>. <span class="math notranslate nohighlight">\(h = w = l, h = w = m\)</span> y <span class="math notranslate nohighlight">\(d = 3\)</span>.</span><a class="headerlink" href="#volume-conv-3dto2d-numref" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.12 </span><span class="caption-text">Convolución <span class="math notranslate nohighlight">\(\text{3D volume}\star\text{3D volume}=\text{2D array}\)</span>. <span class="math notranslate nohighlight">\(h = w = l, h = w = m\)</span> y <span class="math notranslate nohighlight">\(d = 3\)</span>.</span><a class="headerlink" href="#volume-conv-3dto2d-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>La operación se ilustra en la <code class="xref std std-numref docutils literal notranslate"><span class="pre">volume_conv_3Dto2D_numref</span></code>. Las <em><strong>matrices correspondientes (mostradas por diferentes colores y tipos de líneas)</strong></em>. Las <em><strong>tres matrices de salida</strong></em> (<span class="math notranslate nohighlight">\(d = 3\)</span>) <em><strong>se suman posteriormente para formar la convolución de los dos volúmenes</strong></em>. La dimensión <span class="math notranslate nohighlight">\(k\)</span> de la salida depende de los valores de <span class="math notranslate nohighlight">\(l\)</span> y <span class="math notranslate nohighlight">\(m\)</span>, del <em>stride</em> <span class="math notranslate nohighlight">\(s\)</span> y del <em>padding</em> <span class="math notranslate nohighlight">\(p\)</span>, si se utiliza, según la Eq. <a class="reference internal" href="#equation-resulting-matrix-size">(3.5)</a>.</p></li>
+<li><p>La operación se ilustra en la <a class="reference internal" href="#volume-conv-3dto2d-numref"><span class="std std-numref">Fig. 3.12</span></a>. Las <em><strong>matrices correspondientes (mostradas por diferentes colores y tipos de líneas)</strong></em>. Las <em><strong>tres matrices de salida</strong></em> (<span class="math notranslate nohighlight">\(d = 3\)</span>) <em><strong>se suman posteriormente para formar la convolución de los dos volúmenes</strong></em>. La dimensión <span class="math notranslate nohighlight">\(k\)</span> de la salida depende de los valores de <span class="math notranslate nohighlight">\(l\)</span> y <span class="math notranslate nohighlight">\(m\)</span>, del <em>stride</em> <span class="math notranslate nohighlight">\(s\)</span> y del <em>padding</em> <span class="math notranslate nohighlight">\(p\)</span>, si se utiliza, según la Eq. <a class="reference internal" href="#equation-resulting-matrix-size">(3.5)</a>.</p></li>
 </ul>
 <div class="tip admonition">
 <p class="admonition-title">Observación</p>
@@ -1210,7 +1341,7 @@ O_{r}=I_{r}\star H_{r},\quad r=1,2,\dots,d.
 \[
     O_{t}=\boldsymbol{I}\star\boldsymbol{H}_{t}=\sum_{r=1}^{d}h_{t}(1, 1, r)I_{r},~t=1,2,\dots,c.
     \]</div>
-<p>Apilando <span class="math notranslate nohighlight">\(O_{t}, t = 1, 2,\dots,c\)</span>, obtenemos el volumen <span class="math notranslate nohighlight">\(\boldsymbol{O}\)</span> de dimensión <span class="math notranslate nohighlight">\(k\times k\times c\)</span> (ver <code class="xref std std-numref docutils literal notranslate"><span class="pre">1x1conv_dim_reduction_numref</span></code>).</p>
+<p>Apilando <span class="math notranslate nohighlight">\(O_{t}, t = 1, 2,\dots,c\)</span>, obtenemos el volumen <span class="math notranslate nohighlight">\(\boldsymbol{O}\)</span> de dimensión <span class="math notranslate nohighlight">\(k\times k\times c\)</span> (ver <a class="reference internal" href="#x1conv-dim-reduction-numref"><span class="std std-numref">Fig. 3.13</span></a>).</p>
 </li>
 <li><p>La <em><strong>información original se sigue conservando en el nuevo volumen, de forma promediada</strong></em>. A menudo, una vez obtenido el nuevo volumen <span class="math notranslate nohighlight">\(\boldsymbol{O}\)</span>, <em><strong>sus elementos se “empujan” a través de una no linealidad</strong></em>, por ejemplo, <code class="docutils literal notranslate"><span class="pre">ReLU</span></code>.</p></li>
 <li><p>La convolución <span class="math notranslate nohighlight">\(1\times 1\)</span> seguida de la no linealidad se denomina <strong><code class="docutils literal notranslate"><span class="pre">operación</span> <span class="pre">de</span> <span class="pre">red</span> <span class="pre">en</span> <span class="pre">red</span></code></strong> y su finalidad es <em><strong>añadir una etapa de no linealidad adicional en el flujo de operaciones a través de la red</strong></em>. Por lo tanto, en este contexto, si <span class="math notranslate nohighlight">\(c&lt;d\)</span>, <em><strong>la operación de red en red puede considerarse una técnica de reducción de la dimensionalidad no lineal</strong></em>.</p></li>
@@ -1220,7 +1351,7 @@ O_{r}=I_{r}\star H_{r},\quad r=1,2,\dots,d.
 <a class="reference internal image-reference" href="_images/1x1conv_dim_reduction.png"><img alt="_images/1x1conv_dim_reduction.png" src="_images/1x1conv_dim_reduction.png" style="width: 706.3px; height: 274.4px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.11 </span><span class="caption-text">Convolución <span class="math notranslate nohighlight">\(1\times 1\)</span>, con <span class="math notranslate nohighlight">\(c\)</span> tubos de dimensión <span class="math notranslate nohighlight">\(1\times 1\times d\)</span>, donde <span class="math notranslate nohighlight">\(d\)</span> es la profundidad del volumen de entrada. Fuente <span class="bibtex-citation" id="id22">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#x1conv-dim-reduction-numref" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.13 </span><span class="caption-text">Convolución <span class="math notranslate nohighlight">\(1\times 1\)</span>, con <span class="math notranslate nohighlight">\(c\)</span> tubos de dimensión <span class="math notranslate nohighlight">\(1\times 1\times d\)</span>, donde <span class="math notranslate nohighlight">\(d\)</span> es la profundidad del volumen de entrada. Fuente <span class="bibtex-citation" id="id22">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#x1conv-dim-reduction-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="important admonition">
@@ -1228,14 +1359,14 @@ O_{r}=I_{r}\star H_{r},\quad r=1,2,\dots,d.
 <ul class="simple">
 <li><p>Consideremos que la <em><strong>entrada de una capa es un volumen</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{I}\)</span> de 28 × 28 × 192. El objetivo es <em><strong>producir a la salida de la capa un volumen,</strong></em> <span class="math notranslate nohighlight">\(O\)</span><em><strong>, de dimensión</strong></em> 28 × 28 × 32. Para ello <em><strong>emplear 5 × 5 convoluciones iguales</strong></em> y un volumen intermedio <span class="math notranslate nohighlight">\(\boldsymbol{O}'\)</span> de dimensiones <span class="math notranslate nohighlight">\(28\times 28\times 16\)</span>. Nótese que en la última capa se usó <em><strong>padding de 2 píxeles en cada borde</strong></em>.</p></li>
 <li><p>Observe que, rellenando todas las matrices apiladas en <span class="math notranslate nohighlight">\(\boldsymbol{I}\)</span> con <span class="math notranslate nohighlight">\(p\)</span> cero columnas y filas, se tiene que el <em><strong>número de multiplicaciones y adiciones (MADS)</strong></em> es <span class="math notranslate nohighlight">\(3.7\times 10^{6}\times 32\approx 120~\)</span> millones MADS. Además, <em><strong>usando convoluciones</strong></em> <span class="math notranslate nohighlight">\(1\times 1\)</span><em><strong>, este número se reduce a</strong></em> <span class="math notranslate nohighlight">\(28^{2}\times 25\times 16\times 32\approx 10\)</span> millones MADS (ver <span class="bibtex-citation" id="id23">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>).</p></li>
-<li><p>A menudo, el volumen intermedio, <span class="math notranslate nohighlight">\(\boldsymbol{O}'\)</span>, se conoce como <em><strong>capa <code class="docutils literal notranslate"><span class="pre">cuello</span> <span class="pre">de</span> <span class="pre">botella</span> <span class="pre">(bottleneck</span> <span class="pre">layer)</span></code></strong></em>; <em><strong>su función es “reducir” primero el tamaño del volumen de entrada, antes de obtener el volumen de salida final</strong></em> (ver <code class="xref std std-numref docutils literal notranslate"><span class="pre">bottleneck_layer_1x1conv_numref</span></code>).</p></li>
+<li><p>A menudo, el volumen intermedio, <span class="math notranslate nohighlight">\(\boldsymbol{O}'\)</span>, se conoce como <em><strong>capa <code class="docutils literal notranslate"><span class="pre">cuello</span> <span class="pre">de</span> <span class="pre">botella</span> <span class="pre">(bottleneck</span> <span class="pre">layer)</span></code></strong></em>; <em><strong>su función es “reducir” primero el tamaño del volumen de entrada, antes de obtener el volumen de salida final</strong></em> (ver <a class="reference internal" href="#bottleneck-layer-1x1conv-numref"><span class="std std-numref">Fig. 3.14</span></a>).</p></li>
 </ul>
 </div>
 <figure class="align-center" id="bottleneck-layer-1x1conv-numref">
 <a class="reference internal image-reference" href="_images/bottleneck_layer_1x1conv.png"><img alt="_images/bottleneck_layer_1x1conv.png" src="_images/bottleneck_layer_1x1conv.png" style="width: 665.6px; height: 239.20000000000002px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.12 </span><span class="caption-text">Capa cuello de botella. Fuente <span class="bibtex-citation" id="id24">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#bottleneck-layer-1x1conv-numref" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.14 </span><span class="caption-text">Capa cuello de botella. Fuente <span class="bibtex-citation" id="id24">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#bottleneck-layer-1x1conv-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -1248,7 +1379,7 @@ O_{r}=I_{r}\star H_{r},\quad r=1,2,\dots,d.
 <a class="reference internal image-reference" href="_images/complete_cnnarq.png"><img alt="_images/complete_cnnarq.png" src="_images/complete_cnnarq.png" style="width: 667.2px; height: 375.20000000000005px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.13 </span><span class="caption-text">Arquitectura CNN completa. Fuente <span class="bibtex-citation" id="id25">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#complete-cnnarq-numref" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.15 </span><span class="caption-text">Arquitectura CNN completa. Fuente <span class="bibtex-citation" id="id25">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#complete-cnnarq-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="important admonition">
@@ -1288,7 +1419,7 @@ $<span class="math notranslate nohighlight">\(
   \nabla_{\theta_k}\mathcal{L}=\Big(\frac{\partial f_k}{\partial\theta_k}\Big)^{\top}\delta_k .
   \)</span>$</p>
 <ul class="simple">
-<li><p><strong>Costo.</strong> El pase hacia atrás recorre las <span class="math notranslate nohighlight">\(L\)</span> capas una vez y en cada una evalúa dos productos transpuestos (respecto a la entrada y respecto a los parámetros). Si cada uno cuesta una constante por el costo de <span class="math notranslate nohighlight">\(f_k\)</span>, el costo total es una constante por <span class="math notranslate nohighlight">\(\sum_k\mathrm{costo}(f_k)\)</span>, es decir, por el costo del pase hacia adelante. Esta es la <em><strong>propiedad del gradiente barato</strong></em>; ver <span class="bibtex-citation" id="id26">[]</span>. <span class="math notranslate nohighlight">\(\qquad\blacksquare\)</span></p></li>
+<li><p><strong>Costo.</strong> El pase hacia atrás recorre las <span class="math notranslate nohighlight">\(L\)</span> capas una vez y en cada una evalúa dos productos transpuestos (respecto a la entrada y respecto a los parámetros). Si cada uno cuesta una constante por el costo de <span class="math notranslate nohighlight">\(f_k\)</span>, el costo total es una constante por <span class="math notranslate nohighlight">\(\sum_k\mathrm{costo}(f_k)\)</span>, es decir, por el costo del pase hacia adelante. Esta es la <em><strong>propiedad del gradiente barato</strong></em>; ver <span class="bibtex-citation" id="id26">[<a class="reference internal" href="biblio.html#id123" title="Atilim Gunes Baydin, Barak A. Pearlmutter, Alexey Andreyevich Radul, and Jeffrey Mark Siskind. Automatic differentiation in machine learning: a survey. Journal of Machine Learning Research, 18(153):1–43, 2018.">Baydin <em>et al.</em>, 2018</a>, <a class="reference internal" href="biblio.html#id124" title="Andreas Griewank and Andrea Walther. Evaluating Derivatives: Principles and Techniques of Algorithmic Differentiation. SIAM, 2 edition, 2008.">Griewank and Walther, 2008</a>]</span>. <span class="math notranslate nohighlight">\(\qquad\blacksquare\)</span></p></li>
 </ul>
 </div>
 <div class="important admonition">
@@ -1314,7 +1445,7 @@ $<span class="math notranslate nohighlight">\(
 <ul class="simple">
 <li><p><em><strong>Interpretación.</strong></em> El gradiente respecto al núcleo es una <em><strong>correlación de la entrada con <span class="math notranslate nohighlight">\(\delta\)</span></strong></em> y el gradiente respecto a la entrada es una <em><strong>convolución completa de <span class="math notranslate nohighlight">\(\delta\)</span> con el núcleo rotado <span class="math notranslate nohighlight">\(180^\circ\)</span></strong></em>. Es decir, <em><strong>la retropropagación de una capa convolucional es, a su vez, una convolución</strong></em>, y con el mismo número de multiplicaciones del mismo orden que el pase hacia adelante.</p></li>
 <li><p><em><strong>Verificación de dimensiones con el ejemplo del notebook.</strong></em> Para <span class="math notranslate nohighlight">\(l=5\)</span>, <span class="math notranslate nohighlight">\(m=3\)</span> se tiene <span class="math notranslate nohighlight">\(k=3\)</span>: <span class="math notranslate nohighlight">\(\delta\)</span> es <span class="math notranslate nohighlight">\(3\times3\)</span>, el gradiente respecto a <span class="math notranslate nohighlight">\(H\)</span> es una correlación de una entrada <span class="math notranslate nohighlight">\(5\times5\)</span> con <span class="math notranslate nohighlight">\(\delta\)</span> de <span class="math notranslate nohighlight">\(3\times3\)</span> que produce una matriz <span class="math notranslate nohighlight">\(3\times3\)</span>, y el gradiente respecto a <span class="math notranslate nohighlight">\(I\)</span> es la convolución completa de <span class="math notranslate nohighlight">\(\delta\)</span> (<span class="math notranslate nohighlight">\(3\times3\)</span>) con <span class="math notranslate nohighlight">\(H\)</span> (<span class="math notranslate nohighlight">\(3\times3\)</span>), de tamaño <span class="math notranslate nohighlight">\(3+3-1=5\)</span>, igual al de <span class="math notranslate nohighlight">\(I\)</span>.</p></li>
-<li><p><strong>Para profundizar.</strong> El tratamiento clásico está en <span class="bibtex-citation" id="id27">[<a class="reference internal" href="biblio.html#id20" title="David E Rumelhart, Geoffrey E Hinton, and Ronald J Williams. Learning representations by back-propagating errors. nature, 323(6088):533–536, 1986.">Rumelhart <em>et al.</em>, 1986</a>]</span>, y las demostraciones completas del costo y de la diferenciación automática en <span class="bibtex-citation" id="id28">[]</span>. Para el contexto de CNN, <span class="bibtex-citation" id="id29">[<a class="reference internal" href="biblio.html#id26" title="Yann LeCun, Bernhard Boser, John S Denker, Donnie Henderson, Richard E Howard, Wayne Hubbard, and Lawrence D Jackel. Backpropagation applied to handwritten zip code recognition. Neural computation, 1(4):541–551, 1989.">LeCun <em>et al.</em>, 1989</a>]</span>.</p></li>
+<li><p><strong>Para profundizar.</strong> El tratamiento clásico está en <span class="bibtex-citation" id="id27">[<a class="reference internal" href="biblio.html#id20" title="David E Rumelhart, Geoffrey E Hinton, and Ronald J Williams. Learning representations by back-propagating errors. nature, 323(6088):533–536, 1986.">Rumelhart <em>et al.</em>, 1986</a>]</span>, y las demostraciones completas del costo y de la diferenciación automática en <span class="bibtex-citation" id="id28">[<a class="reference internal" href="biblio.html#id123" title="Atilim Gunes Baydin, Barak A. Pearlmutter, Alexey Andreyevich Radul, and Jeffrey Mark Siskind. Automatic differentiation in machine learning: a survey. Journal of Machine Learning Research, 18(153):1–43, 2018.">Baydin <em>et al.</em>, 2018</a>, <a class="reference internal" href="biblio.html#id124" title="Andreas Griewank and Andrea Walther. Evaluating Derivatives: Principles and Techniques of Algorithmic Differentiation. SIAM, 2 edition, 2008.">Griewank and Walther, 2008</a>]</span>. Para el contexto de CNN, <span class="bibtex-citation" id="id29">[<a class="reference internal" href="biblio.html#id26" title="Yann LeCun, Bernhard Boser, John S Denker, Donnie Henderson, Richard E Howard, Wayne Hubbard, and Lawrence D Jackel. Backpropagation applied to handwritten zip code recognition. Neural computation, 1(4):541–551, 1989.">LeCun <em>et al.</em>, 1989</a>]</span>.</p></li>
 </ul>
 </section>
 <section id="caracteristicas-en-una-cnn">
@@ -1365,14 +1496,14 @@ $<span class="math notranslate nohighlight">\(
 <div class="information admonition">
 <p class="admonition-title">Introducción</p>
 <ul class="simple">
-<li><p>El diseño de una CNN sigue pasos básicos con múltiples variantes arquitectónicas y optimizaciones para mejorar la eficiencia computacional (ver <code class="xref std std-numref docutils literal notranslate"><span class="pre">complete_cnnarq_numref</span></code>). <em><strong>Implementarlas requiere un gran esfuerzo técnico para su aprendizaje y aplicación</strong></em>.</p></li>
+<li><p>El diseño de una CNN sigue pasos básicos con múltiples variantes arquitectónicas y optimizaciones para mejorar la eficiencia computacional (ver <a class="reference internal" href="#complete-cnnarq-numref"><span class="std std-numref">Fig. 3.15</span></a>). <em><strong>Implementarlas requiere un gran esfuerzo técnico para su aprendizaje y aplicación</strong></em>.</p></li>
 <li><p>A continuación, se presentan <em><strong>redes convolucionales clásicas, cuya comprensión es clave para profundizar en el tema</strong></em>, aunque algunos de sus métodos ya no se utilicen. Los estudios citados ofrecen una base sólida para el aprendizaje de las CNN.</p></li>
 </ul>
 </div>
-<figure class="align-center" id="id88">
+<figure class="align-center" id="id41">
 <img alt="_images/cat_dog_class.png" src="_images/cat_dog_class.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.14 </span><span class="caption-text">Clasificación de imágenes. Fuente <a class="reference external" href="https://docs.clarifai.com/">clarifai</a></span><a class="headerlink" href="#id88" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.16 </span><span class="caption-text">Clasificación de imágenes. Fuente <a class="reference external" href="https://docs.clarifai.com/">clarifai</a></span><a class="headerlink" href="#id41" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -1389,7 +1520,7 @@ $<span class="math notranslate nohighlight">\(
 <figure class="align-center" id="letnet5-architecture-numref">
 <img alt="_images/letnet5_architecture.jpeg" src="_images/letnet5_architecture.jpeg" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.15 </span><span class="caption-text">Arquitectura LeNet-5. Fuente <span class="bibtex-citation" id="id31">[<a class="reference internal" href="biblio.html#id30" title="Yann LeCun, Léon Bottou, Yoshua Bengio, and Patrick Haffner. Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86(11):2278–2324, 1998.">LeCun <em>et al.</em>, 1998</a>]</span>.</span><a class="headerlink" href="#letnet5-architecture-numref" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.17 </span><span class="caption-text">Arquitectura LeNet-5. Fuente <span class="bibtex-citation" id="id31">[<a class="reference internal" href="biblio.html#id30" title="Yann LeCun, Léon Bottou, Yoshua Bengio, and Patrick Haffner. Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86(11):2278–2324, 1998.">LeCun <em>et al.</em>, 1998</a>]</span>.</span><a class="headerlink" href="#letnet5-architecture-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -1405,7 +1536,7 @@ $<span class="math notranslate nohighlight">\(
 <figure class="align-center" id="alexnet-architecture-numref">
 <img alt="_images/alexnet_architecture.png" src="_images/alexnet_architecture.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.16 </span><span class="caption-text">Arquitectura LeNet-5. Fuente <span class="bibtex-citation" id="id33">[<a class="reference internal" href="biblio.html#id31" title="Alex Krizhevsky, Ilya Sutskever, and Geoffrey E Hinton. Imagenet classification with deep convolutional neural networks. Advances in neural information processing systems, 2012.">Krizhevsky <em>et al.</em>, 2012</a>]</span>.</span><a class="headerlink" href="#alexnet-architecture-numref" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.18 </span><span class="caption-text">Arquitectura LeNet-5. Fuente <span class="bibtex-citation" id="id33">[<a class="reference internal" href="biblio.html#id31" title="Alex Krizhevsky, Ilya Sutskever, and Geoffrey E Hinton. Imagenet classification with deep convolutional neural networks. Advances in neural information processing systems, 2012.">Krizhevsky <em>et al.</em>, 2012</a>]</span>.</span><a class="headerlink" href="#alexnet-architecture-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -1422,7 +1553,7 @@ $<span class="math notranslate nohighlight">\(
 <a class="reference internal image-reference" href="_images/vgg16_architecture.png"><img alt="_images/vgg16_architecture.png" src="_images/vgg16_architecture.png" style="width: 680.0px; height: 403.20000000000005px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.17 </span><span class="caption-text">Arquitectura VGG-16. Fuente <span class="bibtex-citation" id="id35">[<a class="reference internal" href="biblio.html#id32" title="Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. arXiv preprint arXiv:1409.1556, 2014.">Simonyan and Zisserman, 2014</a>]</span>.</span><a class="headerlink" href="#vgg16-architecture-numref" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.19 </span><span class="caption-text">Arquitectura VGG-16. Fuente <span class="bibtex-citation" id="id35">[<a class="reference internal" href="biblio.html#id32" title="Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. arXiv preprint arXiv:1409.1556, 2014.">Simonyan and Zisserman, 2014</a>]</span>.</span><a class="headerlink" href="#vgg16-architecture-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
@@ -1473,7 +1604,7 @@ r_L=1+\sum_{k=1}^{L}(m_k-1)\prod_{j=1}^{k-1}s_j .
 </div>
 <ul class="simple">
 <li><p><em><strong>Cifras concretas.</strong></em> Para <span class="math notranslate nohighlight">\(k=10\)</span>, la red profunda usa <span class="math notranslate nohighlight">\(10\times2=20\)</span> neuronas ReLU, mientras que cualquier red de una capa oculta necesita al menos <span class="math notranslate nohighlight">\(2^{10}-1=1023\)</span>.</p></li>
-<li><p><em><strong>Alcance.</strong></em> El resultado no afirma que toda función se beneficie de la profundidad, sino que <em><strong>existen funciones para las que la separación es exponencial</strong></em>. Telgarsky <span class="bibtex-citation" id="id37">[]</span> extiende la separación a redes de profundidad intermedia y a error de aproximación, que es la versión relevante para clasificación.</p></li>
+<li><p><em><strong>Alcance.</strong></em> El resultado no afirma que toda función se beneficie de la profundidad, sino que <em><strong>existen funciones para las que la separación es exponencial</strong></em>. Telgarsky <span class="bibtex-citation" id="id37">[<a class="reference internal" href="biblio.html#id131" title="Matus Telgarsky. Benefits of depth in neural networks. In Proceedings of the 29th Conference on Learning Theory, volume 49 of Proceedings of Machine Learning Research, 1517–1539. 2016.">Telgarsky, 2016</a>]</span> extiende la separación a redes de profundidad intermedia y a error de aproximación, que es la versión relevante para clasificación.</p></li>
 </ul>
 </section>
 <section id="googlenet-y-la-red-inception">
@@ -1481,22 +1612,22 @@ r_L=1+\sum_{k=1}^{L}(m_k-1)\prod_{j=1}^{k-1}s_j .
 <div class="tip admonition">
 <p class="admonition-title">GoogleNet y la red Inception</p>
 <ul class="simple">
-<li><p>La arquitectura utilizada en <em><strong>esta red se desvía del “arquetípico” que se muestra en</strong></em> <code class="xref std std-numref docutils literal notranslate"><span class="pre">complete_cnnarq_numref</span></code>. En el corazón de esta red se encuentra el llamado módulo de inicio <span class="bibtex-citation" id="id38">[<a class="reference internal" href="biblio.html#id33" title="Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. In Proceedings of the IEEE conference on computer vision and pattern recognition, 1–9. 2015.">Szegedy <em>et al.</em>, 2015</a>]</span>. Un <em><strong>módulo de inicio consta de filtros de diferentes tamaños y profundidades</strong></em>, así como de una <em><strong>ruta de agrupación diferente</strong></em>.</p></li>
+<li><p>La arquitectura utilizada en <em><strong>esta red se desvía del “arquetípico” que se muestra en</strong></em> <a class="reference internal" href="#complete-cnnarq-numref"><span class="std std-numref">Fig. 3.15</span></a>. En el corazón de esta red se encuentra el llamado módulo de inicio <span class="bibtex-citation" id="id38">[<a class="reference internal" href="biblio.html#id33" title="Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. In Proceedings of the IEEE conference on computer vision and pattern recognition, 1–9. 2015.">Szegedy <em>et al.</em>, 2015</a>]</span>. Un <em><strong>módulo de inicio consta de filtros de diferentes tamaños y profundidades</strong></em>, así como de una <em><strong>ruta de agrupación diferente</strong></em>.</p></li>
 <li><p>La arquitectura <code class="docutils literal notranslate"><span class="pre">Inception</span></code> toma la salida de una capa y la divide en varias rutas: una usa <em><strong>convolución 1x1 para reducir la profundidad</strong></em>, otra hace <em><strong>pooling seguido de convolución 5x5</strong></em>, y dos rutas realizan <em><strong>convoluciones separadas con filtros 3x3 y 5x5</strong></em>. Se usa una capa de <em><strong>cuello de botella (convolución 1x1) para reducir la carga computacional antes de las convoluciones</strong></em>.</p></li>
 <li><p>En el módulo de inicio, se <em><strong>concatenan los volúmenes de salida de varias trayectorias</strong></em>, permitiendo que la red, durante el entrenamiento, <em><strong>elija las mejores operaciones para cada capa</strong></em>. A medida que se avanza hacia capas superiores, <em><strong>se incrementa la proporción de convoluciones 3 × 3 y 5 × 5, ya que captan rasgos más abstractos</strong></em>. La red tiene <em><strong>22 capas y 6 millones de parámetros</strong></em>.</p></li>
 </ul>
 </div>
-<figure class="align-center" id="id89">
+<figure class="align-center" id="id42">
 <img alt="_images/google-net-like.png" src="_images/google-net-like.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.18 </span><span class="caption-text">Arquitectura GoogleNet. Fuente <a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/29084154/">pubmed</a></span><a class="headerlink" href="#id89" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.20 </span><span class="caption-text">Arquitectura GoogleNet. Fuente <a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/29084154/">pubmed</a></span><a class="headerlink" href="#id42" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-center" id="inception-architecture-numref">
 <a class="reference internal image-reference" href="_images/inception_architecture.png"><img alt="_images/inception_architecture.png" src="_images/inception_architecture.png" style="width: 583.0999999999999px; height: 389.9px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.19 </span><span class="caption-text">Arquitectura Inception. Fuente <span class="bibtex-citation" id="id39">[<a class="reference internal" href="biblio.html#id33" title="Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. In Proceedings of the IEEE conference on computer vision and pattern recognition, 1–9. 2015.">Szegedy <em>et al.</em>, 2015</a>]</span>.</span><a class="headerlink" href="#inception-architecture-numref" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.21 </span><span class="caption-text">Arquitectura Inception. Fuente <span class="bibtex-citation" id="id39">[<a class="reference internal" href="biblio.html#id33" title="Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. In Proceedings of the IEEE conference on computer vision and pattern recognition, 1–9. 2015.">Szegedy <em>et al.</em>, 2015</a>]</span>.</span><a class="headerlink" href="#inception-architecture-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -1506,14 +1637,14 @@ r_L=1+\sum_{k=1}^{L}(m_k-1)\prod_{j=1}^{k-1}s_j .
 <p class="admonition-title"><em><strong>Redes residuales (ResNets)</strong></em></p>
 <ul class="simple">
 <li><p>Ya hemos hablado de las ventajas de diseñar redes profundas. También abordamos la forma de <em><strong>hacer frente al problema de los gradientes que se desvanecen/explotan</strong></em> mediante una combinación de métodos y trucos que permiten que el <em><strong>algoritmo backpropagation converja con suficiente rapidez</strong></em>. Sin embargo, <em><strong>una vez que empezamos a construir redes muy profundas (del orden de decenas o incluso centenares de capas) nos encontramos con el siguiente comportamiento “poco ortodoxo”</strong></em>.</p></li>
-<li><p>Cabría esperar que, <em><strong>añadiendo más y más capas, el error de entrenamiento mejore o al menos no aumenta</strong></em>. Sin embargo, lo que se observa en la práctica es que <em><strong><code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">partir</span> <span class="pre">de</span> <span class="pre">un</span> <span class="pre">cierto</span> <span class="pre">número</span> <span class="pre">de</span> <span class="pre">capas,</span> <span class="pre">el</span> <span class="pre">error</span> <span class="pre">de</span> <span class="pre">entrenamiento</span> <span class="pre">empieza</span> <span class="pre">a</span> <span class="pre">aumentar</span></code></strong></em>. Esto se ilustra gráficamente en la <code class="xref std std-numref docutils literal notranslate"><span class="pre">residual_net_architecture_numref</span></code>. Este fenómeno <em><strong>no tiene nada que ver con el sobreajuste</strong></em>. Después de todo, estamos hablando del <em><strong>error de entrenamiento y no del de generalización</strong></em>. Parece que esto puede deberse a <em><strong><code class="docutils literal notranslate"><span class="pre">la</span> <span class="pre">tarea</span> <span class="pre">de</span> <span class="pre">optimización</span> <span class="pre">que</span> <span class="pre">se</span> <span class="pre">vuelve</span> <span class="pre">más</span> <span class="pre">y</span> <span class="pre">más</span> <span class="pre">difícil</span> <span class="pre">a</span> <span class="pre">medida</span> <span class="pre">que</span> <span class="pre">se</span> <span class="pre">añaden</span> <span class="pre">más</span> <span class="pre">y</span> <span class="pre">más</span> <span class="pre">capas</span></code></strong></em>.</p></li>
+<li><p>Cabría esperar que, <em><strong>añadiendo más y más capas, el error de entrenamiento mejore o al menos no aumenta</strong></em>. Sin embargo, lo que se observa en la práctica es que <em><strong><code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">partir</span> <span class="pre">de</span> <span class="pre">un</span> <span class="pre">cierto</span> <span class="pre">número</span> <span class="pre">de</span> <span class="pre">capas,</span> <span class="pre">el</span> <span class="pre">error</span> <span class="pre">de</span> <span class="pre">entrenamiento</span> <span class="pre">empieza</span> <span class="pre">a</span> <span class="pre">aumentar</span></code></strong></em>. Esto se ilustra gráficamente en la <a class="reference internal" href="#residual-net-architecture-numref"><span class="std std-numref">Fig. 3.22</span></a>. Este fenómeno <em><strong>no tiene nada que ver con el sobreajuste</strong></em>. Después de todo, estamos hablando del <em><strong>error de entrenamiento y no del de generalización</strong></em>. Parece que esto puede deberse a <em><strong><code class="docutils literal notranslate"><span class="pre">la</span> <span class="pre">tarea</span> <span class="pre">de</span> <span class="pre">optimización</span> <span class="pre">que</span> <span class="pre">se</span> <span class="pre">vuelve</span> <span class="pre">más</span> <span class="pre">y</span> <span class="pre">más</span> <span class="pre">difícil</span> <span class="pre">a</span> <span class="pre">medida</span> <span class="pre">que</span> <span class="pre">se</span> <span class="pre">añaden</span> <span class="pre">más</span> <span class="pre">y</span> <span class="pre">más</span> <span class="pre">capas</span></code></strong></em>.</p></li>
 </ul>
 </div>
 <figure class="align-center" id="residual-net-architecture-numref">
 <a class="reference internal image-reference" href="_images/residual_net_architecture.png"><img alt="_images/residual_net_architecture.png" src="_images/residual_net_architecture.png" style="width: 490.40000000000003px; height: 274.40000000000003px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.20 </span><span class="caption-text"><em><strong>Aumento en lugar de disminución del error</strong></em> cuando el número de capas supera cierto número, en una red muy profunda. <em><strong>(curva roja) como se esperaba a partir de la teoría.</strong></em></span><a class="headerlink" href="#residual-net-architecture-numref" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.22 </span><span class="caption-text"><em><strong>Aumento en lugar de disminución del error</strong></em> cuando el número de capas supera cierto número, en una red muy profunda. <em><strong>(curva roja) como se esperaba a partir de la teoría.</strong></em></span><a class="headerlink" href="#residual-net-architecture-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ol class="arabic simple">
@@ -1565,731 +1696,35 @@ y^r = y^{r-1} + F(y^{r-1})
 <p>La ventaja pedagógica es que <strong>“pesos pequeños” es un punto de partida natural, cercano a la inicialización típica de una red</strong> y fácil de alcanzar por gradiente descendente, mientras que <strong>“pesos que reproducen exactamente la matriz identidad” es una configuración específica y difícil de encontrar</strong> mediante optimización.</p>
 </div>
 <ul class="simple">
-<li><p>El uso de la <em><strong>representación residual</strong></em> no es nuevo y ya <em><strong>se ha utilizado anteriormente en el contexto de la cuantificación vectorial</strong></em>. La esencia del aprendizaje residual es <em><strong>introducir el llamado bloque de construcción residual</strong></em>, que se muestra en la <code class="xref std std-numref docutils literal notranslate"><span class="pre">residual_architecture_cnn_numref</span></code>.</p></li>
+<li><p>El uso de la <em><strong>representación residual</strong></em> no es nuevo y ya <em><strong>se ha utilizado anteriormente en el contexto de la cuantificación vectorial</strong></em>. La esencia del aprendizaje residual es <em><strong>introducir el llamado bloque de construcción residual</strong></em>, que se muestra en la <a class="reference internal" href="#residual-architecture-cnn-numref"><span class="std std-numref">Fig. 3.23</span></a>.</p></li>
 </ul>
 <figure class="align-center" id="residual-architecture-cnn-numref">
 <a class="reference internal image-reference" href="_images/residual_architecture_cnn.png"><img alt="_images/residual_architecture_cnn.png" src="_images/residual_architecture_cnn.png" style="width: 363.20000000000005px; height: 398.40000000000003px;" />
 </a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.21 </span><span class="caption-text">Bloque de construcción residual. Fuente <span class="bibtex-citation" id="id40">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#residual-architecture-cnn-numref" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.23 </span><span class="caption-text">Bloque de construcción residual. Fuente <span class="bibtex-citation" id="id40">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#residual-architecture-cnn-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>De esta manera, un número de capas, digamos, dos, como en el caso de la <code class="xref std std-numref docutils literal notranslate"><span class="pre">residual_architecture_cnn_numref</span></code>, <em><strong>se apilan</strong></em> y dejamos que estas capas se <em><strong>ajusten explícitamente al mapeo residual, a través de las llamadas conexiones de atajo u omisión</strong></em>. Cada capa de pesos realiza una transformación sobre su entrada, por ejemplo, convoluciones. Si <span class="math notranslate nohighlight">\(\boldsymbol{y}^{r}\)</span> e <span class="math notranslate nohighlight">\(\boldsymbol{y}^{r-1}\)</span> son de dimensiones diferentes, el <em><strong>atajo de mapeo de identidad se modifica a</strong></em> <span class="math notranslate nohighlight">\(W\boldsymbol{y}^{r-1}\)</span>, donde <span class="math notranslate nohighlight">\(W\)</span> es una matriz de dimensiones apropiadas.</p></li>
-</ul>
-<ul class="simple">
-<li><p>A continuación, presentamos algunos <em><strong>términos de la jerga utilizada en relación con las CNN:</strong></em></p></li>
-</ul>
-<ol class="arabic simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Profundidad</span></code></strong>: La <em><strong>profundidad de una capa</strong></em> es el <em><strong>número de matrices de filtro que se emplean en esta capa</strong></em>. No debe confundirse profundidad de la red, que corresponde al número total de capas ocultas utilizadas. <em><strong>A veces, nos referimos al número de filtros como el número de canales</strong></em>.</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Campo</span> <span class="pre">receptivo</span></code></strong>: Cada <em><strong>píxel de una matriz de características de salida</strong></em> resulta como una <em><strong>media ponderada de los píxeles dentro de un área específica de la matriz imagen de entrada</strong></em> (o de la salida de la capa anterior). <em><strong>El área específica que corresponde a un píxel se conoce como su campo receptivo</strong></em> (ver <a class="reference internal" href="#feature-maps-inp-img-numref"><span class="std std-numref">Fig. 3.3</span></a>).</p></li>
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Deslizamiento</span></code> (stride)</strong>: En la práctica, <em><strong>en lugar de deslizar la matriz de filtros de píxel en píxel, se puede deslizar, por ejemplo,</strong></em> <span class="math notranslate nohighlight">\(s\)</span> <em><strong>píxeles</strong></em>. Este valor se conoce como <em><strong>stride</strong></em>. Para valores de <span class="math notranslate nohighlight">\(s &gt; 1\)</span>, se obtienen matrices de mapas de características de menor tamaño. Esto se ilustra en <code class="xref std std-numref docutils literal notranslate"><span class="pre">stride_conv_prop_numref</span></code>A y B.</p></li>
-</ol>
-<figure class="align-center" id="id42">
-<a class="reference internal image-reference" href="_images/stride_conv_prop.png"><img alt="_images/stride_conv_prop.png" src="_images/stride_conv_prop.png" style="width: 671.2px; height: 415.20000000000005px;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 3.22 </span><span class="caption-text">Matriz de entrada y filtro de tamaños 5 × 5 y 3 × 3 respectivamente. En (A), el paso es igual a <span class="math notranslate nohighlight">\(s = 1\)</span> y en (B) es igual a <span class="math notranslate nohighlight">\(s = 2\)</span>. En (A) la salida es una matriz de tamaño 3 × 3 y en (B) de tamaño 2 × 2. Fuente <span class="bibtex-citation" id="id41">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#id42" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<ol class="arabic simple" start="4">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Relleno</span> <span class="pre">de</span> <span class="pre">ceros</span></code> (padding)</strong>: A veces, <em><strong>se utilizan ceros para rellenar la matriz de entrada alrededor de los píxeles del borde</strong></em>. De esta forma, <em><strong>la dimensión de la matriz aumenta</strong></em>. Si la matriz original tiene dimensiones <span class="math notranslate nohighlight">\(l\times l\)</span>, <em><strong>después de expandirla con</strong></em> <span class="math notranslate nohighlight">\(p\)</span> <em><strong>columnas y filas, las nuevas dimensiones pasan a ser</strong></em> (<span class="math notranslate nohighlight">\(l + 2p\)</span>). Esto se muestra en la <code class="xref std std-numref docutils literal notranslate"><span class="pre">zero_fill_conv_numref</span></code>.</p></li>
-</ol>
-<figure class="align-center" id="id44">
-<a class="reference internal image-reference" href="_images/zero_fill_conv.png"><img alt="_images/zero_fill_conv.png" src="_images/zero_fill_conv.png" style="width: 182.4px; height: 180.8px;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 3.23 </span><span class="caption-text">Ejemplo en el que la matriz original es de 5 × 5 y tras rellenarla con <span class="math notranslate nohighlight">\(p = 2\)</span> filas y columnas, su tamaño pasa a ser de
-9 × 9. Fuente <span class="bibtex-citation" id="id43">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#id44" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<ol class="arabic simple" start="5">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Término</span> <span class="pre">de</span> <span class="pre">sesgo</span></code></strong>: Tras cada convolución que genera un píxel en el mapa de características, <em><strong>se añade un sesgo común a todos los píxeles de dicho mapa, calculado durante el entrenamiento</strong></em>. Esto sigue la lógica de compartir parámetros, como ocurre con los filtros en la imagen de entrada..</p></li>
-</ol>
-<ul>
-<li><p>Se puede <em><strong>ajustar el tamaño de una matriz de mapa de características</strong></em> de salida <em><strong>ajustando el valor del stride,</strong></em> <span class="math notranslate nohighlight">\(s\)</span>, y el
-<em><strong>número de columnas y filas cero adicionales</strong></em> en el relleno. En general, se puede comprobar fácilmente que si <span class="math notranslate nohighlight">\(I\in\mathbb{R}^{l\times l}, H\in\mathbb{R}^{m\times m}\)</span>, y <span class="math notranslate nohighlight">\(p\)</span> <em><strong>es el número de filas y columnas adicionales</strong></em> para el relleno, entonces el mapa de características tiene dimensiones <span class="math notranslate nohighlight">\(k\times k\)</span>, donde</p>
-<div class="math notranslate nohighlight" id="equation-resulting-matrix-size">
-<span class="eqno">(3.5)<a class="headerlink" href="#equation-resulting-matrix-size" title="Link to this equation">#</a></span>\[
-    k=\lfloor\frac{l+2p-m}{s}+1\rfloor,
-    \]</div>
-<p>y <span class="math notranslate nohighlight">\(\lfloor\cdot\rfloor\)</span> es el <em><strong>operador suelo</strong></em>, i.e <span class="math notranslate nohighlight">\(\lfloor2.7\rfloor=2\)</span>.</p>
-</li>
-</ul>
-<ul class="simple">
-<li><p>Por ejemplo, si <span class="math notranslate nohighlight">\(l = 5, m = 3, p = 0\)</span> y <span class="math notranslate nohighlight">\(s = 1\)</span>, entonces <span class="math notranslate nohighlight">\(k = 3\)</span>. Por otro lado, si <span class="math notranslate nohighlight">\(l = 5, m = 3, p = 0\)</span> y <span class="math notranslate nohighlight">\(s = 2\)</span>, entonces <span class="math notranslate nohighlight">\(k = 2\)</span> (ver <code class="xref std std-numref docutils literal notranslate"><span class="pre">stride_conv_prop_numref</span></code>A y B). Nótese que si los valores de <span class="math notranslate nohighlight">\(l, m, p\)</span> y <span class="math notranslate nohighlight">\(s\)</span> son tales que <em><strong>la matriz de filtrado, al deslizarse sobre <span class="math notranslate nohighlight">\(I\)</span>, cae fuera de <span class="math notranslate nohighlight">\(I\)</span>, estas operaciones no se realizan. Solo realizamos operaciones mientras la matriz filtro
-esté contenida dentro de</strong></em> <span class="math notranslate nohighlight">\(I\)</span>.</p></li>
-</ul>
-</section>
-<section id="id45">
-<h2><span class="section-number">3.16. </span>El paso de la no linealidad<a class="headerlink" href="#id45" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Una vez que <em><strong>se han realizado las convoluciones y se ha añadido el término de sesgo</strong></em> a todos los valores del mapa de características, el siguiente paso es <em><strong><code class="docutils literal notranslate"><span class="pre">aplicar</span> <span class="pre">una</span> <span class="pre">no</span> <span class="pre">linealidad</span> <span class="pre">(función</span> <span class="pre">de</span> <span class="pre">activación)</span> <span class="pre">a</span> <span class="pre">cada</span> <span class="pre">uno</span> <span class="pre">de</span> <span class="pre">los</span> <span class="pre">píxeles</span> <span class="pre">de</span> <span class="pre">cada</span> <span class="pre">matriz</span></code></strong></em> de mapas de características.</p></li>
-<li><p>Se puede emplear cualquiera de las no linealidades que se han comentado anteriormente. Actualmente, la <em><strong>función de activación lineal rectificada, <code class="docutils literal notranslate"><span class="pre">ReLU</span></code>, es la más popular</strong></em>.</p></li>
-</ul>
-<div class="cell tag_hide-input docutils container">
-<details class="admonition hide above-input">
-<summary aria-label="Toggle hidden content">
-<p class="collapsed admonition-title">Show code cell source</p>
-<p class="expanded admonition-title">Hide code cell source</p>
-</summary>
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">relu</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;ReLU&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</details>
-<div class="cell_output docutils container">
-<img alt="_images/66fef92473a67c9ff0ab4d2f4a5b9b3a10757495f0d996d05702dd30b1280911.png" src="_images/66fef92473a67c9ff0ab4d2f4a5b9b3a10757495f0d996d05702dd30b1280911.png" />
-</div>
-</div>
-<div class="information admonition">
-<p class="admonition-title">Importancia de ReLU</p>
-<p>La función de activación más utilizada en CNN es <strong>ReLU (Rectified Linear Unit)</strong> por las siguientes razones:</p>
-<ol class="arabic simple">
-<li><p><strong>Evita el gradiente desvaneciente</strong>: A diferencia de sigmoide o tangente hiperbólica, mantiene gradientes significativos en redes profundas, facilitando el entrenamiento.</p></li>
-<li><p><strong>Eficiencia computacional</strong>: Su cálculo <span class="math notranslate nohighlight">\(\max(0, x)\)</span> es más simple que funciones exponenciales, reduciendo la carga de procesamiento.</p></li>
-<li><p><strong>Favorece la esparsidad</strong>: Al asignar cero a valores negativos, desactiva neuronas, mejorando eficiencia y generalización.</p></li>
-<li><p><strong>Acelera el entrenamiento</strong>: Su linealidad en valores positivos y bajo costo computacional permiten una convergencia más rápida.</p></li>
-</ol>
-<p>No obstante, puede generar <strong>neuronas muertas</strong> cuando ciertos pesos anulan permanentemente la activación. Para evitarlo, existen variantes como <strong>Leaky ReLU</strong> y <strong>PReLU</strong>.</p>
-</div>
-<ul class="simple">
-<li><p>La <code class="xref std std-numref docutils literal notranslate"><span class="pre">relu_activ_fn_numref</span></code>A muestra la imagen obtenida después de <em><strong>filtrar la imagen original del barco con el detector de bordes en la</strong></em> <a class="reference internal" href="#equation-h-filter-conv-eq">(3.2)</a> y la <code class="xref std std-numref docutils literal notranslate"><span class="pre">relu_activ_fn_numref</span></code>B muestra el resultado que se obtiene tras la <em><strong>aplicación de la no linealidad en cada píxel individual</strong></em>.</p></li>
-</ul>
-<figure class="align-center" id="id47">
-<a class="reference internal image-reference" href="_images/relu_activ_fn.png"><img alt="_images/relu_activ_fn.png" src="_images/relu_activ_fn.png" style="width: 630.4000000000001px; height: 340.8px;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 3.24 </span><span class="caption-text">(A) Imagen donde se han extraído los bordes y (B) imagen resultante tras aplicar el en cada uno de los píxeles. Fuente <span class="bibtex-citation" id="id46">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#id47" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-</section>
-<section id="id48">
-<h2><span class="section-number">3.17. </span>La etapa de agrupación<a class="headerlink" href="#id48" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Pooling</span> <span class="pre">espacial</span></code></strong>: Este proceso <em><strong>reduce la dimensionalidad de las matrices de mapas de características</strong></em>. Se emplea una ventana deslizante, cuyo desplazamiento se define mediante un parámetro <em>stride</em>. La operación selecciona un único valor que representa todos los píxeles dentro de la ventana.</p></li>
-<li><p>La operación más común es la <strong>agrupación máxima (<em>max pooling</em>)</strong>, donde se selecciona el píxel de mayor valor dentro de la ventana. Otra opción es la <strong>agrupación promedio (<em>average pooling</em>)</strong>, que toma el valor medio de los píxeles, también conocida como <em>pooling</em> de suma. En la ilustración, una matriz de <strong>6 × 6</strong> se reduce aplicando una ventana de <strong>2 × 2</strong> con un <em>stride</em> de <strong>2</strong>.</p></li>
-</ul>
-<figure class="align-center" id="id50">
-<a class="reference internal image-reference" href="_images/pooling_step_conv.png"><img alt="_images/pooling_step_conv.png" src="_images/pooling_step_conv.png" style="width: 333.6px; height: 207.20000000000002px;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 3.25 </span><span class="caption-text">(A) Matriz original de tamaño de 6 × 6. Agrupación mediante una ventana de 2 × 2 y un stride <span class="math notranslate nohighlight">\(s = 2\)</span>. Valor máximo por ubicación de la ventana se indica en negrita. (B) Matriz 3 × 3 resultante tras la agrupación máxima. Fuente <span class="bibtex-citation" id="id49">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#id50" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<ul class="simple">
-<li><p>La misma fórmula de la Eq. <a class="reference internal" href="#equation-resulting-matrix-size">(3.5)</a> permite calcular el tamaño de la matriz resultante en el caso general. <strong>La <em>agrupación</em> reduce la dimensionalidad y el tamaño de las matrices</strong>, lo que es crucial, ya que cada salida se convierte en la entrada de la siguiente capa. Controlar el tamaño es esencial para gestionar el número de parámetros sin comprometer excesivamente la información.</p></li>
-</ul>
-<figure class="align-center" id="id52">
-<a class="reference internal image-reference" href="_images/pooling_invariant_conv.png"><img alt="_images/pooling_invariant_conv.png" src="_images/pooling_invariant_conv.png" style="width: 607.2px; height: 375.20000000000005px;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 3.26 </span><span class="caption-text">(A) Bordes de la imagen del barco tras la aplicación de <code class="docutils literal notranslate"><span class="pre">ReLu</span></code> (B) Imagen resultante tras aplicar <code class="docutils literal notranslate"><span class="pre">max-pooling</span></code> utilizando una ventana de 8 × 8. Fuente <span class="bibtex-citation" id="id51">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#id52" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<div class="important admonition">
-<p class="admonition-title">Observación</p>
-<ul class="simple">
-<li><p><code class="xref std std-numref docutils literal notranslate"><span class="pre">pooling_invariant_conv_numref</span></code> muestra el efecto de <em><strong>aplicar el pooling a la imagen de la izquierda</strong></em>. Sin duda, <em><strong>los bordes se vuelven más gruesos, pero la información relacionada con los bordes puede extraerse</strong></em>. Nótese que después de la agrupación, el tamaño de la matriz imagen es reducido.</p></li>
-<li><p>Desde otro punto de vista, <em><strong>el polling resume las estadísticas dentro del área pooling</strong></em>. El pooling puede considerarse un <em><strong>tipo especial de <code class="docutils literal notranslate"><span class="pre">filtrado,</span> <span class="pre">en</span> <span class="pre">el</span> <span class="pre">que,</span> <span class="pre">en</span> <span class="pre">lugar</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">convolución,</span> <span class="pre">se</span> <span class="pre">selecciona</span> <span class="pre">el</span> <span class="pre">valor</span> <span class="pre">máximo</span> <span class="pre">(o</span> <span class="pre">medio)</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">imagen</span></code></strong></em>. El pooling ayuda a que la representación sea aproximadamente invariante a pequeñas traslaciones de la entrada.</p></li>
-</ul>
-</div>
-</section>
-<section id="id53">
-<h2><span class="section-number">3.18. </span>Convolución sobre volúmenes<a class="headerlink" href="#id53" title="Link to this heading">#</a></h2>
-<div class="important admonition">
-<p class="admonition-title">Observación</p>
-<ul class="simple">
-<li><p>En la <a class="reference internal" href="#feature-maps-inp-img-numref"><span class="std std-numref">Fig. 3.3</span></a>, la primera capa oculta genera tres matrices de imágenes como entrada para la siguiente capa, similar a la <em><strong>representación RGB de imágenes en color</strong></em>, donde <em><strong>cada matriz indica la intensidad de un color en cada píxel con valores de 0 a 255</strong></em>.</p></li>
-</ul>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Rojo (R)</p></th>
-<th class="head"><p>Verde (G)</p></th>
-<th class="head"><p>Azul (B)</p></th>
-<th class="head"><p>Color resultante</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>255</p></td>
-<td><p>0</p></td>
-<td><p>0</p></td>
-<td><p>🔴 Rojo puro</p></td>
-</tr>
-<tr class="row-odd"><td><p>0</p></td>
-<td><p>255</p></td>
-<td><p>0</p></td>
-<td><p>🟢 Verde puro</p></td>
-</tr>
-<tr class="row-even"><td><p>0</p></td>
-<td><p>0</p></td>
-<td><p>255</p></td>
-<td><p>🔵 Azul puro</p></td>
-</tr>
-<tr class="row-odd"><td><p>255</p></td>
-<td><p>255</p></td>
-<td><p>0</p></td>
-<td><p>🟡 Amarillo (Rojo + Verde)</p></td>
-</tr>
-<tr class="row-even"><td><p>0</p></td>
-<td><p>255</p></td>
-<td><p>255</p></td>
-<td><p>🔵 Cian (Verde + Azul)</p></td>
-</tr>
-<tr class="row-odd"><td><p>255</p></td>
-<td><p>0</p></td>
-<td><p>255</p></td>
-<td><p>🟣 Magenta (Rojo + Azul)</p></td>
-</tr>
-<tr class="row-even"><td><p>255</p></td>
-<td><p>255</p></td>
-<td><p>255</p></td>
-<td><p>⚪ Blanco (Máxima intensidad)</p></td>
-</tr>
-<tr class="row-odd"><td><p>0</p></td>
-<td><p>0</p></td>
-<td><p>0</p></td>
-<td><p>⚫ Negro (Sin intensidad)</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<ul class="simple">
-<li><p>Las entradas no son matrices bidimensionales, sino <strong>conjuntos de matrices bidimensionales</strong>, conocidos en matemáticas como <strong>tensores tridimensionales</strong> o <strong>volúmenes</strong>. Se adopta este último término por su relación con la geometría. El desafío radica en definir <strong>cómo realizar convoluciones en estos volúmenes</strong>.</p></li>
-</ul>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-
-<span class="n">imagen</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
-    <span class="p">[[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">]],</span>  <span class="c1"># Rojo, Verde, Azul</span>
-    <span class="p">[[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">],</span> <span class="p">[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">]],</span>  <span class="c1"># Amarillo, Cian, Magenta</span>
-    <span class="p">[[</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">],</span> <span class="p">[</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>  <span class="c1"># Blanco, Gris, Negro</span>
-<span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
-
-<span class="n">canal_rojo</span>  <span class="o">=</span> <span class="n">imagen</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># Matriz de valores R</span>
-<span class="n">canal_verde</span> <span class="o">=</span> <span class="n">imagen</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># Matriz de valores G</span>
-<span class="n">canal_azul</span>  <span class="o">=</span> <span class="n">imagen</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span>  <span class="c1"># Matriz de valores B</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">imagen</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/0c17d4a0123ec5e83fe1c0b61dd9cb3c2dd887a25675bb864ead733982c05895.png" src="_images/0c17d4a0123ec5e83fe1c0b61dd9cb3c2dd887a25675bb864ead733982c05895.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matriz del canal Rojo (R):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">canal_rojo</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matriz del canal Verde (G):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">canal_verde</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matriz del canal Azul (B):</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">canal_azul</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matriz del canal Rojo (R):
- [[255   0   0]
- [255   0 255]
- [255 128   0]]
-Matriz del canal Verde (G):
- [[  0 255   0]
- [255 255   0]
- [255 128   0]]
-Matriz del canal Azul (B):
- [[  0   0 255]
- [  0 255 255]
- [255 128   0]]
-</pre></div>
-</div>
-</div>
-</div>
-<figure class="align-center" id="id55">
-<a class="reference internal image-reference" href="_images/matrix_to_volume_conv.png"><img alt="_images/matrix_to_volume_conv.png" src="_images/matrix_to_volume_conv.png" style="width: 433.6px; height: 172.0px;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 3.27 </span><span class="caption-text">Se apilan <span class="math notranslate nohighlight">\(d\)</span> matrices de tamaño <span class="math notranslate nohighlight">\(h\times w\)</span> cada una para formar un volumen de tamaño <span class="math notranslate nohighlight">\(h \times w\times d\)</span>. En este caso, <span class="math notranslate nohighlight">\(h = w = 5\)</span> y <span class="math notranslate nohighlight">\(d = 3\)</span>. Fuente <span class="bibtex-citation" id="id54">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#id55" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<ul class="simple">
-<li><p>Por convención, las tres dimensiones de un volumen se representarán como <span class="math notranslate nohighlight">\(h\)</span> <em><strong>para la altura,</strong></em> <span class="math notranslate nohighlight">\(w\)</span> <em><strong>para la anchura</strong></em> y <span class="math notranslate nohighlight">\(d\)</span> <em><strong>para la profundidad</strong></em>. Nótese que la profundidad <span class="math notranslate nohighlight">\(d\)</span> <em><strong>corresponde al número de imágenes implicadas</strong></em>. Así pues, si tenemos <em><strong>tres imágenes de 256 × 256</strong></em>, entonces <span class="math notranslate nohighlight">\(h = w = 256\)</span> y <span class="math notranslate nohighlight">\(d = 3\)</span> y diremos que el volumen es de <em><strong>tamaño (dimensión) 256 × 256 × 3</strong></em>. <code class="xref std std-numref docutils literal notranslate"><span class="pre">matrix_to_volume_conv_numref</span></code> ilustra la geometría asociada a las respectivas definiciones.</p></li>
-</ul>
-<div class="information admonition">
-<p class="admonition-title"><strong>Tipos de formas tensoriales</strong></p>
-<ul>
-<li><p>En el procesamiento de imágenes, cada <strong>canal</strong> es una <strong>matriz 2D</strong> que contiene un tipo específico de información. Cuando se combinan varios canales, obtenemos un <strong>tensor 3D</strong> con forma:</p>
-<div class="math notranslate nohighlight">
-\[
-    \text{(alto, ancho, canales)}
-    \]</div>
-</li>
-<li><p><strong>Ejemplos de formas</strong></p></li>
-</ul>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Tipo de imagen</p></th>
-<th class="head"><p>Forma del tensor <code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">C)</span></code></p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Escala de grises</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">1)</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>RGB (color)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">3)</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>RGBA (color + transparencia)</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">4)</span></code></p></td>
-</tr>
-<tr class="row-odd"><td><p>Satelital multiespectral</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">13)</span></code></p></td>
-</tr>
-<tr class="row-even"><td><p>Hiperespectral</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">(H,</span> <span class="pre">W,</span> <span class="pre">200+)</span></code></p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<ul>
-<li><p>En <code class="docutils literal notranslate"><span class="pre">TensorFlow</span></code>, cuando trabajamos con <strong>lotes de imágenes</strong>, la forma es</p>
-<div class="math notranslate nohighlight">
-\[
-    \text{(batch_size, alto, ancho, canales)}
-    \]</div>
-</li>
-<li><p>Las imágenes con más de tres canales se utilizan ampliamente en <strong>ciencia, ingeniería y medicina</strong>. Algunos casos representativos son los siguientes:</p></li>
-<li><p><strong>Teledetección Satelital</strong></p>
-<ul class="simple">
-<li><p><strong>Sentinel-2 (ESA):</strong> imágenes multiespectrales con <strong>13 bandas</strong> que capturan información en el visible, infrarrojo cercano e infrarrojo de onda corta.</p>
-<ul>
-<li><p>Aplicaciones: monitoreo de cultivos, detección de deforestación, seguimiento de incendios forestales, calidad del agua.</p></li>
-</ul>
-</li>
-<li><p><strong>Landsat-8 (NASA/USGS):</strong> imágenes con <strong>11 bandas espectrales</strong> para estudios ambientales y urbanos.</p>
-<ul>
-<li><p>Ejemplo: cálculo del <strong>NDVI (Normalized Difference Vegetation Index)</strong> para medir la salud de la vegetación.</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>Medicina e Imágenes Biomédicas</strong></p>
-<ul class="simple">
-<li><p><strong>Resonancia Magnética (MRI):</strong> puede incluir múltiples secuencias (T1, T2, FLAIR, DWI, etc.), cada una representando un canal con distinta información anatómica o funcional.</p>
-<ul>
-<li><p>Aplicaciones: detección de tumores, diagnóstico neurológico.</p></li>
-</ul>
-</li>
-<li><p><strong>Microscopía de fluorescencia:</strong> imágenes con <strong>canales multicolor</strong> para visualizar diferentes proteínas o estructuras celulares.</p></li>
-</ul>
-</li>
-<li><p><strong>Defensa y Detección</strong></p>
-<ul class="simple">
-<li><p><strong>Radar de Apertura Sintética (SAR):</strong> imágenes con varios canales que representan diferentes polarizaciones de radar.</p>
-<ul>
-<li><p>Aplicaciones: detección de barcos, monitoreo de movimientos de tierra, vigilancia marítima.</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>Agricultura de Precisión</strong></p>
-<ul class="simple">
-<li><p><strong>Drones multiespectrales:</strong> capturan entre 5 y 10 bandas (RGB + infrarrojos).</p>
-<ul>
-<li><p>Aplicaciones: estimación de rendimiento de cultivos, riego inteligente, detección temprana de plagas.</p></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p><strong>Industria y Calidad</strong></p>
-<ul class="simple">
-<li><p><strong>Cámaras hiperespectrales (200+ canales):</strong> cada canal corresponde a una longitud de onda distinta.</p>
-<ul>
-<li><p>Aplicaciones: inspección de alimentos (detección de contaminantes), control de calidad en textiles, minería (identificación de minerales).</p></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="tip admonition">
-<p class="admonition-title">Convolución de volúmenes</p>
-<ul class="simple">
-<li><p>En una capa con entrada de dimensiones <span class="math notranslate nohighlight">\(h \times w \times d\)</span>, los filtros de las capas ocultas también son volúmenes, pero deben tener la <strong>misma profundidad</strong> <span class="math notranslate nohighlight">\(d\)</span> que la entrada, aunque su altura y anchura pueden variar.</p></li>
-<li><p>Si la entrada es un volumen <span class="math notranslate nohighlight">\(\boldsymbol{I}\)</span> de <span class="math notranslate nohighlight">\(l \times l \times d\)</span>, este consta de <span class="math notranslate nohighlight">\(d\)</span> imágenes <span class="math notranslate nohighlight">\(I_r\)</span> de <span class="math notranslate nohighlight">\(l \times l\)</span>. Un filtro <span class="math notranslate nohighlight">\(\boldsymbol{H}\)</span> de <span class="math notranslate nohighlight">\(m \times m \times d\)</span> también se compone de <span class="math notranslate nohighlight">\(d\)</span> imágenes <span class="math notranslate nohighlight">\(H_r\)</span> de <span class="math notranslate nohighlight">\(m \times m\)</span>. La convolución se define a partir de estos elementos.</p></li>
-</ul>
-<ol class="arabic simple">
-<li><p><em><strong>Convolucionar las correspondientes matrices de imágenes bidimensionales</strong></em> para generar <span class="math notranslate nohighlight">\(d\)</span> matrices bidimensionales de salida, es decir</p></li>
-</ol>
-<div class="math notranslate nohighlight">
-\[
-O_{r}=I_{r}\star H_{r},\quad r=1,2,\dots,d.
-\]</div>
-<ol class="arabic" start="2">
-<li><p>La <em><strong>convolución de los dos volúmenes</strong></em>, <span class="math notranslate nohighlight">\(\boldsymbol{I}\)</span> y <span class="math notranslate nohighlight">\(\boldsymbol{H}\)</span>, se define como</p>
-<div class="math notranslate nohighlight">
-\[
-    O=\sum_{r=1}^{d}O_{r}.
-    \]</div>
-<p>En otras palabras, la <em><strong><code class="docutils literal notranslate"><span class="pre">convolución</span> <span class="pre">(denotada</span> <span class="pre">por</span></code></strong></em> <span class="math notranslate nohighlight">\(\star\)</span>) <em><strong><code class="docutils literal notranslate"><span class="pre">de</span> <span class="pre">dos</span> <span class="pre">volúmenes</span> <span class="pre">es</span> <span class="pre">una</span> <span class="pre">matriz</span> <span class="pre">bidimensional</span></code></strong></em>, es decir,</p>
-<div class="math notranslate nohighlight">
-\[
-    \text{3D volume}\star\text{3D volume}=\text{2D array}.
-    \]</div>
-</li>
-</ol>
-</div>
-<figure class="align-center" id="id56">
-<a class="reference internal image-reference" href="_images/volume_conv_3Dto2D.png"><img alt="_images/volume_conv_3Dto2D.png" src="_images/volume_conv_3Dto2D.png" style="width: 749.4px; height: 158.4px;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 3.28 </span><span class="caption-text">Convolución <span class="math notranslate nohighlight">\(\text{3D volume}\star\text{3D volume}=\text{2D array}\)</span>. <span class="math notranslate nohighlight">\(h = w = l, h = w = m\)</span> y <span class="math notranslate nohighlight">\(d = 3\)</span>.</span><a class="headerlink" href="#id56" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<ul class="simple">
-<li><p>La operación se ilustra en la <code class="xref std std-numref docutils literal notranslate"><span class="pre">volume_conv_3Dto2D_numref</span></code>. Las <em><strong>matrices correspondientes (mostradas por diferentes colores y tipos de líneas)</strong></em>. Las <em><strong>tres matrices de salida</strong></em> (<span class="math notranslate nohighlight">\(d = 3\)</span>) <em><strong>se suman posteriormente para formar la convolución de los dos volúmenes</strong></em>. La dimensión <span class="math notranslate nohighlight">\(k\)</span> de la salida depende de los valores de <span class="math notranslate nohighlight">\(l\)</span> y <span class="math notranslate nohighlight">\(m\)</span>, del <em>stride</em> <span class="math notranslate nohighlight">\(s\)</span> y del <em>padding</em> <span class="math notranslate nohighlight">\(p\)</span>, si se utiliza, según la Eq. <a class="reference internal" href="#equation-resulting-matrix-size">(3.5)</a>.</p></li>
-</ul>
-<div class="tip admonition">
-<p class="admonition-title">Observación</p>
-<ul class="simple">
-<li><p>En la práctica, cada capa de una CNN comprende varios de estos volúmenes de filtrado. Por ejemplo, <em><strong>si la entrada a una capa es un volumen</strong></em> <span class="math notranslate nohighlight">\(l\times l\times d\)</span>, <em><strong>y hay, digamos</strong></em>, <span class="math notranslate nohighlight">\(c\)</span> <em><strong>volúmenes de núcleo, cada uno de dimensiones</strong></em> <span class="math notranslate nohighlight">\(m\times m\times d\)</span>, <em><strong>la salida de la capa será un volumen</strong></em> <span class="math notranslate nohighlight">\(k\times k\times c\)</span>, donde <span class="math notranslate nohighlight">\(k\)</span> se determina la Eq. <a class="reference internal" href="#equation-resulting-matrix-size">(3.5)</a>.</p></li>
-</ul>
-</div>
-</section>
-<section id="id57">
-<h2><span class="section-number">3.19. </span>Red en red y convolución 1 × 1<a class="headerlink" href="#id57" title="Link to this heading">#</a></h2>
-<div class="important admonition">
-<p class="admonition-title">Observación</p>
-<ul class="simple">
-<li><p>La convolución 1 × 1 no tiene sentido cuando se trata de matrices bidimensionales. En efecto <em><strong>una matriz de filtro 1 × 1 es un escalar</strong></em>. <em><strong>Convolucionar una matriz</strong></em> <span class="math notranslate nohighlight">\(I\)</span> <em><strong>de</strong></em> <span class="math notranslate nohighlight">\(l\times l\)</span> <em><strong>con un escalar</strong></em> <span class="math notranslate nohighlight">\(a\)</span> <em><strong>equivale a deslizar el valor escalar sobre todos los píxeles y multiplicar cada uno de ellos por</strong></em> <span class="math notranslate nohighlight">\(a\)</span>. El resultado es la trivial <span class="math notranslate nohighlight">\(aI\)</span> .</p></li>
-</ul>
-</div>
-<ul>
-<li><p>Sin embargo, <em><strong>cuando se trata de volúmenes, la convolución 1 × 1 tiene sentido</strong></em>. En este caso, el filtro correspondiente, <span class="math notranslate nohighlight">\(\boldsymbol{H}\)</span>, es un volumen de tamaño <span class="math notranslate nohighlight">\(1\times 1\times d\)</span>. <em><strong>Geométricamente, se trata de un “tubo”</strong></em>, con <span class="math notranslate nohighlight">\(h = w = 1\)</span> y <span class="math notranslate nohighlight">\(d\)</span> elementos en profundidad, <span class="math notranslate nohighlight">\(h(1, 1, r), r = 1, 2,\dots,d\)</span>. Por lo tanto, <em><strong>el resultado de la convolución de un volumen</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{I}\)</span> de <span class="math notranslate nohighlight">\(l\times l\times d\)</span> con un <span class="math notranslate nohighlight">\(1\times 1\times d\)</span> volumen <span class="math notranslate nohighlight">\(H\)</span> <em><strong>es la media ponderada</strong></em>,</p>
-<div class="math notranslate nohighlight">
-\[
-    O=\boldsymbol{I}\star\boldsymbol{H}=\sum_{r=1}^{d}h(1, 1, r)I_{r}
-    \]</div>
-<p>donde <span class="math notranslate nohighlight">\(I_{r},~r=1,2,\dots,d,\)</span> son las <span class="math notranslate nohighlight">\(d\)</span> matrices, cada una de dimensiones <span class="math notranslate nohighlight">\(l\times l\)</span>, que comprende <span class="math notranslate nohighlight">\(\boldsymbol{I}\)</span>.</p>
-</li>
-</ul>
-<div class="admonition-convolucion-1-times-1 admonition">
-<p class="admonition-title">Convolución <span class="math notranslate nohighlight">\(1\times 1\)</span></p>
-<ul>
-<li><p>Ahora bien, cabe preguntarse <em><strong>por qué necesitamos una operación de este tipo en la práctica</strong></em>. La respuesta está relacionada con el <em><strong>tamaño de los volúmenes implicados</strong></em>; mediante el uso de convoluciones <span class="math notranslate nohighlight">\(1\times 1\)</span>, <em><strong>se puede <code class="docutils literal notranslate"><span class="pre">controlar</span> <span class="pre">y</span> <span class="pre">cambiar</span> <span class="pre">su</span> <span class="pre">tamaño</span> <span class="pre">para</span> <span class="pre">adaptarlo</span> <span class="pre">a</span> <span class="pre">las</span> <span class="pre">necesidades</span> <span class="pre">de</span> <span class="pre">la</span> <span class="pre">red</span></code></strong></em>.</p></li>
-<li><p>Supongamos que en una <em><strong>etapa/capa</strong></em> de una red profunda hemos obtenido un volumen <span class="math notranslate nohighlight">\(\boldsymbol{I}\)</span> de dimensiones <span class="math notranslate nohighlight">\(k\times k\times d\)</span>. <em><strong>Para cambiar la profundidad de</strong></em> <span class="math notranslate nohighlight">\(d\)</span> a <span class="math notranslate nohighlight">\(c\)</span><em><strong>, conservando el mismo tamaño</strong></em> <span class="math notranslate nohighlight">\(k\)</span>, para la altura y la anchura, <em><strong>empleamos</strong></em> <span class="math notranslate nohighlight">\(c\)</span> <em><strong>volúmenes,</strong></em> <span class="math notranslate nohighlight">\(H_{t}, t = 1, 2,\dots,c\)</span>, <em><strong>cada uno de dimensiones</strong></em> <span class="math notranslate nohighlight">\(1\times 1\times d\)</span>. Al realizar las <span class="math notranslate nohighlight">\(c\)</span> convoluciones obtenemos</p>
-<div class="math notranslate nohighlight">
-\[
-    O_{t}=\boldsymbol{I}\star\boldsymbol{H}_{t}=\sum_{r=1}^{d}h_{t}(1, 1, r)I_{r},~t=1,2,\dots,c.
-    \]</div>
-<p>Apilando <span class="math notranslate nohighlight">\(O_{t}, t = 1, 2,\dots,c\)</span>, obtenemos el volumen <span class="math notranslate nohighlight">\(\boldsymbol{O}\)</span> de dimensión <span class="math notranslate nohighlight">\(k\times k\times c\)</span> (ver <code class="xref std std-numref docutils literal notranslate"><span class="pre">1x1conv_dim_reduction_numref</span></code>).</p>
-</li>
-<li><p>La <em><strong>información original se sigue conservando en el nuevo volumen, de forma promediada</strong></em>. A menudo, una vez obtenido el nuevo volumen <span class="math notranslate nohighlight">\(\boldsymbol{O}\)</span>, <em><strong>sus elementos se “empujan” a través de una no linealidad</strong></em>, por ejemplo, <code class="docutils literal notranslate"><span class="pre">ReLU</span></code>.</p></li>
-<li><p>La convolución <span class="math notranslate nohighlight">\(1\times 1\)</span> seguida de la no linealidad se denomina <strong><code class="docutils literal notranslate"><span class="pre">operación</span> <span class="pre">de</span> <span class="pre">red</span> <span class="pre">en</span> <span class="pre">red</span></code></strong> y su finalidad es <em><strong>añadir una etapa de no linealidad adicional en el flujo de operaciones a través de la red</strong></em>. Por lo tanto, en este contexto, si <span class="math notranslate nohighlight">\(c&lt;d\)</span>, <em><strong>la operación de red en red puede considerarse una técnica de reducción de la dimensionalidad no lineal</strong></em>.</p></li>
-</ul>
-</div>
-<figure class="align-center" id="id59">
-<a class="reference internal image-reference" href="_images/1x1conv_dim_reduction.png"><img alt="_images/1x1conv_dim_reduction.png" src="_images/1x1conv_dim_reduction.png" style="width: 706.3px; height: 274.4px;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 3.29 </span><span class="caption-text">Convolución <span class="math notranslate nohighlight">\(1\times 1\)</span>, con <span class="math notranslate nohighlight">\(c\)</span> tubos de dimensión <span class="math notranslate nohighlight">\(1\times 1\times d\)</span>, donde <span class="math notranslate nohighlight">\(d\)</span> es la profundidad del volumen de entrada. Fuente <span class="bibtex-citation" id="id58">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#id59" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<div class="important admonition">
-<p class="admonition-title">Ejemplo</p>
-<ul class="simple">
-<li><p>Consideremos que la <em><strong>entrada de una capa es un volumen</strong></em> <span class="math notranslate nohighlight">\(\boldsymbol{I}\)</span> de 28 × 28 × 192. El objetivo es <em><strong>producir a la salida de la capa un volumen,</strong></em> <span class="math notranslate nohighlight">\(O\)</span><em><strong>, de dimensión</strong></em> 28 × 28 × 32. Para ello <em><strong>emplear 5 × 5 convoluciones iguales</strong></em> y un volumen intermedio <span class="math notranslate nohighlight">\(\boldsymbol{O}'\)</span> de dimensiones <span class="math notranslate nohighlight">\(28\times 28\times 16\)</span>. Nótese que en la última capa se usó <em><strong>padding de 2 píxeles en cada borde</strong></em>.</p></li>
-<li><p>Observe que, rellenando todas las matrices apiladas en <span class="math notranslate nohighlight">\(\boldsymbol{I}\)</span> con <span class="math notranslate nohighlight">\(p\)</span> cero columnas y filas, se tiene que el <em><strong>número de multiplicaciones y adiciones (MADS)</strong></em> es <span class="math notranslate nohighlight">\(3.7\times 10^{6}\times 32\approx 120~\)</span> millones MADS. Además, <em><strong>usando convoluciones</strong></em> <span class="math notranslate nohighlight">\(1\times 1\)</span><em><strong>, este número se reduce a</strong></em> <span class="math notranslate nohighlight">\(28^{2}\times 25\times 16\times 32\approx 10\)</span> millones MADS (ver <span class="bibtex-citation" id="id60">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>).</p></li>
-<li><p>A menudo, el volumen intermedio, <span class="math notranslate nohighlight">\(\boldsymbol{O}'\)</span>, se conoce como <em><strong>capa <code class="docutils literal notranslate"><span class="pre">cuello</span> <span class="pre">de</span> <span class="pre">botella</span> <span class="pre">(bottleneck</span> <span class="pre">layer)</span></code></strong></em>; <em><strong>su función es “reducir” primero el tamaño del volumen de entrada, antes de obtener el volumen de salida final</strong></em> (ver <code class="xref std std-numref docutils literal notranslate"><span class="pre">bottleneck_layer_1x1conv_numref</span></code>).</p></li>
-</ul>
-</div>
-<figure class="align-center" id="id62">
-<a class="reference internal image-reference" href="_images/bottleneck_layer_1x1conv.png"><img alt="_images/bottleneck_layer_1x1conv.png" src="_images/bottleneck_layer_1x1conv.png" style="width: 665.6px; height: 239.20000000000002px;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 3.30 </span><span class="caption-text">Capa cuello de botella. Fuente <span class="bibtex-citation" id="id61">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#id62" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-</section>
-<section id="id63">
-<h2><span class="section-number">3.20. </span>Arquitectura CNN completa<a class="headerlink" href="#id63" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>La forma típica de una red convolucional completa consiste en una <em><strong><code class="docutils literal notranslate"><span class="pre">secuencia</span> <span class="pre">de</span> <span class="pre">capas</span> <span class="pre">convolucionales</span></code>, cada una de las cuales que comprende los tres pasos básicos</strong></em>, a saber, <em><strong><code class="docutils literal notranslate"><span class="pre">convolución</span> <span class="pre">(Conv.),</span> <span class="pre">no</span> <span class="pre">linealidad</span> <span class="pre">(ReLU)</span> <span class="pre">y</span> <span class="pre">agrupación</span> <span class="pre">(Pooling)</span></code></strong></em>, como se describe al principio de esta sección. <em><strong>Dependiendo de la aplicación, <code class="docutils literal notranslate"><span class="pre">se</span> <span class="pre">pueden</span> <span class="pre">apilar</span> <span class="pre">tantas</span> <span class="pre">capas</span> <span class="pre">como</span> <span class="pre">sea</span> <span class="pre">necesario</span></code></strong></em>, donde la salida de una capa se convierte en la entrada de la siguiente. Las <em><strong>entradas y salidas de cada capa son volúmenes</strong></em>, como se ha descrito anteriormente.</p></li>
-</ul>
-<figure class="align-center" id="id65">
-<a class="reference internal image-reference" href="_images/complete_cnnarq.png"><img alt="_images/complete_cnnarq.png" src="_images/complete_cnnarq.png" style="width: 667.2px; height: 375.20000000000005px;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 3.31 </span><span class="caption-text">Arquitectura CNN completa. Fuente <span class="bibtex-citation" id="id64">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#id65" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<div class="important admonition">
-<p class="admonition-title">Procedimiento de una CNN completa</p>
-<ul class="simple">
-<li><p><em><strong>En la primera capa, se aplican filtros para realizar convoluciones seguidas de una transformación no lineal</strong></em>. Luego, la operación de <em>pooling</em> <em><strong>reduce las dimensiones de la salida, que sirve como entrada para la siguiente capa</strong></em>. Este proceso se repite hasta que <em><strong>el volumen final se vectoriza, en un paso conocido como</strong></em> <em>flattening</em>.</p></li>
-<li><p>El resultado es un <em><strong>vector de características obtenido a partir de las transformaciones aplicadas en cada capa convolucional</strong></em>. Este vector se utiliza como entrada para un modelo de aprendizaje, como una <em><strong>red neuronal totalmente conectada o una máquina de vectores de soporte</strong></em>.</p></li>
-</ul>
-</div>
-<div class="seealso admonition">
-<p class="admonition-title">Observación</p>
-<ul class="simple">
-<li><p>La estrategia consiste en <strong>reducir dimensiones mientras se incrementa la profundidad</strong>, aumentando filtros por etapa para extraer más características. La cantidad de capas convolucionales y totalmente conectadas depende de la aplicación, sin un método formal para su determinación, por lo que se elige mediante evaluación. Se sugiere <strong>partir de arquitecturas existentes</strong>, y el aprendizaje Bayesiano facilita la selección óptima de nodos o filtros.</p></li>
-</ul>
-</div>
-</section>
-<section id="id66">
-<h2><span class="section-number">3.21. </span>Características en una CNN<a class="headerlink" href="#id66" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><em><strong>Las características</strong></em> (<em>features</em>) en una Red Neuronal Convolucional (CNN) <em><strong>son patrones visuales que la red aprende a reconocer en las imágenes</strong></em>. Se extraen automáticamente a través de capas convolucionales aplicadas en diferentes niveles de abstracción. <strong>¿Cuáles son las características en una CNN?</strong> Las características son <em><strong>representaciones numéricas que describen el contenido visual de una imagen</strong></em>. Se generan a través de filtros convolucionales que detectan patrones en distintos niveles:</p></li>
-</ul>
-<ol class="arabic simple">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Características</span> <span class="pre">de</span> <span class="pre">bajo</span> <span class="pre">nivel</span></code></strong> (Primeras capas)</p></li>
-</ol>
-<p><strong>Se detectan patrones simples como</strong>:</p>
-<ul class="simple">
-<li><p>Bordes</p></li>
-<li><p>Texturas</p></li>
-<li><p>Esquinas</p></li>
-<li><p>Gradientes de color</p></li>
-</ul>
-<p><strong>Ejemplo:</strong> Un filtro Sobel detecta los bordes en una imagen.</p>
-<ol class="arabic simple" start="2">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Características</span> <span class="pre">de</span> <span class="pre">nivel</span> <span class="pre">intermedio</span> <span class="pre">(Capas</span> <span class="pre">medias)</span></code></strong></p></li>
-</ol>
-<p><strong>Se combinan los bordes y texturas detectados antes para formar estructuras más complejas</strong>, como:</p>
-<ul class="simple">
-<li><p>Formas básicas (círculos, líneas curvas)</p></li>
-<li><p>Contornos de objetos</p></li>
-<li><p>Partes de objetos (ojos, nariz, ruedas)</p></li>
-</ul>
-<p><strong>Ejemplo:</strong> En una CNN que detecta rostros, esta capa podría identificar una nariz o un ojo.</p>
-<ol class="arabic simple" start="3">
-<li><p><strong><code class="docutils literal notranslate"><span class="pre">Características</span> <span class="pre">de</span> <span class="pre">alto</span> <span class="pre">nivel</span> <span class="pre">(Últimas</span> <span class="pre">capas)</span></code></strong></p></li>
-</ol>
-<p><strong>Se forman representaciones abstractas y semánticas de la imagen</strong>, como:</p>
-<ul class="simple">
-<li><p>Objetos completos (caras, coches, animales)</p></li>
-<li><p>Relaciones espaciales entre partes</p></li>
-<li><p>Categorización (perro vs. gato)</p></li>
-</ul>
-<p><strong>Ejemplo:</strong> En una CNN entrenada para clasificar animales, las capas profundas pueden reconocer la silueta completa de un gato.</p>
-<p><strong><code class="docutils literal notranslate"><span class="pre">Ejemplo</span> <span class="pre">Visual</span></code></strong>: Si la CNN clasifica gatos y perros:</p>
-<ul class="simple">
-<li><p><strong>Bordes</strong> → Detecta líneas y curvas.</p></li>
-<li><p><strong>Formas intermedias</strong> → Identifica orejas, ojos y hocico.</p></li>
-<li><p><strong>Características de alto nivel</strong> → Distingue un gato de un perro.</p></li>
-</ul>
-</section>
-<section id="id67">
-<h2><span class="section-number">3.22. </span>Arquitecturas de Redes Neuronales Convolucionales<a class="headerlink" href="#id67" title="Link to this heading">#</a></h2>
-<div class="information admonition">
-<p class="admonition-title">Introducción</p>
-<ul class="simple">
-<li><p>El diseño de una CNN sigue pasos básicos con múltiples variantes arquitectónicas y optimizaciones para mejorar la eficiencia computacional (ver <code class="xref std std-numref docutils literal notranslate"><span class="pre">complete_cnnarq_numref</span></code>). <em><strong>Implementarlas requiere un gran esfuerzo técnico para su aprendizaje y aplicación</strong></em>.</p></li>
-<li><p>A continuación, se presentan <em><strong>redes convolucionales clásicas, cuya comprensión es clave para profundizar en el tema</strong></em>, aunque algunos de sus métodos ya no se utilicen. Los estudios citados ofrecen una base sólida para el aprendizaje de las CNN.</p></li>
-</ul>
-</div>
-<figure class="align-center" id="id90">
-<img alt="_images/cat_dog_class.png" src="_images/cat_dog_class.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 3.32 </span><span class="caption-text">Clasificación de imágenes. Fuente <a class="reference external" href="https://docs.clarifai.com/">clarifai</a></span><a class="headerlink" href="#id90" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-</section>
-<section id="id68">
-<h2><span class="section-number">3.23. </span>LeNet-5<a class="headerlink" href="#id68" title="Link to this heading">#</a></h2>
-<div class="tip admonition">
-<p class="admonition-title">LeNet-5</p>
-<ul class="simple">
-<li><p>Este es un ejemplo típico de la <em><strong>primera generación de CNNs y fue construido para reconocer dígitos de números</strong></em> (ver <span class="bibtex-citation" id="id69">[<a class="reference internal" href="biblio.html#id30" title="Yann LeCun, Léon Bottou, Yoshua Bengio, and Patrick Haffner. Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86(11):2278–2324, 1998.">LeCun <em>et al.</em>, 1998</a>]</span>). Por razones históricas, comentemos un poco su arquitectura. <em><strong>La entrada de la red consiste en imágenes en escala de grises de tamaño 32 × 32 × 1</strong></em>. La red emplea <em><strong>dos capas de convolución</strong></em>. En la primera capa, el <em><strong>volumen de salida tiene un tamaño de 28 × 28 × 6</strong></em>, que tras la agrupación <em><strong>se convierte en 14 × 14 × 6</strong></em>.</p></li>
-<li><p>Las <em><strong>dimensiones del volumen en la segunda capa eran 10 × 10 × 16 y, tras la agrupación, 5 × 5 × 16</strong></em>. La <em><strong>no linealidad utilizada entonces era de tipo <code class="docutils literal notranslate"><span class="pre">sigmoid</span></code></strong></em>. Nótese que la <em><strong><code class="docutils literal notranslate"><span class="pre">altura</span> <span class="pre">y</span> <span class="pre">la</span> <span class="pre">anchura</span> <span class="pre">de</span> <span class="pre">los</span> <span class="pre">volúmenes</span> <span class="pre">disminuyen</span> <span class="pre">y</span> <span class="pre">la</span> <span class="pre">profundidad</span> <span class="pre">aumenta</span></code></strong></em>, como se ha señalado antes. El <em><strong>número de elementos del último volumen es igual a 400</strong></em>. Estos elementos se apilan en un vector y alimentan los correspondientes <em><strong>nodos de entrada de una red totalmente conectada</strong></em>.</p></li>
-<li><p>Esta última consta de <em><strong>dos capas ocultas con 120 nodos en la primera y 84 nodos en la segunda</strong></em>. Hay <em><strong>10 nodos de salida, uno por dígito, que utilizan una no linealidad <code class="docutils literal notranslate"><span class="pre">softmax</span></code></strong></em>. El número total de parámetros implicados es del orden de 60.000.</p></li>
-</ul>
-</div>
-<figure class="align-center" id="id71">
-<img alt="_images/letnet5_architecture.jpeg" src="_images/letnet5_architecture.jpeg" />
-<figcaption>
-<p><span class="caption-number">Fig. 3.33 </span><span class="caption-text">Arquitectura LeNet-5. Fuente <span class="bibtex-citation" id="id70">[<a class="reference internal" href="biblio.html#id30" title="Yann LeCun, Léon Bottou, Yoshua Bengio, and Patrick Haffner. Gradient-based learning applied to document recognition. Proceedings of the IEEE, 86(11):2278–2324, 1998.">LeCun <em>et al.</em>, 1998</a>]</span>.</span><a class="headerlink" href="#id71" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-</section>
-<section id="id72">
-<h2><span class="section-number">3.24. </span>AlexNet<a class="headerlink" href="#id72" title="Link to this heading">#</a></h2>
-<div class="tip admonition">
-<p class="admonition-title">AlexNet</p>
-<ul class="simple">
-<li><p>Esta red también es histórica ya que, <em><strong>demostró que el punto crucial para hacer grandes redes es la disponibilidad de grandes conjuntos de entrenamiento</strong></em> <span class="bibtex-citation" id="id73">[<a class="reference internal" href="biblio.html#id31" title="Alex Krizhevsky, Ilya Sutskever, and Geoffrey E Hinton. Imagenet classification with deep convolutional neural networks. Advances in neural information processing systems, 2012.">Krizhevsky <em>et al.</em>, 2012</a>]</span>. El artículo relacionado es el que realmente hizo volver a las CNN y <em><strong>actuó como catalizador para su adopción mucho más allá de la tarea de reconocimiento de dígitos</strong></em>. La <em><strong>Alexnet es un desarrollo de la LeNet-5, pero es mucho más grande e implica aproximadamente 60 millones de parámetros</strong></em>.</p></li>
-<li><p>Las <em><strong>entradas a la red son imágenes RGB de tamaño 227 × 227 × 3</strong></em>. Comprende <em><strong>cinco capas ocultas</strong></em> y el <em><strong>volumen final consta de 9216 elementos</strong></em> que alimentan una red totalmente conectada con <em><strong>dos capas ocultas de 4096 unidades cada una</strong></em>. La <em><strong>salida consta de 1000 nodos <code class="docutils literal notranslate"><span class="pre">softmax</span></code> (uno por clase) para reconocer imágenes del conjunto de datos ImageNet</strong></em> para el reconocimiento de objetos. <code class="docutils literal notranslate"><span class="pre">ReLU</span></code> se ha utilizado como no linealidad en las capas ocultas.</p></li>
-</ul>
-</div>
-<figure class="align-center" id="id75">
-<img alt="_images/alexnet_architecture.png" src="_images/alexnet_architecture.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 3.34 </span><span class="caption-text">Arquitectura LeNet-5. Fuente <span class="bibtex-citation" id="id74">[<a class="reference internal" href="biblio.html#id31" title="Alex Krizhevsky, Ilya Sutskever, and Geoffrey E Hinton. Imagenet classification with deep convolutional neural networks. Advances in neural information processing systems, 2012.">Krizhevsky <em>et al.</em>, 2012</a>]</span>.</span><a class="headerlink" href="#id75" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-</section>
-<section id="id76">
-<h2><span class="section-number">3.25. </span>VGG-16<a class="headerlink" href="#id76" title="Link to this heading">#</a></h2>
-<div class="admonition-vgg-16 admonition">
-<p class="admonition-title">VGG-16</p>
-<ul class="simple">
-<li><p>Esta red <span class="bibtex-citation" id="id77">[<a class="reference internal" href="biblio.html#id32" title="Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. arXiv preprint arXiv:1409.1556, 2014.">Simonyan and Zisserman, 2014</a>]</span> es <em><strong>mucho mayor que AlexNet</strong></em>. Implica un total de aproximadamente <em><strong>140 millones de parámetros</strong></em>. La principal característica de esta red es su <em><strong>regularidad</strong></em>. Involucra <em><strong>filtros 3 × 3 para realizar las mismas convoluciones utilizando padding y stride</strong></em> <span class="math notranslate nohighlight">\(s = 1\)</span> y <em><strong>ventanas 2 × 2 para maxpooling</strong></em> con stride <span class="math notranslate nohighlight">\(s = 2\)</span>. Cada vez que se realiza un pooling, <em><strong>la altura y la anchura de los volúmenes se reducen a la mitad y la profundidad se multiplica por dos</strong></em>.</p></li>
-<li><p>Partiendo de <em><strong>224 × 224 × 3 imagen de entrada</strong></em> y después de <em><strong>13 capas</strong></em> el <em><strong>volumen final tiene un tamaño de 7 × 7 × 512, un total de 25088 elementos</strong></em>, que tras su <em><strong>vectorización alimenta a una red totalmente conectada con 2 capas ocultas de 4096 nodos cada una</strong></em>. Los 1000 nodos de salida están construidos en torno a la no linealidad <code class="docutils literal notranslate"><span class="pre">softmax</span></code> y se ha utilizado <code class="docutils literal notranslate"><span class="pre">ReLU</span></code> para las unidades ocultas en toda la red.</p></li>
-</ul>
-</div>
-<figure class="align-center" id="id79">
-<a class="reference internal image-reference" href="_images/vgg16_architecture.png"><img alt="_images/vgg16_architecture.png" src="_images/vgg16_architecture.png" style="width: 680.0px; height: 403.20000000000005px;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 3.35 </span><span class="caption-text">Arquitectura VGG-16. Fuente <span class="bibtex-citation" id="id78">[<a class="reference internal" href="biblio.html#id32" title="Karen Simonyan and Andrew Zisserman. Very deep convolutional networks for large-scale image recognition. arXiv preprint arXiv:1409.1556, 2014.">Simonyan and Zisserman, 2014</a>]</span>.</span><a class="headerlink" href="#id79" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<ul class="simple">
-<li><p>El diseño de <code class="docutils literal notranslate"><span class="pre">VGG-16</span></code> se basó en la hipótesis de que <em><strong>aumentar la profundidad de una red convolucional, mientras se usan pequeños filtros, conduciría a un mejor rendimiento en la tarea de clasificación de imágenes</strong></em>. La naturaleza homogénea de la arquitectura con filtros 3x3 repetidos permitió que la red aprendiera características jerárquicas más profundas, conservando al mismo tiempo una buena eficiencia computacional.</p></li>
-<li><p>El uso de <em><strong>filtros pequeños</strong></em> y <em><strong>capas profundas</strong></em> fue una decisión clave porque:</p>
-<ul>
-<li><p>Filtros más pequeños <em><strong>capturan características locales</strong></em>, pero apilados sucesivamente tienen un campo receptivo mayor.</p></li>
-<li><p>Mayor profundidad permite <em><strong>extraer características más abstractas y complejas</strong></em> a medida que las capas avanzan.</p></li>
-</ul>
-</li>
-</ul>
-</section>
-<section id="id80">
-<h2><span class="section-number">3.26. </span>GoogleNet y la red Inception<a class="headerlink" href="#id80" title="Link to this heading">#</a></h2>
-<div class="tip admonition">
-<p class="admonition-title">GoogleNet y la red Inception</p>
-<ul class="simple">
-<li><p>La arquitectura utilizada en <em><strong>esta red se desvía del “arquetípico” que se muestra en</strong></em> <code class="xref std std-numref docutils literal notranslate"><span class="pre">complete_cnnarq_numref</span></code>. En el corazón de esta red se encuentra el llamado módulo de inicio <span class="bibtex-citation" id="id81">[<a class="reference internal" href="biblio.html#id33" title="Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. In Proceedings of the IEEE conference on computer vision and pattern recognition, 1–9. 2015.">Szegedy <em>et al.</em>, 2015</a>]</span>. Un <em><strong>módulo de inicio consta de filtros de diferentes tamaños y profundidades</strong></em>, así como de una <em><strong>ruta de agrupación diferente</strong></em>.</p></li>
-<li><p>La arquitectura <code class="docutils literal notranslate"><span class="pre">Inception</span></code> toma la salida de una capa y la divide en varias rutas: una usa <em><strong>convolución 1x1 para reducir la profundidad</strong></em>, otra hace <em><strong>pooling seguido de convolución 5x5</strong></em>, y dos rutas realizan <em><strong>convoluciones separadas con filtros 3x3 y 5x5</strong></em>. Se usa una capa de <em><strong>cuello de botella (convolución 1x1) para reducir la carga computacional antes de las convoluciones</strong></em>.</p></li>
-<li><p>En el módulo de inicio, se <em><strong>concatenan los volúmenes de salida de varias trayectorias</strong></em>, permitiendo que la red, durante el entrenamiento, <em><strong>elija las mejores operaciones para cada capa</strong></em>. A medida que se avanza hacia capas superiores, <em><strong>se incrementa la proporción de convoluciones 3 × 3 y 5 × 5, ya que captan rasgos más abstractos</strong></em>. La red tiene <em><strong>22 capas y 6 millones de parámetros</strong></em>.</p></li>
-</ul>
-</div>
-<figure class="align-center" id="id91">
-<img alt="_images/google-net-like.png" src="_images/google-net-like.png" />
-<figcaption>
-<p><span class="caption-number">Fig. 3.36 </span><span class="caption-text">Arquitectura GoogleNet. Fuente <a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/29084154/">pubmed</a></span><a class="headerlink" href="#id91" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<figure class="align-center" id="id83">
-<a class="reference internal image-reference" href="_images/inception_architecture.png"><img alt="_images/inception_architecture.png" src="_images/inception_architecture.png" style="width: 583.0999999999999px; height: 389.9px;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 3.37 </span><span class="caption-text">Arquitectura Inception. Fuente <span class="bibtex-citation" id="id82">[<a class="reference internal" href="biblio.html#id33" title="Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. In Proceedings of the IEEE conference on computer vision and pattern recognition, 1–9. 2015.">Szegedy <em>et al.</em>, 2015</a>]</span>.</span><a class="headerlink" href="#id83" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-</section>
-<section id="id84">
-<h2><span class="section-number">3.27. </span>Redes residuales (ResNets)<a class="headerlink" href="#id84" title="Link to this heading">#</a></h2>
-<div class="seealso admonition">
-<p class="admonition-title"><em><strong>Redes residuales (ResNets)</strong></em></p>
-<ul class="simple">
-<li><p>Ya hemos hablado de las ventajas de diseñar redes profundas. También abordamos la forma de <em><strong>hacer frente al problema de los gradientes que se desvanecen/explotan</strong></em> mediante una combinación de métodos y trucos que permiten que el <em><strong>algoritmo backpropagation converja con suficiente rapidez</strong></em>. Sin embargo, <em><strong>una vez que empezamos a construir redes muy profundas (del orden de decenas o incluso centenares de capas) nos encontramos con el siguiente comportamiento “poco ortodoxo”</strong></em>.</p></li>
-<li><p>Cabría esperar que, <em><strong>añadiendo más y más capas, el error de entrenamiento mejore o al menos no aumenta</strong></em>. Sin embargo, lo que se observa en la práctica es que <em><strong><code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">partir</span> <span class="pre">de</span> <span class="pre">un</span> <span class="pre">cierto</span> <span class="pre">número</span> <span class="pre">de</span> <span class="pre">capas,</span> <span class="pre">el</span> <span class="pre">error</span> <span class="pre">de</span> <span class="pre">entrenamiento</span> <span class="pre">empieza</span> <span class="pre">a</span> <span class="pre">aumentar</span></code></strong></em>. Esto se ilustra gráficamente en la <code class="xref std std-numref docutils literal notranslate"><span class="pre">residual_net_architecture_numref</span></code>. Este fenómeno <em><strong>no tiene nada que ver con el sobreajuste</strong></em>. Después de todo, estamos hablando del <em><strong>error de entrenamiento y no del de generalización</strong></em>. Parece que esto puede deberse a <em><strong><code class="docutils literal notranslate"><span class="pre">la</span> <span class="pre">tarea</span> <span class="pre">de</span> <span class="pre">optimización</span> <span class="pre">que</span> <span class="pre">se</span> <span class="pre">vuelve</span> <span class="pre">más</span> <span class="pre">y</span> <span class="pre">más</span> <span class="pre">difícil</span> <span class="pre">a</span> <span class="pre">medida</span> <span class="pre">que</span> <span class="pre">se</span> <span class="pre">añaden</span> <span class="pre">más</span> <span class="pre">y</span> <span class="pre">más</span> <span class="pre">capas</span></code></strong></em>.</p></li>
-</ul>
-</div>
-<figure class="align-center" id="id85">
-<a class="reference internal image-reference" href="_images/residual_net_architecture.png"><img alt="_images/residual_net_architecture.png" src="_images/residual_net_architecture.png" style="width: 490.40000000000003px; height: 274.40000000000003px;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 3.38 </span><span class="caption-text"><em><strong>Aumento en lugar de disminución del error</strong></em> cuando el número de capas supera cierto número, en una red muy profunda. <em><strong>(curva roja) como se esperaba a partir de la teoría.</strong></em></span><a class="headerlink" href="#id85" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<ol class="arabic simple">
-<li><p><strong>Interpretación Matemática de una Capa en la Red Neuronal</strong></p></li>
-</ol>
-<ul class="simple">
-<li><p>Cada capa de una red neuronal aplica una función <span class="math notranslate nohighlight">\(H\)</span> que transforma la salida anterior <span class="math notranslate nohighlight">\(\boldsymbol{y}^{r-1}\)</span> en una nueva salida <span class="math notranslate nohighlight">\(\boldsymbol{y}^{r}\)</span>:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\boldsymbol{y}^{r} = H(\boldsymbol{y}^{r-1})
-\]</div>
-<ol class="arabic simple" start="2">
-<li><p><strong>¿Por qué Añadir Más Capas No Debería Aumentar el Error de Entrenamiento?</strong></p></li>
-</ol>
-<ul>
-<li><p>Si una capa ha extraído toda la información útil, una capa adicional, en el peor caso, solo replicaría la salida anterior aplicando la función identidad:</p>
-<div class="math notranslate nohighlight">
-\[
-    \boldsymbol{y}^{r} = H(\boldsymbol{y}^{r-1}) = \boldsymbol{y}^{r-1}
-    \]</div>
-<p>Es decir, si no hay nada nuevo que aprender, la capa extra solo copiaría la información.</p>
-</li>
-</ul>
-<ol class="arabic simple" start="3">
-<li><p><strong>Problema de redes profundas: saturación y dificultades de optimización</strong></p></li>
-</ol>
-<ul class="simple">
-<li><p>En redes profundas, el rendimiento se estanca porque más capas no mejoran la precisión y la optimización enfrenta dificultades para aprender el mapeo de identidad <span class="math notranslate nohighlight">\(H(y^{r-1}) = y^{r-1}\)</span>, generando errores por gradientes pequeños o desajustes en los pesos.</p></li>
-</ul>
-<ol class="arabic simple" start="4">
-<li><p><strong>Solución propuesta por He et al. (2016): Redes Residuales (ResNets)</strong></p></li>
-</ol>
-<ul class="simple">
-<li><p>En lugar de aprender directamente <span class="math notranslate nohighlight">\(H(y^{r-1})\)</span>, se propone un mapeo residual <span class="math notranslate nohighlight">\(F(y^{r-1}) = H(y^{r-1}) - y^{r-1}\)</span>, donde la capa solo ajusta la diferencia necesaria en vez de replicar la entrada. Así, la salida se obtiene sumando este ajuste residual:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-y^r = y^{r-1} + F(y^{r-1})
-\]</div>
-<div class="tip admonition">
-<p class="admonition-title">Observación</p>
-<p>El objetivo real es que <strong>la salida de la función residual sea cero, <span class="math notranslate nohighlight">\(F(y^{r-1}) = 0\)</span>, no que los pesos sean cero por sí mismos</strong>. Sin embargo, <strong>el mecanismo más simple para lograrlo es llevar los pesos <span class="math notranslate nohighlight">\(W\)</span> de esa rama hacia valores cercanos a cero</strong>: si <span class="math notranslate nohighlight">\(W \approx 0\)</span>, la transformación lineal produce salidas cercanas a cero, y tras la no linealidad (por ejemplo ReLU) el resultado sigue siendo cero o muy pequeño.</p>
-<p><strong>En resumen:</strong></p>
-<ul class="simple">
-<li><p><strong>Objetivo real</strong>: <span class="math notranslate nohighlight">\(F(y^{r-1}) = 0\)</span> (la salida del bloque residual).</p></li>
-<li><p><strong>Mecanismo para lograrlo</strong>: pesos <span class="math notranslate nohighlight">\(W\)</span> pequeños o nulos.</p></li>
-</ul>
-<p>La ventaja pedagógica es que <strong>“pesos pequeños” es un punto de partida natural, cercano a la inicialización típica de una red</strong> y fácil de alcanzar por gradiente descendente, mientras que <strong>“pesos que reproducen exactamente la matriz identidad” es una configuración específica y difícil de encontrar</strong> mediante optimización.</p>
-</div>
-<ul class="simple">
-<li><p>El uso de la <em><strong>representación residual</strong></em> no es nuevo y ya <em><strong>se ha utilizado anteriormente en el contexto de la cuantificación vectorial</strong></em>. La esencia del aprendizaje residual es <em><strong>introducir el llamado bloque de construcción residual</strong></em>, que se muestra en la <code class="xref std std-numref docutils literal notranslate"><span class="pre">residual_architecture_cnn_numref</span></code>.</p></li>
-</ul>
-<figure class="align-center" id="id87">
-<a class="reference internal image-reference" href="_images/residual_architecture_cnn.png"><img alt="_images/residual_architecture_cnn.png" src="_images/residual_architecture_cnn.png" style="width: 363.20000000000005px; height: 398.40000000000003px;" />
-</a>
-<figcaption>
-<p><span class="caption-number">Fig. 3.39 </span><span class="caption-text">Bloque de construcción residual. Fuente <span class="bibtex-citation" id="id86">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#id87" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
-<ul class="simple">
-<li><p>De esta manera, un número de capas, digamos, dos, como en el caso de la <code class="xref std std-numref docutils literal notranslate"><span class="pre">residual_architecture_cnn_numref</span></code>, <em><strong>se apilan</strong></em> y dejamos que estas capas se <em><strong>ajusten explícitamente al mapeo residual, a través de las llamadas conexiones de atajo u omisión</strong></em>. Cada capa de pesos realiza una transformación sobre su entrada, por ejemplo, convoluciones. Si <span class="math notranslate nohighlight">\(\boldsymbol{y}^{r}\)</span> e <span class="math notranslate nohighlight">\(\boldsymbol{y}^{r-1}\)</span> son de dimensiones diferentes, el <em><strong>atajo de mapeo de identidad se modifica a</strong></em> <span class="math notranslate nohighlight">\(W\boldsymbol{y}^{r-1}\)</span>, donde <span class="math notranslate nohighlight">\(W\)</span> es una matriz de dimensiones apropiadas.</p></li>
+<li><p>De esta manera, un número de capas, digamos, dos, como en el caso de la <a class="reference internal" href="#residual-architecture-cnn-numref"><span class="std std-numref">Fig. 3.23</span></a>, <em><strong>se apilan</strong></em> y dejamos que estas capas se <em><strong>ajusten explícitamente al mapeo residual, a través de las llamadas conexiones de atajo u omisión</strong></em>. Cada capa de pesos realiza una transformación sobre su entrada, por ejemplo, convoluciones. Si <span class="math notranslate nohighlight">\(\boldsymbol{y}^{r}\)</span> e <span class="math notranslate nohighlight">\(\boldsymbol{y}^{r-1}\)</span> son de dimensiones diferentes, el <em><strong>atajo de mapeo de identidad se modifica a</strong></em> <span class="math notranslate nohighlight">\(W\boldsymbol{y}^{r-1}\)</span>, donde <span class="math notranslate nohighlight">\(W\)</span> es una matriz de dimensiones apropiadas.</p></li>
 </ul>
 </section>
 <section id="u-net-redes-convolucionales-para-la-segmentacion-de-imagenes-biomedicas">
-<h2><span class="section-number">3.28. </span>U-Net: Redes Convolucionales para la Segmentación de Imágenes Biomédicas<a class="headerlink" href="#u-net-redes-convolucionales-para-la-segmentacion-de-imagenes-biomedicas" title="Link to this heading">#</a></h2>
-<figure class="align-center" id="id92">
+<h2><span class="section-number">3.16. </span>U-Net: Redes Convolucionales para la Segmentación de Imágenes Biomédicas<a class="headerlink" href="#u-net-redes-convolucionales-para-la-segmentacion-de-imagenes-biomedicas" title="Link to this heading">#</a></h2>
+<figure class="align-center" id="id43">
 <img alt="_images/segmentation_instance.avif" src="_images/segmentation_instance.avif" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.40 </span><span class="caption-text">Image segmentation vs Instance segmentation. Fuente <a class="reference external" href="https://www.v7labs.com/">v7labs</a></span><a class="headerlink" href="#id92" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.24 </span><span class="caption-text">Image segmentation vs Instance segmentation. Fuente <a class="reference external" href="https://www.v7labs.com/">v7labs</a></span><a class="headerlink" href="#id43" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
 <li><p>En imágenes médicas, la <strong><em>segmentación semántica</em> clasifica cada píxel según una categoría anatómica o patológica, mientras que la <em>segmentación de instancias</em> diferencia objetos individuales dentro de la misma clase</strong>. Estas técnicas son esenciales para el diagnóstico automatizado y la planificación clínica.</p></li>
 <li><p>La arquitectura <strong><em>U-Net</em>, diseñada para segmentación biomédica, permite una segmentación precisa</strong> mediante un diseño en forma de <em>U</em> que combina información de contexto con detalles espaciales, mejorando la detección de estructuras complejas en imágenes médicas.</p></li>
 </ul>
-<figure class="align-center" id="id93">
+<figure class="align-center" id="id44">
 <img alt="_images/unet_segmentation.png" src="_images/unet_segmentation.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.41 </span><span class="caption-text">La arquitectura U-Net representa mapas de características con cajas, indicando canales y tamaño, mientras que las flechas señalan las operaciones.</span><a class="headerlink" href="#id93" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.25 </span><span class="caption-text">La arquitectura U-Net representa mapas de características con cajas, indicando canales y tamaño, mientras que las flechas señalan las operaciones.</span><a class="headerlink" href="#id44" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="admonition-arquitectura-u-net admonition">
@@ -2330,7 +1765,7 @@ y^r = y^{r-1} + F(y^{r-1})
 </div>
 </section>
 <section id="aplicacion-reconocimiento-facial-de-emociones">
-<h2><span class="section-number">3.29. </span>Aplicación: Reconocimiento facial de emociones<a class="headerlink" href="#aplicacion-reconocimiento-facial-de-emociones" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.17. </span>Aplicación: Reconocimiento facial de emociones<a class="headerlink" href="#aplicacion-reconocimiento-facial-de-emociones" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Los datos para el siguiente ejemplo pueden ser descargados del siguiente link: <a class="reference external" href="https://github.com/lihkir/Data/tree/main/face_sentiment_detection">Face Sentiment Detection</a></p></li>
 </ul>
@@ -3904,7 +3339,7 @@ final train accuracy = 94.35 , validation accuracy = 90.81
 </div>
 </section>
 <section id="aplicacion-segmentacion-de-imagenes-biomedicas-con-u-net">
-<h2><span class="section-number">3.30. </span>Aplicación: Segmentación de Imágenes Biomédicas con U-Net<a class="headerlink" href="#aplicacion-segmentacion-de-imagenes-biomedicas-con-u-net" title="Link to this heading">#</a></h2>
+<h2><span class="section-number">3.18. </span>Aplicación: Segmentación de Imágenes Biomédicas con U-Net<a class="headerlink" href="#aplicacion-segmentacion-de-imagenes-biomedicas-con-u-net" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>El cáncer de mama es una de las principales causas de mortalidad en mujeres, y su detección temprana reduce muertes prematuras. Este conjunto de datos de <strong>ultrasonido mamario</strong> incluye <strong>780 imágenes</strong> de <strong>600 pacientes (25-75 años)</strong>, recopiladas en <strong>2018</strong>, clasificadas en <strong>normales, benignas y malignas</strong>. Las imágenes, en <strong>formato PNG (500×500 píxeles)</strong>, incluyen referencias (<strong>ground truth</strong>) para mejorar su análisis mediante aprendizaje automático en clasificación, detección y segmentación (ver <a class="reference external" href="https://www.kaggle.com/datasets/aryashah2k/breast-ultrasound-images-dataset/data">Breast Ultrasound Images Dataset</a>).</p></li>
 </ul>
@@ -4874,16 +4309,16 @@ F1 = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Precisión} + 
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "tf"
+            mode: "tf_gpu"
         },
         kernelOptions: {
-            name: "tf",
+            name: "tf_gpu",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'tf'</script>
+    <script>kernelName = 'tf_gpu'</script>
 
                 </article>
               
@@ -4946,21 +4381,9 @@ F1 = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Precisión} + 
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#vgg-16">3.13. VGG-16</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#googlenet-y-la-red-inception">3.14. GoogleNet y la red Inception</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#redes-residuales-resnets">3.15. Redes residuales (ResNets)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id45">3.16. El paso de la no linealidad</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id48">3.17. La etapa de agrupación</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id53">3.18. Convolución sobre volúmenes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id57">3.19. Red en red y convolución 1 × 1</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id63">3.20. Arquitectura CNN completa</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id66">3.21. Características en una CNN</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id67">3.22. Arquitecturas de Redes Neuronales Convolucionales</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id68">3.23. LeNet-5</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id72">3.24. AlexNet</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id76">3.25. VGG-16</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id80">3.26. GoogleNet y la red Inception</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id84">3.27. Redes residuales (ResNets)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#u-net-redes-convolucionales-para-la-segmentacion-de-imagenes-biomedicas">3.28. U-Net: Redes Convolucionales para la Segmentación de Imágenes Biomédicas</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-reconocimiento-facial-de-emociones">3.29. Aplicación: Reconocimiento facial de emociones</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-segmentacion-de-imagenes-biomedicas-con-u-net">3.30. Aplicación: Segmentación de Imágenes Biomédicas con U-Net</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#u-net-redes-convolucionales-para-la-segmentacion-de-imagenes-biomedicas">3.16. U-Net: Redes Convolucionales para la Segmentación de Imágenes Biomédicas</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-reconocimiento-facial-de-emociones">3.17. Aplicación: Reconocimiento facial de emociones</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aplicacion-segmentacion-de-imagenes-biomedicas-con-u-net">3.18. Aplicación: Segmentación de Imágenes Biomédicas con U-Net</a></li>
 </ul>
   </nav></div>
 
