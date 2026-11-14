@@ -27,8 +27,8 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
-<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+  <link href="_static/styles/theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=55c26ed414f5f8a31ebb" rel="stylesheet" />
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
@@ -42,10 +42,10 @@
     <link rel="stylesheet" type="text/css" href="_static/.ipynb_checkpoints/custom-checkpoint.css" />
   
   <!-- So that users can add custom icons -->
-  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="_static/scripts/fontawesome.js?digest=55c26ed414f5f8a31ebb"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
-<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb" />
 
     <script src="_static/documentation_options.js?v=9eb32ce0"></script>
     <script src="_static/doctools.js?v=9a2dae69"></script>
@@ -66,6 +66,7 @@
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.0/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'cnn_model';</script>
+    <script>DOCUMENTATION_OPTIONS.search_as_you_type = false;</script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/custom.js?v=14184634"></script>
     <script src="_static/.ipynb_checkpoints/custom-checkpoint.js"></script>
@@ -76,20 +77,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
+  
+    
+    <script src="_static/searchtools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="searchindex.js"></script>
+  
   </head>
-  
-  
-  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
-
+  <body data-default-mode="">
   
   
   <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+
   
   <div id="pst-scroll-pixel-helper"></div>
   
   <button type="button" class="btn rounded-pill" id="pst-back-to-top">
     <i class="fa-solid fa-arrow-up"></i>Back to top</button>
-
+  
+  
+  
   
   <dialog id="pst-search-dialog">
     
@@ -115,7 +122,51 @@
 </div>
 
   
-    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    <header id="pst-header" class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
     </header>
   
 
@@ -330,7 +381,7 @@
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+                <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-necesidad-de-convoluciones">3.1. La necesidad de convoluciones</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-etapa-de-convolucion">3.2. La etapa de convolución</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-de-uso-de-multiples-kernels-en-una-cnn">3.3. Ejemplo de uso de Múltiples <em>Kernels</em> en una CNN</a></li>
@@ -944,7 +995,12 @@ esté contenida dentro de</strong></em> <span class="math notranslate nohighligh
 <li><p><strong>(II) Suficiencia para <span class="math notranslate nohighlight">\(\sigma\)</span> sigmoidal continua</strong> (<span class="math notranslate nohighlight">\(\sigma(t)\to1\)</span> si <span class="math notranslate nohighlight">\(t\to+\infty\)</span> y <span class="math notranslate nohighlight">\(\sigma(t)\to0\)</span> si <span class="math notranslate nohighlight">\(t\to-\infty\)</span>): <span class="math notranslate nohighlight">\(\mathcal{N}_\sigma\)</span> es denso (teorema de Cybenko).</p></li>
 <li><p><strong>(III) Suficiencia para ReLU</strong>, como consecuencia de (II).</p></li>
 </ul>
-<p>Si <span class="math notranslate nohighlight">\(K\)</span> fuera finito, por ejemplo <span class="math notranslate nohighlight">\(K=\{x_1,\dots,x_m\}\)</span>, una función <span class="math notranslate nohighlight">\(g:K\to\mathbb{R}\)</span> queda determinada por sus <span class="math notranslate nohighlight">\(m\)</span> valores, <span class="math notranslate nohighlight">\(g\mapsto\big(g(x_1),\dots,g(x_m)\big)\in\mathbb{R}^m\)</span>. Esta correspondencia es biyectiva y lineal, así que <span class="math notranslate nohighlight">\(C(K)\cong\mathbb{R}^m\)</span> (se lee “<span class="math notranslate nohighlight">\(C(K)\)</span> es isomorfo a <span class="math notranslate nohighlight">\(\mathbb{R}^m\)</span>”: son el mismo espacio vectorial escrito de dos formas, y por tanto tienen la misma dimensión). En particular <span class="math notranslate nohighlight">\(\dim C(K)=m&lt;\infty\)</span>. Basta entonces ajustar esos <span class="math notranslate nohighlight">\(m\)</span> valores, y eso lo logran incluso las redes con <span class="math notranslate nohighlight">\(\sigma\)</span> polinomial, así que la Parte I sería falsa. Por eso se pide que <span class="math notranslate nohighlight">\(K\)</span> sea infinito.</p>
+<details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
+<summary class="sd-summary-title sd-card-header">
+<span class="sd-summary-text">¿Qué pasa si <span class="math notranslate nohighlight">\(K\)</span> es finito?</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+<p class="sd-card-text">Si <span class="math notranslate nohighlight">\(K\)</span> fuera finito, por ejemplo <span class="math notranslate nohighlight">\(K=\{x_1,\dots,x_m\}\)</span>, cada punto de <span class="math notranslate nohighlight">\(K\)</span> es <strong>aislado</strong>: existe <span class="math notranslate nohighlight">\(r&gt;0\)</span> (por ejemplo, la menor distancia entre dos puntos distintos de <span class="math notranslate nohighlight">\(K\)</span>) tal que la bola <span class="math notranslate nohighlight">\(B(x_i,r)\)</span> no contiene otros puntos de <span class="math notranslate nohighlight">\(K\)</span>. Por eso toda función <span class="math notranslate nohighlight">\(g:K\to\mathbb{R}\)</span> es continua (si <span class="math notranslate nohighlight">\(x\in K\)</span> está cerca de <span class="math notranslate nohighlight">\(x_i\)</span>, entonces <span class="math notranslate nohighlight">\(x=x_i\)</span> y <span class="math notranslate nohighlight">\(|g(x)-g(x_i)|=0\)</span>), y <span class="math notranslate nohighlight">\(C(K)\)</span> está formado por todas las funciones <span class="math notranslate nohighlight">\(K\to\mathbb{R}\)</span>. La aplicación lineal <span class="math notranslate nohighlight">\(\Phi(g)=\big(g(x_1),\dots,g(x_m)\big)\in\mathbb{R}^m\)</span> es <strong>inyectiva</strong>, pues si <span class="math notranslate nohighlight">\(g,\tilde g\in C(K)\)</span> cumplen <span class="math notranslate nohighlight">\(\Phi(g)=\Phi(\tilde g)\)</span>, entonces <span class="math notranslate nohighlight">\(g(x_i)=\tilde g(x_i)\)</span> para <span class="math notranslate nohighlight">\(i=1,\dots,m\)</span> y, como <span class="math notranslate nohighlight">\(K\)</span> no tiene más puntos, <span class="math notranslate nohighlight">\(g=\tilde g\)</span>; y es <strong>sobreyectiva</strong>, pues dado <span class="math notranslate nohighlight">\((v_1,\dots,v_m)\in\mathbb{R}^m\)</span> la función con <span class="math notranslate nohighlight">\(g(x_i)=v_i\)</span> (bien definida porque los <span class="math notranslate nohighlight">\(x_i\)</span> son distintos) cumple <span class="math notranslate nohighlight">\(\Phi(g)=(v_1,\dots,v_m)\)</span>. Por tanto <span class="math notranslate nohighlight">\(\Phi\)</span> es biyectiva y lineal, así que <span class="math notranslate nohighlight">\(C(K)\cong\mathbb{R}^m\)</span> (se lee “<span class="math notranslate nohighlight">\(C(K)\)</span> es isomorfo a <span class="math notranslate nohighlight">\(\mathbb{R}^m\)</span>”: son el mismo espacio vectorial escrito de dos formas, y por tanto tienen la misma dimensión). En particular <span class="math notranslate nohighlight">\(\dim C(K)=m&lt;\infty\)</span>.</p>
+</div>
+</details><p>Basta entonces ajustar esos <span class="math notranslate nohighlight">\(m\)</span> valores, y eso lo logran incluso las redes con <span class="math notranslate nohighlight">\(\sigma\)</span> polinomial, así que la Parte I sería falsa. Por eso se pide que <span class="math notranslate nohighlight">\(K\)</span> sea infinito.</p>
 <p>La implicación recíproca general de (I) (si <span class="math notranslate nohighlight">\(\sigma\)</span> es continua y no polinomial, entonces <span class="math notranslate nohighlight">\(\mathcal{N}_\sigma\)</span> es denso) es la parte más sustancial del teorema, y su demostración completa puede consultarse en <span class="bibtex-citation" id="id14">[<a class="reference internal" href="biblio.html#id116" title="Moshe Leshno, Vladimir Ya. Lin, Allan Pinkus, and Shimon Schocken. Multilayer feedforward networks with a nonpolynomial activation function can approximate any function. Neural Networks, 6(6):861–867, 1993.">Leshno <em>et al.</em>, 1993</a>]</span>. Aquí se prueba solo para los casos sigmoidal y ReLU.</p>
 <ul class="simple">
 <li><p><strong>Parte I. Necesidad: si <span class="math notranslate nohighlight">\(\sigma\)</span> es un polinomio, <span class="math notranslate nohighlight">\(\mathcal{N}_\sigma\)</span> no es denso</strong></p></li>
@@ -991,8 +1047,11 @@ esté contenida dentro de</strong></em> <span class="math notranslate nohighligh
 <li><p><span class="math notranslate nohighlight">\(\sigma\)</span> es <strong>acotada</strong>: tiene límites finitos en <span class="math notranslate nohighlight">\(\pm\infty\)</span>, así que existe <span class="math notranslate nohighlight">\(R&gt;0\)</span> con <span class="math notranslate nohighlight">\(|\sigma(t)|\le1\)</span> si <span class="math notranslate nohighlight">\(|t|\ge R\)</span>, y en <span class="math notranslate nohighlight">\([-R,R]\)</span> está acotada por ser continua. Sea <span class="math notranslate nohighlight">\(C=\sup_{t\in\mathbb{R}}|\sigma(t)|&lt;\infty\)</span>. Esta cota se usa en el Paso 2 para aplicar convergencia dominada.</p></li>
 <li><p><span class="math notranslate nohighlight">\(\mathcal{N}_\sigma\subset C(K)\)</span>, pues cada neurona es composición de funciones continuas. Además <span class="math notranslate nohighlight">\(\mathcal{N}_\sigma\)</span> es un subespacio vectorial, y su clausura <span class="math notranslate nohighlight">\(\overline{\mathcal{N}_\sigma}\)</span> también lo es, porque la suma y el producto por escalares son continuos en la norma.</p></li>
 </ul>
-<p><strong>Idea global.</strong> Se razona por contradicción mediante dualidad. <strong>Si <span class="math notranslate nohighlight">\(\mathcal{N}_\sigma\)</span> no fuera denso, existiría un funcional lineal continuo no nulo que se anula sobre él</strong> (Paso 1). Ese funcional es una integral contra una medida <span class="math notranslate nohighlight">\(\mu\)</span>, y anularse sobre las neuronas significa que <span class="math notranslate nohighlight">\(\mu\)</span> es “ortogonal” a todas ellas. El Paso 2 muestra que entonces <span class="math notranslate nohighlight">\(\mu\)</span> no ve ningún semiespacio, y el Paso 3 que esto fuerza <span class="math notranslate nohighlight">\(\mu=0\)</span>, es decir, <span class="math notranslate nohighlight">\(L=0\)</span>, lo cual es absurdo.</p>
-<p>Como analogía, en un espacio de Hilbert <span class="math notranslate nohighlight">\(H\)</span> un subespacio cerrado <span class="math notranslate nohighlight">\(M\)</span> es todo <span class="math notranslate nohighlight">\(H\)</span> si y solo si <span class="math notranslate nohighlight">\(M^\perp=\{0\}\)</span>. En <span class="math notranslate nohighlight">\(C(K)\)</span> no hay producto interno, pero el anulador <span class="math notranslate nohighlight">\(M^\perp=\{L\in C(K)^*:\ L|_M=0\}\)</span> cumple el mismo papel: <span class="math notranslate nohighlight">\(\overline{M}=C(K)\)</span> si y solo si <span class="math notranslate nohighlight">\(M^\perp=\{0\}\)</span>.</p>
+<p><strong>Idea global.</strong> Se razona por contradicción mediante dualidad. <strong>Si <span class="math notranslate nohighlight">\(\mathcal{N}_\sigma\)</span> no fuera denso, existiría un funcional lineal continuo no nulo que se anula sobre él</strong> (Paso 1) <a class="reference internal" href="appendix.html#th_density_duality">Theorem 8.9</a>. Ese funcional es una integral contra una medida <span class="math notranslate nohighlight">\(\mu\)</span>, y anularse sobre las neuronas significa que <span class="math notranslate nohighlight">\(\mu\)</span> es “ortogonal” a todas ellas.</p>
+<p>En el Paso 2 se demuestra que <span class="math notranslate nohighlight">\(\mu(H)=0\)</span> para todo semiespacio <span class="math notranslate nohighlight">\(H\)</span> de <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span>, es decir, que <span class="math notranslate nohighlight">\(\mu\)</span> asigna medida cero a cada semiespacio. En el Paso 3 se prueba que esta propiedad implica <span class="math notranslate nohighlight">\(\mu=0\)</span>. Entonces el funcional</p>
+<div class="math notranslate nohighlight">
+\[L(f)=\int_K f\,d\mu\]</div>
+<p>es idénticamente nulo, lo cual contradice la hipótesis <span class="math notranslate nohighlight">\(L\neq 0\)</span>. Por lo tanto, <span class="math notranslate nohighlight">\(M\)</span> es denso en <span class="math notranslate nohighlight">\(C(K)\)</span>. Como analogía, en un espacio de Hilbert <span class="math notranslate nohighlight">\(H\)</span> un subespacio cerrado <span class="math notranslate nohighlight">\(M\)</span> es todo <span class="math notranslate nohighlight">\(H\)</span> si y solo si <span class="math notranslate nohighlight">\(M^\perp=\{0\}\)</span>. En <span class="math notranslate nohighlight">\(C(K)\)</span> no hay producto interno, pero el anulador <span class="math notranslate nohighlight">\(M^\perp=\{L\in C(K)^*:\ L|_M=0\}\)</span> cumple el mismo papel: <span class="math notranslate nohighlight">\(\overline{M}=C(K)\)</span> si y solo si <span class="math notranslate nohighlight">\(M^\perp=\{0\}\)</span>.</p>
 <p><strong>Paso 1: reducción por dualidad (Hahn-Banach y Riesz-Markov)</strong></p>
 <p>Supongamos, por contradicción, que <span class="math notranslate nohighlight">\(\overline{\mathcal{N}_\sigma}\neq C(K)\)</span>.</p>
 <p><strong>(a) Un funcional que anula <span class="math notranslate nohighlight">\(\overline{\mathcal{N}_\sigma}\)</span>.</strong></p>
@@ -1007,7 +1066,7 @@ esté contenida dentro de</strong></em> <span class="math notranslate nohighligh
 \[L(g)=\int_K g\,d\mu,\qquad g\in C(K),\]</div>
 <p>para una única medida de Borel regular, finita y con signo <span class="math notranslate nohighlight">\(\mu\)</span>. Si <span class="math notranslate nohighlight">\(M(K)\)</span> denota el espacio de estas medidas, la correspondencia <span class="math notranslate nohighlight">\(\mu\mapsto L_\mu\)</span> es un isomorfismo <span class="math notranslate nohighlight">\(C(K)^*\cong M(K)\)</span>, es decir, una biyección lineal que preserva la norma (variación total <span class="math notranslate nohighlight">\(|\mu|\)</span> en <span class="math notranslate nohighlight">\(M(K)\)</span>, norma de operador en <span class="math notranslate nohighlight">\(C(K)^*\)</span>).</p>
 </div></blockquote>
-<p>Un compacto <span class="math notranslate nohighlight">\(K\subset\mathbb{R}^n\)</span> es de Hausdorff (dos puntos distintos tienen abiertos disjuntos que los separan) porque <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> es un espacio métrico: si <span class="math notranslate nohighlight">\(x\neq y\)</span>, las bolas abiertas de radio <span class="math notranslate nohighlight">\(\|x-y\|/2\)</span> centradas en ellos son disjuntas. Así el teorema aplica. Que <span class="math notranslate nohighlight">\(\mu\)</span> sea finita (su variación total <span class="math notranslate nohighlight">\(|\mu|(K)=\mu^+(K)+\mu^-(K)\)</span> es finita) hace que</p>
+<p>Un compacto <span class="math notranslate nohighlight">\(K\subset\mathbb{R}^n\)</span> es de Hausdorff (dos puntos distintos tienen abiertos disjuntos que los separan) porque <span class="math notranslate nohighlight">\(\mathbb{R}^n\)</span> es un espacio métrico: si <span class="math notranslate nohighlight">\(x\neq y\)</span>, las bolas abiertas de radio <span class="math notranslate nohighlight">\(\|x-y\|/2\)</span> centradas en ellos son disjuntas. Así el teorema aplica. Que <span class="math notranslate nohighlight">\(\mu\)</span> sea finita (su variación total <span class="math notranslate nohighlight">\(|\mu|(K)=\mu^+(K)+\mu^-(K)\)</span> es finita, la parte negativa de <span class="math notranslate nohighlight">\(\mu\)</span> es la medida no negativa <span class="math notranslate nohighlight">\(\mu^-(A)=-\mu(A\cap N)\)</span>) hace que</p>
 <div class="math notranslate nohighlight">
 \[\int h\,d\mu\]</div>
 <p>esté bien definida para toda función <span class="math notranslate nohighlight">\(h\)</span> boreliana acotada (medible respecto a los conjuntos de Borel, como los indicadores de semiespacios, que no son continuos), no solo continua; esto se usa en el Paso 3. Recordemos que <span class="math notranslate nohighlight">\(\mu=\mu^+-\mu^-\)</span> (descomposición de Jordan, con <span class="math notranslate nohighlight">\(\mu^\pm\)</span> medidas positivas finitas) y que</p>
@@ -1091,7 +1150,7 @@ H=\{x\in K:\ w^\top x+b&gt;0\},\qquad \Pi=\{x\in K:\ w^\top x+b=0\}.
 <li><p>si <span class="math notranslate nohighlight">\(t&lt;0\)</span>, entonces <span class="math notranslate nohighlight">\(kt+\theta\to-\infty\)</span> y <span class="math notranslate nohighlight">\(\sigma_k(x)\to0\)</span>;</p></li>
 <li><p>si <span class="math notranslate nohighlight">\(t=0\)</span> (es decir, <span class="math notranslate nohighlight">\(x\in\Pi\)</span>), entonces <span class="math notranslate nohighlight">\(\sigma_k(x)=\sigma(\theta)\)</span> para todo <span class="math notranslate nohighlight">\(k\)</span>.</p></li>
 </ul>
-<p>Por tanto <span class="math notranslate nohighlight">\(\sigma_k\to\mathbf{1}_H+\sigma(\theta)\mathbf{1}_\Pi\)</span> puntualmente en <span class="math notranslate nohighlight">\(K\)</span>. Además <span class="math notranslate nohighlight">\(|\sigma_k|\le C\)</span>, y la constante <span class="math notranslate nohighlight">\(C\)</span> es integrable respecto de <span class="math notranslate nohighlight">\(|\mu|\)</span>, que es finita. Aplicando convergencia dominada a <span class="math notranslate nohighlight">\(\mu^+\)</span> y a <span class="math notranslate nohighlight">\(\mu^-\)</span> por separado, y restando,</p>
+<p>Por tanto <span class="math notranslate nohighlight">\(\sigma_k\to\mathbf{1}_H+\sigma(\theta)\mathbf{1}_\Pi\)</span> puntualmente en <span class="math notranslate nohighlight">\(K\)</span>. Además <span class="math notranslate nohighlight">\(|\sigma_k|\le C\)</span>, y la constante <span class="math notranslate nohighlight">\(C\)</span> es integrable respecto de <span class="math notranslate nohighlight">\(|\mu|\)</span>, que es finita. Aplicando convergencia dominada (ver <a class="reference internal" href="appendix.html#th_dominated">Theorem 8.11</a>) a <span class="math notranslate nohighlight">\(\mu^+\)</span> y a <span class="math notranslate nohighlight">\(\mu^-\)</span> por separado, y restando,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{aligned}
@@ -1157,7 +1216,7 @@ H=\{x\in K:\ w^\top x+b&gt;0\},\qquad \Pi=\{x\in K:\ w^\top x+b=0\}.
 \[
 \int h\,d\nu=0\qquad\text{para toda } h \text{ boreliana y acotada.}
 \]</div>
-<p>Para extenderlo usamos el teorema <span class="math notranslate nohighlight">\(\pi\)</span>-<span class="math notranslate nohighlight">\(\lambda\)</span> de Dynkin, que exige que <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> sea cerrada bajo intersecciones (un <span class="math notranslate nohighlight">\(\pi\)</span>-sistema) y que contenga al espacio total: la intersección de dos intervalos <span class="math notranslate nohighlight">\((a,c]\)</span> es otro intervalo de ese tipo o es vacía, y <span class="math notranslate nohighlight">\(\mathbb{R}\in\mathcal{P}\)</span>. Además, <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> genera la <span class="math notranslate nohighlight">\(\sigma\)</span>-álgebra de Borel de <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>, pues todo abierto es unión numerable de intervalos <span class="math notranslate nohighlight">\((a,c]\)</span>.</p>
+<p>Para extenderlo usamos el teorema <span class="math notranslate nohighlight">\(\pi\)</span>-<span class="math notranslate nohighlight">\(\lambda\)</span> de Dynkin (ver <a class="reference internal" href="appendix.html#th_dynkin">Theorem 8.12</a>), que exige que <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> sea cerrada bajo intersecciones (un <span class="math notranslate nohighlight">\(\pi\)</span>-sistema) y que contenga al espacio total: la intersección de dos intervalos <span class="math notranslate nohighlight">\((a,c]\)</span> es otro intervalo de ese tipo o es vacía, y <span class="math notranslate nohighlight">\(\mathbb{R}\in\mathcal{P}\)</span>. Además, <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> genera la <span class="math notranslate nohighlight">\(\sigma\)</span>-álgebra de Borel de <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>, pues todo abierto es unión numerable de intervalos <span class="math notranslate nohighlight">\((a,c]\)</span>.</p>
 <p>Escribimos <span class="math notranslate nohighlight">\(\nu=\nu^+-\nu^-\)</span> (Jordan). Como <span class="math notranslate nohighlight">\(\nu=0\)</span> sobre <span class="math notranslate nohighlight">\(\mathcal{P}\)</span>, las medidas positivas finitas <span class="math notranslate nohighlight">\(\nu^+\)</span> y <span class="math notranslate nohighlight">\(\nu^-\)</span> coinciden sobre <span class="math notranslate nohighlight">\(\mathcal{P}\)</span> (incluido <span class="math notranslate nohighlight">\(\mathbb{R}\)</span>, lo que garantiza igualdad de masa total), y por Dynkin coinciden en todos los borelianos. Por tanto <span class="math notranslate nohighlight">\(\nu=0\)</span>.</p>
 <p>La fórmula de <strong>cambio de variables para medidas imagen</strong> exige tres cosas, y las tres se cumplen aquí:</p>
 <ul class="simple">
@@ -2078,10 +2137,10 @@ O_{r}=I_{r}\star H_{r},\quad r=1,2,\dots,d.
 <li><p>A continuación, se presentan <em><strong>redes convolucionales clásicas, cuya comprensión es clave para profundizar en el tema</strong></em>, aunque algunos de sus métodos ya no se utilicen. Los estudios citados ofrecen una base sólida para el aprendizaje de las CNN.</p></li>
 </ul>
 </div>
-<figure class="align-center" id="id42">
+<figure class="align-center" id="id41">
 <img alt="_images/cat_dog_class.png" src="_images/cat_dog_class.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.18 </span><span class="caption-text">Clasificación de imágenes. Fuente <a class="reference external" href="https://docs.clarifai.com/">clarifai</a></span><a class="headerlink" href="#id42" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.18 </span><span class="caption-text">Clasificación de imágenes. Fuente <a class="reference external" href="https://docs.clarifai.com/">clarifai</a></span><a class="headerlink" href="#id41" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -2294,10 +2353,10 @@ y combinación lineal de salida \)</span>2h_1-4h_2<span class="math notranslate 
 <li><p>En el módulo de inicio, se <em><strong>concatenan los volúmenes de salida de varias trayectorias</strong></em>, permitiendo que la red, durante el entrenamiento, <em><strong>elija las mejores operaciones para cada capa</strong></em>. A medida que se avanza hacia capas superiores, <em><strong>se incrementa la proporción de convoluciones 3 × 3 y 5 × 5, ya que captan rasgos más abstractos</strong></em>. La red tiene <em><strong>22 capas y 6 millones de parámetros</strong></em>.</p></li>
 </ul>
 </div>
-<figure class="align-center" id="id43">
+<figure class="align-center" id="id42">
 <img alt="_images/google-net-like.png" src="_images/google-net-like.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.22 </span><span class="caption-text">Arquitectura GoogleNet. Fuente <a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/29084154/">pubmed</a></span><a class="headerlink" href="#id43" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.22 </span><span class="caption-text">Arquitectura GoogleNet. Fuente <a class="reference external" href="https://pubmed.ncbi.nlm.nih.gov/29084154/">pubmed</a></span><a class="headerlink" href="#id42" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-center" id="inception-architecture-numref">
@@ -2307,6 +2366,16 @@ y combinación lineal de salida \)</span>2h_1-4h_2<span class="math notranslate 
 <p><span class="caption-number">Fig. 3.23 </span><span class="caption-text">Arquitectura Inception. Fuente <span class="bibtex-citation" id="id40">[<a class="reference internal" href="biblio.html#id33" title="Christian Szegedy, Wei Liu, Yangqing Jia, Pierre Sermanet, Scott Reed, Dragomir Anguelov, Dumitru Erhan, Vincent Vanhoucke, and Andrew Rabinovich. Going deeper with convolutions. In Proceedings of the IEEE conference on computer vision and pattern recognition, 1–9. 2015.">Szegedy <em>et al.</em>, 2015</a>]</span>.</span><a class="headerlink" href="#inception-architecture-numref" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
+<div class="tip admonition">
+<p class="admonition-title">Por qué cada rama</p>
+<ul class="simple">
+<li><p><strong><span class="math notranslate nohighlight">\(1\times1\)</span> conv (rama izquierda):</strong> captura correlaciones entre canales en cada posición, sin mirar vecinos.</p></li>
+<li><p><strong><span class="math notranslate nohighlight">\(3\times3\)</span> y <span class="math notranslate nohighlight">\(5\times5\)</span> conv:</strong> capturan patrones locales de distinta escala. En una imagen, la información relevante puede ser un borde fino o una estructura más grande, y esto da campos receptivos distintos en la misma capa.</p></li>
+<li><p><strong>Pooling:</strong> aporta una rama sin parámetros que resume vecindades, y en la práctica mejoraba los resultados al incluirla.</p></li>
+<li><p><strong>Concatenación:</strong> las ramas deben producir mapas con el mismo tamaño espacial (por eso se usa <em>padding</em>), y se apilan en la dimensión de canales. Así la capa siguiente recibe características a varias escalas a la vez.</p></li>
+</ul>
+</div>
+<p>La motivación del módulo no proviene de una única observación, sino de la combinación de tres ideas: (i) los objetos aparecen a distintas escalas, por lo que conviene aplicar filtros de varios tamaños en paralelo en lugar de fijar uno; (ii) las convoluciones <span class="math notranslate nohighlight">\(1\times1\)</span>, introducidas en <em>Network in Network</em>, combinan canales en cada posición y permiten reducir dimensión; y (iii) una aproximación densa a estructuras dispersas de conexión. La arquitectura final se refinó experimentalmente, y los propios autores señalan que su éxito no prueba por sí solo que esos principios sean la causa.</p>
 </section>
 <section id="redes-residuales-resnets">
 <h2><span class="section-number">3.15. </span>Redes residuales (ResNets)<a class="headerlink" href="#redes-residuales-resnets" title="Link to this heading">#</a></h2>
@@ -2373,35 +2442,34 @@ y^r = y^{r-1} + F(y^{r-1})
 <p>La ventaja pedagógica es que <strong>“pesos pequeños” es un punto de partida natural, cercano a la inicialización típica de una red</strong> y fácil de alcanzar por gradiente descendente, mientras que <strong>“pesos que reproducen exactamente la matriz identidad” es una configuración específica y difícil de encontrar</strong> mediante optimización.</p>
 </div>
 <ul class="simple">
-<li><p>El uso de la <em><strong>representación residual</strong></em> no es nuevo y ya <em><strong>se ha utilizado anteriormente en el contexto de la cuantificación vectorial</strong></em>. La esencia del aprendizaje residual es <em><strong>introducir el llamado bloque de construcción residual</strong></em>, que se muestra en la <a class="reference internal" href="#residual-architecture-cnn-numref"><span class="std std-numref">Fig. 3.25</span></a>.</p></li>
+<li><p>El uso de la <em><strong>representación residual</strong></em> no es nuevo y ya <em><strong>se ha utilizado anteriormente en el contexto de la cuantificación vectorial</strong></em>. La esencia del aprendizaje residual es <em><strong>introducir el llamado bloque de construcción residual</strong></em>, que se muestra en la <a class="reference internal" href="#fig-bloque-residual"><span class="std std-numref">Fig. 3.25</span></a>.</p></li>
 </ul>
-<figure class="align-center" id="residual-architecture-cnn-numref">
-<a class="reference internal image-reference" href="_images/residual_architecture_cnn.png"><img alt="_images/residual_architecture_cnn.png" src="_images/residual_architecture_cnn.png" style="width: 363.20000000000005px; height: 398.40000000000003px;" />
-</a>
+<figure class="align-center" id="fig-bloque-residual">
+<img alt="_images/bloque_residual.png" src="_images/bloque_residual.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.25 </span><span class="caption-text">Bloque de construcción residual. Fuente <span class="bibtex-citation" id="id41">[<a class="reference internal" href="biblio.html#id113" title="S. Theodoridis. Machine Learning: A Bayesian and Optimization Perspective. Elsevier Science, 2020. ISBN 9780128188040. URL: https://books.google.com.co/books?id=l-nEDwAAQBAJ.">Theodoridis, 2020</a>]</span>.</span><a class="headerlink" href="#residual-architecture-cnn-numref" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.25 </span><span class="caption-text">Bloque residual. La rama principal calcula <span class="math notranslate nohighlight">\(F(\boldsymbol{y}^{r-1})=W_2\,\mathrm{ReLU}(W_1\boldsymbol{y}^{r-1})\)</span>; la conexión de salto suma la entrada sin cambios, y la ReLU final produce <span class="math notranslate nohighlight">\(\boldsymbol{y}^{r}\)</span>. La salida de cada bloque es la entrada del siguiente.</span><a class="headerlink" href="#fig-bloque-residual" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
-<li><p>De esta manera, un número de capas, digamos, dos, como en el caso de la <a class="reference internal" href="#residual-architecture-cnn-numref"><span class="std std-numref">Fig. 3.25</span></a>, <em><strong>se apilan</strong></em> y dejamos que estas capas se <em><strong>ajusten explícitamente al mapeo residual, a través de las llamadas conexiones de atajo u omisión</strong></em>. Cada capa de pesos realiza una transformación sobre su entrada, por ejemplo, convoluciones. Si <span class="math notranslate nohighlight">\(\boldsymbol{y}^{r}\)</span> e <span class="math notranslate nohighlight">\(\boldsymbol{y}^{r-1}\)</span> son de dimensiones diferentes, el <em><strong>atajo de mapeo de identidad se modifica a</strong></em> <span class="math notranslate nohighlight">\(W\boldsymbol{y}^{r-1}\)</span>, donde <span class="math notranslate nohighlight">\(W\)</span> es una matriz de dimensiones apropiadas.</p></li>
+<li><p>De esta manera, un número de capas, digamos, dos, como en el caso de la <a class="reference internal" href="#fig-bloque-residual"><span class="std std-numref">Fig. 3.25</span></a>, <em><strong>se apilan</strong></em> y dejamos que estas capas se <em><strong>ajusten explícitamente al mapeo residual, a través de las llamadas conexiones de atajo u omisión</strong></em>. Cada capa de pesos realiza una transformación sobre su entrada, por ejemplo, convoluciones. Si <span class="math notranslate nohighlight">\(\boldsymbol{y}^{r}\)</span> e <span class="math notranslate nohighlight">\(\boldsymbol{y}^{r-1}\)</span> son de dimensiones diferentes, el <em><strong>atajo de mapeo de identidad se modifica a</strong></em> <span class="math notranslate nohighlight">\(W\boldsymbol{y}^{r-1}\)</span>, donde <span class="math notranslate nohighlight">\(W\)</span> es una matriz de dimensiones apropiadas.</p></li>
 </ul>
 </section>
 <section id="u-net-redes-convolucionales-para-la-segmentacion-de-imagenes-biomedicas">
 <h2><span class="section-number">3.16. </span>U-Net: Redes Convolucionales para la Segmentación de Imágenes Biomédicas<a class="headerlink" href="#u-net-redes-convolucionales-para-la-segmentacion-de-imagenes-biomedicas" title="Link to this heading">#</a></h2>
-<figure class="align-center" id="id44">
+<figure class="align-center" id="id43">
 <img alt="_images/segmentation_instance.avif" src="_images/segmentation_instance.avif" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.26 </span><span class="caption-text">Image segmentation vs Instance segmentation. Fuente <a class="reference external" href="https://www.v7labs.com/">v7labs</a></span><a class="headerlink" href="#id44" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.26 </span><span class="caption-text">Image segmentation vs Instance segmentation. Fuente <a class="reference external" href="https://www.v7labs.com/">v7labs</a></span><a class="headerlink" href="#id43" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <ul class="simple">
 <li><p>En imágenes médicas, la <strong><em>segmentación semántica</em> clasifica cada píxel según una categoría anatómica o patológica, mientras que la <em>segmentación de instancias</em> diferencia objetos individuales dentro de la misma clase</strong>. Estas técnicas son esenciales para el diagnóstico automatizado y la planificación clínica.</p></li>
 <li><p>La arquitectura <strong><em>U-Net</em>, diseñada para segmentación biomédica, permite una segmentación precisa</strong> mediante un diseño en forma de <em>U</em> que combina información de contexto con detalles espaciales, mejorando la detección de estructuras complejas en imágenes médicas.</p></li>
 </ul>
-<figure class="align-center" id="id45">
+<figure class="align-center" id="id44">
 <img alt="_images/unet_segmentation.png" src="_images/unet_segmentation.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 3.27 </span><span class="caption-text">La arquitectura U-Net representa mapas de características con cajas, indicando canales y tamaño, mientras que las flechas señalan las operaciones.</span><a class="headerlink" href="#id45" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 3.27 </span><span class="caption-text">La arquitectura U-Net representa mapas de características con cajas, indicando canales y tamaño, mientras que las flechas señalan las operaciones.</span><a class="headerlink" href="#id44" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="admonition-arquitectura-u-net admonition">
@@ -2425,20 +2493,69 @@ y^r = y^{r-1} + F(y^{r-1})
 </ul>
 <p>El modelo <em><strong>ajusta sus parámetros hasta que pueda predecir correctamente la máscara a partir de una nueva imagen</strong></em>.</p>
 <div class="important admonition">
-<p class="admonition-title">¿Cómo se maneja la correspondencia de píxeles?</p>
-<p>U-Net genera una salida de menor tamaño que la imagen de entrada debido a la reducción espacial provocada por las capas de <em>max pooling</em> en la fase de <em>contracción</em> y el uso de <em>valid convolutions</em> sin <em>padding</em>. Aunque las <em>up-convolutions</em> intentan recuperar la resolución original, la salida sigue siendo más pequeña.</p>
-<p><strong>¿Cómo mantener la correspondencia de píxeles?</strong></p>
+<p class="admonition-title">U-Net: qué mapea cada bloque y cómo se mantiene la correspondencia de píxeles</p>
+<p><strong>Notación.</strong> Un mapa de características es un tensor <span class="math notranslate nohighlight">\(\mathbb{R}^{H\times W\times C}\)</span>. Las convoluciones <span class="math notranslate nohighlight">\(3\times3\)</span> de esta U-Net son <strong>sin relleno</strong> (<em>valid</em>) y cada una quita <span class="math notranslate nohighlight">\(2\)</span> píxeles por dimensión.</p>
+<p><strong>Contracción</strong> (izquierda). Dos conv <span class="math notranslate nohighlight">\(3\times3\)</span> + ReLU y <em>max pooling</em> <span class="math notranslate nohighlight">\(2\times2\)</span>. Las conv duplican los canales y restan <span class="math notranslate nohighlight">\(4\)</span> píxeles; el pooling divide el tamaño por <span class="math notranslate nohighlight">\(2\)</span>. Se gana <strong>contexto</strong> y se pierde <strong>localización</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{R}^{H\times W\times C}\ \longrightarrow\ \mathbb{R}^{\frac{H-4}{2}\times\frac{W-4}{2}\times 2C}.
+\]</div>
+<p><strong>Expansión</strong> (derecha). <em>Up-conv</em> <span class="math notranslate nohighlight">\(2\times2\)</span> (duplica el tamaño y reduce los canales a la mitad), concatenación con la contracción (<em>copy and crop</em>, aporta <strong>localización</strong>) y dos conv <span class="math notranslate nohighlight">\(3\times3\)</span> + ReLU:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbb{R}^{H\times W\times C}\ \xrightarrow{\text{up-conv}}\ \mathbb{R}^{2H\times 2W\times \frac{C}{2}}\ \xrightarrow{\text{concat}}\ \mathbb{R}^{2H\times 2W\times C}\ \xrightarrow{\text{2 conv}}\ \mathbb{R}^{(2H-4)\times(2W-4)\times\frac{C}{2}}.
+\]</div>
+<p><strong>Concatenación.</strong> Se hace a lo largo de los canales: exige el mismo alto y ancho, pero los canales pueden diferir. Como el mapa de la contracción es más grande, se <strong>recorta su centro</strong>. Por ejemplo, en el nivel 3 se pasa de <span class="math notranslate nohighlight">\(136^2\)</span> a <span class="math notranslate nohighlight">\(104^2\)</span> (se quitan <span class="math notranslate nohighlight">\(16\)</span> píxeles por lado) y <span class="math notranslate nohighlight">\(256+256=512\)</span> canales.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Nivel</p></th>
+<th class="head"><p>Contracción (se copia)</p></th>
+<th class="head"><p>Expansión (tras up-conv)</p></th>
+<th class="head"><p>Tras concatenar</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p><span class="math notranslate nohighlight">\(568^2\times64\to\)</span> recorte <span class="math notranslate nohighlight">\(392^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(392^2\times64\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(392^2\times128\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p><span class="math notranslate nohighlight">\(280^2\times128\to\)</span> recorte <span class="math notranslate nohighlight">\(200^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(200^2\times128\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(200^2\times256\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p><span class="math notranslate nohighlight">\(136^2\times256\to\)</span> recorte <span class="math notranslate nohighlight">\(104^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(104^2\times256\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(104^2\times512\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p><span class="math notranslate nohighlight">\(64^2\times512\to\)</span> recorte <span class="math notranslate nohighlight">\(56^2\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(56^2\times512\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(56^2\times1024\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><strong>Correspondencia de píxeles.</strong> Por las <em>valid convolutions</em> y el <em>max pooling</em>, la salida es más pequeña que la entrada (en la figura, <span class="math notranslate nohighlight">\(388^2\)</span> frente a <span class="math notranslate nohighlight">\(572^2\)</span>), aunque las <em>up-convolutions</em> recuperen resolución. Opciones para mantener la correspondencia:</p>
 <ol class="arabic simple">
-<li><p><strong>Same padding</strong>: Mantiene el tamaño original sin postprocesamiento, pero puede introducir valores artificiales en los bordes.</p></li>
-<li><p><strong>Superposición de parches</strong>: Divide la imagen en fragmentos solapados para reconstruir la segmentación completa, útil en imágenes médicas de alta resolución.</p></li>
-<li><p><strong>Interpolación o recorte</strong>: Ajusta el tamaño de salida cuando se usan <em>valid convolutions</em>, aunque puede generar imprecisiones.</p></li>
+<li><p><strong>Same padding:</strong> conserva el tamaño sin postprocesamiento (la entrada debe ser divisible por <span class="math notranslate nohighlight">\(2^{\text{niveles}}\)</span>), pero introduce valores artificiales en los bordes.</p></li>
+<li><p><strong>Superposición de parches:</strong> divide la imagen en fragmentos solapados y reconstruye la segmentación completa; útil en imágenes grandes (por ejemplo, médicas). El artículo original completa los bordes reflejando la imagen.</p></li>
+<li><p><strong>Interpolación o recorte:</strong> ajusta el tamaño de salida con <em>valid convolutions</em>, con posibles imprecisiones.</p></li>
 </ol>
-<p><strong>Recomendación</strong>:</p>
-<ul class="simple">
-<li><p>Para conservar el tamaño original, usar <strong>same padding</strong> en todas las convoluciones.</p></li>
-<li><p>En imágenes grandes, aplicar <strong>superposición de parches</strong> para optimizar memoria y evitar artefactos.</p></li>
-<li><p>Si la red ya está entrenada con <em>valid convolutions</em>, usar <strong>interpolación</strong> como ajuste final.</p></li>
-</ul>
+<p><strong>Recomendación.</strong> Usa <strong>same padding</strong> para conservar el tamaño; en imágenes grandes, <strong>superposición de parches</strong>; y si la red ya fue entrenada con <em>valid convolutions</em>, <strong>interpolación</strong> como ajuste final.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.keras</span><span class="w"> </span><span class="kn">import</span> <span class="n">layers</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">recortar_y_concatenar</span><span class="p">(</span><span class="n">enc</span><span class="p">,</span> <span class="n">dec</span><span class="p">):</span>
+    <span class="c1"># enc: (B, H1, W1, C1) de la contracción; dec: (B, H2, W2, C2), con H2 &lt;= H1, W2 &lt;= W1</span>
+    <span class="n">dh</span> <span class="o">=</span> <span class="p">(</span><span class="n">enc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">dec</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">dw</span> <span class="o">=</span> <span class="p">(</span><span class="n">enc</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">dec</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">//</span> <span class="mi">2</span>
+    <span class="n">enc</span> <span class="o">=</span> <span class="n">layers</span><span class="o">.</span><span class="n">Cropping2D</span><span class="p">(((</span><span class="n">dh</span><span class="p">,</span> <span class="n">dh</span><span class="p">),</span> <span class="p">(</span><span class="n">dw</span><span class="p">,</span> <span class="n">dw</span><span class="p">)))(</span><span class="n">enc</span><span class="p">)</span>   <span class="c1"># recorta el centro</span>
+    <span class="k">return</span> <span class="n">layers</span><span class="o">.</span><span class="n">Concatenate</span><span class="p">(</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)([</span><span class="n">enc</span><span class="p">,</span> <span class="n">dec</span><span class="p">])</span>       <span class="c1"># axis=-1: canales</span>
+</pre></div>
 </div>
 </section>
 <section id="aplicacion-reconocimiento-facial-de-emociones">
@@ -4624,16 +4741,16 @@ F1 = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Precisión} + 
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "tf_gpu"
         },
         kernelOptions: {
-            name: "python3",
+            name: "tf_gpu",
             path: "./."
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'tf_gpu'</script>
 
                 </article>
               
@@ -4680,7 +4797,7 @@ F1 = 2 \times \frac{\text{Precisión} \times \text{Recall}}{\text{Precisión} + 
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
+    <ul class="pst-show_toc_level nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-necesidad-de-convoluciones">3.1. La necesidad de convoluciones</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#la-etapa-de-convolucion">3.2. La etapa de convolución</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ejemplo-de-uso-de-multiples-kernels-en-una-cnn">3.3. Ejemplo de uso de Múltiples <em>Kernels</em> en una CNN</a></li>
@@ -4750,8 +4867,8 @@ By Lihki Rubio, Ph.D.
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
-<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+  <script defer src="_static/scripts/bootstrap.js?digest=55c26ed414f5f8a31ebb"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=55c26ed414f5f8a31ebb"></script>
 
   <footer class="bd-footer">
   </footer>
